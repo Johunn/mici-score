@@ -203,7 +203,7 @@ const FEATS=[
 ];
 const BW=0.5;            // bonus par niveau d'épaississant
 const PF=[0.6,1,1.5,0.3];    // petite, normale, grosse, trace (sauce, garniture)
-const CATS=['Légumes','Fruits','Féculents et pains','Viandes et poissons','Œufs et produits laitiers','Légumineuses, noix et graines','Sauces et condiments','Graisses, épices et herbes','Boissons','Petit-déjeuner et sucré','Plats et restauration','Snacks et apéritif'];
+const CATS=['Légumes','Fruits','Féculents et pains','Viandes et poissons','Œufs et produits laitiers','Légumineuses, noix et graines','Sauces et condiments','Graisses, épices et herbes','Boissons','Petit-déjeuner','Plats et restauration','Snacks et apéritif','Sandwichs','Desserts et sucré'];
 // format : "Nom|g,l,f,h,e,s,c,b" ; 3e champ "o" = calibré sur les retours de l'utilisateur
 const RAW=[
 [0,[
@@ -339,16 +339,9 @@ const RAW=[
 "Pain de seigle|0,0,2.5,2.5,0,0,0,0||2;0;R4;",
 "Pain sans gluten|0.5,0,0.5,0.5,0,0,0,0||0.4;0;R4;",
 "Pain au levain blanc|0,0,0.5,0.5,0,0,0,0.5||0.4;0;R4;",
-"Biscottes classiques|0,0,0.5,1,0,0,0.5,0.5||0.8;0;R4;",
-"Krisprolls nature|0,0,0.5,0.5,0,0,0.5,0.5||0.4;0;R4;",
-"Krisprolls complet ou graines|1,0,2.5,1.5,0,0,0.5,0||1.2;0;R4;",
 "Galettes de riz|0,0,0.5,0,0,0,0,1",
 "Tortilla ou wrap de blé|1,0,0.5,1.5,0,0,0,0||0.75;0;R0;",
 "Crêpe nature maison|1.5,1.5,0.5,1,0,0,1,0||0.5;0;R0;",
-"Flocons d'avoine cuits à l'eau|0,0,1,1,0,0,0,1||0.5;0;R0;",
-"Müesli|1,0,2.5,2,0,0,1.5,0||1;0;R0;",
-"Corn flakes|0,0,0.5,1,0,0,1.5,0||0.5;0;R0;",
-"Céréales chocolatées|0.5,0,1,1.5,0,0,2.5,0||0.75;2;R0;U1",
 "Vermicelles ou nouilles de riz|0,0,0.5,0,0,0,0,1",
 "Nouilles de blé|0.5,0,0.5,1,0,0,0,0||0.5;0;R0;",
 "Tapioca ou perles du Japon|0,0,0,0,0,0,0.5,1",
@@ -406,7 +399,8 @@ const RAW=[
 "Blanc de poulet pané|2.5,0,0.5,0.5,0,0,0,0||0.25;0;R0;",
 "Poisson blanc grillé à l'huile|1,0,0,0,0,0,0,0",
 "Foie de volaille|1,0,0,0,0,0,0,0",
-"Tripes ou abats|2,0,0,1,0,0,0,0||0.5;0;R0;"
+"Tripes ou abats|2,0,0,1,0,0,0,0||0.5;0;R0;",
+"Pâté crème (type Aoste)|3,0.25,0,0.5,0.25,0,0,0||0.25;1;R0;"
 ]],
 [4,[
 "Œuf dur|1,0,0,0,0,0,0,0",
@@ -618,17 +612,10 @@ const RAW=[
 "Brioche|2,0.5,0.5,1,0,0,1.5,0||0.5;0;R0;",
 "Pain aux raisins|2,0.5,1,1,0,0,2,0||0.8;0;R4;",
 "Chausson aux pommes|2.5,0.5,0.5,2,0,0,1.5,0||0;0;R6;",
-"Beignet ou donut|3,0.5,0.5,0.5,0,0,2,0||0.25;0;R0;",
 "Gaufre|2,1,0.5,1,0,0,2,0||0.5;0;R0;",
 "Pancakes|1.5,1,0.5,1,0,0,1.5,0||0.5;0;R0;",
 "Pain perdu|2,1,0.5,1,0,0,1.5,0||0.8;0;R4;",
 "Muffin|2,0.5,0.5,1,0,0,2,0||0.5;0;R0;",
-"Cake ou quatre-quarts|2.5,0.5,0.5,0.5,0,0,2,0||0.25;0;R0;",
-"Tarte aux pommes|2,0.5,1,2,0,0,2,0||0;0;R6;",
-"Tarte au citron meringuée|2,0.5,0.5,0.5,1.5,0,2.5,0||0.25;0;R0;",
-"Éclair au chocolat|2.5,2,0.5,0.5,0,0.5,2.5,0||0.25;2;R0;U1",
-"Tiramisu|2.5,2.5,0.5,0.5,0,2,2,0||0.25;0;R0;",
-"Cookies|2,0.5,1,1,0,0.5,2.5,0||0.5;0;R0;",
 "Petits-beurre ou biscuits secs|0.5,0.5,0.5,0.5,0,0,1,0||0.4;2;R4;U2",
 "Confiture d'abricot ou de pêche|0,0,0,0.5,0,0,1.5,0||0;0;R6;",
 "Confiture de fraise (pépins)|0,0,1,0.5,0,0,1.5,0||0.25;0;R0;",
@@ -636,9 +623,6 @@ const RAW=[
 "Miel|0,0,0,3,0,0,2,0||0;0;R7;",
 "Sirop d'érable|0,0,0,0.5,0,0,2,0||0;0;R7;",
 "Pâte à tartiner chocolat-noisette|2.5,0.5,0.5,1,0,0.5,2.5,0||0.5;2;R0;U1",
-"Chocolat noir 70 %|2.5,0,1,0.5,0,1.5,1.5,0||0.25;2;R0;U1",
-"Chocolat au lait|2,1.5,0.5,0.5,0,1,2.5,0||0.25;2;R0;U1",
-"Chocolat blanc|2.5,2,0,0.5,0,0,3,0||0.25;2;R0;U1",
 "Porridge à l'eau|0,0,1,1,0,0,0,1||0.5;0;R0;",
 "Porridge au lait|1,2.5,1,1,0,0,0.5,0.5||0.5;0;R0;",
 "Sucre (1 cuillère)|0,0,0,0,0,0,1,0",
@@ -646,17 +630,16 @@ const RAW=[
 "Crêpe sucrée (sucre ou confiture)|1.5,1.5,0.5,1,0,0,2,0||0.5;0;R0;",
 "Crêpe à la pâte à tartiner|2.5,1.5,0.5,1,0,0.5,2.5,0||0.5;2;R0;U2",
 "Barre de céréales|1.5,0.5,1.5,1.5,0,0,2.5,0||0.75;2;R0;U2",
-"Macaron|1.5,0,0.5,0.5,0,0,3,0||0.25;0;R0;",
-"Bûche ou gâteau à la crème|3,2,0.5,0.5,0,0,2.5,0||0.4;2;R4;U2",
-"Pâte d'amande (massepain)|2,0,1,1.5,0,0,3,0||1.2;0;R4;",
-"Compote de pomme sans sucre ajouté|0,0,0.5,2,0,0,0.5,0.5||0;0;R6;"
+"Compote de pomme sans sucre ajouté|0,0,0.5,2,0,0,0.5,0.5||0;0;R6;",
+"Biscottes classiques|0,0,0.5,1,0,0,0.5,0.5||0.8;0;R4;",
+"Krisprolls nature|0,0,0.5,0.5,0,0,0.5,0.5||0.4;0;R4;",
+"Krisprolls complet ou graines|1,0,2.5,1.5,0,0,0.5,0||1.2;0;R4;",
+"Flocons d'avoine cuits à l'eau|0,0,1,1,0,0,0,1||0.5;0;R0;",
+"Müesli|1,0,2.5,2,0,0,1.5,0||1;0;R0;",
+"Corn flakes|0,0,0.5,1,0,0,1.5,0||0.5;0;R0;",
+"Céréales chocolatées|0.5,0,1,1.5,0,0,2.5,0||0.75;2;R0;U1"
 ]],
 [10,[
-"Sandwich poulet, fromage fondu, andalouse, carotte, oignon frit|3,1,1.75,2.25,0.5,0,0,0.5||1.78;0.25;RC;;Poulet grillé sans peau ×1 + Fromage fondu en portion ×0,6 + Sauce andalouse ×0,3 + Carotte crue ×0,6 + Oignon frit ×0,3 + Baguette ou pain blanc ×1",
-"Sandwich poulet-crudités (sans sauce)|0.5,0,3,2,1,0,0,0.5||1.25;0;RC;;Poulet grillé sans peau ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Concombre ×0,6 + Baguette ou pain blanc ×1",
-"Sandwich poulet-crudités mayonnaise|1.25,0,3,2,1,0,0,0.5||1.25;0.5;RC;;Poulet grillé sans peau ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Concombre ×0,6 + Mayonnaise ×0,3 + Baguette ou pain blanc ×1",
-"Sandwich jambon blanc-fromage|2.75,0,0.5,1.5,0,0,0,0.5||1.05;0;RC;;Jambon blanc ×1 + Emmental ou gruyère ×0,6 + Beurre ×1 + Baguette ou pain blanc ×1",
-"Wrap poulet-crudités|2.25,0,2.25,2,1,0,0,0||1.05;0.5;RC;;Poulet grillé sans peau ×1 + Tortilla ou wrap de blé ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Mayonnaise ×0,3",
 "Assiette poulet grillé, riz blanc, carottes cuites|0.5,0,1.5,0,0,0,0.5,1.5||0;0;RC;;Poulet grillé sans peau ×1 + Riz blanc ×1 + Carotte cuite ×1",
 "Burger maison (bœuf haché 5 %, fromage, salade)|2.25,0,1.5,1.5,1,0,0.5,0.5||1.1;0.5;RC;;Bœuf haché 5 % ×1 + Baguette ou pain blanc ×1 + Emmental ou gruyère ×0,6 + Salade verte ×0,3 + Tomate crue ×0,3 + Ketchup ×0,3",
 "Tartiflette|3,1,0.5,1,0,0,0,0|o|0;0;RO;",
@@ -678,7 +661,6 @@ const RAW=[
 "Pizza à la charcuterie|3,1,0.5,1.5,1.5,0,0,0||1.2;2;R4;U2",
 "Burger (fast-food)|3,1,0.5,1.5,1,0,0,0||0.75;2;R0;U2",
 "Kebab|3,1.5,0.5,2,2,0,0,0||1;2;R0;U2",
-"Hot-dog|3,0.5,0,1,1.5,0,0,0||0.5;0;R0;",
 "Nuggets de poulet|3,0,0.5,0.5,0,0,0,0||0.25;2;R0;U2",
 "Tacos français|3,2,0.5,1.5,2,0,0,0||0.75;0;R0;",
 "Sushis (maki, poisson)|0.5,0,0,0.5,0.5,0,0.5,0.5||0.25;0;R0;",
@@ -688,10 +670,6 @@ const RAW=[
 "Poulet frit (fast-food)|3,0,0.5,0.5,1,0,0,0||0.25;2;R0;U2",
 "Fish and chips|3,0,1,0.5,0,0,0,0||0.25;2;R0;U2",
 "Quiche lorraine|3,1,0.5,1,0,0,0,0||0.5;0;R0;",
-"Croque-monsieur|2.5,2,0.5,1,0,0,0,0||0.5;0;R0;",
-"Sandwich jambon-beurre|1.5,0,0.5,1,0,0,0,0||0.5;0;R0;",
-"Sandwich thon-mayonnaise|2.5,0,0.5,1,0.5,0,0,0||0.5;2;R0;U2",
-"Panini fromage et jambon|2.5,1.5,0.5,1,0,0,0,0||0.5;0;R0;",
 "Salade composée de crudités|1.5,0,2,1.5,1,0,0,0||0.75;0;R0;",
 "Salade César|3,1,1.5,1,1,0,0,0||0.5;0;R0;",
 "Pot-au-feu|1.5,0,1.5,1.5,0,0,0,0||0.75;0;R0;",
@@ -712,8 +690,12 @@ const RAW=[
 "Carbonnade flamande|2,0,0.5,2,0.5,1,1,0||1;0;R0;",
 "Waterzooi|2,2,1,1.5,0,0,0,0||0.75;0;R0;",
 "Filet américain|2,0,0,1,1,0,0,0||0.5;0;R0;",
-"Pain-saucisse ou friture de rue|3,0,0.5,1,1,0,0,0||0.8;2;R4;U2",
-"Sandwich américain (frites, viande, sauces)|3,0.5,1,1.5,1.5,0,0,0||0.75;0;R0;"
+"Couscous poulet et merguez|4,0,2.75,4,2.5,0,0.25,0.5||2.06;0;RC;;Poulet avec la peau ×0,8 + Merguez ×0,6 + Semoule de couscous ×1 + Carotte cuite ×0,5 + Courgette cuite sans peau ×0,5 + Navet cuit ×0,4 + Pois chiches ×0,3 + Oignon cuit ×0,4 + Tomate cuite sans peau ×0,3 + Cumin ×0,3 + Huile d'olive (1 cuillère) ×0,5",
+"Curry japonais (poulet, roux, pommes de terre, carottes, riz)|1.5,0,1.75,2,1,0,0.25,2||0.26;0;RC;;Poulet grillé sans peau ×1 + Beurre (fine couche) ×1 + Curry en poudre ×0,5 + Oignon cuit ×0,5 + Pomme de terre vapeur sans peau ×0,7 + Carotte cuite ×0,5 + Riz blanc ×1,2 + Sauce soja ×0,3",
+"Giouvetsi (agneau, orzo, sauce tomate)|4,0,1.25,3,1.75,0,0,0||1.56;0;RC;;Gigot d'agneau ×0,8 + Pâtes blanches nature ×1,2 + Sauce tomate nature maison ×0,8 + Oignon cuit ×0,3 + Ail cuit ×0,2 + Huile d'olive (1 cuillère) ×1 + Cannelle ×0,3 + Parmesan râpé ×0,3",
+"Paella aux fruits de mer|2.25,0,1.5,1.75,0.75,0.25,0,1.75||1.12;0;RC;;Riz blanc ×1,2 + Crevettes cuites ×0,8 + Moules (cuisson au vin blanc) ×0,6 + Poivron cuit ×0,4 + Tomate cuite sans peau ×0,3 + Ail cuit ×0,2 + Huile d'olive (1 cuillère) ×1 + Persil, coriandre, basilic frais ×0,3",
+"Risotto à la saucisse épicée et au fenouil|4,0.5,2,3.25,1.5,0,0,1.75||0.93;1.6;RC;;Saucisse de porc ×0,8 + Riz blanc ×1,2 + Oignon cuit ×0,5 + Fenouil cuit ×0,7 + Piment (frais ou en poudre) ×0,3 + Mascarpone ×0,25 + Parmesan râpé ×0,3 + Beurre (fine couche) ×1 + Bouillon cube ×0,5",
+"Carbonades flamandes|2.25,0,0.5,4,1.5,0.75,1.25,0.25||0.17;0;RC;;Steak grillé ×1,2 + Oignon cuit ×1 + Beurre (fine couche) ×0,5 + Bière blonde ×0,3 + Bouillon clair ×0,7 + Moutarde de Dijon ×0,3 + Sucre (1 cuillère) ×1 + Vinaigre ×0,3"
 ]],
 [11,[
 "Chips nature|3,0,1,0.5,0.5,0,0,0||0.25;2;R0;U2",
@@ -736,6 +718,38 @@ const RAW=[
 "Samoussas ou nems|3,0,1,1.5,1,0,0,0||0.75;2;R0;U3",
 "Mini-pizzas ou feuilletés apéritifs|3,1,0.5,1,0,0,0,0||0.8;2;R4;U2",
 "Crudités et dips|1.5,0.5,2,1.5,0,0,0,0||0.75;2;R0;U3"
+]],
+[12,[
+"Sandwich poulet, fromage fondu, andalouse, carotte, oignon frit|3,1,1.75,2.25,0.5,0,0,0.5||1.78;0.25;RC;;Poulet grillé sans peau ×1 + Fromage fondu en portion ×0,6 + Sauce andalouse ×0,3 + Carotte crue ×0,6 + Oignon frit ×0,3 + Baguette ou pain blanc ×1",
+"Sandwich poulet-crudités (sans sauce)|0.5,0,3,2,1,0,0,0.5||1.25;0;RC;;Poulet grillé sans peau ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Concombre ×0,6 + Baguette ou pain blanc ×1",
+"Sandwich poulet-crudités mayonnaise|1.25,0,3,2,1,0,0,0.5||1.25;0.5;RC;;Poulet grillé sans peau ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Concombre ×0,6 + Mayonnaise ×0,3 + Baguette ou pain blanc ×1",
+"Sandwich jambon blanc-fromage|2.75,0,0.5,1.5,0,0,0,0.5||1.05;0;RC;;Jambon blanc ×1 + Emmental ou gruyère ×0,6 + Beurre ×1 + Baguette ou pain blanc ×1",
+"Wrap poulet-crudités|2.25,0,2.25,2,1,0,0,0||1.05;0.5;RC;;Poulet grillé sans peau ×1 + Tortilla ou wrap de blé ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Mayonnaise ×0,3",
+"Hot-dog|3,0.5,0,1,1.5,0,0,0||0.5;0;R0;",
+"Croque-monsieur|2.5,2,0.5,1,0,0,0,0||0.5;0;R0;",
+"Sandwich jambon-beurre|1.5,0,0.5,1,0,0,0,0||0.5;0;R0;",
+"Sandwich thon-mayonnaise|2.5,0,0.5,1,0.5,0,0,0||0.5;2;R0;U2",
+"Panini fromage et jambon|2.5,1.5,0.5,1,0,0,0,0||0.5;0;R0;",
+"Pain-saucisse ou friture de rue|3,0,0.5,1,1,0,0,0||0.8;2;R4;U2",
+"Sandwich américain (frites, viande, sauces)|3,0.5,1,1.5,1.5,0,0,0||0.75;0;R0;",
+"Sandwich pâté crème (type Aoste)|1.5,0,0.5,1.25,0,0,0,0.5||0.93;0.5;RC;;Baguette ou pain blanc ×1 + Pâté crème (type Aoste) ×0,5",
+"Sandwich salami, fromage fondu, mayonnaise|3.25,1,0.5,1,0.5,0,0,0.5||0.8;0.6;RC;;Baguette ou pain blanc ×1 + Saucisson sec ×0,4 + Fromage fondu en portion ×0,6 + Mayonnaise ×0,3",
+"Sandwich poulet curry|2,0,0.5,1.25,0.75,0,0,0.5||0.88;1.2;RC;;Baguette ou pain blanc ×1 + Poulet grillé sans peau ×0,8 + Mayonnaise ×0,6 + Curry en poudre ×0,3"
+]],
+[13,[
+"Beignet ou donut|3,0.5,0.5,0.5,0,0,2,0||0.25;0;R0;",
+"Cake ou quatre-quarts|2.5,0.5,0.5,0.5,0,0,2,0||0.25;0;R0;",
+"Tarte aux pommes|2,0.5,1,2,0,0,2,0||0;0;R6;",
+"Tarte au citron meringuée|2,0.5,0.5,0.5,1.5,0,2.5,0||0.25;0;R0;",
+"Éclair au chocolat|2.5,2,0.5,0.5,0,0.5,2.5,0||0.25;2;R0;U1",
+"Tiramisu|2.5,2.5,0.5,0.5,0,2,2,0||0.25;0;R0;",
+"Cookies|2,0.5,1,1,0,0.5,2.5,0||0.5;0;R0;",
+"Chocolat noir 70 %|2.5,0,1,0.5,0,1.5,1.5,0||0.25;2;R0;U1",
+"Chocolat au lait|2,1.5,0.5,0.5,0,1,2.5,0||0.25;2;R0;U1",
+"Chocolat blanc|2.5,2,0,0.5,0,0,3,0||0.25;2;R0;U1",
+"Macaron|1.5,0,0.5,0.5,0,0,3,0||0.25;0;R0;",
+"Bûche ou gâteau à la crème|3,2,0.5,0.5,0,0,2.5,0||0.4;2;R4;U2",
+"Pâte d'amande (massepain)|2,0,1,1.5,0,0,3,0||1.2;0;R4;"
 ]]
 ];
 
@@ -762,7 +776,8 @@ const MODS={sten:{f:1.5}};
 const profMul=k=>((PROF[store.prof]||{})[k]||1)*((store.mods&&store.mods.sten&&MODS.sten[k])||1);
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 /* Poids de référence d'une portion normale (grammes) : valeurs NUBEL (Conseil supérieur de la Santé, Belgique) pour les aliments cités par nom ; le reste = estimations par catégorie, à corriger. */
-const REFG_CAT=[150,140,150,120,100,60,25,5,200,40,300,40];
+const REFG_CAT=[150,140,150,120,100,60,25,5,200,40,300,40,200,60];
+const ORD=[0,1,2,3,4,5,6,7,8,9,13,12,10,11];   // ordre d'affichage des catégories (les index restent stables pour tes aliments perso)
 const REFG_NOM=[[/jambon cru|fum/i,25],[/jambon/i,45],[/fromage fondu/i,20],[/fromage|emmental|gruy|edam|gouda|mozzarella/i,25],[/œuf|oeuf|omelette/i,50],[/baguette/i,130],[/pistolet/i,45],[/pain/i,80],[/wrap|tortilla/i,60],[/yaourt/i,125],[/poulet/i,160],[/saumon/i,180],[/cabillaud|colin/i,175],[/frites/i,250],[/lasagne/i,400],[/spaghetti/i,300],[/croque/i,135],[/croissant/i,50],[/purée|puree/i,160],[/riz/i,150],[/mayonnaise|ketchup/i,25],[/huile/i,10],[/beurre/i,10],[/pomme(?! de terre)/i,140],[/banane/i,130],[/orange/i,140],[/poire/i,160]];
 const refG=f=>{for(const [rx,g] of REFG_NOM)if(rx.test(f.n))return g;return REFG_CAT[f.c]||100};
 const pfOf=it=>it.g>0?Math.min(3,Math.max(0.1,it.g/refG(it.f))):PF[it.p];
@@ -798,7 +813,7 @@ function scoreOf(items,ctx){
 
 /* ---------- Stockage ---------- */
 const KEY='mici:v2';
-const CHIPS=['Légumes','Fruits','Féculents','Viandes et poissons','Laitiers','Légumineuses et noix','Sauces','Graisses et épices','Boissons','Sucré','Plats','Snacks'];
+const CHIPS=['Légumes','Fruits','Féculents','Viandes et poissons','Laitiers','Légumineuses et noix','Sauces','Graisses et épices','Boissons','Petit-déj.','Plats','Snacks','Sandwichs','Desserts'];
 const RIB='<svg class="rib" viewBox="0 0 24 32" role="img" aria-label="Ruban violet : sensibilisation aux MICI"><title>Ruban violet : sensibilisation aux MICI</title><path d="M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linejoin="miter"/></svg>';
 const THEMES=[
  {id:'system',n:'Auto (téléphone)',sw:['#EDF1EE','#1F5C63','#0F1B1D']},
@@ -927,13 +942,13 @@ function attentionHTML(lv){
 }
 function listHTML(){
   const q=ui.qs.trim().toLowerCase();
-  const all=allFoods().filter(f=>(ui.cat<0||f.c===ui.cat)&&(!q||f.n.toLowerCase().includes(q))).sort((x,y)=>x.c-y.c);
+  const all=allFoods().filter(f=>(ui.cat<0||f.c===ui.cat)&&(!q||f.n.toLowerCase().includes(q))).sort((x,y)=>ORD.indexOf(x.c)-ORD.indexOf(y.c));
   if(!all.length)return `<div class="empty">Aucun aliment trouvé.<br><button class="link" data-act="newfood">Ajouter « ${esc(ui.qs)} »</button></div>`;
   const PS=100,pages=Math.ceil(all.length/PS);ui.page=Math.min(Math.max(0,ui.page||0),pages-1);
   const foods=all.slice(ui.page*PS,(ui.page+1)*PS),sus=suspectIds();
   const pager=pages>1?`<div class="seg" role="group" aria-label="Pages" style="margin:12px 0;align-items:center"><button data-act="pg" data-d="-1" ${ui.page===0?'disabled':''}>‹ Précédent</button><span class="small muted" style="padding:0 10px">Page ${ui.page+1} / ${pages} · ${all.length} aliments</span><button data-act="pg" data-d="1" ${ui.page>=pages-1?'disabled':''}>Suivant ›</button></div>`:'';
-  return pager+CATS.map((c,i)=>{
-    const g=foods.filter(f=>f.c===i);
+  return pager+ORD.map(i=>{
+    const c=CATS[i],g=foods.filter(f=>f.c===i);
     if(!g.length)return '';
     return `<section class="group"><h3>${c} (${g.length})</h3><div class="rows">${g.map(f=>{
       const v=foodScore(f),ov=store.over[f.id]!=null,sel=ui.plate.some(x=>x.id===f.id);
@@ -951,7 +966,7 @@ function calcHTML(){
   <div class="searchbox"><input type="search" id="qs" placeholder="Rechercher parmi ${allFoods().length} aliments" value="${esc(ui.qs)}" aria-label="Rechercher"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" ${ui.qs?'':'hidden'}>✕</button></div>
   <div class="chips" role="group" aria-label="Catégories">
     <button class="chip" data-act="cat" data-i="-1" aria-pressed="${ui.cat<0}">Tout</button>
-    ${CATS.map((c,i)=>`<button class="chip" data-act="cat" data-i="${i}" aria-pressed="${ui.cat===i}">${CHIPS[i]}</button>`).join('')}
+    ${ORD.map(i=>`<button class="chip" data-act="cat" data-i="${i}" aria-pressed="${ui.cat===i}">${CHIPS[i]}</button>`).join('')}
   </div>
   <p class="muted small" style="margin-top:12px">Touche un aliment pour l'ajouter à ton assiette, touche-le encore pour le retirer. Touche › pour ses détails et corriger son score. Un * indique un score corrigé par toi.</p>
   <div id="list">${listHTML()}</div>
@@ -1038,7 +1053,7 @@ function addHTML(){
   <h2 style="margin-top:6px">Ajouter un aliment</h2>
   <div class="card" style="margin-top:0">
     <div class="field" style="margin-top:0"><label for="newName">Nom</label><input type="text" id="newName" value="${esc(ui.newName)}" placeholder="Ex. : Gratin de chicons"></div>
-    <div class="field"><label for="newCat">Catégorie</label><select id="newCat">${CATS.map((c,i)=>`<option value="${i}" ${i===ui.newCat?'selected':''}>${c}</option>`).join('')}</select></div>
+    <div class="field"><label for="newCat">Catégorie</label><select id="newCat">${ORD.map(i=>`<option value="${i}" ${i===ui.newCat?'selected':''}>${CATS[i]}</option>`).join('')}</select></div>
     <div class="field"><span class="lbl">Caractéristiques (0 à 3)</span><div class="lvgrid">
       ${FEATS.map((ft,i)=>`<label for="nl${i}">${ft.n}<span class="muted small" style="display:block;font-weight:400">${ft.d}</span></label><select id="nl${i}" data-act="nl" data-i="${i}">${opts(LV,ui.newL[i])}</select>`).join('')}
       <label for="nb">Épaississant<span class="muted small" style="display:block;font-weight:400">Riz blanc, banane, pomme de terre</span></label><select id="nb" data-act="nb">${opts([0,0.5,1,1.5,2],ui.newB)}</select>
@@ -1162,7 +1177,7 @@ function sourcesHTML(){
     <p class="small"><b>Poche en J</b> (défaut) : oligosaccharides à poids 0,3, fibres insolubles ×0,8. <b>Général</b> : barème sans ajustement (oligosaccharides à 1). <b>Sténose</b> (option) : fibres insolubles ×1,5. <b>Crohn</b> (option) : aucun effet sur le score.</p>
     <p class="small muted">Ces multiplicateurs sont des hypothèses de départ arbitraires. Aucune source ne donne de valeur chiffrée pour une poche. Les aliments déjà calibrés sur tes retours gardent leur poids d'origine.</p></div>
   <div class="card"><h3>4. Origine des niveaux par aliment</h3>
-    <p class="small">Les 507 aliments viennent de connaissances générales (gras, lactose, fibres, FODMAP approximatifs). Aucun niveau n'est validé par une source par aliment. Le partage des fermentescibles entre oligosaccharides et fructose/polyols a été fait par règles de mots-clés (fructanes de l'oignon, de l'ail et du blé ; GOS des légumineuses ; polyols et fructose en excès des fruits, champignons et édulcorants). 65 % des aliments concernés ne correspondent à aucune règle et sont coupés 50/50 par défaut. La règle appliquée est visible dans la fiche de chaque aliment. Les additifs sont attribués par mots-clés (snacks, sodas light, biscuits, surgelés).</p>
+    <p class="small">Les 517 aliments viennent de connaissances générales (gras, lactose, fibres, FODMAP approximatifs). Aucun niveau n'est validé par une source par aliment. Le partage des fermentescibles entre oligosaccharides et fructose/polyols a été fait par règles de mots-clés (fructanes de l'oignon, de l'ail et du blé ; GOS des légumineuses ; polyols et fructose en excès des fruits, champignons et édulcorants). 65 % des aliments concernés ne correspondent à aucune règle et sont coupés 50/50 par défaut. La règle appliquée est visible dans la fiche de chaque aliment. Les additifs sont attribués par mots-clés (snacks, sodas light, biscuits, surgelés).</p>
     <p class="small muted">Les produits de marque n'ont pas leur composition exacte. Le score d'une assiette suppose des effets additifs ; l'ordre des aliments, la quantité exacte, le repas de la veille, le stress et la fatigue ne sont pas modélisés.</p></div>
   <div class="card"><h3>5. Personnalisation</h3>
     <p class="small">Tu peux corriger le score d'un aliment (il remplace le calcul), régler une sensibilité par caractéristique (×0,5 à ×2) et noter chaque repas de 0 à 10 dans le journal. Les suggestions d'apprentissage demandent au moins 8 repas avec détail et 3 par groupe. Ce sont des corrélations, pas des preuves : plusieurs aliments se mélangent dans un repas.</p>
