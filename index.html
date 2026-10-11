@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6' fill='none' stroke='%238A4FBF' stroke-width='3.4'/%3E%3C/svg%3E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MICI Score">
-<title>MICI Score</title><!-- v9 : statuts d'aliments (à surveiller, confirmé, écarté) -->
+<title>MICI Score</title><!-- v13 : tri de la liste (catégories, nom, score) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -687,7 +687,6 @@ const RAW=[
 "Croquettes de fromage ou de crevettes|3,1,0.5,0.5,0,0,0,0||0.25;0;R0;",
 "Boulets sauce lapin|2.5,0,0.5,1.5,0.5,0,1.5,0||0.75;0;R0;",
 "Stoemp (purée de légumes et lardons)|2.5,1,1,1.5,0,0,0,0||0.75;0;R0;",
-"Carbonnade flamande|2,0,0.5,2,0.5,1,1,0||1;0;R0;",
 "Waterzooi|2,2,1,1.5,0,0,0,0||0.75;0;R0;",
 "Filet américain|2,0,0,1,1,0,0,0||0.5;0;R0;",
 "Couscous poulet et merguez|4,0,2.75,4,2.5,0,0.25,0.5||2.06;0;RC;;Poulet avec la peau ×0,8 + Merguez ×0,6 + Semoule de couscous ×1 + Carotte cuite ×0,5 + Courgette cuite sans peau ×0,5 + Navet cuit ×0,4 + Pois chiches ×0,3 + Oignon cuit ×0,4 + Tomate cuite sans peau ×0,3 + Cumin ×0,3 + Huile d'olive (1 cuillère) ×0,5",
@@ -764,7 +763,7 @@ RAW.forEach(([c,list])=>list.forEach(str=>{
   FOODS.push({id,n:p[0],c,L:v.slice(0,7),b:v[7],obs:p[2]==='o',ho:+ex[0]||0,u:+ex[1]||0,rf:ex[2]||'',ru:ex[3]||'',comp:ex[4]||''});
 }));
 
-let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,flags:{}};
+let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',sort:'cat',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,flags:{}};
 const sensOf=k=>(store.sens[k]!=null?store.sens[k]:1);
 /* Profil : multiplicateurs ARBITRAIRES (aucune source chiffrée). Sens : FODMAP plus lourds, fibres insolubles moins lourdes avec une poche (Ardalan 2021, preuve faible). */
 const PROF={poche:{f:0.8,o:0.3},general:{}};   // o = poids des oligosaccharides : 0,3 = opinion d'expert (guides patients poche), hypothèse à tester
@@ -831,7 +830,7 @@ const THEMES=[
 function norm(p){
   let th=(['system','dark','ocean','charbon','foret','amoled','micinuit','mici','light','contraste','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
   if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
-  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,flags:(p.flags&&typeof p.flags==='object')?p.flags:{}};
+  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,flags:(p.flags&&typeof p.flags==='object')?p.flags:{}};
 }
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const rgb2hex=a=>'#'+a.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
@@ -918,7 +917,7 @@ function flagCard(f){
 }
 
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sel:null,plate:[],quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
+const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:[],quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
   newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false};
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
@@ -940,20 +939,33 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
+const APP_V='v13';
+const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
+const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
 function listHTML(){
-  const q=ui.qs.trim().toLowerCase();
-  const all=allFoods().filter(f=>(ui.cat<0||f.c===ui.cat)&&(!q||f.n.toLowerCase().includes(q))).sort((x,y)=>ORD.indexOf(x.c)-ORD.indexOf(y.c));
+  const q=ui.qs.trim().toLowerCase(),so=ui.sort||'cat';
+  const all=allFoods().filter(f=>(ui.cat<0||f.c===ui.cat)&&(!q||f.n.toLowerCase().includes(q)));
+  if(so==='cat')all.sort((x,y)=>ORD.indexOf(x.c)-ORD.indexOf(y.c));
+  else{
+    const sc={};all.forEach(f=>{sc[f.id]=foodScore(f)});
+    all.sort(so==='nom'?(x,y)=>COL.compare(x.n,y.n):so==='scd'?(x,y)=>(sc[y.id]-sc[x.id])||COL.compare(x.n,y.n):(x,y)=>(sc[x.id]-sc[y.id])||COL.compare(x.n,y.n));
+  }
   if(!all.length)return `<div class="empty">Aucun aliment trouvé.<br><button class="link" data-act="newfood">Ajouter « ${esc(ui.qs)} »</button></div>`;
   const PS=100,pages=Math.ceil(all.length/PS);ui.page=Math.min(Math.max(0,ui.page||0),pages-1);
   const foods=all.slice(ui.page*PS,(ui.page+1)*PS),sus=suspectIds();
   const pager=pages>1?`<div class="seg" role="group" aria-label="Pages" style="margin:12px 0;align-items:center"><button data-act="pg" data-d="-1" ${ui.page===0?'disabled':''}>‹ Précédent</button><span class="small muted" style="padding:0 10px">Page ${ui.page+1} / ${pages} · ${all.length} aliments</span><button data-act="pg" data-d="1" ${ui.page>=pages-1?'disabled':''}>Suivant ›</button></div>`:'';
+  const row=f=>{
+    const v=foodScore(f),ov=store.over[f.id]!=null,sel=ui.plate.some(x=>x.id===f.id);
+    return `<div class="row${sel?' sel':''}"><button class="name" data-act="add" data-id="${esc(f.id)}" aria-pressed="${sel}">${esc(f.n)}${flagBadge(f.id,sus)}</button><span class="badge ${cls(v)}" title="${ov?'Corrigé par toi':'Calculé'}">${fmt(v)}${ov?'*':''}</span><button class="info" data-act="info" data-id="${esc(f.id)}" aria-label="Détails de ${esc(f.n)}">›</button></div>`;
+  };
+  if(so!=='cat'){
+    const lab=so==='nom'?'Par nom, A à Z':so==='scd'?'Du meilleur au moins bon score':'Du moins bon au meilleur score';
+    return pager+`<section class="group"><h3>${lab} (${foods.length})</h3><div class="rows">${foods.map(row).join('')}</div></section>`+pager;
+  }
   return pager+ORD.map(i=>{
     const c=CATS[i],g=foods.filter(f=>f.c===i);
     if(!g.length)return '';
-    return `<section class="group"><h3>${c} (${g.length})</h3><div class="rows">${g.map(f=>{
-      const v=foodScore(f),ov=store.over[f.id]!=null,sel=ui.plate.some(x=>x.id===f.id);
-      return `<div class="row${sel?' sel':''}"><button class="name" data-act="add" data-id="${esc(f.id)}" aria-pressed="${sel}">${esc(f.n)}${flagBadge(f.id,sus)}</button><span class="badge ${cls(v)}" title="${ov?'Corrigé par toi':'Calculé'}">${fmt(v)}${ov?'*':''}</span><button class="info" data-act="info" data-id="${esc(f.id)}" aria-label="Détails de ${esc(f.n)}">›</button></div>`;
-    }).join('')}</div></section>`;
+    return `<section class="group"><h3>${c} (${g.length})</h3><div class="rows">${g.map(row).join('')}</div></section>`;
   }).join('')+pager;
 }
 
@@ -968,6 +980,7 @@ function calcHTML(){
     <button class="chip" data-act="cat" data-i="-1" aria-pressed="${ui.cat<0}">Tout</button>
     ${ORD.map(i=>`<button class="chip" data-act="cat" data-i="${i}" aria-pressed="${ui.cat===i}">${CHIPS[i]}</button>`).join('')}
   </div>
+  <div class="seg" role="group" aria-label="Tri de la liste" style="margin-top:10px">${SORTS.map(t=>`<button data-act="sort" data-id="${t[0]}" aria-pressed="${(ui.sort||'cat')===t[0]}">${t[1]}</button>`).join('')}</div>
   <p class="muted small" style="margin-top:12px">Touche un aliment pour l'ajouter à ton assiette, touche-le encore pour le retirer. Touche › pour ses détails et corriger son score. Un * indique un score corrigé par toi.</p>
   <div id="list">${listHTML()}</div>
   <p style="margin-top:20px"><button class="btn ghost block" data-act="newfood">Ajouter un aliment</button></p>
@@ -1150,7 +1163,8 @@ function profilHTML(){
   </div>
   <div class="card"><h3>Quand consulter</h3>
     <p class="small muted">Contacte ton gastro-entérologue ou un diététicien MICI en cas de perte de poids, dénutrition, douleurs importantes, ballonnement avec arrêt des gaz et des selles (occlusion possible), sang dans les selles, fièvre, signes de déshydratation, fuites nocturnes ou plus de selles pendant plusieurs jours (pochite possible). Questran : à discuter uniquement avec le gastro-entérologue ; surveillance nutritionnelle si prescrite (il peut réduire l'absorption des vitamines A, D, E, K et du folate ; espacement des autres médicaments à voir avec le médecin ou le pharmacien). Surveillance nutritionnelle : pas de fréquence universelle validée. B12 après poche iléo-anale, fréquence fixée par ton gastro ; fer en cas d'anémie, fatigue, saignement ou restriction alimentaire ; vitamine D surtout en cas de carence, os fragiles, malabsorption ou Questran. Hydratation : individualisée, surtout si selles fréquentes ou liquides ; demande au pharmacien une solution de réhydratation si besoin. Le score n'est ni un diagnostic ni un traitement.</p>
-  </div>`;
+  </div>
+  <p class="small muted" style="text-align:center;margin:18px 0 0">MICI Score ${APP_V} · ${FOODS.length} aliments</p>`;
 }
 
 function updateBar(){
@@ -1177,7 +1191,7 @@ function sourcesHTML(){
     <p class="small"><b>Poche en J</b> (défaut) : oligosaccharides à poids 0,3, fibres insolubles ×0,8. <b>Général</b> : barème sans ajustement (oligosaccharides à 1). <b>Sténose</b> (option) : fibres insolubles ×1,5. <b>Crohn</b> (option) : aucun effet sur le score.</p>
     <p class="small muted">Ces multiplicateurs sont des hypothèses de départ arbitraires. Aucune source ne donne de valeur chiffrée pour une poche. Les aliments déjà calibrés sur tes retours gardent leur poids d'origine.</p></div>
   <div class="card"><h3>4. Origine des niveaux par aliment</h3>
-    <p class="small">Les 517 aliments viennent de connaissances générales (gras, lactose, fibres, FODMAP approximatifs). Aucun niveau n'est validé par une source par aliment. Le partage des fermentescibles entre oligosaccharides et fructose/polyols a été fait par règles de mots-clés (fructanes de l'oignon, de l'ail et du blé ; GOS des légumineuses ; polyols et fructose en excès des fruits, champignons et édulcorants). 65 % des aliments concernés ne correspondent à aucune règle et sont coupés 50/50 par défaut. La règle appliquée est visible dans la fiche de chaque aliment. Les additifs sont attribués par mots-clés (snacks, sodas light, biscuits, surgelés).</p>
+    <p class="small">Les ${FOODS.length} aliments viennent de connaissances générales (gras, lactose, fibres, FODMAP approximatifs). Aucun niveau n'est validé par une source par aliment. Le partage des fermentescibles entre oligosaccharides et fructose/polyols a été fait par règles de mots-clés (fructanes de l'oignon, de l'ail et du blé ; GOS des légumineuses ; polyols et fructose en excès des fruits, champignons et édulcorants). 65 % des aliments concernés ne correspondent à aucune règle et sont coupés 50/50 par défaut. La règle appliquée est visible dans la fiche de chaque aliment. Les additifs sont attribués par mots-clés (snacks, sodas light, biscuits, surgelés).</p>
     <p class="small muted">Les produits de marque n'ont pas leur composition exacte. Le score d'une assiette suppose des effets additifs ; l'ordre des aliments, la quantité exacte, le repas de la veille, le stress et la fatigue ne sont pas modélisés.</p></div>
   <div class="card"><h3>5. Personnalisation</h3>
     <p class="small">Tu peux corriger le score d'un aliment (il remplace le calcul), régler une sensibilité par caractéristique (×0,5 à ×2) et noter chaque repas de 0 à 10 dans le journal. Les suggestions d'apprentissage demandent au moins 8 repas avec détail et 3 par groupe. Ce sont des corrélations, pas des preuves : plusieurs aliments se mélangent dans un repas.</p>
@@ -1297,6 +1311,7 @@ document.addEventListener('click',e=>{
   else if(a==='clearBar'){ui.plate=[];document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
   else if(a==='back'){if(navDepth>0){history.back()}else{ui.view='list';ui.msg='';render()}}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
+  else if(a==='sort'){ui.sort=id;store.sort=id;save();ui.page=0;render(true)}
   else if(a==='pg'){ui.page=Math.max(0,(ui.page||0)+(+b.dataset.d));document.getElementById('list').innerHTML=listHTML();window.scrollTo(0,0)}
   else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;render(true)}
   else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);if(!ui.plate.length)ui.view='list';render(true)}

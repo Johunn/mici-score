@@ -1,93 +1,60 @@
 # MICI Score
 
-Application web personnelle qui estime la **tolérance digestive d'un aliment ou d'un repas**, construite pour une **rectocolite ulcéro-hémorragique avec poche en J** (anastomose iléo-anale).
+Application web mobile (PWA) personnelle qui estime la tolérance digestive d'aliments sur une échelle de 0 à 10, pour un profil MICI avec poche iléo-anale (poche en J). Profil « Général » disponible.
 
-**Application : https://johunn.github.io/mici-score/**
+**Ce sont des estimations générales, non validées scientifiquement. Ni diagnostic ni traitement. Elles ne remplacent pas l'avis d'un gastro-entérologue ou d'un diététicien. Ton vécu et ton journal priment toujours sur le score.**
 
-> **Avertissement.** Le MICI Score est une estimation personnelle. Ce n'est ni un diagnostic, ni un traitement, ni un avis médical, et il n'a pas été validé cliniquement. Les chiffres viennent de connaissances générales et de choix arbitraires, pas d'études par aliment. Ton ressenti et ton journal priment toujours sur le score. En cas de sang dans les selles, fièvre, douleurs importantes, déshydratation, perte de poids, fuites nocturnes ou augmentation durable du nombre de selles, contacte ton gastro-entérologue.
+Application : https://johunn.github.io/mici-score/
 
-## À quoi ça sert
+## Utilisation
 
-- Donner un score de **0 à 10** (10 = très bien toléré) à plus de 500 aliments et plats courants.
-- Composer une **assiette** (plusieurs aliments, portion ou poids en grammes) et voir le score du repas.
-- Afficher des **points d'attention** (gras, lactose, fibres insolubles, gaz possibles, épices, stimulants, sucres, ultra-transformé) avec des pistes d'adaptation. Ce ne sont pas des interdits.
-- Tenir un **journal** : note de ressenti de 0 à 10, Questran pris ou non, à jeun ou non, remarques.
-- **Personnaliser** : corriger le score d'un aliment, régler des sensibilités par caractéristique, repérer un « déclencheur personnel » d'après le journal.
+- **Calculer** : liste d'environ 500 aliments génériques (recherche, filtre par catégorie, tri par catégories, nom ou score). Touche un aliment pour l'ajouter à ton assiette, `›` pour sa fiche. Dans l'assiette : portion (trace, petite, normale, grosse) ou poids en grammes, Questran pris, à jeun.
+- **Journal** : note ton ressenti après un repas (0 à 10). L'appli signale des aliments « à surveiller » selon tes notes, sans modifier le score ; tu peux confirmer ou écarter.
+- **Sources** : calcul, poids, niveaux de preuve et limites.
+- **Profil** : thèmes, profil, sensibilités, sauvegarde.
 
 ## Lecture du score
 
-| Score | Couleur | Sens |
-|---|---|---|
-| 6 ou plus | vert | généralement bien toléré |
-| 4 à 6 | orange | à adapter (portion, cuisson, accompagnement) |
-| moins de 4 | rouge | plusieurs points d'attention |
+| Score | Lecture |
+|---|---|
+| 6 ou plus (vert) | généralement bien toléré |
+| 4 à 6 (orange) | à adapter (portion, cuisson, accompagnement) |
+| moins de 4 (rouge) | plusieurs points d'attention |
 
-Ces seuils sont des choix de lecture, pas des valeurs sourcées.
+Aucun aliment n'est interdit. Un `*` indique un score corrigé par toi.
 
-## Comment le score est calculé
+## Calcul
 
-Chaque aliment a des niveaux de 0 à 3 pour sept caractéristiques : gras, lactose, fibres insolubles, fermentescibles (gaz), épices et acidité, stimulants, sucres concentrés. Un bonus « épaississant » (riz blanc, banane, pomme de terre) réduit la pénalité.
+Chaque aliment est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactose, fibres insolubles, oligosaccharides, fructose et polyols, épices et acidité, stimulants, sucres concentrés, additifs), avec un bonus épaississant. La pénalité est la somme pondérée de ces niveaux ; le score vaut `10 × exp(−pénalité / 9)`. Les poids, les coefficients de portion, les seuils de couleur et le diviseur sont des **choix arbitraires** ; les niveaux par aliment sont des estimations. Aucun score alimentaire validé n'existe pour la rectocolite ou la poche. Détail et niveaux de preuve dans l'onglet Sources de l'appli.
 
-```
-pénalité = somme(poids × sensibilité × multiplicateur du profil × niveau)
-           + 0,3 × additifs − 0,5 × bonus épaississant   (minimum 0)
-score    = 10 × exp(−pénalité / 9)
-```
+## Installation sur Android
 
-Les portions (trace ×0,3, petite ×0,6, normale ×1, grosse ×1,5) et le poids saisi en grammes modulent les niveaux. Les poids de référence viennent en partie de la table belge NUBEL (Conseil supérieur de la Santé) et sinon d'estimations. Tout le détail (poids, niveaux de preuve, sources, limites, questions pour le médecin) est dans l'onglet **Sources** de l'application, à montrer à un médecin ou à un diététicien.
+Ouvre https://johunn.github.io/mici-score/ dans Chrome, puis menu ⋮ > « Installer l'application » (ou « Ajouter à l'écran d'accueil »).
 
-## Installer sur Android
+## Données
 
-1. Ouvrir https://johunn.github.io/mici-score/ dans Chrome.
-2. Menu ⋮ puis **Installer l'application** (ou **Ajouter à l'écran d'accueil**).
-
-L'appli fonctionne ensuite comme une application, en plein écran.
-
-## Données personnelles
-
-- Journal, corrections et réglages sont stockés **uniquement dans le navigateur de l'appareil** (`localStorage`). Aucun serveur, aucun compte, rien n'est envoyé.
-- Vider les données de Chrome efface tout. Utilise **Profil > Copier la sauvegarde** de temps en temps et garde le texte dans une note.
-- Le stockage est propre à chaque adresse : pour changer d'adresse, copie la sauvegarde puis restaure-la dans la nouvelle appli (**Profil > Restaurer**).
-- Le bouton de partage ne transmet que le lien de l'appli, aucune donnée.
+Tout reste dans le navigateur (`localStorage`) : rien n'est envoyé, aucun compte. Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
 
 ## Contenu du dépôt
 
-| Fichier | Rôle |
-|---|---|
-| `index.html` | l'application complète (page unique) |
-| `manifest.webmanifest` | informations d'installation (nom, icônes, couleurs) |
-| `sw.js` | service worker « réseau d'abord » : charge la dernière version en ligne |
-| `icons/` | icônes de l'application |
-| `LISEZ-MOI.txt` | étapes d'hébergement sur GitHub Pages |
+- `index.html` : toute l'application (données et code embarqués)
+- `manifest.webmanifest`, `sw.js`, `icons/` : installation et mode « réseau d'abord »
+- `LISEZ-MOI.txt` : notes d'installation
 
-## Mettre à jour l'application
+## Mise à jour
 
-1. Remplacer `index.html` dans le dépôt (même nom de fichier) puis valider.
-2. Attendre 1 à 2 minutes le déploiement de GitHub Pages (jusqu'à environ 10 minutes avec le cache).
-3. Rouvrir l'appli sur le téléphone en étant en ligne. Le journal n'est pas touché.
+Remplace `index.html` à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée en bas de l'onglet Profil. Le journal n'est pas touché.
 
-Si `sw.js` change, le navigateur le met à jour à la visite suivante.
+## Limites
 
-## Limites connues
-
-- Aucun score, ni « feu tricolore » alimentaire validé n'existe pour la rectocolite ou la poche : celui-ci n'en est pas un.
-- Niveaux par aliment estimés ; aucune source par aliment. Les produits de marque n'ont pas leur composition exacte.
-- Le score d'une assiette suppose des effets additifs : l'ordre des aliments, la quantité exacte, le repas de la veille, le stress ne sont pas modélisés.
-- Les coefficients de portion, le diviseur 9 et les multiplicateurs du profil sont arbitraires.
-- L'application ne détecte ni pochite ni déshydratation.
-- Un régime pauvre en FODMAP, s'il est utilisé pour des symptômes de type SII, doit être temporaire, en phases et suivi par un diététicien.
+- Estimations par aliment non sourcées ; effets supposés additifs ; interactions (repas de la veille, stress, quantité exacte) non modélisées.
+- Peu de données publiées sur l'alimentation avec une poche en J ; le lien gras, acides biliaires et selles, et l'effet du Questran sur la poche ne sont pas démontrés.
+- L'appli ne détecte ni pochite ni déshydratation. En cas de fièvre, sang, douleurs importantes, ballonnement avec arrêt des gaz et des selles, perte de poids ou selles très liquides persistantes, consulte rapidement.
 
 ## Sources principales
 
-- ECCO, Dietary Management of IBD : an ECCO Consensus (2025).
-- AGA, Clinical Practice Update on diet and nutritional therapies in IBD.
-- Crohn's & Colitis UK, Food and Crohn's or Colitis.
-- NHS Hull University Teaching Hospitals, Eating with an ileoanal pouch.
-- Ardalan et al., Aliment Pharmacol Ther 2021 (alimentation et poche, revue narrative).
-- Ardalan et al., JGH Open 2023 et 2025 (Monash Pouch Diet).
+ECCO, Dietary Management of IBD (consensus 2025) ; AGA Clinical Practice Update on diet in IBD ; Crohn's & Colitis UK, Food ; Ardalan et al., Aliment Pharmacol Ther 2021 (alimentation et poche) ; table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour les poids de portion.
 
-La liste complète, avec liens et niveaux de preuve, est dans l'onglet Sources de l'application.
+## Licence
 
-## Licence et affiliation
-
-Projet personnel, sans licence déclarée pour l'instant : par défaut, tous droits réservés. L'application n'est affiliée à aucune association. Le ruban violet est un symbole générique de sensibilisation aux MICI (Journée mondiale le 19 mai), pas le logo d'une association.
+Aucune licence choisie : tous droits réservés par défaut.
