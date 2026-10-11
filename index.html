@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6' fill='none' stroke='%238A4FBF' stroke-width='3.4'/%3E%3C/svg%3E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MICI Score">
-<title>MICI Score</title><!-- v8 : fermentescibles scindés, additifs, déclencheur personnel -->
+<title>MICI Score</title><!-- v9 : statuts d'aliments (à surveiller, confirmé, écarté) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -62,7 +62,8 @@ button{cursor:pointer}
 .rib{width:.6em;height:.8em;margin-left:9px;color:var(--ribbon,#8A4FBF);vertical-align:-.04em;flex:none}
 .ibtn{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0;align-self:center}
 .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
-input[type=search],input[type=text],textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--glass,var(--surface))}
+input[type=search],input[type=text],input[type=number],textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--glass,var(--surface));color:var(--ink);font:inherit}
+input[type=number]::placeholder{color:var(--muted,var(--ink));opacity:.55}
 textarea{min-height:76px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0 4px}
 .chips::-webkit-scrollbar{display:none}
@@ -157,6 +158,8 @@ body[data-layout="cartes"] .row:last-child{border-bottom:1px solid var(--line)}
 body[data-layout="cartes"] .row .name{padding:12px 44px 6px 12px;width:100%;min-height:64px}
 body[data-layout="cartes"] .row .badge{align-self:flex-start;margin:0 12px 12px;font-size:20px}
 body[data-layout="cartes"] .row .info{position:absolute;top:0;right:0;width:40px;height:40px;border:0}
+.flag{font-size:13px;margin-left:6px;color:var(--mid)}
+.flag.c{color:var(--bad)}
 @media (prefers-reduced-motion:no-preference){.dial .arc{transition:stroke-dasharray .35s ease}}
 </style>
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjZlNGFlNDFjLTZmODktNGUxOC1hNTdhLTlmZWYxMDJjNmZhNgAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNowU53JDrSGrSUFaYOht8zegAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6OWMyZDNiNTgtMWJmOS00OWViLWE3ZjQtYWVjMDViZTBiNTQzbHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaF7hPjVKAs6x8BJw0ubVVRIAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIBThenWN4ltvLuBH7vRd8lrCC6kt9aKxTk8OH7rEkvn9pGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2hYcYq3hJ06wvuGqHY40z8ZAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFgg1vt1tUFDPQ27QBu156RSCWkj2gmbgWi1iSXtqykKt5hkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTo2ZTRhZTQxYy02Zjg5LTRlMTgtYTU3YS05ZmVmMTAyYzZmYTYvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDoxMzJlNjM5OC03NGFlLTQ1NTEtODZkZC05ODA1NzUzMDBjZDFyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggFOF6dY3iW28u4Efu9F3yWsILqS31orFOTw4fusSS+f2iY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIG5Ak4wohoclKEEHwPXU4owJvuN0vdwMduAY8emcnuv5omN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIHXn3Y6ur/PHxi3I7yC/A9CJZEtVVxE/8RUpc44qz/QtdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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">
@@ -747,7 +750,7 @@ RAW.forEach(([c,list])=>list.forEach(str=>{
   FOODS.push({id,n:p[0],c,L:v.slice(0,7),b:v[7],obs:p[2]==='o',ho:+ex[0]||0,u:+ex[1]||0,rf:ex[2]||'',ru:ex[3]||'',comp:ex[4]||''});
 }));
 
-let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true};
+let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,flags:{}};
 const sensOf=k=>(store.sens[k]!=null?store.sens[k]:1);
 /* Profil : multiplicateurs ARBITRAIRES (aucune source chiffrée). Sens : FODMAP plus lourds, fibres insolubles moins lourdes avec une poche (Ardalan 2021, preuve faible). */
 const PROF={poche:{f:0.8,o:0.3},general:{}};   // o = poids des oligosaccharides : 0,3 = opinion d'expert (guides patients poche), hypothèse à tester
@@ -813,7 +816,7 @@ const THEMES=[
 function norm(p){
   let th=(['system','dark','ocean','charbon','foret','amoled','micinuit','mici','light','contraste','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
   if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
-  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false};
+  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,flags:(p.flags&&typeof p.flags==='object')?p.flags:{}};
 }
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const rgb2hex=a=>'#'+a.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
@@ -866,8 +869,41 @@ function personalSingle(id){
   return{mean:e.reduce((a,x)=>a+x.r,0)/e.length,n:e.length};
 }
 
+
+/* Statuts d'aliments. « À surveiller » est calculé depuis le journal en comparant les bons et les mauvais repas ; il ne change pas le score. « Confirmé » et « écarté » sont des choix de l'utilisateur. */
+const SUSP_MAX=4;
+function foodStats(){
+  const es=store.entries.filter(e=>Array.isArray(e.items)&&typeof e.r==='number'&&e.items.some(i=>i.id!=='legacy'));
+  const per={};
+  es.forEach(e=>{const seen={};e.items.forEach(it=>{if(it.id==='legacy'||seen[it.id])return;seen[it.id]=1;const o=per[it.id]=per[it.id]||{id:it.id,name:it.n,ms:[]};o.ms.push(e)})});
+  const tot=es.length,sumAll=es.reduce((a,e)=>a+e.r,0);
+  return Object.values(per).map(o=>{
+    const n=o.ms.length,sw=o.ms.reduce((a,e)=>a+e.r,0),bad=o.ms.filter(e=>e.r<=4).length,good=o.ms.filter(e=>e.r>=7).length;
+    const nWo=tot-n,meanWo=nWo>0?(sumAll-sw)/nWo:null;
+    const rec=o.ms.slice().sort((a,b)=>b.ts-a.ts).slice(0,3),cleared=n>=4&&rec.length===3&&rec.every(e=>e.r>=7);
+    return{id:o.id,name:o.name,n,bad,good,mean:sw/n,meanWo,nWo,cleared,gap:meanWo==null?null:meanWo-sw/n};
+  });
+}
+function suspectList(){
+  const fl=store.flags||{};
+  return foodStats().filter(s=>!fl[s.id]&&!s.cleared&&s.bad>=2&&s.gap!=null&&s.gap>=1.5&&s.nWo>=3&&s.good<=s.bad*0.5).sort((a,b)=>b.gap-a.gap);
+}
+const suspectIds=()=>suspectList().slice(0,SUSP_MAX).map(s=>s.id);
+const flagOf=(id,sus)=>(store.flags||{})[id]||((sus||suspectIds()).indexOf(id)>=0?'suspect':'');
+const flagBadge=(id,sus)=>{const t=flagOf(id,sus);return t==='suspect'?'<span class="flag" title="À surveiller">⚠</span>':t==='confirm'?'<span class="flag c" title="Déclencheur confirmé">✖</span>':''};
+function flagCard(f){
+  const st=flagOf(f.id),s=foodStats().find(x=>x.id===f.id);
+  const lab={suspect:'À surveiller',confirm:'Confirmé',clear:'Écarté'}[st]||'Neutre';
+  const info=s?`Présent dans ${s.n} repas du journal (moyenne ${fmt(s.mean)}${s.meanWo!=null?`, contre ${fmt(s.meanWo)} sans lui`:''} ; ${s.bad} mauvais, ${s.good} bons).${s.cleared?' Ses 3 derniers repas sont bons : il n\u2019est plus signalé.':''}`:'Aucun repas du journal ne contient cet aliment.';
+  const btn=(v,t)=>`<button class="btn ghost block" data-act="flag" data-id="${esc(f.id)}" data-v="${v}">${t}</button>`;
+  return `<div class="card"><h3>Statut : ${lab}</h3>
+    <p class="small muted">${info}</p>
+    <p class="small muted">« À surveiller » ne change pas le score. « Confirmé » applique ta moyenne comme correction (modifiable). Pour trancher, retire l'aliment quelques jours, un changement à la fois.</p>
+    <p style="margin:10px 0 0">${st==='confirm'||st==='clear'?btn('none','Retirer le statut'):btn('confirm','Confirmer comme déclencheur')+btn('clear','Écarter (hors de cause)')}</p></div>`;
+}
+
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sel:null,plate:[],quest:false,jeun:false,ress:7,note:'',msg:'',ov:5,
+const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sel:null,plate:[],quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
   newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false};
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
@@ -894,14 +930,14 @@ function listHTML(){
   const all=allFoods().filter(f=>(ui.cat<0||f.c===ui.cat)&&(!q||f.n.toLowerCase().includes(q))).sort((x,y)=>x.c-y.c);
   if(!all.length)return `<div class="empty">Aucun aliment trouvé.<br><button class="link" data-act="newfood">Ajouter « ${esc(ui.qs)} »</button></div>`;
   const PS=100,pages=Math.ceil(all.length/PS);ui.page=Math.min(Math.max(0,ui.page||0),pages-1);
-  const foods=all.slice(ui.page*PS,(ui.page+1)*PS);
+  const foods=all.slice(ui.page*PS,(ui.page+1)*PS),sus=suspectIds();
   const pager=pages>1?`<div class="seg" role="group" aria-label="Pages" style="margin:12px 0;align-items:center"><button data-act="pg" data-d="-1" ${ui.page===0?'disabled':''}>‹ Précédent</button><span class="small muted" style="padding:0 10px">Page ${ui.page+1} / ${pages} · ${all.length} aliments</span><button data-act="pg" data-d="1" ${ui.page>=pages-1?'disabled':''}>Suivant ›</button></div>`:'';
   return pager+CATS.map((c,i)=>{
     const g=foods.filter(f=>f.c===i);
     if(!g.length)return '';
     return `<section class="group"><h3>${c} (${g.length})</h3><div class="rows">${g.map(f=>{
       const v=foodScore(f),ov=store.over[f.id]!=null,sel=ui.plate.some(x=>x.id===f.id);
-      return `<div class="row${sel?' sel':''}"><button class="name" data-act="add" data-id="${esc(f.id)}" aria-pressed="${sel}">${esc(f.n)}</button><span class="badge ${cls(v)}" title="${ov?'Corrigé par toi':'Calculé'}">${fmt(v)}${ov?'*':''}</span><button class="info" data-act="info" data-id="${esc(f.id)}" aria-label="Détails de ${esc(f.n)}">›</button></div>`;
+      return `<div class="row${sel?' sel':''}"><button class="name" data-act="add" data-id="${esc(f.id)}" aria-pressed="${sel}">${esc(f.n)}${flagBadge(f.id,sus)}</button><span class="badge ${cls(v)}" title="${ov?'Corrigé par toi':'Calculé'}">${fmt(v)}${ov?'*':''}</span><button class="info" data-act="info" data-id="${esc(f.id)}" aria-label="Détails de ${esc(f.n)}">›</button></div>`;
     }).join('')}</div></section>`;
   }).join('')+pager;
 }
@@ -990,6 +1026,7 @@ function detailHTML(){
     ${p?`<button class="btn ghost block" data-act="useMean" data-id="${esc(f.id)}" data-v="${p.mean}">Utiliser ma moyenne (${fmt(p.mean)})</button>`:''}
     ${ovSet?`<button class="btn ghost block" data-act="resetOv" data-id="${esc(f.id)}">Rétablir le calcul</button>`:''}</p>
   </div>
+  ${flagCard(f)}
   ${f.custom?`<p style="margin-top:14px"><button class="btn danger block" data-act="delFood" data-id="${esc(f.id)}">Supprimer cet aliment</button></p>`:''}`;
 }
 
@@ -1014,19 +1051,23 @@ function addHTML(){
 
 function journalHTML(){
   const ents=store.entries.slice().sort((a,b)=>b.ts-a.ts);
-  const per={};
-  store.entries.forEach(e=>(e.items||[]).forEach(it=>{if(it.id==='legacy')return;const o=per[it.id]=per[it.id]||{name:it.n,sum:0,n:0};o.sum+=e.r;o.n++}));
-  const bilan=Object.values(per).filter(x=>x.n>=2).map(x=>({name:x.name,mean:x.sum/x.n,n:x.n})).sort((a,b)=>a.mean-b.mean).slice(0,12);
+  const sl=suspectList(),sus=sl.slice(0,SUSP_MAX),hid=sl.length-sus.length;
+  const conf=Object.keys(store.flags||{}).filter(k=>store.flags[k]==='confirm').map(k=>{const f=byId(k);return f?f.n:null}).filter(Boolean);
+  const bilan=(sus.length||conf.length)?[1]:[];
   const dt=ts=>new Date(ts).toLocaleString('fr-BE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
   return `<div class="top"><h1>Journal</h1></div>
   ${!ents.length?`<div class="empty">Aucune note pour l'instant.<br>Compose une assiette dans « Calculer » puis note ton ressenti.</div>`:`
-  ${bilan.length?`<div class="card" style="margin-top:0"><h3>Aliments associés aux moins bons ressentis</h3>
-    <p class="muted small">Moyenne des notes des repas qui contiennent l'aliment (au moins 2 repas). Indicatif : un repas mélange plusieurs aliments.</p>
-    ${bilan.map(x=>`<div class="entry"><span class="badge ${cls(x.mean)}">${fmt(x.mean)}</span><div class="body"><b>${esc(x.name)}</b><span class="muted small" style="display:block">${x.n} repas${x.n<3?' · peu fiable':''}</span></div></div>`).join('')}</div>`:''}
+  ${bilan.length?`<div class="card" style="margin-top:0"><h3>À surveiller</h3>
+    <p class="muted small">Aliments présents dans plusieurs repas mal notés (4 ou moins) et rarement dans les bons, comparés aux repas sans eux. Ça sert à choisir quoi tester, pas à conclure : retire-le quelques jours, un changement à la fois. Aucun effet sur le score tant que tu ne confirmes pas. Maximum ${SUSP_MAX} à la fois.</p>
+    ${sus.map(x=>`<div class="entry"><span class="badge ${cls(x.mean)}">${fmt(x.mean)}</span><div class="body"><b>${esc(x.name)}</b><span class="muted small" style="display:block">${x.n} repas : ${x.bad} mauvais, ${x.good} bons · sans lui : ${fmt(x.meanWo)}${x.n<4?' · peu fiable':''}</span><span style="display:flex;gap:8px;margin-top:6px"><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="flag" data-id="${esc(x.id)}" data-v="confirm">Confirmer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="flag" data-id="${esc(x.id)}" data-v="clear">Écarter</button></span></div></div>`).join('')}
+    ${hid>0?`<p class="small muted">${hid} autre${hid>1?'s':''} suspect${hid>1?'s':''} masqué${hid>1?'s':''} (limite de ${SUSP_MAX}) : traite d'abord ceux-ci.</p>`:''}
+    ${conf.length?`<p class="small"><b>Confirmés :</b> ${conf.map(esc).join(', ')}</p>`:''}</div>`:''}
   <div class="card"${bilan.length?'':' style="margin-top:0"'}><h3>Historique</h3>
     ${ents.map(e=>`<div class="entry"><span class="badge ${cls(e.r)}">${e.r}</span><div class="body"><b>${esc((e.items||[]).map(i=>i.n).join(' + '))}</b>
       <span class="muted small" style="display:block">${dt(e.ts)}${e.quest?' · Questran':''}${e.jeun?' · à jeun':''}${e.score!=null?' · calculé '+fmt(e.score):''}</span>
-      ${e.note?`<span class="small" style="display:block">${esc(e.note)}</span>`:''}</div>
+      ${e.note?`<span class="small" style="display:block">${esc(e.note)}</span>`:''}
+      ${e.edited?`<span class="muted small" style="display:block">Corrigé le ${dt(e.edited)}</span>`:''}
+      ${String(ui.editId)===String(e.id)?`<div class="field" style="margin-top:8px"><label for="eress">Digestion : <span class="rangeval" id="eressv">${ui.eR}</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="${ui.eR}"><textarea id="enote" placeholder="Note (facultatif)">${esc(ui.eNote)}</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="${e.id}">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>`:`<button class="btn ghost" style="margin:6px 0 0;padding:6px 12px" data-act="editEntry" data-id="${e.id}">Corriger la note</button>`}</div>
       <button class="del" data-act="delEntry" data-id="${e.id}">Supprimer</button></div>`).join('')}
   </div>`}`;
 }
@@ -1121,11 +1162,14 @@ function sourcesHTML(){
     <p class="small"><b>Poche en J</b> (défaut) : oligosaccharides à poids 0,3, fibres insolubles ×0,8. <b>Général</b> : barème sans ajustement (oligosaccharides à 1). <b>Sténose</b> (option) : fibres insolubles ×1,5. <b>Crohn</b> (option) : aucun effet sur le score.</p>
     <p class="small muted">Ces multiplicateurs sont des hypothèses de départ arbitraires. Aucune source ne donne de valeur chiffrée pour une poche. Les aliments déjà calibrés sur tes retours gardent leur poids d'origine.</p></div>
   <div class="card"><h3>4. Origine des niveaux par aliment</h3>
-    <p class="small">Les 499 aliments viennent de connaissances générales (gras, lactose, fibres, FODMAP approximatifs). Aucun niveau n'est validé par une source par aliment. Le partage des fermentescibles entre oligosaccharides et fructose/polyols a été fait par règles de mots-clés (fructanes de l'oignon, de l'ail et du blé ; GOS des légumineuses ; polyols et fructose en excès des fruits, champignons et édulcorants). 65 % des aliments concernés ne correspondent à aucune règle et sont coupés 50/50 par défaut. La règle appliquée est visible dans la fiche de chaque aliment. Les additifs sont attribués par mots-clés (snacks, sodas light, biscuits, surgelés).</p>
+    <p class="small">Les 507 aliments viennent de connaissances générales (gras, lactose, fibres, FODMAP approximatifs). Aucun niveau n'est validé par une source par aliment. Le partage des fermentescibles entre oligosaccharides et fructose/polyols a été fait par règles de mots-clés (fructanes de l'oignon, de l'ail et du blé ; GOS des légumineuses ; polyols et fructose en excès des fruits, champignons et édulcorants). 65 % des aliments concernés ne correspondent à aucune règle et sont coupés 50/50 par défaut. La règle appliquée est visible dans la fiche de chaque aliment. Les additifs sont attribués par mots-clés (snacks, sodas light, biscuits, surgelés).</p>
     <p class="small muted">Les produits de marque n'ont pas leur composition exacte. Le score d'une assiette suppose des effets additifs ; l'ordre des aliments, la quantité exacte, le repas de la veille, le stress et la fatigue ne sont pas modélisés.</p></div>
   <div class="card"><h3>5. Personnalisation</h3>
     <p class="small">Tu peux corriger le score d'un aliment (il remplace le calcul), régler une sensibilité par caractéristique (×0,5 à ×2) et noter chaque repas de 0 à 10 dans le journal. Les suggestions d'apprentissage demandent au moins 8 repas avec détail et 3 par groupe. Ce sont des corrélations, pas des preuves : plusieurs aliments se mélangent dans un repas.</p>
     <p class="small"><b>Déclencheur personnel</b> : un aliment avec au moins 2 notes seul et une moyenne de 4 ou moins est signalé, même si la grille le classe favorable. En cas de désaccord entre la grille et ton journal, le journal prime.</p></div>
+  <div class="card"><h3>Statuts d'aliments : à surveiller, confirmé, écarté</h3>
+    <p class="small">Un aliment est « à surveiller » s'il figure dans au moins 2 repas notés 4 ou moins, si la moyenne des repas qui le contiennent est au moins 1,5 point sous celle des repas sans lui (au moins 3 repas sans lui), et si les repas notés 7 ou plus qui le contiennent ne dépassent pas la moitié des mauvais. Les bons repas comptent donc autant que les mauvais. Ces seuils sont arbitraires. Au plus 4 suspects sont affichés à la fois, pour éviter une restriction en cascade.</p>
+    <p class="small muted">« À surveiller » ne change pas le score. « Confirmé » est ta décision : l'appli applique alors ta moyenne comme correction du score (modifiable). « Écarté » sort l'aliment de la liste. Le journal ne contrôle ni le Questran, ni le repas de la veille, ni le gras, le stress, la fatigue ou le délai entre le repas et les symptômes : c'est une corrélation, pas une preuve. Le seul vrai test est de retirer l'aliment quelques jours, un changement à la fois. Avec une poche, une restriction excessive expose à la perte de poids et aux carences : un diététicien MICI aide à la limiter. Le « déclencheur personnel » (2 notes seul, moyenne de 4 ou moins) reste un simple message dans la fiche, sans effet sur le score.</p></div>
   <div class="card"><h3>6. Sources</h3>
     <ul class="small muted" style="padding-left:18px;margin:0">
       <li>ECCO, Dietary Management of IBD (consensus 2025). ${A('https://ecco-ibd.eu/publications/news/issues/2025/volume-20-issue-4/dietary-management-of-inflammatory-bowel-disease-an-ecco-consensus','Synthèse ECCO News')} (texte complet non relu : PDF inaccessible). Alimentation saine de base ; low FODMAP recommandé pour symptômes de type SII en rémission ; preuves insuffisantes sur les fibres hors sténose ; pas de régime pour induire la rémission en RCH ; régime méditerranéen possible en maintenance de RCH ; accès à un diététicien MICI.</li>
@@ -1194,6 +1238,8 @@ document.addEventListener('input',e=>{
   if(t.id==='qs'){ui.qs=t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML();const cb=document.querySelector('.searchbox .clear');if(cb)cb.hidden=!t.value}
   else if(t.id==='ress'){ui.ress=+t.value;document.getElementById('ressv').textContent=t.value}
   else if(t.id==='note'){ui.note=t.value}
+  else if(t.id==='eress'){ui.eR=+t.value;const v=document.getElementById('eressv');if(v)v.textContent=t.value}
+  else if(t.id==='enote'){ui.eNote=t.value}
   else if(t.id==='newName'){ui.newName=t.value}
   else if(t.id==='ov'){ui.ov=+t.value;document.getElementById('ovv').textContent=fmt(ui.ov)}
   else if(t.id==='cbg'){store.cbg=t.value;save();applyTheme()}
@@ -1246,6 +1292,9 @@ document.addEventListener('click',e=>{
     store.entries.push({id:Date.now(),ts:Date.now(),items:items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0})),r:ui.ress,quest:ui.quest,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
     save();ui.plate=[];ui.view='list';ui.note='';ui.ress=7;ui.tab='journal';render();
   }
+  else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
+  else if(a==='cancelEdit'){ui.editId=null;render(true)}
+  else if(a==='saveEdit'){const e=store.entries.find(x=>String(x.id)===id);if(e){e.r=ui.eR;e.note=(ui.eNote||'').trim();e.edited=Date.now()}ui.editId=null;save();render(true)}
   else if(a==='delEntry'){store.entries=store.entries.filter(x=>String(x.id)!==id);save();render(true)}
   else if(a==='saveOv'){store.over[id]=ui.ov;save();ui.msg='Correction enregistrée.';render(true)}
   else if(a==='useMean'){store.over[id]=Math.round(+b.dataset.v*2)/2;ui.ov=store.over[id];save();ui.msg='Moyenne appliquée.';render(true)}
@@ -1259,7 +1308,20 @@ document.addEventListener('click',e=>{
     save();ui.qs='';ui.msg='';openDetail(nid);
   }
   else if(a==='delFood'){
-    store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];ui.plate=ui.plate.filter(x=>x.id!==id);save();ui.view='list';render();
+    store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);save();ui.view='list';render();
+  }
+  else if(a==='flag'){
+    const v=b.dataset.v;store.flags=store.flags||{};
+    if(v==='none'){delete store.flags[id];ui.msg='Statut retiré. La correction de score éventuelle reste : tu peux la rétablir.'}
+    else{
+      store.flags[id]=v;
+      if(v==='confirm'){
+        const f=byId(id),st=foodStats().find(x=>x.id===id);
+        if(f&&st&&store.over[id]==null){store.over[id]=Math.max(0,Math.round(Math.min(single(f),st.mean)*2)/2);ui.ov=store.over[id];ui.msg='Confirmé : score corrigé à '+fmt(store.over[id])+' (modifiable plus bas).'}
+        else ui.msg='Confirmé.';
+      }else ui.msg='Écarté de la liste des suspects.';
+    }
+    save();render(true);
   }
   else if(a==='theme'){store.theme=id;save();applyTheme();render(true)}
   else if(a==='layout'){store.layout=id;save();applyTheme();render(true)}
