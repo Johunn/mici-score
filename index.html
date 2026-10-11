@@ -60,6 +60,7 @@ button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .rib{width:.6em;height:.8em;margin-left:9px;color:var(--ribbon,#8A4FBF);vertical-align:-.04em;flex:none}
+.ibtn{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0;align-self:center}
 .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
 input[type=search],input[type=text],textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--glass,var(--surface))}
 textarea{min-height:76px;resize:vertical}
@@ -908,7 +909,8 @@ function calcHTML(){
   if(ui.view==='add')return addHTML();
   if(ui.view==='detail'&&ui.sel)return detailHTML();
   if(ui.view==='plate')return plateHTML();
-  return `<div class="top"><h1>MICI Score${RIB}</h1></div>
+  return `<div class="top"><h1>MICI Score${RIB}</h1><button class="ibtn" data-act="share" aria-label="Partager l\u2019appli" title="Partager l\u2019appli"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button></div>
+  ${ui.msg?`<p class="small" role="status" style="margin:-6px 0 10px">${esc(ui.msg)}</p>`:''}
   <div class="searchbox"><input type="search" id="qs" placeholder="Rechercher parmi ${allFoods().length} aliments" value="${esc(ui.qs)}" aria-label="Rechercher"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" ${ui.qs?'':'hidden'}>✕</button></div>
   <div class="chips" role="group" aria-label="Catégories">
     <button class="chip" data-act="cat" data-i="-1" aria-pressed="${ui.cat<0}">Tout</button>
@@ -1089,10 +1091,6 @@ function profilHTML(){
     <p class="muted small">Supprime notes, corrections, sensibilités et aliments ajoutés.</p>
     <button class="btn danger block" data-act="reset">${ui.resetArmed?'Confirmer : tout effacer':'Tout effacer'}</button>
   </div>
-  <div class="card"><h3>Partager l'appli</h3>
-    <p class="small muted">Envoie le lien à un proche ou à ton médecin. Le lien ne contient aucune de tes données.</p>
-    <button class="btn block" data-act="share">Partager le lien</button>
-    <p class="small muted" style="margin:8px 0 0;word-break:break-all">https://johunn.github.io/mici-score/</p></div>
   <div class="card"><h3>Quand consulter</h3>
     <p class="small muted">Contacte ton gastro-entérologue ou un diététicien MICI en cas de perte de poids, dénutrition, douleurs importantes, ballonnement avec arrêt des gaz et des selles (occlusion possible), sang dans les selles, fièvre, signes de déshydratation, fuites nocturnes ou plus de selles pendant plusieurs jours (pochite possible). Questran : à discuter uniquement avec le gastro-entérologue ; surveillance nutritionnelle si prescrite (il peut réduire l'absorption des vitamines A, D, E, K et du folate ; espacement des autres médicaments à voir avec le médecin ou le pharmacien). Surveillance nutritionnelle : pas de fréquence universelle validée. B12 après poche iléo-anale, fréquence fixée par ton gastro ; fer en cas d'anémie, fatigue, saignement ou restriction alimentaire ; vitamine D surtout en cas de carence, os fragiles, malabsorption ou Questran. Hydratation : individualisée, surtout si selles fréquentes ou liquides ; demande au pharmacien une solution de réhydratation si besoin. Le score n'est ni un diagnostic ni un traitement.</p>
   </div>`;
@@ -1253,7 +1251,7 @@ document.addEventListener('click',e=>{
   else if(a==='theme'){store.theme=id;save();applyTheme();render(true)}
   else if(a==='layout'){store.layout=id;save();applyTheme();render(true)}
   else if(a==='applySens'){store.sens[b.dataset.k]=+b.dataset.v;save();render(true)}
-  else if(a==='share'){const url='https://johunn.github.io/mici-score/',d={title:'MICI Score',text:'MICI Score : estimation personnelle de la tolérance alimentaire (rectocolite avec poche en J). Ni diagnostic ni traitement.',url};if(navigator.share){navigator.share(d).catch(()=>{})}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>{ui.msg='Lien copié.';render(true)},()=>{ui.msg='Copie impossible. Lien : '+url;render(true)})}else{ui.msg='Lien : '+url;render(true)}}
+  else if(a==='share'){const url='https://johunn.github.io/mici-score/',d={title:'MICI Score',text:'MICI Score : estimation personnelle de la tolérance alimentaire (rectocolite avec poche en J). Ni diagnostic ni traitement.',url};if(navigator.share){navigator.share(d).catch(()=>{})}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>{ui.msg='Lien copié.';render(true);setTimeout(()=>{if(ui.msg==='Lien copié.'){ui.msg='';render(true)}},2500)},()=>{ui.msg='Copie impossible. Lien : '+url;render(true)})}else{ui.msg='Lien : '+url;render(true)}}
   else if(a==='prof'){store.prof=id;save();render(true)}
   else if(a==='mod'){store.mods=store.mods||{};store.mods[id]=!store.mods[id];save();render(true)}
   else if(a==='resetSens'){store.sens={};save();render(true)}
