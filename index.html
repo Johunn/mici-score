@@ -763,6 +763,7 @@ const REFG_CAT=[150,140,150,120,100,60,25,5,200,40,300,40];
 const REFG_NOM=[[/jambon cru|fum/i,25],[/jambon/i,45],[/fromage fondu/i,20],[/fromage|emmental|gruy|edam|gouda|mozzarella/i,25],[/œuf|oeuf|omelette/i,50],[/baguette/i,130],[/pistolet/i,45],[/pain/i,80],[/wrap|tortilla/i,60],[/yaourt/i,125],[/poulet/i,160],[/saumon/i,180],[/cabillaud|colin/i,175],[/frites/i,250],[/lasagne/i,400],[/spaghetti/i,300],[/croque/i,135],[/croissant/i,50],[/purée|puree/i,160],[/riz/i,150],[/mayonnaise|ketchup/i,25],[/huile/i,10],[/beurre/i,10],[/pomme(?! de terre)/i,140],[/banane/i,130],[/orange/i,140],[/poire/i,160]];
 const refG=f=>{for(const [rx,g] of REFG_NOM)if(rx.test(f.n))return g;return REFG_CAT[f.c]||100};
 const pfOf=it=>it.g>0?Math.min(3,Math.max(0.1,it.g/refG(it.f))):PF[it.p];
+const grOf=(f,k)=>{const g=refG(f)*PF[k];return g<10?Math.round(g):Math.round(g/5)*5};   // poids estimé affiché sous chaque portion
 function levels(items,ctx){
   const L=Array(7).fill(0);let b=0,ho=0,u=0;
   items.forEach(it=>{const P=pfOf(it);it.f.L.forEach((v,i)=>{L[i]+=v*P});b+=it.f.b*P;ho+=(it.f.ho||0)*P;u+=(it.f.u||0)*P});
@@ -936,7 +937,7 @@ function plateHTML(){
   ${attentionHTML(r.lv)}
   <div class="card"><h3>Aliments</h3>
     ${items.map((it,i)=>`<div class="item"><div class="head"><span>${esc(it.f.n)}</span><button class="x" data-act="rm" data-i="${i}">Retirer</button></div>
-      <div class="seg" role="group" aria-label="Portion">${[[3,'Trace'],[0,'Petite'],[1,'Normale'],[2,'Grosse']].map(([k,l])=>`<button data-act="pp" data-i="${i}" data-v="${k}" aria-pressed="${!it.g&&it.p===k}">${l}</button>`).join('')}</div>
+      <div class="seg" role="group" aria-label="Portion">${[[3,'Trace'],[0,'Petite'],[1,'Normale'],[2,'Grosse']].map(([k,l])=>`<button data-act="pp" data-i="${i}" data-v="${k}" aria-pressed="${!it.g&&it.p===k}">${l}<small style="display:block;font-weight:400;opacity:.85;font-size:12px">≈ ${grOf(it.f,k)} g</small></button>`).join('')}</div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><span class="small muted">ou</span><input type="number" inputmode="numeric" min="1" max="1500" step="5" data-gi="${i}" value="${it.g||''}" placeholder="${Math.round(refG(it.f))}" aria-label="Poids en grammes de ${esc(it.f.n)}" style="width:90px"><span class="small muted">g · portion normale ≈ ${Math.round(refG(it.f))} g (estimation)</span></div></div>`).join('')}
     <p style="margin:14px 0 0"><button class="btn ghost block" data-act="back">Ajouter un aliment</button></p>
   </div>
@@ -1110,7 +1111,7 @@ function sourcesHTML(){
     <p class="small muted">Cet onglet explique d'où viennent les chiffres, pour qu'un médecin ou un diététicien puisse les vérifier et les corriger.</p></div>
   <div class="card"><h3>1. Comment le score est calculé</h3>
     <p class="small">Chaque aliment a des niveaux de 0 à 3 (par demi-point) pour des caractéristiques. Pénalité = somme(poids × ta sensibilité × multiplicateur du profil × niveau) + 0,3 × additifs − 0,5 × bonus épaississant (minimum 0). Score = 10 × exp(−pénalité / 9), donc entre 0 et 10 (10 = très bien toléré). La forme exponentielle évite que tous les plats gras tombent à 0 ; elle et le diviseur 9 sont arbitraires.</p>
-    <p class="small muted">Poids en grammes : le facteur est poids saisi / poids de référence de la portion normale, plafonné entre ×0,1 et ×3. Références tirées de la table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour œuf 50 g, jambon cuit 45 g, fromage fondu 20 g, fromage en tranche 25 g, filet de poulet 160 g, saumon 180 g, darne de cabillaud 175 g, riz cuit 150 g, frites 250 g, lasagnes 400 g, croque-monsieur 135 g, croissant 50 g, pomme 140 g, banane 130 g, mayonnaise et ketchup en cuillère 25 g ; le pain (80 g, trois tranches) et la demi-baguette (130 g) en sont déduits ; les autres références (légumes 150 g, viandes 120 g, boissons 200 g, etc.) sont des estimations sans source. Portion : trace ×0,3 (sauces et condiments, par défaut dans l'assiette), petite ×0,6, normale ×1, grosse ×1,5. Questran pris : gras ×0,75. À jeun : lactose ×1,3. Les niveaux d'une assiette s'additionnent (plafonnés à 4) : un sandwich de 6 ingrédients compte donc 6 portions, d'où des scores très bas si les portions ne sont pas réduites. Ces ajustements sont arbitraires.</p>
+    <p class="small muted">Poids en grammes : le facteur est poids saisi / poids de référence de la portion normale, plafonné entre ×0,1 et ×3. Références tirées de la table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour œuf 50 g, jambon cuit 45 g, fromage fondu 20 g, fromage en tranche 25 g, filet de poulet 160 g, saumon 180 g, darne de cabillaud 175 g, riz cuit 150 g, frites 250 g, lasagnes 400 g, croque-monsieur 135 g, croissant 50 g, pomme 140 g, banane 130 g, mayonnaise et ketchup en cuillère 25 g ; le pain (80 g, trois tranches) et la demi-baguette (130 g) en sont déduits ; les autres références (légumes 150 g, viandes 120 g, boissons 200 g, etc.) sont des estimations sans source. Portion : trace ×0,3 (sauces et condiments, par défaut dans l'assiette), petite ×0,6, normale ×1, grosse ×1,5. Questran pris : gras ×0,75. À jeun : lactose ×1,3. Les niveaux d'une assiette s'additionnent (plafonnés à 4) : un sandwich de 6 ingrédients compte donc 6 portions, d'où des scores très bas si les portions ne sont pas réduites. Les poids affichés sous Trace, Petite, Normale et Grosse dans l'assiette sont la référence de la portion normale multipliée par le coefficient (arrondis à 5 g) : ce sont des estimations. Ces ajustements sont arbitraires.</p>
     <p class="small muted">Lecture : 6 ou plus généralement bien toléré ; 4 à 6 à adapter ; moins de 4 plusieurs points d'attention. Seuils abaissés parce que l'ancienne échelle (7 et 5, gras à 2,0, diviseur 6,5) classait 90 % des plats en rouge : elle était calibrée sur de mauvais repas seulement. Ces seuils ne sont pas validés. Le score affiché combine l'estimation et ta moyenne personnelle quand tu as des notes.</p></div>
   <div class="card"><h3>2. Caractéristiques, poids et niveau de preuve</h3>
     ${FEATS.map(f=>`<div style="margin:0 0 10px"><b class="small">${f.n} · poids ${fmt(f.w)}</b><span class="small muted" style="display:block">${f.d}</span><span class="small" style="display:block">Preuve : ${f.ev}</span><span class="small muted" style="display:block">${f.sr}</span></div>`).join('')}
@@ -1159,7 +1160,19 @@ function sourcesHTML(){
   <div class="card"><h3>Pour mon médecin</h3>
     <p class="small muted">Questions à discuter : mon nombre de selles par jour est-il normal pour ma poche, et quel seuil doit me faire consulter ? Le Questran est-il adapté (dose maximale, espacement des autres médicaments, suivi des vitamines A, D, E, K, du folate et du temps de prothrombine) ? Quelle fréquence de suivi pour la B12, le fer et la vitamine D ? Le lopéramide est-il autorisé ? Quelle hydratation et quelle solution de réhydratation ? Un test de malabsorption des acides biliaires ou d'intolérance au lactose est-il utile ? Un diététicien MICI est-il accessible ? Alcool et bière ? Dépistage de la fragilité osseuse ?</p></div>`;
 }
+/* Navigation : le bouton Retour d'Android remonte d'un écran dans l'appli (liste, détail, assiette, onglets) au lieu de quitter la page. */
+let fromPop=false,navDepth=0;
+const navKey=()=>ui.tab+'|'+ui.view+'|'+(ui.view==='detail'?ui.sel:'');
+let lastKey=navKey();
+try{history.replaceState({tab:ui.tab,view:ui.view,sel:ui.sel},'')}catch(e){}
+window.addEventListener('popstate',e=>{
+  const s=e.state;navDepth=Math.max(0,navDepth-1);fromPop=true;
+  if(s&&s.tab){ui.tab=s.tab;ui.view=s.view;ui.sel=s.sel}else{ui.tab='calc';ui.view='list';ui.sel=null}
+  ui.msg='';lastKey=navKey();render();fromPop=false;
+});
 function render(keep){
+  const k=navKey();
+  if(k!==lastKey){lastKey=k;if(!fromPop){try{history.pushState({tab:ui.tab,view:ui.view,sel:ui.sel},'');navDepth++}catch(e){}}}
   const y=window.scrollY;
   document.querySelectorAll('nav.tabs button').forEach(b=>{if(b.dataset.tab===ui.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   app.innerHTML=ui.tab==='calc'?calcHTML():ui.tab==='journal'?journalHTML():ui.tab==='sources'?sourcesHTML():profilHTML();
@@ -1221,7 +1234,7 @@ document.addEventListener('click',e=>{
   else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}render(true)}
   else if(a==='openPlate'){ui.view='plate';render()}
   else if(a==='clearBar'){ui.plate=[];document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
-  else if(a==='back'){ui.view='list';ui.msg='';render()}
+  else if(a==='back'){if(navDepth>0){history.back()}else{ui.view='list';ui.msg='';render()}}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
   else if(a==='pg'){ui.page=Math.max(0,(ui.page||0)+(+b.dataset.d));document.getElementById('list').innerHTML=listHTML();window.scrollTo(0,0)}
   else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;render(true)}
