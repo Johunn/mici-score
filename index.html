@@ -1089,6 +1089,10 @@ function profilHTML(){
     <p class="muted small">Supprime notes, corrections, sensibilités et aliments ajoutés.</p>
     <button class="btn danger block" data-act="reset">${ui.resetArmed?'Confirmer : tout effacer':'Tout effacer'}</button>
   </div>
+  <div class="card"><h3>Partager l'appli</h3>
+    <p class="small muted">Envoie le lien à un proche ou à ton médecin. Le lien ne contient aucune de tes données.</p>
+    <button class="btn block" data-act="share">Partager le lien</button>
+    <p class="small muted" style="margin:8px 0 0;word-break:break-all">https://johunn.github.io/mici-score/</p></div>
   <div class="card"><h3>Quand consulter</h3>
     <p class="small muted">Contacte ton gastro-entérologue ou un diététicien MICI en cas de perte de poids, dénutrition, douleurs importantes, ballonnement avec arrêt des gaz et des selles (occlusion possible), sang dans les selles, fièvre, signes de déshydratation, fuites nocturnes ou plus de selles pendant plusieurs jours (pochite possible). Questran : à discuter uniquement avec le gastro-entérologue ; surveillance nutritionnelle si prescrite (il peut réduire l'absorption des vitamines A, D, E, K et du folate ; espacement des autres médicaments à voir avec le médecin ou le pharmacien). Surveillance nutritionnelle : pas de fréquence universelle validée. B12 après poche iléo-anale, fréquence fixée par ton gastro ; fer en cas d'anémie, fatigue, saignement ou restriction alimentaire ; vitamine D surtout en cas de carence, os fragiles, malabsorption ou Questran. Hydratation : individualisée, surtout si selles fréquentes ou liquides ; demande au pharmacien une solution de réhydratation si besoin. Le score n'est ni un diagnostic ni un traitement.</p>
   </div>`;
@@ -1249,6 +1253,7 @@ document.addEventListener('click',e=>{
   else if(a==='theme'){store.theme=id;save();applyTheme();render(true)}
   else if(a==='layout'){store.layout=id;save();applyTheme();render(true)}
   else if(a==='applySens'){store.sens[b.dataset.k]=+b.dataset.v;save();render(true)}
+  else if(a==='share'){const url='https://johunn.github.io/mici-score/',d={title:'MICI Score',text:'MICI Score : estimation personnelle de la tolérance alimentaire (rectocolite avec poche en J). Ni diagnostic ni traitement.',url};if(navigator.share){navigator.share(d).catch(()=>{})}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>{ui.msg='Lien copié.';render(true)},()=>{ui.msg='Copie impossible. Lien : '+url;render(true)})}else{ui.msg='Lien : '+url;render(true)}}
   else if(a==='prof'){store.prof=id;save();render(true)}
   else if(a==='mod'){store.mods=store.mods||{};store.mods[id]=!store.mods[id];save();render(true)}
   else if(a==='resetSens'){store.sens={};save();render(true)}
