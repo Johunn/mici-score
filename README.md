@@ -62,7 +62,7 @@ Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom)
 
 ## Sources principales
 
-ECCO, Dietary Management of IBD (consensus 2025) ; AGA Clinical Practice Update on diet in IBD ; Crohn's & Colitis UK, Food ; Ardalan et al., Aliment Pharmacol Ther 2020 (alimentation et poche) ; table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour les poids de portion.
+ECCO, Dietary Management of IBD (consensus 2025, J Crohns Colitis 19(9):jjaf122 ; PDF complet relu : déclarations 25.1 et 25.2 sur la poche, 21.1 sur la sténose, 20.1 et 12 sur le low FODMAP, 23.1 sur le gras et les acides biliaires) ; AGA Clinical Practice Update on diet in IBD ; Crohn's & Colitis UK, Food ; Ardalan et al., Aliment Pharmacol Ther 2020 (alimentation et poche) ; table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour les poids de portion.
 
 ## Licence
 
