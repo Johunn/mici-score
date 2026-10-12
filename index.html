@@ -929,9 +929,36 @@ function loadGIS(){
   });
   return _gisP;
 }
+/* Appli installée (écran d'accueil) : la fenêtre popup de Google reste blanche (v25). On passe par une redirection de la page entière.
+   Nécessite l'URI de redirection https://johunn.github.io/mici-score/ dans la console Google (voir GUIDE-GOOGLE-CLOUD.md). */
+const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: minimal-ui)').matches||navigator.standalone===true}catch(e){return false}};
+const redirUri=()=>location.origin+location.pathname.replace(/[^\/]*$/,'');
+function startRedirect(){
+  const st=Math.random().toString(36).slice(2)+Date.now().toString(36);
+  try{localStorage.setItem('mici:gstate',st)}catch(e){}
+  const p=new URLSearchParams({client_id:cid(),redirect_uri:redirUri(),response_type:'token',scope:G_SCOPE,state:st,include_granted_scopes:'true'});
+  if(store.acct&&store.acct.email)p.set('login_hint',store.acct.email);
+  location.assign('https://accounts.google.com/o/oauth2/v2/auth?'+p.toString());
+}
+function readRedirect(){
+  if(!/[#&](access_token|error)=/.test(location.hash))return;
+  const p=new URLSearchParams(location.hash.slice(1));
+  let ok=false;
+  try{const s=localStorage.getItem('mici:gstate');ok=!!s&&p.get('state')===s;localStorage.removeItem('mici:gstate')}catch(e){}
+  try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
+  if(!ok){gs.st='Connexion Google invalide ou interrompue : réessaie.';return}
+  if(p.get('error')||!p.get('access_token')){gs.st=p.get('error')==='access_denied'?'Connexion Google refusée.':'Connexion Google impossible ('+(p.get('error')||'réponse vide')+').';return}
+  gs.tok=p.get('access_token');gs.exp=Date.now()+(+p.get('expires_in')||3600)*1000;
+}
 function getToken(interactive){
   return new Promise((res,rej)=>{
     if(gs.tok&&Date.now()<gs.exp-60000)return res(gs.tok);
+    if(isStandalone()){
+      if(!interactive)return rej(new Error('popup'));
+      setTimeout(()=>rej(new Error('timeout')),90000);
+      startRedirect();return;
+    }
+    if(interactive)setTimeout(()=>rej(new Error('timeout')),180000);
     loadGIS().then(()=>{
       if(!gs.client)gs.client=google.accounts.oauth2.initTokenClient({client_id:cid(),scope:G_SCOPE,callback:()=>{}});
       gs.client.callback=r=>{
@@ -989,6 +1016,7 @@ function errText(e){
   if(e&&e.status===401){gs.tok=null;return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».'}
   if(e&&e.status===403)return 'Accès refusé par Google (autorisation Drive ou API Drive non activée).';
   if(e&&e.status===429)return 'Trop de requêtes : réessaie dans quelques minutes.';
+  if(e&&e.message==='timeout')return 'La fenêtre Google n’a pas répondu. Si tu utilises l’icône installée, ouvre l’appli dans le navigateur (onglet normal) pour te connecter.';
   if(e&&e.message==='gis')return 'Connexion Google indisponible sur cette adresse ou hors ligne.';
   if(e&&(e.message==='popup_closed'||e.message==='popup_failed_to_open'||e.message==='access_denied'||e.message==='interaction_required'||e.message==='user_logged_out'||e.message==='immediate_failed'||e.message==='popup'))return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».';
   if(e&&e.message==='bad')return 'Fichier en ligne illisible : rien n\u2019a été écrasé.';
@@ -1075,7 +1103,8 @@ function acctHTML(){
   return `<div class="card"><h3>Compte Google et synchronisation</h3>${b}</div>`;
 }
 function syncInit(){
-  if(store.acct&&cid())syncNow(false);
+  readRedirect();if(gs.st)refreshGbar();
+  if((store.acct||gs.tok)&&cid())syncNow(false);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&store.acct&&cid()&&Date.now()-(gs.last||0)>300000)syncNow(false)});
   window.addEventListener('online',()=>{if(store.acct&&cid())syncNow(false)});
 }
@@ -1195,7 +1224,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v24';
+const APP_V='v25';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
