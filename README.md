@@ -31,6 +31,10 @@ Chaque aliment est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactos
 
 Ouvre https://johunn.github.io/mici-score/ dans Chrome, puis menu ⋮ > « Installer l'application » (ou « Ajouter à l'écran d'accueil »).
 
+## Assistant de départ
+
+À la première utilisation (aucune donnée enregistrée, ou nouveau compte Google sans données), une fenêtre propose de pré-régler le profil : poche en J, rectocolite, Crohn ou autre, avec options sténose et poussée. Le profil « Poche en J » est le seul à ajuster le score (hypothèses arbitraires) ; la sténose applique fibres insolubles ×1,5 ; la poussée ne change pas les scores. Relançable depuis Profil > Mon profil.
+
 ## Compte Google (optionnel)
 
 Pastille « Se connecter » en haut de l'appli ou Profil > « Compte Google et synchronisation » : connexion avec Google, puis le journal et les réglages sont copiés dans un **dossier caché de ton propre Google Drive** (autorisation limitée à ce dossier). Aucune donnée n'est hébergée par l'auteur de l'appli. Il faut d'abord créer un identifiant client Google : voir `GUIDE-GOOGLE-CLOUD.md`. Ce sont des données de santé : Google les traite selon ses conditions. « Supprimer mes données en ligne » efface la copie ; « Se déconnecter » arrête la synchro.
@@ -58,7 +62,7 @@ Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom)
 
 ## Sources principales
 
-ECCO, Dietary Management of IBD (consensus 2025) ; AGA Clinical Practice Update on diet in IBD ; Crohn's & Colitis UK, Food ; Ardalan et al., Aliment Pharmacol Ther 2021 (alimentation et poche) ; table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour les poids de portion.
+ECCO, Dietary Management of IBD (consensus 2025) ; AGA Clinical Practice Update on diet in IBD ; Crohn's & Colitis UK, Food ; Ardalan et al., Aliment Pharmacol Ther 2020 (alimentation et poche) ; table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé) pour les poids de portion.
 
 ## Licence
 
