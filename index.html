@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6' fill='none' stroke='%238A4FBF' stroke-width='3.4'/%3E%3C/svg%3E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MICI Score">
-<title>MICI Score</title><!-- v16 : en-tête fixe, pastille Google, pages de 50, thèmes retirés -->
+<title>MICI Score</title><!-- v17 : pied de page avec lien vers la politique de confidentialité -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,7 +44,9 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--f-body);-webkit-text-size-adjust:100%}
-main{max-width:560px;margin:0 auto;padding:10px 16px calc(150px + env(safe-area-inset-bottom,0px))}
+main{max-width:560px;margin:0 auto;padding:10px 16px 20px}
+#appfoot{max-width:560px;margin:0 auto;padding:0 16px calc(130px + env(safe-area-inset-bottom,0px));text-align:center;font-size:12px;line-height:1.5;color:var(--muted)}
+#appfoot a,.card a{color:var(--accent)}
 h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.1}
 h1{font-size:30px;font-weight:700;letter-spacing:-.02em}
 h2{font-size:22px;font-weight:700;margin-bottom:12px}
@@ -187,6 +189,7 @@ body[data-layout="cartes"] .row .info{position:absolute;top:0;right:0;width:40px
 <body>
 <header id="appbar"><div class="appbar-in"><button class="brand" id="brand" data-act="home" aria-label="MICI Score : retour à l'accueil"></button><div class="appbar-r"><span id="gbar"></span><button class="ibtn sm" data-act="share" aria-label="Partager l\u2019appli" title="Partager l\u2019appli"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button></div></div></header>
 <main id="app"></main>
+<footer id="appfoot">MICI Score : estimation personnelle de la tolérance digestive d'aliments (rectocolite, poche en J). Ni diagnostic ni traitement. · <a href="confidentialite.html">Politique de confidentialité</a></footer>
 <div id="bar"></div>
 <nav class="tabs" aria-label="Navigation">
   <button data-tab="calc">Calculer</button>
@@ -1128,7 +1131,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v16';
+const APP_V='v17';
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
 function listHTML(){
@@ -1345,7 +1348,7 @@ function profilHTML(){
     <p class="small muted" style="margin:10px 0 0"><b>Avec « Se connecter avec Google »</b> (facultatif) : une copie de ton journal, de tes corrections, de tes aliments ajoutés, de tes sensibilités et de ton profil est enregistrée dans un dossier caché de <b>ton propre</b> Google Drive. Chaque personne se connecte avec son compte Google et ses données vont dans son Drive : elles ne sont jamais mélangées avec celles d\u2019une autre personne.</p>
     <p class="small muted" style="margin:10px 0 0"><b>Ce que l\u2019appli peut faire</b> : lire et écrire son seul fichier dans ce dossier, et lire ton adresse e-mail pour l\u2019afficher. Elle ne voit ni tes autres fichiers Drive, ni tes e-mails, ni tes contacts. L\u2019auteur de l\u2019appli n\u2019héberge aucune donnée et ne peut pas les lire ; Google les traite selon ses propres conditions.</p>
     <p class="small muted" style="margin:10px 0 0"><b>Sur un nouvel appareil</b> : ouvre l\u2019appli, touche « Se connecter » avec le même compte Google, tes données se rechargent. Thème, mise en page et tri restent propres à chaque appareil.</p>
-    <p class="small muted" style="margin:10px 0 0"><b>Tu gardes la main</b> : « Se déconnecter » arrête la synchronisation ; « Supprimer mes données en ligne » efface la copie du Drive ; tu peux aussi retirer l\u2019accès à l\u2019appli dans les paramètres de sécurité de ton compte Google. Ce sont des données de santé : l\u2019appli reste entièrement utilisable sans compte.</p>
+    <p class="small muted" style="margin:10px 0 0"><b>Tu gardes la main</b> : « Se déconnecter » arrête la synchronisation ; « Supprimer mes données en ligne » efface la copie du Drive ; tu peux aussi retirer l\u2019accès à l\u2019appli dans les paramètres de sécurité de ton compte Google. Ce sont des données de santé : l\u2019appli reste entièrement utilisable sans compte. <a href="confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a>.</p>
   </div>
   <div class="card"><h3>Sauvegarde</h3>
     <p class="muted small">Tes données sont stockées uniquement dans ce navigateur. Vider les données de Chrome les efface. Copie une sauvegarde de temps en temps et garde-la dans une note.</p>

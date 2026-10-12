@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politique de confidentialité – MICI Score</title>
+<style>
+:root{--bg:#fff;--ink:#1d1d24;--muted:#5b5b68;--line:#dcdce4;--accent:#512178}
+@media (prefers-color-scheme:dark){:root{--bg:#160d21;--ink:#f3ebf8;--muted:#b8a7c8;--line:#3a2750;--accent:#e0be1a}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:24px 18px 48px}
+h1{font-size:28px;line-height:1.2;margin:0 0 4px}
+h2{font-size:19px;margin:28px 0 6px;padding-top:6px;border-top:1px solid var(--line)}
+p,li{margin:8px 0}
+.muted{color:var(--muted);font-size:14px}
+a{color:var(--accent)}
+code{background:color-mix(in srgb,var(--line) 50%,transparent);padding:1px 5px;border-radius:4px;font-size:.92em}
+</style>
+</head>
+<body>
+<main>
+<p><a href="./">← Retour à l'application MICI Score</a></p>
+<h1>Politique de confidentialité</h1>
+<p class="muted">MICI Score · dernière mise à jour : 12 octobre 2026</p>
+
+<h2>1. De quoi s'agit-il</h2>
+<p>MICI Score est une application web gratuite et non commerciale qui estime la tolérance digestive d'aliments pour une personne atteinte d'une maladie inflammatoire chronique de l'intestin (MICI), avec un profil « poche iléo-anale » ou « général ». Elle est éditée à titre personnel par « Johunn » (pseudonyme GitHub) et hébergée sur GitHub Pages à l'adresse <code>https://johunn.github.io/mici-score/</code>. Elle ne constitue ni un diagnostic, ni un traitement, ni un dispositif médical et ne remplace pas l'avis d'un médecin ou d'un diététicien.</p>
+
+<h2>2. Données concernées</h2>
+<p>L'application traite uniquement ce que tu y saisis : repas notés dans le journal (aliments, portions, ressenti de 0 à 10, notes libres, prise de médicament indiquée), corrections de score, aliments ajoutés, sensibilités, profil et réglages d'affichage. Ces informations peuvent révéler des informations de santé. L'application ne demande ni nom, ni adresse, ni numéro de téléphone.</p>
+
+<h2>3. Sans compte : tout reste sur ton appareil</h2>
+<p>Par défaut, ces données sont enregistrées uniquement dans le stockage du navigateur de ton appareil (<code>localStorage</code>). L'éditeur n'exploite aucun serveur de données : rien ne lui est envoyé. L'application n'utilise ni cookies publicitaires, ni outil de mesure d'audience, ni publicité. Elle charge des polices de caractères depuis Google Fonts : ta connexion contacte donc les serveurs de Google pour les récupérer (ton adresse IP leur est visible, comme pour tout site qui utilise ce service). Effacer les données du navigateur ou désinstaller l'application supprime ces données locales.</p>
+
+<h2>4. Connexion Google facultative et sauvegarde dans ton Google Drive</h2>
+<p>Si tu choisis « Se connecter avec Google », l'application utilise Google Identity Services et demande trois autorisations :</p>
+<ul>
+<li><code>openid</code> et <code>email</code> : lire ton adresse e-mail Google, uniquement pour l'afficher dans l'application ;</li>
+<li><code>https://www.googleapis.com/auth/drive.appdata</code> : lire et écrire <strong>un seul fichier</strong> (<code>mici-score.json</code>) dans le dossier caché réservé à l'application dans ton Google Drive. Cette autorisation ne donne accès à aucun autre fichier de ton Drive, à tes e-mails ni à tes contacts.</li>
+</ul>
+<p>Ce fichier contient une copie des données décrites au point 2 (hors thème et mise en page). Il est stocké dans <strong>ton</strong> Google Drive : l'éditeur n'y a pas accès et n'en reçoit aucune copie. Le jeton d'accès fourni par Google reste en mémoire dans ton navigateur le temps de la session ; il n'est pas enregistré. Ton adresse e-mail et la date de dernière synchronisation sont conservées dans le stockage local de ton navigateur.</p>
+
+<h2>5. Partage et utilisation des données</h2>
+<p>Les données ne sont ni vendues, ni louées, ni cédées, ni utilisées pour de la publicité, du profilage ou l'entraînement de modèles. Elles ne sont transmises à personne, à l'exception de Google, que tu as choisi comme service de stockage lorsque tu actives la connexion. Google traite ces données selon ses propres conditions et sa propre politique de confidentialité.</p>
+<p>L'utilisation et le transfert par MICI Score des informations reçues des API Google respectent la <a href="https://developers.google.com/terms/api-services-user-data-policy">Politique de données utilisateur des services d'API Google</a>, y compris les exigences d'utilisation limitée (<em>Limited Use</em>). / MICI Score's use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements.</p>
+
+<h2>6. Ton contrôle</h2>
+<ul>
+<li><strong>Se déconnecter</strong> (Profil) : arrête la synchronisation et révoque le jeton ; tes données restent sur l'appareil et dans ton Drive.</li>
+<li><strong>Supprimer mes données en ligne</strong> (Profil) : supprime le fichier du dossier caché de ton Drive.</li>
+<li><strong>Retirer l'accès</strong> : depuis les paramètres de sécurité de ton compte Google (« Applications et services tiers » / « Connexion avec Google »), tu peux retirer l'accès de MICI Score.</li>
+<li><strong>Effacer l'appareil</strong> : « Tout effacer » dans Profil, ou effacement des données du navigateur.</li>
+</ul>
+
+<h2>7. Sécurité</h2>
+<p>L'application est servie en HTTPS. Les données en ligne sont protégées par les mécanismes de sécurité de ton compte Google et de Google Drive (mot de passe, validation en deux étapes). Si d'autres personnes utilisent ton appareil, elles peuvent voir les données enregistrées dans son navigateur.</p>
+
+<h2>8. Modifications et contact</h2>
+<p>Cette politique peut évoluer ; la date de mise à jour figure en haut de la page. Pour toute question, ouvre une demande sur <a href="https://github.com/Johunn/mici-score/issues">https://github.com/Johunn/mici-score/issues</a>.</p>
+</main>
+</body>
+</html>
