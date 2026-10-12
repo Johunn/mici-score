@@ -41,11 +41,12 @@ Pastille « Se connecter » en haut de l'appli ou Profil > « Compte Google et s
 
 ## Données
 
-Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est envoyé. Avec le compte, une copie est aussi dans ton Drive (voir ci-dessus). Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
+Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est envoyé aux serveurs de l'éditeur. Le script de connexion de Google (Google Identity Services) est chargé quand tu ouvres l'onglet Profil : Google voit alors ton adresse IP, même sans connexion. Avec le compte, une copie est aussi dans ton Drive (voir ci-dessus). Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
 
 ## Contenu du dépôt
 
 - `index.html` : toute l'application (données et code embarqués)
+- `fonts/` : polices Bricolage Grotesque, Figtree et Montserrat hébergées avec l'appli (licence SIL OFL 1.1, textes dans `fonts/licences/`) : aucune requête vers Google Fonts
 - `manifest.webmanifest`, `sw.js`, `icons/` : installation et mode « réseau d'abord » (le service worker ignore les requêtes vers d'autres sites)
 - `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google
 - `LISEZ-MOI.txt` : notes d'installation
