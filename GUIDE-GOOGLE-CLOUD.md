@@ -20,7 +20,7 @@ But : obtenir un **identifiant client** (se termine par `.apps.googleusercontent
 1. Menu > **Identifiants** (ou « Clients ») > **Créer des identifiants** > **ID client OAuth**.
 2. Type d'application : **Application Web**.
 3. **Origines JavaScript autorisées** : `https://johunn.github.io` (sans `/mici-score`, sans `/` final).
-4. Pas d'URI de redirection nécessaire. Crée, puis copie l'**ID client**.
+4. **URI de redirection autorisés** : ajoute `https://johunn.github.io/mici-score/` (avec le `/` final, exactement). Elle sert uniquement à la connexion depuis l'icône installée sur l'écran d'accueil (v25) ; dans le navigateur, la fenêtre popup n'en a pas besoin. Crée (ou modifie le client existant : Identifiants > ton ID client > Enregistrer), puis copie l'**ID client**. Les changements peuvent prendre quelques minutes à s'appliquer.
 
 ## 5. Dans l'appli
 Profil > « Compte Google et synchronisation » > colle l'ID > « Enregistrer l'identifiant » > « Se connecter avec Google ». Fais-le une fois par appareil, ou envoie-moi l'ID pour que je l'intègre au fichier.
@@ -33,7 +33,8 @@ Profil > « Compte Google et synchronisation » > colle l'ID > « Enregistrer l'
 ## Dépannage
 - **« Accès bloqué : … n'a pas terminé la procédure de validation de Google », Erreur 403 : access_denied** : le compte avec lequel tu te connectes n'est pas dans les testeurs. Console Google Cloud > Audience (ou Écran de consentement > Utilisateurs de test) > **Add users** > ajoute l'adresse Gmail affichée sur l'écran d'erreur > Enregistrer. Attends 1 à 5 minutes, puis réessaie dans la fenêtre Google. Alternative : **Publier l'application** (statut « En production ») ; plus aucun testeur à ajouter.
 - **« Accès refusé par Google » dans l'appli après connexion** : l'API Google Drive n'est pas activée (étape 2) ou le champ d'application `drive.appdata` manque (étape 3).
-- **Erreur « redirect_uri_mismatch » ou « origin_mismatch »** : l'origine JavaScript autorisée doit être exactement `https://johunn.github.io`.
+- **Erreur « redirect_uri_mismatch » ou « origin_mismatch »** : l'origine JavaScript autorisée doit être exactement `https://johunn.github.io` ; l'URI de redirection (icône installée) doit être exactement `https://johunn.github.io/mici-score/`.
+- **Écran blanc après le choix du compte, depuis l'icône installée (v24 et avant)** : la fenêtre popup de Google ne fonctionne pas dans une appli installée. Depuis la v25, l'appli installée utilise une redirection de la page entière (voir étape 4).
 
 ## Partager l'appli à d'autres personnes
 1. Envoie-leur le lien https://johunn.github.io/mici-score/ (bouton de partage de l'appli). Sans compte, ils peuvent déjà tout utiliser en local.
