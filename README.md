@@ -57,4 +57,4 @@ ECCO, Dietary Management of IBD (consensus 2025) ; AGA Clinical Practice Update 
 
 ## Licence
 
-Aucune licence choisie : tous droits réservés par défaut.
+Aucun fichier de licence : tous droits réservés.
