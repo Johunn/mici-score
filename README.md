@@ -31,19 +31,24 @@ Chaque aliment est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactos
 
 Ouvre https://johunn.github.io/mici-score/ dans Chrome, puis menu ⋮ > « Installer l'application » (ou « Ajouter à l'écran d'accueil »).
 
+## Compte Google (optionnel)
+
+Profil > « Compte Google et synchronisation » : connexion avec Google, puis le journal et les réglages sont copiés dans un **dossier caché de ton propre Google Drive** (autorisation limitée à ce dossier). Aucune donnée n'est hébergée par l'auteur de l'appli. Il faut d'abord créer un identifiant client Google : voir `GUIDE-GOOGLE-CLOUD.md`. Ce sont des données de santé : Google les traite selon ses conditions. « Supprimer mes données en ligne » efface la copie ; « Se déconnecter » arrête la synchro.
+
 ## Données
 
-Tout reste dans le navigateur (`localStorage`) : rien n'est envoyé, aucun compte. Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
+Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est envoyé. Avec le compte, une copie est aussi dans ton Drive (voir ci-dessus). Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
 
 ## Contenu du dépôt
 
 - `index.html` : toute l'application (données et code embarqués)
-- `manifest.webmanifest`, `sw.js`, `icons/` : installation et mode « réseau d'abord »
+- `manifest.webmanifest`, `sw.js`, `icons/` : installation et mode « réseau d'abord » (le service worker ignore les requêtes vers d'autres sites)
+- `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google
 - `LISEZ-MOI.txt` : notes d'installation
 
 ## Mise à jour
 
-Remplace `index.html` à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée en bas de l'onglet Profil. Le journal n'est pas touché.
+Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée en bas de l'onglet Profil. Le journal n'est pas touché.
 
 ## Limites
 

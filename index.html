@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6' fill='none' stroke='%238A4FBF' stroke-width='3.4'/%3E%3C/svg%3E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MICI Score">
-<title>MICI Score</title><!-- v13 : tri de la liste (catégories, nom, score) -->
+<title>MICI Score</title><!-- v14 : compte Google et synchronisation Drive -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -763,7 +763,7 @@ RAW.forEach(([c,list])=>list.forEach(str=>{
   FOODS.push({id,n:p[0],c,L:v.slice(0,7),b:v[7],obs:p[2]==='o',ho:+ex[0]||0,u:+ex[1]||0,rf:ex[2]||'',ru:ex[3]||'',comp:ex[4]||''});
 }));
 
-let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',sort:'cat',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,flags:{}};
+let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',sort:'cat',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,flags:{},ep:0,mt:0,del:{},acct:null};
 const sensOf=k=>(store.sens[k]!=null?store.sens[k]:1);
 /* Profil : multiplicateurs ARBITRAIRES (aucune source chiffrée). Sens : FODMAP plus lourds, fibres insolubles moins lourdes avec une poche (Ardalan 2021, preuve faible). */
 const PROF={poche:{f:0.8,o:0.3},general:{}};   // o = poids des oligosaccharides : 0,3 = opinion d'expert (guides patients poche), hypothèse à tester
@@ -830,7 +830,7 @@ const THEMES=[
 function norm(p){
   let th=(['system','dark','ocean','charbon','foret','amoled','micinuit','mici','light','contraste','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
   if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
-  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,flags:(p.flags&&typeof p.flags==='object')?p.flags:{}};
+  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
 }
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const rgb2hex=a=>'#'+a.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
@@ -867,7 +867,175 @@ try{
     if(o&&Array.isArray(o.entries))store.entries=o.entries.map(e=>({id:e.id,ts:e.ts,items:[{id:'legacy',n:e.name,p:e.p}],r:e.r,quest:!!e.q,jeun:!!e.j,note:e.note||'',L:null}));
   }
 }catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+/* ---------- Compte Google et synchronisation (v14) ----------
+   Les données (journal, corrections, aliments perso, sensibilités, profil) sont copiées dans un dossier caché du Google Drive de l'utilisateur
+   (autorisation drive.appdata : l'appli ne voit aucun autre fichier). Une copie reste dans le navigateur (hors ligne). Thème et mise en page restent propres à chaque appareil. */
+const GOOGLE_CLIENT_ID='';
+const G_SCOPE='openid email https://www.googleapis.com/auth/drive.appdata';
+const G_FILE='mici-score.json';
+const cid=()=>GOOGLE_CLIENT_ID||(function(){try{return localStorage.getItem('mici:cid')||''}catch(e){return ''}})();
+const gs={tok:null,exp:0,client:null,busy:false,again:false,st:'',timer:null,last:0};
+const dataHash=()=>JSON.stringify([store.custom,store.entries,store.over,store.sens,store.prof,store.mods,store.flags,store.del]);
+let _h=dataHash(),_applying=false;
+function save(){
+  try{const h=dataHash();if(h!==_h){_h=h;if(!_applying){store.mt=Date.now();schedSync()}}}catch(e){}
+  try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}
+}
+const snap=()=>JSON.parse(JSON.stringify({app:'mici-score',fmt:1,ep:store.ep||0,mt:store.mt||0,custom:store.custom,entries:store.entries,over:store.over,sens:store.sens,prof:store.prof,mods:store.mods,flags:store.flags,del:store.del||{}}));
+const sig=o=>JSON.stringify([o.ep||0,o.custom,o.entries,o.over,o.sens,o.prof,o.mods,o.flags,o.del]);
+/* Fusion : si une réinitialisation ou une restauration a eu lieu d'un côté (ep plus récent), ce côté gagne ; sinon les repas et aliments perso sont fusionnés par identifiant (la suppression l'emporte), et le reste (corrections, sensibilités, profil, statuts) vient du côté modifié en dernier. */
+function mergeSnap(L,R){
+  if((R.ep||0)>(L.ep||0))return R;
+  if((L.ep||0)>(R.ep||0))return L;
+  const del=Object.assign({},R.del||{});Object.keys(L.del||{}).forEach(k=>{del[k]=Math.max(del[k]||0,L.del[k])});
+  const em={};
+  [R.entries||[],L.entries||[]].forEach(arr=>arr.forEach(e=>{const k=String(e.id);if(del[k])return;const o=em[k];if(!o||(e.edited||e.ts||0)>=(o.edited||o.ts||0))em[k]=e}));
+  const entries=Object.keys(em).map(k=>em[k]).sort((a,b)=>(a.ts||0)-(b.ts||0));
+  const newer=(L.mt||0)>=(R.mt||0)?L:R,older=newer===L?R:L;
+  const cm={};
+  [older.custom||[],newer.custom||[]].forEach(arr=>arr.forEach(f=>{if(!del[f.id])cm[f.id]=f}));
+  const clean=o=>{const r=Object.assign({},o||{});Object.keys(r).forEach(k=>{if(del[k])delete r[k]});return r};
+  return{app:'mici-score',fmt:1,ep:L.ep||0,mt:Math.max(L.mt||0,R.mt||0),custom:Object.keys(cm).map(k=>cm[k]),entries,over:clean(newer.over),sens:newer.sens||{},prof:newer.prof==='general'?'general':'poche',mods:newer.mods||{},flags:clean(newer.flags),del};
+}
+let _gisP=null;
+function loadGIS(){
+  if(window.google&&google.accounts&&google.accounts.oauth2)return Promise.resolve();
+  if(_gisP)return _gisP;
+  _gisP=new Promise((res,rej)=>{
+    const s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=true;
+    s.onload=()=>res();s.onerror=()=>{_gisP=null;rej(new Error('gis'))};document.head.appendChild(s);
+    setTimeout(()=>{if(!(window.google&&google.accounts&&google.accounts.oauth2)){_gisP=null;rej(new Error('gis'))}},15000);
+  });
+  return _gisP;
+}
+function getToken(interactive){
+  return new Promise((res,rej)=>{
+    if(gs.tok&&Date.now()<gs.exp-60000)return res(gs.tok);
+    loadGIS().then(()=>{
+      if(!gs.client)gs.client=google.accounts.oauth2.initTokenClient({client_id:cid(),scope:G_SCOPE,callback:()=>{}});
+      gs.client.callback=r=>{
+        if(r&&r.error)return rej(new Error(r.error));
+        gs.tok=r.access_token;gs.exp=Date.now()+(+r.expires_in||3600)*1000;res(gs.tok);
+      };
+      gs.client.error_callback=e=>rej(new Error((e&&e.type)||'popup'));
+      const o={prompt:interactive?'':'none'};
+      if(store.acct&&store.acct.email)o.hint=store.acct.email;
+      gs.client.requestAccessToken(o);
+    }).catch(rej);
+  });
+}
+async function gapi(tok,path,opt){
+  const o=Object.assign({cache:'no-store'},opt||{});
+  o.headers=Object.assign({Authorization:'Bearer '+tok},o.headers||{});
+  const r=await fetch('https://www.googleapis.com'+path,o);
+  if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+  return r;
+}
+async function findFile(tok){
+  const q=encodeURIComponent("name='"+G_FILE+"' and trashed=false");
+  const r=await gapi(tok,'/drive/v3/files?spaces=appDataFolder&pageSize=10&fields=files(id)&q='+q);
+  const j=await r.json();return j.files&&j.files[0]?j.files[0].id:null;
+}
+async function putFile(tok,id,obj){
+  if(!id){
+    const r=await gapi(tok,'/drive/v3/files',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:G_FILE,parents:['appDataFolder'],mimeType:'application/json'})});
+    id=(await r.json()).id;
+  }
+  await gapi(tok,'/upload/drive/v3/files/'+id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});
+  return id;
+}
+function setSt(t){gs.st=t;if(ui&&ui.tab==='profil')render(true)}
+function errText(e){
+  if(e&&e.status===401){gs.tok=null;return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».'}
+  if(e&&e.status===403)return 'Accès refusé par Google (autorisation Drive ou API Drive non activée).';
+  if(e&&e.status===429)return 'Trop de requêtes : réessaie dans quelques minutes.';
+  if(e&&e.message==='gis')return 'Connexion Google indisponible sur cette adresse ou hors ligne.';
+  if(e&&(e.message==='popup_closed'||e.message==='popup_failed_to_open'||e.message==='access_denied'||e.message==='interaction_required'||e.message==='user_logged_out'||e.message==='immediate_failed'||e.message==='popup'))return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».';
+  if(e&&e.message==='bad')return 'Fichier en ligne illisible : rien n\u2019a été écrasé.';
+  return 'Synchronisation impossible (hors ligne ou service injoignable). Tes données restent sur cet appareil.';
+}
+async function syncNow(interactive){
+  if(!cid())return;
+  if(!navigator.onLine&&!interactive){setSt('Hors ligne : synchronisation en attente.');return}
+  if(gs.busy){gs.again=true;return}
+  gs.busy=true;setSt('Synchronisation…');
+  try{
+    const tok=await getToken(!!interactive);
+    let email=store.acct&&store.acct.email;
+    if(!email){try{const u=await (await gapi(tok,'/oauth2/v3/userinfo')).json();email=u.email||''}catch(e){email=''}}
+    let id=await findFile(tok),R=null;
+    if(id){
+      const raw=await (await gapi(tok,'/drive/v3/files/'+id+'?alt=media')).text();
+      try{R=JSON.parse(raw)}catch(e){R=null}
+      if(!R||R.app!=='mici-score'||!Array.isArray(R.entries))throw new Error('bad');
+    }
+    const L=snap(),M=R?mergeSnap(L,R):L;
+    if(R&&sig(M)!==sig(L)){
+      try{localStorage.setItem(KEY+':avant-synchro',JSON.stringify(store))}catch(e){}
+      _applying=true;
+      store.ep=M.ep;store.mt=M.mt;store.custom=M.custom;store.entries=M.entries;store.over=M.over;store.sens=M.sens;store.prof=M.prof;store.mods=M.mods;store.flags=M.flags;store.del=M.del;
+      save();_applying=false;
+    }
+    if(!R||sig(M)!==sig(R))await putFile(tok,id,M);
+    gs.last=Date.now();store.acct={email:email||'',last:gs.last};save();
+    gs.st='';
+    if(R&&sig(M)!==sig(L)){ui.msg='Données synchronisées depuis ton Drive.'}
+  }catch(e){gs.st=errText(e)}
+  finally{gs.busy=false;if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);if(gs.again){gs.again=false;setTimeout(()=>syncNow(false),500)}}
+}
+function schedSync(){
+  if(!store.acct||!cid())return;
+  clearTimeout(gs.timer);gs.timer=setTimeout(()=>syncNow(false),4000);
+}
+function gDisconnect(){
+  const t=gs.tok;gs.tok=null;gs.exp=0;
+  try{if(t&&window.google&&google.accounts&&google.accounts.oauth2)google.accounts.oauth2.revoke(t,()=>{})}catch(e){}
+  store.acct=null;save();gs.st='';ui.msg='Déconnecté. Tes données restent sur cet appareil et dans ton Drive.';render(true);
+}
+async function gDeleteOnline(){
+  gs.busy=true;setSt('Suppression en ligne…');
+  try{
+    const tok=await getToken(true);
+    let id,n=0;
+    while((id=await findFile(tok))&&n<5){await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'});n++}
+    gs.st='';ui.msg=n?'Données en ligne supprimées. Une prochaine synchronisation les recréera : déconnecte-toi pour l\u2019éviter.':'Aucune donnée en ligne trouvée.';
+  }catch(e){gs.st=errText(e)}
+  finally{gs.busy=false;render(true)}
+}
+function statusText(){
+  if(gs.st)return gs.st;
+  const a=store.acct;
+  if(a&&a.last)return 'Dernière synchronisation : '+new Date(a.last).toLocaleString('fr-BE',{dateStyle:'short',timeStyle:'short'});
+  return 'Pas encore synchronisé.';
+}
+function acctHTML(){
+  const c=cid(),a=store.acct;
+  let b;
+  if(!c){
+    b=`<p class="small muted">Connexion Google non configurée sur cet appareil. Colle l\u2019identifiant client créé dans Google Cloud (se termine par .apps.googleusercontent.com).</p>
+    <div class="field"><input type="text" id="cid" placeholder="123456-abc.apps.googleusercontent.com" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:100%"></div>
+    <p><button class="btn block" data-act="gcid">Enregistrer l\u2019identifiant</button></p>`;
+  }else if(!a){
+    loadGIS().catch(()=>{});
+    b=`<p class="small muted" style="margin:0 0 10px">Ton journal et tes réglages sont copiés dans un dossier caché de ton Google Drive, que seule cette appli peut lire. Tu retrouves tes données sur tout appareil où tu te connectes.</p>
+    ${gs.st?`<p class="small" role="status">${esc(gs.st)}</p>`:''}
+    <button class="btn block" data-act="gconnect">Se connecter avec Google</button>`;
+  }else{
+    loadGIS().catch(()=>{});
+    b=`<p class="small" style="margin:0 0 4px">Connecté${a.email?' : <b>'+esc(a.email)+'</b>':''}</p>
+    <p class="small muted" role="status" style="margin:0 0 10px">${esc(statusText())}</p>
+    <button class="btn block" data-act="gsync">Synchroniser maintenant</button>
+    <p style="margin:8px 0 0"><button class="btn ghost block" data-act="gdisc">Se déconnecter</button></p>
+    <p style="margin:8px 0 0"><button class="btn danger block" data-act="gdelonline">${ui.delArmed?'Confirmer : supprimer mes données en ligne':'Supprimer mes données en ligne'}</button></p>
+    <p class="small muted" style="margin:10px 0 0">Thème et mise en page restent propres à chaque appareil. Une copie des données reste sur l\u2019appareil (fonctionne hors ligne). « Tout effacer » efface aussi les données en ligne à la prochaine synchronisation.</p>`;
+  }
+  return `<div class="card"><h3>Compte Google et synchronisation</h3>${b}</div>`;
+}
+function syncInit(){
+  if(store.acct&&cid())syncNow(false);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&store.acct&&cid()&&Date.now()-(gs.last||0)>300000)syncNow(false)});
+  window.addEventListener('online',()=>{if(store.acct&&cid())syncNow(false)});
+}
 
 const defP=id=>{const f=allFoods().find(x=>x.id===id);return f&&(f.c===6||f.c===7)?3:1};   // sauces, condiments, épices : trace par défaut
 const allFoods=()=>FOODS.concat(store.custom.map(f=>Object.assign({obs:false,custom:true},f)));
@@ -918,7 +1086,7 @@ function flagCard(f){
 
 /* ---------- État de l'interface ---------- */
 const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:[],quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
-  newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false};
+  newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false};
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
 
@@ -939,7 +1107,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v13';
+const APP_V='v14';
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
 function listHTML(){
@@ -1150,6 +1318,7 @@ function profilHTML(){
       ${L.out.map(s=>`<div class="entry"><div class="body"><b>${s.n}</b><span class="small" style="display:block">${s.txt}</span></div><button class="btn ghost" data-act="applySens" data-k="${s.k}" data-v="${s.to}">${s.dir>0?'Augmenter':'Baisser'} à ×${fmt(s.to)}</button></div>`).join('')}`:
       '<p class="muted small">Aucune suggestion pour l\'instant : tes notes ne montrent pas d\'écart net.</p>'}
   </div>
+  ${acctHTML()}
   <div class="card"><h3>Sauvegarde</h3>
     <p class="muted small">Tes données sont stockées uniquement dans ce navigateur. Vider les données de Chrome les efface. Copie une sauvegarde de temps en temps et garde-la dans une note.</p>
     <p><button class="btn block" data-act="export">Copier la sauvegarde</button></p>
@@ -1228,6 +1397,9 @@ function sourcesHTML(){
     </ul></div>
   <div class="card"><h3>Ruban violet</h3>
     <p class="small muted">Le ruban violet près du titre symbolise la sensibilisation aux MICI (la Journée mondiale des MICI a lieu le 19 mai ; source : afa Crohn RCH France). C'est un ruban générique, pas le logo d'une association, et l'appli n'est affiliée à aucune association.</p></div>
+  <div class="card"><h3>Données et confidentialité</h3>
+    <p class="small muted">Par défaut, tout reste dans le navigateur de l\u2019appareil : rien n\u2019est envoyé. Si tu te connectes avec Google (Profil), une copie de ton journal, de tes corrections, de tes aliments ajoutés, de tes sensibilités et de ton profil est enregistrée dans un dossier caché de ton propre Google Drive. L\u2019autorisation demandée est limitée à ce dossier : l\u2019appli ne voit pas tes autres fichiers, et son auteur n\u2019héberge aucune donnée et n\u2019y a pas accès. Ce sont des données de santé : Google les traite selon ses propres conditions. « Supprimer mes données en ligne » efface la copie du Drive ; « Se déconnecter » arrête la synchronisation.</p>
+  </div>
   <div class="card"><h3>8. Limites et sécurité</h3>
     <p class="small muted">Aucune étude ne valide ce score. L'application ne détecte ni pochite ni déshydratation. Consulte rapidement en cas de fièvre, déshydratation, sang important, douleurs importantes, ballonnement avec arrêt des gaz et des selles, augmentation brutale des selles, perte de poids ou fuites nocturnes. Un diététicien MICI est recommandé avant tout régime restrictif. Un régime pauvre en FODMAP, s'il était utilisé pour un SII, serait temporaire, en phases et suivi par un diététicien, jamais permanent.</p></div>
   <div class="card"><h3>Pour mon médecin</h3>
@@ -1256,7 +1428,7 @@ function render(keep){
 /* ---------- Événements ---------- */
 document.querySelector('nav.tabs').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  ui.tab=b.dataset.tab;ui.msg='';ui.resetArmed=false;
+  ui.tab=b.dataset.tab;ui.msg='';ui.resetArmed=false;ui.delArmed=false;
   if(ui.tab==='calc'&&ui.view==='add')ui.view='list';
   render();
 });
@@ -1312,6 +1484,10 @@ document.addEventListener('click',e=>{
   else if(a==='back'){if(navDepth>0){history.back()}else{ui.view='list';ui.msg='';render()}}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
   else if(a==='sort'){ui.sort=id;store.sort=id;save();ui.page=0;render(true)}
+  else if(a==='gcid'){const v=(document.getElementById('cid').value||'').trim();if(/^[\w.-]+\.apps\.googleusercontent\.com$/.test(v)){try{localStorage.setItem('mici:cid',v)}catch(e){}ui.msg='Identifiant enregistré.'}else ui.msg='Identifiant invalide : il se termine par .apps.googleusercontent.com.';render(true)}
+  else if(a==='gconnect'||a==='gsync'){syncNow(true)}
+  else if(a==='gdisc'){gDisconnect()}
+  else if(a==='gdelonline'){if(!ui.delArmed){ui.delArmed=true;render(true);return}ui.delArmed=false;gDeleteOnline()}
   else if(a==='pg'){ui.page=Math.max(0,(ui.page||0)+(+b.dataset.d));document.getElementById('list').innerHTML=listHTML();window.scrollTo(0,0)}
   else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;render(true)}
   else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);if(!ui.plate.length)ui.view='list';render(true)}
@@ -1325,7 +1501,7 @@ document.addEventListener('click',e=>{
   else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
   else if(a==='cancelEdit'){ui.editId=null;render(true)}
   else if(a==='saveEdit'){const e=store.entries.find(x=>String(x.id)===id);if(e){e.r=ui.eR;e.note=(ui.eNote||'').trim();e.edited=Date.now()}ui.editId=null;save();render(true)}
-  else if(a==='delEntry'){store.entries=store.entries.filter(x=>String(x.id)!==id);save();render(true)}
+  else if(a==='delEntry'){store.del=store.del||{};store.del[id]=Date.now();store.entries=store.entries.filter(x=>String(x.id)!==id);save();render(true)}
   else if(a==='saveOv'){store.over[id]=ui.ov;save();ui.msg='Correction enregistrée.';render(true)}
   else if(a==='useMean'){store.over[id]=Math.round(+b.dataset.v*2)/2;ui.ov=store.over[id];save();ui.msg='Moyenne appliquée.';render(true)}
   else if(a==='resetOv'){delete store.over[id];save();const f=byId(id);ui.ov=f?Math.round(single(f)*2)/2:5;ui.msg='Calcul rétabli.';render(true)}
@@ -1338,7 +1514,7 @@ document.addEventListener('click',e=>{
     save();ui.qs='';ui.msg='';openDetail(nid);
   }
   else if(a==='delFood'){
-    store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);save();ui.view='list';render();
+    store.del=store.del||{};store.del[id]=Date.now();store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);save();ui.view='list';render();
   }
   else if(a==='flag'){
     const v=b.dataset.v;store.flags=store.flags||{};
@@ -1361,7 +1537,7 @@ document.addEventListener('click',e=>{
   else if(a==='mod'){store.mods=store.mods||{};store.mods[id]=!store.mods[id];save();render(true)}
   else if(a==='resetSens'){store.sens={};save();render(true)}
   else if(a==='export'){
-    const txt=JSON.stringify(store);
+    const txt=JSON.stringify(Object.assign({},store,{acct:null}));
     const done=()=>{ui.msg='Sauvegarde copiée.';render(true)},fail=()=>{ui.msg='Copie impossible sur ce navigateur.';render(true)};
     try{navigator.clipboard.writeText(txt).then(done,fail)}catch(err){fail()}
   }
@@ -1370,18 +1546,19 @@ document.addEventListener('click',e=>{
     try{
       const p=JSON.parse(raw);
       if(!p||!Array.isArray(p.entries))throw 0;
-      store=norm(p);save();applyTheme();ui.msg='Sauvegarde restaurée.';
+      const ac=store.acct;store=norm(p);store.acct=ac;store.del={};store.ep=Date.now();store.mt=Date.now();save();applyTheme();ui.msg='Sauvegarde restaurée.';
     }catch(err){ui.msg='Texte invalide. Colle la sauvegarde complète.'}
     render(true);
   }
   else if(a==='reset'){
     if(!ui.resetArmed){ui.resetArmed=true;render(true);return}
-    store=norm({});save();applyTheme();ui.plate=[];ui.resetArmed=false;ui.msg='Données effacées.';render(true);
+    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];ui.resetArmed=false;ui.msg='Données effacées.';render(true);
   }
 });
 
 applyTheme();
 render();
+syncInit();
 })();
 </script>
 <script>

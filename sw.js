@@ -1,9 +1,17 @@
-const CACHE='mici-score-v8-2';
-const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon-512-maskable.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
-/* Réseau d'abord : tu as toujours la dernière version quand tu es en ligne ; sinon la copie en cache (mode hors ligne). */
+// Service worker MICI Score (v14) : réseau d'abord, copie locale en secours hors ligne.
+// Il n'intercepte JAMAIS les requêtes vers d'autres sites (Google, Drive) : aucune donnée de compte n'est mise en cache ici.
+const CACHE='mici-score-v14';
+self.addEventListener('install',()=>{self.skipWaiting()});
+self.addEventListener('activate',e=>{
+  e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));
+});
 self.addEventListener('fetch',e=>{
-  const r=e.request;if(r.method!=='GET')return;
-  e.respondWith(fetch(r).then(res=>{if(res&&res.status===200){const copy=res.clone();caches.open(CACHE).then(c=>c.put(r,copy))}return res}).catch(()=>caches.match(r)));
+  const r=e.request,u=new URL(r.url);
+  if(r.method!=='GET'||u.origin!==self.location.origin)return;
+  e.respondWith(
+    fetch(r).then(res=>{
+      if(res&&res.ok){const c=res.clone();caches.open(CACHE).then(ch=>ch.put(r,c))}
+      return res;
+    }).catch(()=>caches.match(r).then(m=>m||caches.match(self.registration.scope)))
+  );
 });
