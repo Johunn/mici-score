@@ -201,7 +201,7 @@ body[data-layout="cartes"] .row .info{position:absolute;top:0;right:0;width:40px
 <body>
 <header id="appbar"><span id="appver" title="Version de l'application"></span><div class="appbar-in"><button class="brand" id="brand" data-act="home" aria-label="MICI Score : retour à l'accueil"></button><div class="appbar-r"><span id="gbar"></span><button class="ibtn sm" data-act="share" aria-label="Partager l\u2019appli" title="Partager l\u2019appli"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button></div></div></header>
 <main id="app"></main>
-<footer id="appfoot">MICI Score : estimation personnelle de la tolérance digestive d'aliments (rectocolite, poche en J). Ni diagnostic ni traitement. · <a href="confidentialite.html">Politique de confidentialité</a></footer>
+<footer id="appfoot">MICI Score : estimation personnelle de la tolérance digestive d'aliments. Ni diagnostic ni traitement. · <a href="confidentialite.html">Politique de confidentialité</a></footer>
 <div id="bar"></div>
 <nav class="tabs" aria-label="Navigation">
   <button data-tab="calc">Calculer</button>
@@ -1224,7 +1224,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v26';
+const APP_V='v27';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1261,7 +1261,7 @@ function calcHTML(){
   if(ui.view==='plate')return plateHTML();
   return `
   ${ui.msg?`<p class="small" role="status" style="margin:-6px 0 10px">${esc(ui.msg)}</p>`:''}
-  <p class="muted small" style="margin:0 0 12px"><b>Le MICI Score</b> estime de 0 à 10 si un aliment ou un repas risque d'être bien toléré par ton système digestif (10 = très bien toléré), pensé pour une poche en J. Estimation personnelle, ni diagnostic ni avis médical.</p>
+  <p class="muted" style="margin:0 0 12px;font-size:11px;line-height:1.4;font-style:italic;text-align:center;opacity:.75">Le MICI Score estime de 0 à 10 si un aliment ou un repas risque d'être bien toléré par ton système digestif (10 = très bien toléré). Estimation personnelle, ni diagnostic ni avis médical.</p>
   <div class="searchbox"><input type="search" id="qs" placeholder="Rechercher parmi ${allFoods().length} aliments" value="${esc(ui.qs)}" aria-label="Rechercher"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" ${ui.qs?'':'hidden'}>✕</button></div>
   <div class="chips" role="group" aria-label="Catégories">
     <button class="chip" data-act="cat" data-i="-1" aria-pressed="${ui.cat<0}">Tout</button>
@@ -1662,7 +1662,7 @@ document.addEventListener('click',e=>{
   else if(a==='theme'){store.theme=id;save();applyTheme();render(true)}
   else if(a==='layout'){store.layout=id;save();applyTheme();render(true)}
   else if(a==='applySens'){store.sens[b.dataset.k]=+b.dataset.v;save();render(true)}
-  else if(a==='share'){const url='https://johunn.github.io/mici-score/',d={title:'MICI Score',text:'MICI Score : estimation personnelle de la tolérance alimentaire (rectocolite avec poche en J). Ni diagnostic ni traitement.',url};if(navigator.share){navigator.share(d).catch(()=>{})}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>{ui.msg='Lien copié.';render(true);setTimeout(()=>{if(ui.msg==='Lien copié.'){ui.msg='';render(true)}},2500)},()=>{ui.msg='Copie impossible. Lien : '+url;render(true)})}else{ui.msg='Lien : '+url;render(true)}}
+  else if(a==='share'){const url='https://johunn.github.io/mici-score/',d={title:'MICI Score',text:'MICI Score : estimation personnelle de la tolérance alimentaire. Ni diagnostic ni traitement.',url};if(navigator.share){navigator.share(d).catch(()=>{})}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>{ui.msg='Lien copié.';render(true);setTimeout(()=>{if(ui.msg==='Lien copié.'){ui.msg='';render(true)}},2500)},()=>{ui.msg='Copie impossible. Lien : '+url;render(true)})}else{ui.msg='Lien : '+url;render(true)}}
   else if(a==='onbNext'){if(ui.onb){ui.onb.step=Math.min(3,ui.onb.step+1);drawOnb()}}
   else if(a==='onbBack'){if(ui.onb){ui.onb.step=Math.max(1,ui.onb.step-1);drawOnb()}}
   else if(a==='onbPick'){if(ui.onb){ui.onb.sel=id;drawOnb()}}
