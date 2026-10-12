@@ -53,7 +53,7 @@ Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est 
 
 ## Mise à jour
 
-Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée en bas de l'onglet Profil. Le journal n'est pas touché.
+Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée discrètement en haut à gauche de l'écran et en bas de l'onglet Profil. Le journal n'est pas touché.
 
 ## Limites
 
