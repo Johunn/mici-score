@@ -33,7 +33,7 @@ Ouvre https://johunn.github.io/mici-score/ dans Chrome, puis menu ⋮ > « Insta
 
 ## Compte Google (optionnel)
 
-Profil > « Compte Google et synchronisation » : connexion avec Google, puis le journal et les réglages sont copiés dans un **dossier caché de ton propre Google Drive** (autorisation limitée à ce dossier). Aucune donnée n'est hébergée par l'auteur de l'appli. Il faut d'abord créer un identifiant client Google : voir `GUIDE-GOOGLE-CLOUD.md`. Ce sont des données de santé : Google les traite selon ses conditions. « Supprimer mes données en ligne » efface la copie ; « Se déconnecter » arrête la synchro.
+Bouton sur l'écran d'accueil ou Profil > « Compte Google et synchronisation » : connexion avec Google, puis le journal et les réglages sont copiés dans un **dossier caché de ton propre Google Drive** (autorisation limitée à ce dossier). Aucune donnée n'est hébergée par l'auteur de l'appli. Il faut d'abord créer un identifiant client Google : voir `GUIDE-GOOGLE-CLOUD.md`. Ce sont des données de santé : Google les traite selon ses conditions. « Supprimer mes données en ligne » efface la copie ; « Se déconnecter » arrête la synchro.
 
 ## Données
 

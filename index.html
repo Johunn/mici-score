@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6' fill='none' stroke='%238A4FBF' stroke-width='3.4'/%3E%3C/svg%3E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="MICI Score">
-<title>MICI Score</title><!-- v14 : compte Google et synchronisation Drive -->
+<title>MICI Score</title><!-- v15 : connexion Google sur l'écran d'accueil, identifiant client intégré -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -870,7 +870,7 @@ try{
 /* ---------- Compte Google et synchronisation (v14) ----------
    Les données (journal, corrections, aliments perso, sensibilités, profil) sont copiées dans un dossier caché du Google Drive de l'utilisateur
    (autorisation drive.appdata : l'appli ne voit aucun autre fichier). Une copie reste dans le navigateur (hors ligne). Thème et mise en page restent propres à chaque appareil. */
-const GOOGLE_CLIENT_ID='';
+const GOOGLE_CLIENT_ID='953065605103-h9vk0soc9sm2qi01t6gemuolst0hs51n.apps.googleusercontent.com';
 const G_SCOPE='openid email https://www.googleapis.com/auth/drive.appdata';
 const G_FILE='mici-score.json';
 const cid=()=>GOOGLE_CLIENT_ID||(function(){try{return localStorage.getItem('mici:cid')||''}catch(e){return ''}})();
@@ -944,7 +944,14 @@ async function putFile(tok,id,obj){
   await gapi(tok,'/upload/drive/v3/files/'+id+'?uploadType=media',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});
   return id;
 }
-function setSt(t){gs.st=t;if(ui&&ui.tab==='profil')render(true)}
+function gbarHTML(){
+  if(!cid())return '';
+  const a=store.acct;
+  if(!a)return `<button class="btn block" data-act="gconnect" style="margin:0 0 10px">Se connecter avec Google (sauvegarde en ligne)</button>${gs.st?`<p class="small" role="status" style="margin:-4px 0 10px">${esc(gs.st)}</p>`:''}`;
+  return `<p class="small muted" style="margin:0 0 10px"><button class="link" data-act="gsync">\u2601 ${esc(gs.st||'Synchronisé avec ton Drive')}</button></p>`;
+}
+function refreshGbar(){const e=document.getElementById('gbar');if(e)e.innerHTML=gbarHTML()}
+function setSt(t){gs.st=t;refreshGbar();if(ui&&ui.tab==='profil')render(true)}
 function errText(e){
   if(e&&e.status===401){gs.tok=null;return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».'}
   if(e&&e.status===403)return 'Accès refusé par Google (autorisation Drive ou API Drive non activée).';
@@ -981,7 +988,7 @@ async function syncNow(interactive){
     gs.st='';
     if(R&&sig(M)!==sig(L)){ui.msg='Données synchronisées depuis ton Drive.'}
   }catch(e){gs.st=errText(e)}
-  finally{gs.busy=false;if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);if(gs.again){gs.again=false;setTimeout(()=>syncNow(false),500)}}
+  finally{gs.busy=false;refreshGbar();if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);if(gs.again){gs.again=false;setTimeout(()=>syncNow(false),500)}}
 }
 function schedSync(){
   if(!store.acct||!cid())return;
@@ -1107,7 +1114,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v14';
+const APP_V='v15';
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
 function listHTML(){
@@ -1143,6 +1150,7 @@ function calcHTML(){
   if(ui.view==='plate')return plateHTML();
   return `<div class="top"><h1>MICI Score${RIB}</h1><button class="ibtn" data-act="share" aria-label="Partager l\u2019appli" title="Partager l\u2019appli"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button></div>
   ${ui.msg?`<p class="small" role="status" style="margin:-6px 0 10px">${esc(ui.msg)}</p>`:''}
+  <div id="gbar">${gbarHTML()}</div>
   <div class="searchbox"><input type="search" id="qs" placeholder="Rechercher parmi ${allFoods().length} aliments" value="${esc(ui.qs)}" aria-label="Rechercher"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" ${ui.qs?'':'hidden'}>✕</button></div>
   <div class="chips" role="group" aria-label="Catégories">
     <button class="chip" data-act="cat" data-i="-1" aria-pressed="${ui.cat<0}">Tout</button>
