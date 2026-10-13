@@ -44,14 +44,54 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v38';/);
+  assert.match(html, /const APP_V='v39';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v24';/);
+  assert.match(swSource, /const CACHE='mici-score-v25';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
+});
+
+
+const saveSource = extractBetween(html, 'function save(){', '\nconst snap=');
+
+test('local save reports storage failure without advancing the sync baseline', () => {
+  function harness(failWrite) {
+    const saved = new Map();
+    const sandbox = {
+      KEY: 'mici:v2',
+      store: { entries: [{ id: 1 }], custom: [], over: {}, sens: {}, prof: 'poche', mods: {}, flags: {}, del: {}, mt: 1 },
+      _h: 'previous-hash',
+      _applying: false,
+      syncCount: 0,
+      dataHash() { return JSON.stringify([sandbox.store.entries]); },
+      schedSync() { sandbox.syncCount++; },
+      localStorage: {
+        setItem(key, value) {
+          if (failWrite) throw new Error('quota exceeded');
+          saved.set(key, value);
+        }
+      }
+    };
+    vm.createContext(sandbox);
+    new vm.Script(saveSource + '\nglobalThis.saveForTest = save;').runInContext(sandbox);
+    return { sandbox, saved };
+  }
+
+  const failed = harness(true);
+  assert.equal(failed.sandbox.saveForTest(), false);
+  assert.equal(failed.sandbox._h, 'previous-hash');
+  assert.equal(failed.sandbox.syncCount, 0);
+  assert.equal(failed.saved.has('mici:v2'), false);
+
+  const succeeded = harness(false);
+  assert.equal(succeeded.sandbox.saveForTest(), true);
+  assert.equal(succeeded.saved.has('mici:v2'), true);
+  assert.notEqual(succeeded.sandbox._h, 'previous-hash');
+  assert.equal(succeeded.sandbox.syncCount, 1);
+  assert.ok(Number.isFinite(succeeded.sandbox.store.mt));
 });
 
 
@@ -276,7 +316,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v38';/);
+  assert.match(html, /const APP_V='v39';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -437,6 +477,47 @@ test('failed import preserves pasted text and leaves existing data untouched', (
 });
 
 
+
+test('restore storage failure keeps the previous data and draft unchanged', () => {
+  const importer = extractBetween(
+    html,
+    "else if(a==='import'){",
+    "\n  else if(a==='reset')"
+  ).replace("else if(a==='import'){", "if(a==='import'){");
+  const input = { value: JSON.stringify(validBackup()) };
+  const status = { textContent: '', style: { display: 'none' } };
+  const initialStore = {
+    acct: { email: 'keep@example.com' }, entries: [{ id: 1, r: 2 }],
+    custom: [{ id: 'old-custom' }], plate: [{ id: 'old-draft' }]
+  };
+  const snapshot = copy(initialStore);
+  const sandbox = {
+    a: 'import',
+    document: { getElementById(id) {
+      if (id === 'imp') return input;
+      if (id === 'profileStatus') return status;
+      return null;
+    }},
+    store: initialStore,
+    ui: { msg: '', plate: [{ id: 'old-draft', p: 2, g: 0 }], exportText: 'fallback', view: 'profile', editId: 4 },
+    norm(value) { return value; },
+    validateBackup: makeValidator(),
+    save() { return false; },
+    applyTheme() { throw new Error('theme must not change if restore cannot be saved'); },
+    render() { throw new Error('screen must not rebuild if restore cannot be saved'); }
+  };
+  vm.createContext(sandbox);
+  new vm.Script("(function(){\n" + importer + "\n}).call(globalThis);").runInContext(sandbox);
+
+  assert.deepEqual(copy(sandbox.store), snapshot);
+  assert.deepEqual(copy(sandbox.ui.plate), [{ id: 'old-draft', p: 2, g: 0 }]);
+  assert.equal(sandbox.ui.exportText, 'fallback');
+  assert.equal(input.value, JSON.stringify(validBackup()));
+  assert.match(status.textContent, /Impossible d’enregistrer la sauvegarde/);
+  assert.match(status.textContent, /Aucune donnée n’a été modifiée/);
+  assert.equal(status.style.display, 'block');
+});
+
 test('successful import replaces data, preserves the current account, and clears local draft state', () => {
   const importer = extractBetween(
     html,
@@ -460,9 +541,11 @@ test('successful import replaces data, preserves the current account, and clears
     },
     norm(value) { return value; },
     validateBackup: makeValidator(),
-    savePlate() { sandbox.store.plate = copy(sandbox.ui.plate); },
+    PLATE_KEY: 'mici:plate:v1',
+    localStorage: { values: new Map(), setItem(key, value) { this.values.set(key, value); } },
     saveCount: 0,
-    save() { sandbox.saveCount++; },
+    persistedSnapshot: null,
+    save() { sandbox.saveCount++; sandbox.persistedSnapshot = copy(sandbox.store); return true; },
     applyTheme() { sandbox.themeApplied = true; },
     render(keep) { sandbox.renderCount = (sandbox.renderCount || 0) + 1; sandbox.renderKeep = keep; }
   };
@@ -480,6 +563,8 @@ test('successful import replaces data, preserves the current account, and clears
   assert.equal(sandbox.ui.editId, null);
   assert.match(sandbox.ui.msg, /Sauvegarde restaurée/);
   assert.equal(sandbox.saveCount, 1);
+  assert.deepEqual(copy(sandbox.persistedSnapshot.plate), []);
+  assert.equal(sandbox.localStorage.values.get('mici:plate:v1'), '[]');
   assert.equal(sandbox.themeApplied, true);
   assert.equal(sandbox.renderCount, 1);
   assert.equal(sandbox.renderKeep, true);
