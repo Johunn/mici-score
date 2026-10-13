@@ -853,6 +853,82 @@ function norm(p){
   if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
   return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
 }
+
+/* Validation stricte des sauvegardes importées : ne jamais injecter de données JSON
+   directement dans le modèle de données de l'application. */
+function validateBackup(p){
+  const fail=()=>{throw new Error('invalid-backup')};
+  const record=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
+  const num=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
+  const text=(v,max,nonempty=false)=>typeof v==='string'&&v.length<=max&&(!nonempty||v.trim().length>0);
+  const id=v=>text(v,200,true)&&/^[A-Za-z0-9][A-Za-z0-9_-]{0,199}$/.test(v)&&!['constructor','prototype','toString','valueOf','hasOwnProperty','isPrototypeOf','propertyIsEnumerable','__defineGetter__','__defineSetter__','__lookupGetter__','__lookupSetter__'].includes(v);
+  const date=v=>num(v,0,8640000000000000);
+  const map=(v)=>record(v);
+  const arrNums=(v,n,min,max)=>Array.isArray(v)&&v.length===n&&v.every(x=>num(x,min,max));
+  if(!record(p)||!Array.isArray(p.entries)||p.entries.length>10000)fail();
+  ['custom','over','sens','mods','flags','del'].forEach(k=>{if(p[k]!==undefined&&(k==='custom'?!Array.isArray(p[k]):!map(p[k])))fail()});
+  if(p.custom&&p.custom.length>1000)fail();
+
+  const custom=(p.custom||[]).map(f=>{
+    if(!record(f)||!id(f.id)||!text(f.n,200,true)||!Number.isInteger(f.c)||f.c<0||f.c>=CATS.length||!arrNums(f.L,7,0,4)||!num(f.b,0,2))fail();
+    const o={id:f.id,n:f.n.trim(),c:f.c,L:f.L.slice(),b:f.b};
+    if(f.obs!==undefined){if(typeof f.obs!=='boolean')fail();o.obs=f.obs}
+    ['ho','u'].forEach(k=>{if(f[k]!==undefined){if(!num(f[k],0,4))fail();o[k]=f[k]}});
+    ['rf','ru'].forEach(k=>{if(f[k]!==undefined){if(!text(f[k],20)||!(f[k]===''||Object.prototype.hasOwnProperty.call(RULES,f[k])))fail();o[k]=f[k]}});
+    if(f.comp!==undefined){if(!text(f.comp,2000))fail();o.comp=f.comp}
+    return o;
+  });
+  if(new Set(custom.map(f=>f.id)).size!==custom.length)fail();
+
+  const entries=p.entries.map(e=>{
+    if(!record(e))fail();
+    let eid=e.id;
+    if(typeof eid==='string'&&/^\\d{1,16}$/.test(eid))eid=Number(eid);
+    if(!Number.isSafeInteger(eid)||eid<0||!date(e.ts)||!num(e.r,0,10))fail();
+    let sourceItems=e.items;
+    /* Compatibilité avec les anciennes sauvegardes à un seul aliment par entrée. */
+    if(!Array.isArray(sourceItems)&&text(e.name,200,true)){
+      sourceItems=[{id:'legacy',n:e.name,p:Number.isInteger(e.p)&&e.p>=0&&e.p<=3?e.p:1,g:0}];
+    }
+    if(!Array.isArray(sourceItems)||sourceItems.length>250)fail();
+    const items=sourceItems.map(it=>{
+      if(!record(it)||!id(it.id)||!text(it.n,200,true))fail();
+      const portion=it.p===undefined?1:it.p,grams=it.g===undefined?0:it.g;
+      if(!Number.isInteger(portion)||portion<0||portion>3||!num(grams,0,1500))fail();
+      return{id:it.id,n:it.n,p:portion,g:grams};
+    });
+    const o={id:eid,ts:e.ts,items,r:e.r,quest:e.quest===true||e.q===true,jeun:e.jeun===true||e.j===true,note:e.note===undefined?'':e.note};
+    if(!text(o.note,10000))fail();
+    if(e.L===null||e.L===undefined)o.L=null;else{if(!arrNums(e.L,7,0,4))fail();o.L=e.L.slice()}
+    if(e.score!==undefined){if(!num(e.score,0,10))fail();o.score=e.score}
+    if(e.edited!==undefined){if(!date(e.edited))fail();o.edited=e.edited}
+    return o;
+  });
+  if(new Set(entries.map(e=>e.id)).size!==entries.length)fail();
+
+  const over={};
+  Object.keys(p.over||{}).forEach(k=>{if(!id(k)||!num(p.over[k],0,10))fail();over[k]=p.over[k]});
+  const sens={};
+  const featureKeys=['g','l','f','h','e','s','c'];
+  Object.keys(p.sens||{}).forEach(k=>{if(!featureKeys.includes(k)||!num(p.sens[k],0.5,2))fail();sens[k]=p.sens[k]});
+  const mods={};
+  Object.keys(p.mods||{}).forEach(k=>{if(!['sten','crohn'].includes(k)||typeof p.mods[k]!=='boolean')fail();mods[k]=p.mods[k]});
+  const flags={};
+  Object.keys(p.flags||{}).forEach(k=>{if(!id(k)||!['suspect','confirm','clear'].includes(p.flags[k]))fail();flags[k]=p.flags[k]});
+  const del={};
+  Object.keys(p.del||{}).forEach(k=>{if(!id(k)||!date(p.del[k]))fail();del[k]=p.del[k]});
+
+  const themes=['system','dark','ocean','charbon','amoled','micinuit','mici','custom'];
+  if(p.theme!==undefined&&!themes.includes(p.theme))fail();
+  if(p.layout!==undefined&&!['liste','compact','cartes'].includes(p.layout))fail();
+  if(p.sort!==undefined&&!['cat','nom','scd','sca'].includes(p.sort))fail();
+  if(p.cbg!==undefined&&!/^#[0-9a-f]{6}$/i.test(p.cbg))fail();
+  if(p.cac!==undefined&&!/^#[0-9a-f]{6}$/i.test(p.cac))fail();
+  ['aurora','onb'].forEach(k=>{if(p[k]!==undefined&&typeof p[k]!=='boolean')fail()});
+  ['ep','mt'].forEach(k=>{if(p[k]!==undefined&&!date(p[k]))fail()});
+
+  return Object.assign({},p,{custom,entries,over,sens,mods,flags,del,acct:null});
+}
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const rgb2hex=a=>'#'+a.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
 const lum=h=>{const c=hex2rgb(h).map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2]};
@@ -1378,7 +1454,7 @@ function journalHTML(){
     ${hid>0?`<p class="small muted">${hid} autre${hid>1?'s':''} suspect${hid>1?'s':''} masqué${hid>1?'s':''} (limite de ${SUSP_MAX}) : traite d'abord ceux-ci.</p>`:''}
     ${conf.length?`<p class="small"><b>Confirmés :</b> ${conf.map(esc).join(', ')}</p>`:''}</div>`:''}
   <div class="card"${bilan.length?'':' style="margin-top:0"'}><h3>Historique</h3>
-    ${ents.map(e=>`<div class="entry"><span class="badge ${cls(e.r)}">${e.r}</span><div class="body"><b>${esc((e.items||[]).map(i=>i.n).join(' + '))}</b>
+    ${ents.map(e=>`<div class="entry"><span class="badge ${cls(e.r)}">${fmt(e.r)}</span><div class="body"><b>${esc((e.items||[]).map(i=>i.n).join(' + '))}</b>
       <span class="muted small" style="display:block">${dt(e.ts)}${e.quest?' · Questran':''}${e.jeun?' · à jeun':''}${e.score!=null?' · calculé '+fmt(e.score):''}</span>
       ${e.note?`<span class="small" style="display:block">${esc(e.note)}</span>`:''}
       ${e.edited?`<span class="muted small" style="display:block">Corrigé le ${dt(e.edited)}</span>`:''}
@@ -1686,10 +1762,21 @@ document.addEventListener('click',e=>{
   else if(a==='import'){
     const raw=(document.getElementById('imp').value||'').trim();
     try{
-      const p=JSON.parse(raw);
-      if(!p||!Array.isArray(p.entries))throw 0;
-      const ac=store.acct;store=norm(p);store.acct=ac;store.del={};store.ep=Date.now();store.mt=Date.now();save();applyTheme();ui.msg='Sauvegarde restaurée.';
-    }catch(err){ui.msg='Texte invalide. Colle la sauvegarde complète.'}
+      if(raw.length>8000000)throw new Error('backup-too-large');
+      const p=validateBackup(JSON.parse(raw));
+      const restored=norm(p);
+      restored.acct=store.acct;
+      restored.del={};
+      restored.ep=Date.now();
+      restored.mt=Date.now();
+      store=restored;
+      ui.plate=[];ui.view='list';ui.editId=null;
+      save();applyTheme();ui.msg='Sauvegarde restaurée.';
+    }catch(err){
+      ui.msg=err&&err.message==='backup-too-large'
+        ?'Sauvegarde trop volumineuse (limite : 8 Mo). Aucune donnée n’a été modifiée.'
+        :'Sauvegarde invalide ou incompatible. Aucune donnée n’a été modifiée.';
+    }
     render(true);
   }
   else if(a==='reset'){
