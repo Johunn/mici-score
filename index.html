@@ -756,8 +756,16 @@ function savePlate(){
 }
 
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
+const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
   newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false};
+function backupText(){
+  return JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
+}
+function showBackupCopyFallback(txt){
+  ui.exportText=txt;
+  ui.msg='Copie automatique impossible. Sélectionne le texte de la sauvegarde ci-dessous et copie-le.';
+  render(true);
+}
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
 
@@ -778,7 +786,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v35';
+const APP_V='v36';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1003,6 +1011,7 @@ function profilHTML(){
   <div class="card"><h3>Sauvegarde</h3>
     <p class="muted small">Tes données sont stockées uniquement dans ce navigateur. Vider les données de Chrome les efface. Copie une sauvegarde de temps en temps et garde-la dans une note.</p>
     <p><button class="btn block" data-act="export">Copier la sauvegarde</button></p>
+    ${ui.exportText ? `<div class="field"><label for="backupOut">Sauvegarde à copier manuellement</label><textarea id="backupOut" rows="8" readonly>${esc(ui.exportText)}</textarea><button class="btn ghost block" style="margin-top:8px" data-act="selectBackup">Sélectionner le texte de la sauvegarde</button><p class="small muted">Le texte est sélectionné ; copie-le avec Ctrl+C (ou la commande Copier de ton appareil).</p></div>` : ``}
     <div class="field"><label for="imp">Restaurer depuis une sauvegarde</label><textarea id="imp" placeholder="Colle ici le texte copié"></textarea></div>
     <p style="margin:10px 0 0"><button class="btn ghost block" data-act="import">Restaurer</button></p>
     ${ui.msg?`<p class="small" role="status" style="margin:10px 0 0">${esc(ui.msg)}</p>`:''}
@@ -1233,9 +1242,13 @@ document.addEventListener('click',e=>{
   else if(a==='mod'){store.mods=store.mods||{};store.mods[id]=!store.mods[id];save();render(true)}
   else if(a==='resetSens'){store.sens={};save();render(true)}
   else if(a==='export'){
-    const txt=JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
-    const done=()=>{ui.msg='Sauvegarde copiée.';render(true)},fail=()=>{ui.msg='Copie impossible sur ce navigateur.';render(true)};
+    const txt=backupText();
+    const done=()=>{ui.exportText='';ui.msg='Sauvegarde copiée.';render(true)},fail=()=>showBackupCopyFallback(txt);
     try{navigator.clipboard.writeText(txt).then(done,fail)}catch(err){fail()}
+  }
+  else if(a==='selectBackup'){
+    const el=document.getElementById('backupOut');
+    if(el){el.focus();el.select()}
   }
   else if(a==='import'){
     const raw=(document.getElementById('imp').value||'').trim();
@@ -1248,7 +1261,7 @@ document.addEventListener('click',e=>{
       restored.ep=Date.now();
       restored.mt=Date.now();
       store=restored;
-      ui.plate=[];savePlate();ui.view='list';ui.editId=null;
+      ui.plate=[];savePlate();ui.exportText='';ui.view='list';ui.editId=null;
       save();applyTheme();ui.msg='Sauvegarde restaurée.';
     }catch(err){
       ui.msg=err&&err.message==='backup-too-large'
@@ -1259,7 +1272,7 @@ document.addEventListener('click',e=>{
   }
   else if(a==='reset'){
     if(!ui.resetArmed){ui.resetArmed=true;render(true);return}
-    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];savePlate();ui.resetArmed=false;ui.msg='Données effacées.';render(true);
+    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];savePlate();ui.exportText='';ui.resetArmed=false;ui.msg='Données effacées.';render(true);
   }
 });
 
