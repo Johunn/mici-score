@@ -466,3 +466,35 @@ test('feature weights and scoring constants are finite and non-negative', () => 
   assert.ok(Number.isFinite(core.BW) && core.BW >= 0);
   assert.ok(Number.isFinite(core.UW) && core.UW >= 0);
 });
+
+
+test('app shell required scoring API is exported by score-core.js', () => {
+  const core = makeCoreHarness();
+  const required = [
+    'FEATS', 'BW', 'PF', 'CATS', 'RAW', 'FOODS', 'slug', 'store',
+    'setStoreProvider', 'sensOf', 'PROF', 'UW', 'oMul', 'effL',
+    'RULES', 'MODS', 'profMul', 'clamp', 'REFG_CAT', 'ORD',
+    'REFG_NOM', 'refG', 'pfOf', 'grOf', 'levels', 'K', 'penalty',
+    'rawScore', 'single', 'scoreOf'
+  ];
+  for (const name of required) {
+    assert.ok(Object.hasOwn(core, name), 'missing score-core.js export: ' + name);
+  }
+});
+
+test('scoring functions follow the app store provider when app state is replaced', () => {
+  const core = makeCoreHarness();
+  let appStore = Object.assign({}, core.store, {
+    prof: 'general',
+    sens: {},
+    mods: {},
+    over: {}
+  });
+  core.setStoreProvider(() => appStore);
+  const food = makeFood('provider-test', [1, 0, 0, 0, 0, 0, 0]);
+  const before = core.single(food);
+  appStore = Object.assign({}, appStore, { sens: { g: 2 } });
+  const after = core.single(food);
+  assert.ok(after < before, 'the engine should use the currently active app store');
+  assert.ok(Math.abs(after - 10 * Math.exp(-2.4 / 9)) < 1e-12);
+});
