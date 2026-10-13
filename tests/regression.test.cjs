@@ -183,6 +183,7 @@ function createOAuthHarness() {
     gs: { tok: null, exp: 0, st: '' },
     location,
     history,
+    URLSearchParams,
     localStorage: {
       setItem(k, v) { values.set(k, v); },
       getItem(k) { return values.has(k) ? values.get(k) : null; },
