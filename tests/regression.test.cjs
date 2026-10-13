@@ -96,7 +96,7 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
   sandbox.ui = { plate };
   sandbox.platePersistenceTest.savePlate();
   assert.deepEqual(JSON.parse(values.get('mici:plate:v1')), expected);
-  assert.deepEqual(sandbox.store.plate, expected);
+  assert.deepEqual(copy(sandbox.store.plate), expected);
   sandbox.store = JSON.parse(values.get('mici:v2'));
   assert.deepEqual(copy(sandbox.platePersistenceTest.loadPlate()), expected);
   assert.match(html, /plate:loadPlate\(\)/);
@@ -150,6 +150,7 @@ test('assiette persistence caps a corrupted oversized draft', () => {
   }));
   const values = new Map([['mici:plate:v1', JSON.stringify(saved)]]);
   const sandbox = {
+    store: { plate: null },
     localStorage: { getItem(key) { return values.get(key) || null; } },
     byId(id) { return id.startsWith('food-') ? { id } : null; }
   };
