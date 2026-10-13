@@ -1,6 +1,6 @@
-/* MICI Score : service worker « réseau d'abord » (v16). Ignore les requêtes vers d'autres sites. */
-const CACHE='mici-score-v16';
-const CORE=['./','index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon-512-maskable.png','fonts/bricolage-grotesque-latin-opsz-normal.woff2','fonts/figtree-latin-wght-normal.woff2','fonts/montserrat-latin-wght-normal.woff2'];
+/* MICI Score : service worker « réseau d'abord » (v17). Ignore les requêtes vers d'autres sites. */
+const CACHE='mici-score-v17';
+const CORE=['./','index.html','score-core.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon-512-maskable.png','fonts/bricolage-grotesque-latin-opsz-normal.woff2','fonts/figtree-latin-wght-normal.woff2','fonts/montserrat-latin-wght-normal.woff2'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>Promise.allSettled(CORE.map(u=>c.add(u)))).then(()=>self.skipWaiting()));
 });
