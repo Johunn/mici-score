@@ -8,7 +8,7 @@ Application : https://johunn.github.io/mici-score/
 
 ## Utilisation
 
-- **Calculer** : liste d'environ 500 aliments génériques (recherche, filtre par catégorie, tri par catégories, nom ou score ; 50 aliments par page). Touche un aliment pour l'ajouter à ton assiette, `›` pour sa fiche. Dans l'assiette : portion (trace, petite, normale, grosse) ou poids en grammes ; Questran est enregistré comme contexte du journal sans modifier le score, tandis que « à jeun » conserve son ajustement sur le lactose.
+- **Calculer** : liste d'environ 500 aliments génériques (recherche, filtre par catégorie, tri par catégories, nom ou score ; 50 aliments par page). Touche un aliment pour l'ajouter à ton assiette, `›` pour sa fiche. Dans l'assiette : portion (trace, petite, normale, grosse) ou poids en grammes ; « à jeun » conserve son ajustement sur le lactose.
 - **Journal** : note ton ressenti après un repas (0 à 10). L'appli signale des aliments « à surveiller » selon tes notes, sans modifier le score ; tu peux confirmer ou écarter.
 - **Sources** : calcul, poids, niveaux de preuve et limites.
 - **Profil** : thèmes, profil, sensibilités, sauvegarde.
@@ -69,7 +69,7 @@ Les fichiers de l'application doivent être publiés ensemble à la racine du d�
 ## Limites
 
 - Estimations par aliment non sourcées ; effets supposés additifs ; interactions (repas de la veille, stress, quantité exacte) non modélisées.
-- Peu de données publiées sur l'alimentation avec une poche en J ; le lien gras, acides biliaires et selles, et l'effet du Questran sur la poche ne sont pas démontrés.
+- Peu de données publiées sur l'alimentation avec une poche en J ; les liens entre apports en graisses, acides biliaires et fonctionnement de la poche restent incertains.
 - L'appli ne détecte ni pochite ni déshydratation. En cas de fièvre, sang, douleurs importantes, ballonnement avec arrêt des gaz et des selles, perte de poids ou selles très liquides persistantes, consulte rapidement.
 
 ## Sources principales
