@@ -25,7 +25,7 @@ Aucun aliment n'est interdit. Un `*` indique un score corrigé par toi.
 
 ## Calcul
 
-Chaque aliment est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactose, fibres insolubles, oligosaccharides, fructose et polyols, épices et acidité, stimulants, sucres concentrés, additifs), avec un bonus épaississant. La pénalité est la somme pondérée de ces niveaux ; le score vaut `10 × exp(−pénalité / 9)`. Les poids, les coefficients de portion, les seuils de couleur et le diviseur sont des **choix arbitraires** ; les niveaux par aliment sont des estimations. Aucun score alimentaire validé n'existe pour la rectocolite ou la poche. Détail et niveaux de preuve dans l'onglet Sources de l'appli.
+Chaque aliment simple est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactose, fibres insolubles, oligosaccharides, fructose et polyols, épices et acidité, stimulants, sucres concentrés, additifs), avec un bonus épaississant. Certaines valeurs de plats composés sont des estimations agrégées qui peuvent atteindre 4 ; le calcul plafonne chaque caractéristique à 4. Les aliments personnalisés restent notés de 0 à 3. La pénalité est la somme pondérée de ces niveaux ; le score vaut `10 × exp(−pénalité / 9)`. Les poids, les coefficients de portion, les seuils de couleur et le diviseur sont des **choix arbitraires** ; les niveaux par aliment sont des estimations. Aucun score alimentaire validé n'existe pour la rectocolite ou la poche. Détail et niveaux de preuve dans l'onglet Sources de l'appli.
 
 ## Installation sur Android
 
