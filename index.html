@@ -416,7 +416,7 @@ function save(){
   if(h!==null){_h=h;if(changed&&!_applying)schedSync()}
   return true;
 }
-const snap=()=>JSON.parse(JSON.stringify({app:'mici-score',fmt:1,ep:store.ep||0,mt:store.mt||0,custom:store.custom,entries:cleanJournalEntries(store.entries),over:store.over,sens:store.sens,prof:store.prof,mods:store.mods,flags:store.flags,del:store.del||{}}));
+const snap=()=>JSON.parse(JSON.stringify({app:'mici-score',fmt:1,ep:store.ep||0,mt:store.mt||0,custom:store.custom,entries:store.entries,over:store.over,sens:store.sens,prof:store.prof,mods:store.mods,flags:store.flags,del:store.del||{}}));
 const sig=o=>JSON.stringify([o.ep||0,o.custom,o.entries,o.over,o.sens,o.prof,o.mods,o.flags,o.del]);
 /* Fusion : si une réinitialisation ou une restauration a eu lieu d'un côté (ep plus récent), ce côté gagne ; sinon les repas et aliments perso sont fusionnés par identifiant (la suppression l'emporte), et le reste (corrections, sensibilités, profil, statuts) vient du côté modifié en dernier. */
 function mergeSnap(L,R){
