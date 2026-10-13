@@ -8,6 +8,7 @@ const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const coreModuleSource = fs.readFileSync(path.join(root, 'score-core.js'), 'utf8');
 const swSource = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
 
 function copy(value) {
@@ -32,6 +33,25 @@ test('all inline JavaScript in index.html is syntactically valid', () => {
 
 test('service worker JavaScript is syntactically valid', () => {
   new vm.Script(swSource, { filename: 'sw.js' });
+});
+
+test('extracted scoring module is syntactically valid', () => {
+  new vm.Script(coreModuleSource, { filename: 'score-core.js' });
+});
+
+test('app shell loads the scoring module before its inline code', () => {
+  const moduleTag = html.indexOf('<script src="score-core.js"></script>');
+  const appScript = html.indexOf('<script>\n(function(){');
+  assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
+  assert.ok(appScript > moduleTag, 'score module must load before app initialization');
+  assert.match(html, /const APP_V='v31';/);
+  assert.doesNotMatch(html, /\/\*CORE_START\*\//);
+  assert.doesNotMatch(html, /\/\*CORE_END\*\//);
+});
+
+test('service worker pre-caches the extracted scoring module', () => {
+  assert.match(swSource, /const CACHE='mici-score-v17';/);
+  assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
 test('score formula and scale explanations stay consistent', () => {
@@ -305,17 +325,13 @@ test('service worker only deletes MICI Score caches', async () => {
 });
 
 
-const coreEngineSource = extractBetween(html, '/*CORE_START*/', '/*CORE_END*/');
-
 function makeCoreHarness() {
-  const sandbox = {};
+  const sandbox = { window: {} };
   vm.createContext(sandbox);
-  new vm.Script(
-    coreEngineSource +
-    '\nglobalThis.miciScoreCore = { FEATS, PF, RAW, FOODS, store, levels, penalty, rawScore, single, scoreOf, refG, pfOf, effL, profMul, K, BW, UW };',
-    { filename: 'index.html:score-core' }
-  ).runInContext(sandbox);
-  return sandbox.miciScoreCore;
+  new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(sandbox);
+  const core = sandbox.window.MICI_SCORE_CORE;
+  assert.ok(core, 'score-core.js must expose the scoring API');
+  return core;
 }
 
 function makeFood(id, L, extra = {}) {
