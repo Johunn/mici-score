@@ -32,6 +32,11 @@
 :root[data-theme="amoled"]{--bg:#000000;--surface:#0E0E0E;--ink:#F5F5F5;--muted:#9A9A9A;--line:#262626;--accent:#5EEAD4;--on-accent:#00120F;--good:#5FBF86;--mid:#E0B04F;--bad:#E2756D}
 :root[data-theme="mici"]{--bg:#FFF7F1;--surface:#FFFFFF;--ink:#2B1740;--muted:#6B5F78;--line:#E6D9E2;--accent:#512178;--on-accent:#FFFFFF;--hi:#BF9F00;--good:#2F7D4F;--mid:#8A6A00;--bad:#B23A32;--f-display:'Montserrat',system-ui,sans-serif;--f-body:'Montserrat',system-ui,sans-serif}
 :root[data-theme="micinuit"]{--bg:#160D21;--surface:#231433;--ink:#F3EBF8;--muted:#B8A7C8;--line:#3A2750;--accent:#E0BE1A;--on-accent:#1A0F26;--hi:#E0BE1A;--good:#5FBF86;--mid:#E0B04F;--bad:#E2756D;--f-display:'Montserrat',system-ui,sans-serif;--f-body:'Montserrat',system-ui,sans-serif}
+/* Harmonise les menus natifs avec le thème : évite le texte clair sur fond blanc. */
+:root{color-scheme:light}
+:root[data-theme="dark"],:root[data-theme="ocean"],:root[data-theme="charbon"],:root[data-theme="amoled"],:root[data-theme="micinuit"]{color-scheme:dark}
+@media (prefers-color-scheme:dark){:root[data-theme="system"]{color-scheme:dark}}
+
 /* Fond Aurore : halos colorés + cartes en verre dépoli (thèmes sombres) */
 :root[data-theme="dark"],:root[data-theme="ocean"],:root[data-theme="charbon"],:root[data-theme="amoled"],:root[data-theme="micinuit"]{--glass:rgba(255,255,255,.07);--glassline:rgba(255,255,255,.12);--bf:blur(14px);--navbg:color-mix(in srgb,var(--surface) 75%,transparent)}
 :root[data-theme="micinuit"]{--g1:rgba(132,56,206,.62);--g2:rgba(224,190,26,.22);--g3:rgba(196,48,150,.34)}
@@ -62,6 +67,8 @@ button{cursor:pointer}
 .ibtn{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0;align-self:center}
 .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
 input[type=search],input[type=text],input[type=number],textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--glass,var(--surface));color:var(--ink);font:inherit}
+select option{background-color:var(--surface);color:var(--ink)}
+
 input[type=number]::placeholder{color:var(--muted,var(--ink));opacity:.55}
 textarea{min-height:76px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0 4px}
@@ -953,12 +960,14 @@ const mixc=(a,b,t)=>{const x=hex2rgb(a),y=hex2rgb(b);return rgb2hex(x.map((v,i)=
 const THEME_VARS=['--bg','--surface','--ink','--muted','--line','--accent','--on-accent','--good','--mid','--bad','--g1','--g2','--g3','--glass','--glassline','--bf','--navbg'];
 function applyTheme(){
   const r=document.documentElement;
+  r.style.removeProperty('color-scheme');
   r.setAttribute('data-theme',store.theme);
   r.setAttribute('data-aurora',store.aurora?'on':'off');
   document.body.setAttribute('data-layout',store.layout);
   THEME_VARS.forEach(v=>r.style.removeProperty(v));
   if(store.theme==='custom'){
     const bg=store.cbg,ac=store.cac,dark=lum(bg)<0.4;
+    r.style.colorScheme=dark?'dark':'light';
     const ink=dark?'#F2F2F2':'#14181A';
     const vals={'--bg':bg,'--surface':mixc(bg,dark?'#FFFFFF':'#FFFFFF',dark?0.07:0.7),'--ink':ink,'--muted':mixc(ink,bg,0.38),'--line':mixc(bg,ink,0.16),'--accent':ac,'--on-accent':lum(ac)>0.45?'#111111':'#FFFFFF',
       '--good':dark?'#5FBF86':'#2F7D4F','--mid':dark?'#E0B04F':'#9A6A0F','--bad':dark?'#E2756D':'#B23A32'};
@@ -1317,7 +1326,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v28';
+const APP_V='v29';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
