@@ -615,7 +615,7 @@ function acctHTML(){
   let b;
   if(!c){
     b=`<p class="small muted">Connexion Google non configurée sur cet appareil. Colle l\u2019identifiant client créé dans Google Cloud (se termine par .apps.googleusercontent.com).</p>
-    <div class="field"><input type="text" id="cid" placeholder="123456-abc.apps.googleusercontent.com" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:100%"></div>
+    <div class="field"><label for="cid">Identifiant client Google</label><input type="text" id="cid" placeholder="123456-abc.apps.googleusercontent.com" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:100%"></div>
     <p><button class="btn block" data-act="gcid">Enregistrer l\u2019identifiant</button></p>`;
   }else if(!a){
     loadGIS().catch(()=>{});
@@ -789,7 +789,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v39';
+const APP_V='v40';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -947,7 +947,7 @@ function journalHTML(){
       <span class="muted small" style="display:block">${dt(e.ts)}${e.quest?' · Questran':''}${e.jeun?' · à jeun':''}${e.score!=null?' · calculé '+fmt(e.score):''}</span>
       ${e.note?`<span class="small" style="display:block">${esc(e.note)}</span>`:''}
       ${e.edited?`<span class="muted small" style="display:block">Corrigé le ${dt(e.edited)}</span>`:''}
-      ${String(ui.editId)===String(e.id)?`<div class="field" style="margin-top:8px"><label for="eress">Digestion : <span class="rangeval" id="eressv">${ui.eR}</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="${ui.eR}"><textarea id="enote" placeholder="Note (facultatif)">${esc(ui.eNote)}</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="${e.id}">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>`:`<button class="btn ghost" style="margin:6px 0 0;padding:6px 12px" data-act="editEntry" data-id="${e.id}">Corriger la note</button>`}</div>
+      ${String(ui.editId)===String(e.id)?`<div class="field" style="margin-top:8px"><label for="eress">Digestion : <span class="rangeval" id="eressv">${ui.eR}</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="${ui.eR}"><label for="enote">Note (facultatif)</label><textarea id="enote" placeholder="Note (facultatif)">${esc(ui.eNote)}</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="${e.id}">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>`:`<button class="btn ghost" style="margin:6px 0 0;padding:6px 12px" data-act="editEntry" data-id="${e.id}">Corriger la note</button>`}</div>
       <button class="del" data-act="delEntry" data-id="${e.id}">Supprimer</button></div>`).join('')}
   </div>`}`;
 }
