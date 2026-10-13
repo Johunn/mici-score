@@ -929,7 +929,22 @@ function validateBackup(p){
   ['aurora','onb'].forEach(k=>{if(p[k]!==undefined&&typeof p[k]!=='boolean')fail()});
   ['ep','mt'].forEach(k=>{if(p[k]!==undefined&&!date(p[k]))fail()});
 
-  return Object.assign({},p,{custom,entries,over,sens,mods,flags,del,acct:null});
+  /* Retourner uniquement les propriétés reconnues : ne pas recopier des clés JSON inconnues. */
+  return {
+    custom,entries,over,sens,mods,flags,del,
+    prof:p.prof,
+    theme:p.theme,
+    layout:p.layout,
+    sort:p.sort,
+    cbg:p.cbg,
+    cac:p.cac,
+    ver:p.ver,
+    aurora:p.aurora,
+    onb:p.onb,
+    ep:p.ep,
+    mt:p.mt,
+    acct:null
+  };
 }
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const rgb2hex=a=>'#'+a.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
