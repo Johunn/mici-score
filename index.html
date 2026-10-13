@@ -1031,13 +1031,30 @@ function loadGIS(){
   });
   return _gisP;
 }
-/* Appli installée (écran d'accueil) : la fenêtre popup de Google reste blanche (v25). On passe par une redirection de la page entière.
+/* Appli installée (écran d'accueil) : la fenêtre popup de Google reste blanche (v25), donc une redirection plein écran est utilisée.
+   Limite connue : ce chemin utilise le flux implicite historique (response_type=token), que Google déconseille désormais pour les SPA.
+   Le flux code + PKCE recommandé demande un endpoint backend et un échange de code côté serveur ; ne pas exposer de secret client dans ce fichier statique.
    Nécessite l'URI de redirection https://johunn.github.io/mici-score/ dans la console Google (voir GUIDE-GOOGLE-CLOUD.md). */
 const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: minimal-ui)').matches||navigator.standalone===true}catch(e){return false}};
 const redirUri=()=>location.origin+location.pathname.replace(/[^\/]*$/,'');
+function createOAuthState(){
+  if(!window.crypto||typeof window.crypto.getRandomValues!=='function')throw new Error('secure-random');
+  const bytes=new Uint8Array(32);
+  window.crypto.getRandomValues(bytes);
+  return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function acceptTokenResponse(r){
+  const token=r&&typeof r.access_token==='string'?r.access_token:'';
+  const tokenType=r&&typeof r.token_type==='string'?r.token_type.toLowerCase():'';
+  const lifetime=Number(r&&r.expires_in);
+  if(!token||token.length>8192||tokenType!=='bearer'||!Number.isFinite(lifetime)||lifetime<=0||lifetime>86400)throw new Error('oauth-response');
+  gs.tok=token;
+  gs.exp=Date.now()+lifetime*1000;
+  return token;
+}
 function startRedirect(){
-  const st=Math.random().toString(36).slice(2)+Date.now().toString(36);
-  try{localStorage.setItem('mici:gstate',st)}catch(e){}
+  const st=createOAuthState();
+  try{localStorage.setItem('mici:gstate',st)}catch(e){throw new Error('state-storage')}
   const p=new URLSearchParams({client_id:cid(),redirect_uri:redirUri(),response_type:'token',scope:G_SCOPE,state:st,include_granted_scopes:'true'});
   if(store.acct&&store.acct.email)p.set('login_hint',store.acct.email);
   location.assign('https://accounts.google.com/o/oauth2/v2/auth?'+p.toString());
@@ -1047,10 +1064,12 @@ function readRedirect(){
   const p=new URLSearchParams(location.hash.slice(1));
   let ok=false;
   try{const s=localStorage.getItem('mici:gstate');ok=!!s&&p.get('state')===s;localStorage.removeItem('mici:gstate')}catch(e){}
+  /* Retire le jeton éventuel de l'URL avant tout autre rendu de l'application. */
   try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
   if(!ok){gs.st='Connexion Google invalide ou interrompue : réessaie.';return}
-  if(p.get('error')||!p.get('access_token')){gs.st=p.get('error')==='access_denied'?'Connexion Google refusée.':'Connexion Google impossible ('+(p.get('error')||'réponse vide')+').';return}
-  gs.tok=p.get('access_token');gs.exp=Date.now()+(+p.get('expires_in')||3600)*1000;
+  if(p.get('error')){gs.st=p.get('error')==='access_denied'?'Connexion Google refusée.':'Connexion Google impossible ('+p.get('error')+').';return}
+  try{acceptTokenResponse({access_token:p.get('access_token'),token_type:p.get('token_type'),expires_in:p.get('expires_in')})}
+  catch(e){gs.st='Réponse OAuth invalide ou expirée. Réessaie la connexion.'}
 }
 function getToken(interactive){
   return new Promise((res,rej)=>{
@@ -1065,7 +1084,7 @@ function getToken(interactive){
       if(!gs.client)gs.client=google.accounts.oauth2.initTokenClient({client_id:cid(),scope:G_SCOPE,callback:()=>{}});
       gs.client.callback=r=>{
         if(r&&r.error)return rej(new Error(r.error));
-        gs.tok=r.access_token;gs.exp=Date.now()+(+r.expires_in||3600)*1000;res(gs.tok);
+        try{res(acceptTokenResponse(r))}catch(e){rej(e)}
       };
       gs.client.error_callback=e=>rej(new Error((e&&e.type)||'popup'));
       const o={prompt:interactive?'':'none'};
@@ -1080,6 +1099,14 @@ async function gapi(tok,path,opt){
   const r=await fetch('https://www.googleapis.com'+path,o);
   if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
   return r;
+}
+async function verifyGoogleAccount(tok){
+  const u=await (await gapi(tok,'/oauth2/v3/userinfo')).json();
+  const email=typeof u.email==='string'?u.email.trim():'';
+  if(!email||u.email_verified===false)throw new Error('account-email');
+  const expected=store.acct&&typeof store.acct.email==='string'?store.acct.email.trim().toLowerCase():'';
+  if(expected&&email.toLowerCase()!==expected)throw new Error('account-mismatch');
+  return email;
 }
 async function findFile(tok){
   const q=encodeURIComponent("name='"+G_FILE+"' and trashed=false");
@@ -1118,6 +1145,11 @@ function errText(e){
   if(e&&e.status===401){gs.tok=null;return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».'}
   if(e&&e.status===403)return 'Accès refusé par Google (autorisation Drive ou API Drive non activée).';
   if(e&&e.status===429)return 'Trop de requêtes : réessaie dans quelques minutes.';
+  if(e&&e.message==='account-mismatch')return 'Le compte Google autorisé ne correspond pas au compte mémorisé. Déconnecte-toi puis reconnecte-toi avec le bon compte. Aucune donnée n’a été synchronisée.';
+  if(e&&e.message==='account-email')return 'Impossible de vérifier l’identité du compte Google. Aucune donnée n’a été synchronisée ; réessaie.';
+  if(e&&e.message==='oauth-response')return 'Google a renvoyé une réponse d’autorisation invalide. Réessaie la connexion.';
+  if(e&&e.message==='secure-random')return 'Ce navigateur ne permet pas de générer un état de connexion sécurisé. Mets ton navigateur à jour.';
+  if(e&&e.message==='state-storage')return 'Le navigateur ne permet pas de vérifier la connexion en toute sécurité. Autorise le stockage du site puis réessaie.';
   if(e&&e.message==='timeout')return 'La fenêtre Google n’a pas répondu. Si tu utilises l’icône installée, ouvre l’appli dans le navigateur (onglet normal) pour te connecter.';
   if(e&&e.message==='gis')return 'Connexion Google indisponible sur cette adresse ou hors ligne.';
   if(e&&(e.message==='popup_closed'||e.message==='popup_failed_to_open'||e.message==='access_denied'||e.message==='interaction_required'||e.message==='user_logged_out'||e.message==='immediate_failed'||e.message==='popup'))return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».';
@@ -1131,8 +1163,8 @@ async function syncNow(interactive){
   gs.busy=true;setSt('Synchronisation…');
   try{
     const tok=await getToken(!!interactive);
-    let email=store.acct&&store.acct.email;
-    if(!email){try{const u=await (await gapi(tok,'/oauth2/v3/userinfo')).json();email=u.email||''}catch(e){email=''}}
+    /* Vérifier le compte avant de lire, fusionner ou écrire la sauvegarde Drive. */
+    const email=await verifyGoogleAccount(tok);
     let id=await findFile(tok),R=null;
     if(id){
       const raw=await (await gapi(tok,'/drive/v3/files/'+id+'?alt=media')).text();
@@ -1169,6 +1201,8 @@ async function gDeleteOnline(){
   gs.busy=true;setSt('Suppression en ligne…');
   try{
     const tok=await getToken(true);
+    /* Ne jamais supprimer un fichier Drive avant d'avoir vérifié le compte autorisé. */
+    await verifyGoogleAccount(tok);
     let id,n=0;
     while((id=await findFile(tok))&&n<5){await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'});n++}
     gs.st='';ui.msg=n?'Données en ligne supprimées. Une prochaine synchronisation les recréera : déconnecte-toi pour l\u2019éviter.':'Aucune donnée en ligne trouvée.';
@@ -1326,7 +1360,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v29';
+const APP_V='v30';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
