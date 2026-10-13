@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v4.3';"));
+  assert.ok(html.includes("const APP_V='v4.4';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -67,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v30';/);
+test('service worker pre-caches the extracted scoring module and uses the v31 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v31';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -334,7 +334,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v4.3';"));
+  assert.ok(html.includes("const APP_V='v4.4';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -980,7 +980,7 @@ test('neutral food scores 10 and a single feature follows the documented formula
   assert.ok(Math.abs(core.single(fat) - expected) < 1e-12);
 });
 
-test('portion factors and contextual adjustments are applied before the level cap', () => {
+test('portion factors apply; fasting adjusts lactose; Questran does not affect the score', () => {
   const core = makeCoreHarness();
   const food = makeFood('portion-test', [2, 2, 0, 0, 0, 0, 0]);
 
@@ -995,8 +995,12 @@ test('portion factors and contextual adjustments are applied before the level ca
   assert.equal(large.L[0], 3);
 
   const context = core.levels([{ f: food, p: 1 }], { quest: true, jeun: true });
-  assert.equal(context.L[0], 1.5);
-  assert.ok(Math.abs(context.L[1] - 2.6) < 1e-12);
+  assert.equal(context.L[0], normal.L[0], 'Questran must not reduce the fat level');
+  assert.ok(Math.abs(context.L[1] - 2.6) < 1e-12, 'fasting adjustment remains');
+
+  const withQuestran = core.scoreOf([{ f: food, p: 1 }], { quest: true });
+  const withoutQuestran = core.scoreOf([{ f: food, p: 1 }], {});
+  assert.equal(withQuestran.score, withoutQuestran.score, 'Questran must not affect the score');
 });
 
 test('combined feature levels are capped at 4 and scores remain within 0–10', () => {
