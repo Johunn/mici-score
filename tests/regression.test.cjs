@@ -44,13 +44,13 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v32';/);
+  assert.match(html, /const APP_V='v33';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v18';/);
+  assert.match(swSource, /const CACHE='mici-score-v19';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -155,7 +155,7 @@ test('assiette persistence caps a corrupted oversized draft', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v32';/);
+  assert.match(html, /const APP_V='v33';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -173,6 +173,7 @@ function makeValidator() {
   new vm.Script(
     'const CATS = Array(14).fill("catégorie");\n' +
     'const RULES = {};\n' +
+    'const FOODS = [{id:"carotte-cuite"}];\n' +
     validatorSource +
     '\nglobalThis.validateBackupForTest = validateBackup;'
   ).runInContext(sandbox);
@@ -238,7 +239,8 @@ test('invalid backup values are rejected', async (t) => {
     ['note over 10000 characters', (p) => { p.entries[0].note = 'x'.repeat(10001); }],
     ['duplicate entry id', (p) => { p.entries.push(copy(p.entries[0])); }],
     ['wrong custom food name type', (p) => { p.custom[0].n = { bad: true }; }],
-    ['non-integer timestamp', (p) => { p.entries[0].ts = 1720000000001.5; }]
+    ['non-integer timestamp', (p) => { p.entries[0].ts = 1720000000001.5; }],
+    ['custom id collides with a built-in food', (p) => { p.custom[0].id = 'carotte-cuite'; }]
   ];
   for (const entry of cases) {
     await t.test(entry[0], () => {
