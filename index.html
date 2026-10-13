@@ -609,7 +609,7 @@ function gDisconnect(){
   gs.again=false;
   const t=gs.tok;gs.tok=null;gs.exp=0;
   try{if(t&&window.google&&google.accounts&&google.accounts.oauth2)google.accounts.oauth2.revoke(t,()=>{})}catch(e){}
-  store.acct=null;save();gs.st='';ui.msg='Déconnecté. Tes données restent sur cet appareil et dans ton Drive.';render(true);
+  store.acct=null;const saved=save();gs.st='';ui.msg=saved?'Déconnecté. Tes données restent sur cet appareil et dans ton Drive.':'Déconnecté pour cette session, mais le navigateur n’a pas pu enregistrer ce choix. Libère de l’espace de stockage puis réessaie, ou retire l’accès à MICI Score dans ton compte Google.';render(true);
 }
 async function gDeleteOnline(){
   if(gs.busy){gs.st='Une opération Google est déjà en cours. Attends qu’elle se termine.';render(true);return}
@@ -820,7 +820,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v41';
+const APP_V='v42';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
