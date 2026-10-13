@@ -44,13 +44,31 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v39';/);
+  assert.match(html, /const APP_V='v40';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
 
+
+test('settings and journal note fields have accessible labels and focus support', () => {
+  assert.match(html, /<label for="cid">Identifiant client Google<\\/label><input type="text" id="cid"/);
+  assert.match(html, /<label for="enote">Note \\(facultatif\\)<\\/label><textarea id="enote"/);
+  assert.match(html, /:focus-visible\\{outline:3px solid var\\(--accent\\);outline-offset:2px\\}/);
+  assert.match(html, /<nav class="tabs" aria-label="Navigation">/);
+  assert.match(html, /@media \\(prefers-reduced-motion:no-preference\\)/);
+});
+
+test('offline shell caches the app engine and local fonts without intercepting external origins', () => {
+  assert.match(swSource, /const CORE=\\[[^\\]]*'index\\.html'[^\\]]*'score-core\\.js'/);
+  assert.match(swSource, /'fonts\\/bricolage-grotesque-latin-opsz-normal\\.woff2'/);
+  assert.match(swSource, /'fonts\\/figtree-latin-wght-normal\\.woff2'/);
+  assert.match(swSource, /'fonts\\/montserrat-latin-wght-normal\\.woff2'/);
+  assert.match(swSource, /new URL\\(r\\.url\\)\\.origin!==self\\.location\\.origin\\)return/);
+  assert.match(swSource, /catch\\(\\)=>caches\\.open\\(CACHE\\)\\.then\\(c=>c\\.match\\(r\\)\\)/);
+});
+
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v25';/);
+  assert.match(swSource, /const CACHE='mici-score-v26';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -316,7 +334,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v39';/);
+  assert.match(html, /const APP_V='v40';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
