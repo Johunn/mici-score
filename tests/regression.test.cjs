@@ -44,13 +44,13 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v33';/);
+  assert.match(html, /const APP_V='v34';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v19';/);
+  assert.match(swSource, /const CACHE='mici-score-v20';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -71,6 +71,8 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
     { id: 'pain-blanc', p: 0, g: -5 }
   ])]]);
   const sandbox = {
+    store: {},
+    save() { values.set('mici:v2', JSON.stringify(sandbox.store)); },
     localStorage: {
       getItem(key) { return values.has(key) ? values.get(key) : null; },
       setItem(key, value) { values.set(key, value); }
@@ -94,8 +96,10 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
   sandbox.ui = { plate };
   sandbox.platePersistenceTest.savePlate();
   assert.deepEqual(JSON.parse(values.get('mici:plate:v1')), expected);
+  assert.deepEqual(sandbox.store.plate, expected);
+  sandbox.store = JSON.parse(values.get('mici:v2'));
   assert.deepEqual(copy(sandbox.platePersistenceTest.loadPlate()), expected);
-  assert.match(html, /plate:loadPlate\(\)/);
+  assert.match(html, /plate:loadPlate\(\)/);\n  assert.match(html, /plate:Array\.isArray\(p\.plate\)\?p\.plate:null/);\n  assert.match(html, /const txt=JSON\.stringify\(Object\.assign\(\{},store,\{acct:null,plate:undefined\}\)\)/);
   assert.match(html, /savePlate\(\);updateBar\(\)/);
   assert.match(html, /ui\.plate\[i\]\.g=.*?;savePlate\(\);render\(true\)/);
 });
@@ -103,6 +107,8 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
 
 test('assiette persistence handles corrupt or unavailable browser storage', () => {
   const sandbox = {
+    store: {},
+    save() { throw new Error('quota exceeded'); },
     localStorage: {
       getItem() { throw new Error('storage disabled'); },
       setItem() { throw new Error('quota exceeded'); }
@@ -155,7 +161,7 @@ test('assiette persistence caps a corrupted oversized draft', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v33';/);
+  assert.match(html, /const APP_V='v34';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
