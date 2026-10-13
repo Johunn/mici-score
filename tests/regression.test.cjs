@@ -100,6 +100,58 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
   assert.match(html, /ui\.plate\[i\]\.g=.*?;savePlate\(\);render\(true\)/);
 });
 
+
+test('assiette persistence handles corrupt or unavailable browser storage', () => {
+  const sandbox = {
+    localStorage: {
+      getItem() { throw new Error('storage disabled'); },
+      setItem() { throw new Error('quota exceeded'); }
+    },
+    byId() { return null; }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(platePersistenceSource +
+    '\nglobalThis.platePersistenceTest = { loadPlate, savePlate };'
+  ).runInContext(sandbox);
+  assert.deepEqual(copy(sandbox.platePersistenceTest.loadPlate()), []);
+  sandbox.ui = { plate: [{ id: 'carotte-cuite', p: 1, g: 0 }] };
+  assert.doesNotThrow(() => sandbox.platePersistenceTest.savePlate());
+});
+
+test('assiette storage is updated by edits and cleared by completed or destructive flows', () => {
+  const clickSource = extractBetween(
+    html,
+    "document.addEventListener('click',e=>{",
+    "\ndocument.getElementById('brand')"
+  );
+  assert.match(clickSource, /if\(a==='add'\)[\s\S]*?savePlate\(\);updateBar\(\)/);
+  assert.match(clickSource, /else if\(a==='addDetail'\)[\s\S]*?savePlate\(\);render\(true\)/);
+  assert.match(clickSource, /else if\(a==='clearBar'\)\{ui\.plate=\[\];savePlate\(\)/);
+  assert.match(clickSource, /else if\(a==='pp'\)[\s\S]*?savePlate\(\);render\(true\)/);
+  assert.match(clickSource, /else if\(a==='rm'\)[\s\S]*?savePlate\(\)/);
+  assert.match(clickSource, /else if\(a==='clearPlate'\)\{ui\.plate=\[\];savePlate\(\)/);
+  assert.match(clickSource, /else if\(a==='saveEntry'\)[\s\S]*?save\(\);ui\.plate=\[\];savePlate\(\)/);
+  assert.match(clickSource, /else if\(a==='delFood'\)[\s\S]*?ui\.plate=ui\.plate\.filter[\s\S]*?savePlate\(\)/);
+  assert.match(html, /store=restored;\s*ui\.plate=\[\];savePlate\(\)/);
+  assert.match(html, /store=norm\(\{\}\)[\s\S]*?ui\.plate=\[\];savePlate\(\)/);
+});
+
+test('assiette persistence caps a corrupted oversized draft', () => {
+  const saved = Array.from({ length: 105 }, (_, i) => ({
+    id: 'food-' + i, p: 1, g: 0
+  }));
+  const values = new Map([['mici:plate:v1', JSON.stringify(saved)]]);
+  const sandbox = {
+    localStorage: { getItem(key) { return values.get(key) || null; } },
+    byId(id) { return /^food-\\d+$/.test(id) ? { id } : null; }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(platePersistenceSource +
+    '\nglobalThis.loadPlateForTest = loadPlate;'
+  ).runInContext(sandbox);
+  assert.equal(sandbox.loadPlateForTest().length, 100);
+});
+
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
