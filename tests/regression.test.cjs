@@ -397,7 +397,7 @@ test('failed import preserves pasted text and leaves existing data untouched', (
     html,
     "else if(a==='import'){",
     "\n  else if(a==='reset')"
-  ).replace(/^\\s*else\\s+if\\(a==='import'\\)\\{/, "if(a==='import'){");
+  ).replace("else if(a==='import'){", "if(a==='import'){");
   const input = { value: '{not-json' };
   const status = { textContent: '', style: { display: 'none' } };
   const initialStore = {
