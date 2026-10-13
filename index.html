@@ -729,8 +729,27 @@ function flagCard(f){
     <p style="margin:10px 0 0">${st==='confirm'||st==='clear'?btn('none','Retirer le statut'):btn('confirm','Confirmer comme déclencheur')+btn('clear','Écarter (hors de cause)')}</p></div>`;
 }
 
+const PLATE_KEY='mici:plate:v1';
+function normalizePlate(items){
+  if(!Array.isArray(items))return [];
+  const seen=new Set();
+  return items.slice(0,100).filter(p=>{
+    if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.id!=='string'||!byId(p.id)||seen.has(p.id))return false;
+    if(!Number.isInteger(p.p)||![0,1,2,3].includes(p.p))return false;
+    if(p.g!==undefined&&(!Number.isInteger(p.g)||p.g<0||p.g>1500))return false;
+    seen.add(p.id);
+    return true;
+  }).map(p=>({id:p.id,p:p.p,g:p.g||0}));
+}
+function loadPlate(){
+  try{return normalizePlate(JSON.parse(localStorage.getItem(PLATE_KEY)||'null'))}catch(e){return []}
+}
+function savePlate(){
+  try{localStorage.setItem(PLATE_KEY,JSON.stringify(ui.plate))}catch(e){}
+}
+
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:[],quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
+const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
   newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false};
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
@@ -752,7 +771,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v31';
+const APP_V='v32';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1087,7 +1106,7 @@ document.querySelector('nav.tabs').addEventListener('click',e=>{
   render();
 });
 
-document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){ui.plate[i].g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));render(true)}}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){ui.plate[i].g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));savePlate();render(true)}}});
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='qs'){ui.qs=t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML();const cb=document.querySelector('.searchbox .clear');if(cb)cb.hidden=!t.value}
@@ -1130,13 +1149,13 @@ document.addEventListener('click',e=>{
     const i=ui.plate.findIndex(x=>x.id===id),row=b.closest('.row');
     if(i>=0){ui.plate.splice(i,1);row.classList.remove('sel');b.setAttribute('aria-pressed','false')}
     else{ui.plate.push({id,p:defP(id)});row.classList.add('sel');b.setAttribute('aria-pressed','true')}
-    updateBar();
+    savePlate();updateBar();
   }
   else if(a==='clearq'){ui.qs='';ui.page=0;const q=document.getElementById('qs');q.value='';document.getElementById('list').innerHTML=listHTML();b.hidden=true;q.focus()}
   else if(a==='info'){openDetail(id)}
-  else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}render(true)}
+  else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}savePlate();render(true)}
   else if(a==='openPlate'){ui.view='plate';render()}
-  else if(a==='clearBar'){ui.plate=[];document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
+  else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
   else if(a==='back'){if(navDepth>0){history.back()}else{ui.view='list';ui.msg='';render()}}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
   else if(a==='home'){ui.tab='calc';ui.view='list';ui.sel=null;ui.qs='';ui.cat=-1;ui.page=0;ui.msg='';ui.resetArmed=false;ui.delArmed=false;render()}
@@ -1147,14 +1166,14 @@ document.addEventListener('click',e=>{
   else if(a==='gdisc'){gDisconnect()}
   else if(a==='gdelonline'){if(!ui.delArmed){ui.delArmed=true;render(true);return}ui.delArmed=false;gDeleteOnline()}
   else if(a==='pg'){ui.page=Math.max(0,(ui.page||0)+(+b.dataset.d));document.getElementById('list').innerHTML=listHTML();window.scrollTo(0,0)}
-  else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;render(true)}
-  else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);if(!ui.plate.length)ui.view='list';render(true)}
-  else if(a==='clearPlate'){ui.plate=[];ui.view='list';ui.note='';ui.ress=7;render()}
+  else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;savePlate();render(true)}
+  else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);savePlate();if(!ui.plate.length)ui.view='list';render(true)}
+  else if(a==='clearPlate'){ui.plate=[];savePlate();ui.view='list';ui.note='';ui.ress=7;render()}
   else if(a==='saveEntry'){
     const items=plateItems();if(!items.length)return;
     const r=scoreOf(items,ui);
     store.entries.push({id:Date.now(),ts:Date.now(),items:items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0})),r:ui.ress,quest:ui.quest,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
-    save();ui.plate=[];ui.view='list';ui.note='';ui.ress=7;ui.tab='journal';render();
+    save();ui.plate=[];savePlate();ui.view='list';ui.note='';ui.ress=7;ui.tab='journal';render();
   }
   else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
   else if(a==='cancelEdit'){ui.editId=null;render(true)}
@@ -1172,7 +1191,7 @@ document.addEventListener('click',e=>{
     save();ui.qs='';ui.msg='';openDetail(nid);
   }
   else if(a==='delFood'){
-    store.del=store.del||{};store.del[id]=Date.now();store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);save();ui.view='list';render();
+    store.del=store.del||{};store.del[id]=Date.now();store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);savePlate();save();ui.view='list';render();
   }
   else if(a==='flag'){
     const v=b.dataset.v;store.flags=store.flags||{};
@@ -1222,7 +1241,7 @@ document.addEventListener('click',e=>{
       restored.ep=Date.now();
       restored.mt=Date.now();
       store=restored;
-      ui.plate=[];ui.view='list';ui.editId=null;
+      ui.plate=[];savePlate();ui.view='list';ui.editId=null;
       save();applyTheme();ui.msg='Sauvegarde restaurée.';
     }catch(err){
       ui.msg=err&&err.message==='backup-too-large'
@@ -1233,7 +1252,7 @@ document.addEventListener('click',e=>{
   }
   else if(a==='reset'){
     if(!ui.resetArmed){ui.resetArmed=true;render(true);return}
-    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];ui.resetArmed=false;ui.msg='Données effacées.';render(true);
+    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];savePlate();ui.resetArmed=false;ui.msg='Données effacées.';render(true);
   }
 });
 
