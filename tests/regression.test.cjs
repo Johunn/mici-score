@@ -50,7 +50,7 @@ test('app shell loads the scoring module before its inline code', () => {
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v23';/);
+  assert.match(swSource, /const CACHE='mici-score-v24';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
