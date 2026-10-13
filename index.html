@@ -389,7 +389,7 @@ const GOOGLE_CLIENT_ID='953065605103-h9vk0soc9sm2qi01t6gemuolst0hs51n.apps.googl
 const G_SCOPE='openid email https://www.googleapis.com/auth/drive.appdata';
 const G_FILE='mici-score.json';
 const cid=()=>GOOGLE_CLIENT_ID||(function(){try{return localStorage.getItem('mici:cid')||''}catch(e){return ''}})();
-const gs={tok:null,exp:0,client:null,busy:false,again:false,st:'',timer:null,last:0};
+const gs={tok:null,exp:0,client:null,busy:false,again:false,st:'',timer:null,last:0,session:0};
 const dataHash=()=>JSON.stringify([store.custom,store.entries,store.over,store.sens,store.prof,store.mods,store.flags,store.del]);
 let _h=dataHash(),_applying=false;
 function save(){
@@ -552,35 +552,51 @@ function errText(e){
   return 'Synchronisation impossible (hors ligne ou service injoignable). Tes données restent sur cet appareil.';
 }
 async function syncNow(interactive){
-  if(!cid())return;
+  if(!cid()||(!interactive&&!store.acct&&!gs.tok))return;
   if(!navigator.onLine&&!interactive){setSt('Hors ligne : synchronisation en attente.');return}
   if(gs.busy){gs.again=true;return}
   gs.busy=true;setSt('Synchronisation…');
+  const session=gs.session;
   try{
     const tok=await getToken(!!interactive);
+    if(session!==gs.session)return;
     /* Vérifier le compte avant de lire, fusionner ou écrire la sauvegarde Drive. */
     const email=await verifyGoogleAccount(tok);
+    if(session!==gs.session)return;
     let id=await findFile(tok),R=null;
+    if(session!==gs.session)return;
     if(id){
       const raw=await (await gapi(tok,'/drive/v3/files/'+id+'?alt=media')).text();
+      if(session!==gs.session)return;
       try{R=JSON.parse(raw)}catch(e){R=null}
       if(!R||R.app!=='mici-score'||!Array.isArray(R.entries))throw new Error('bad');
     }
+    if(session!==gs.session)return;
     const L=snap(),M=R?mergeSnap(L,R):L;
     if(R&&!store.onb&&((R.entries||[]).length||(R.custom||[]).length||Object.keys(R.over||{}).length)){store.onb=true;hideOnb()}
     else if(!R&&freshStore())setTimeout(maybeOnb,0);
     if(R&&sig(M)!==sig(L)){
+      if(session!==gs.session)return;
       try{localStorage.setItem(KEY+':avant-synchro',JSON.stringify(store))}catch(e){}
       _applying=true;
       store.ep=M.ep;store.mt=M.mt;store.custom=M.custom;store.entries=M.entries;store.over=M.over;store.sens=M.sens;store.prof=M.prof;store.mods=M.mods;store.flags=M.flags;store.del=M.del;
       savePlate();save();_applying=false;
     }
-    if(!R||sig(M)!==sig(R))await putFile(tok,id,M);
+    if(session!==gs.session)return;
+    if(!R||sig(M)!==sig(R)){
+      await putFile(tok,id,M);
+      if(session!==gs.session)return;
+    }
+    if(session!==gs.session)return;
     gs.last=Date.now();store.acct={email:email||'',last:gs.last};save();
     gs.st='';
     if(R&&sig(M)!==sig(L)){ui.msg='Données synchronisées depuis ton Drive.'}
-  }catch(e){gs.st=errText(e)}
-  finally{gs.busy=false;refreshGbar();if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);if(gs.again){gs.again=false;setTimeout(()=>syncNow(false),500)}}
+  }catch(e){if(session===gs.session)gs.st=errText(e)}
+  finally{
+    gs.busy=false;refreshGbar();
+    if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);
+    if(gs.again){gs.again=false;if(store.acct&&cid())setTimeout(()=>syncNow(false),500)}
+  }
 }
 function schedSync(){
   if(!store.acct||!cid())return;
@@ -588,21 +604,36 @@ function schedSync(){
 }
 function gDisconnect(){
   ui.gmenu=false;
+  gs.session++;
+  if(gs.timer){clearTimeout(gs.timer);gs.timer=null}
+  gs.again=false;
   const t=gs.tok;gs.tok=null;gs.exp=0;
   try{if(t&&window.google&&google.accounts&&google.accounts.oauth2)google.accounts.oauth2.revoke(t,()=>{})}catch(e){}
   store.acct=null;save();gs.st='';ui.msg='Déconnecté. Tes données restent sur cet appareil et dans ton Drive.';render(true);
 }
 async function gDeleteOnline(){
+  if(gs.busy){gs.st='Une opération Google est déjà en cours. Attends qu’elle se termine.';render(true);return}
+  if(gs.timer){clearTimeout(gs.timer);gs.timer=null}
+  gs.again=false;
   gs.busy=true;setSt('Suppression en ligne…');
+  const session=gs.session;
   try{
     const tok=await getToken(true);
+    if(session!==gs.session)return;
     /* Ne jamais supprimer un fichier Drive avant d'avoir vérifié le compte autorisé. */
     await verifyGoogleAccount(tok);
+    if(session!==gs.session)return;
     let id,n=0;
-    while((id=await findFile(tok))&&n<5){await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'});n++}
+    while((id=await findFile(tok))&&n<5){
+      if(session!==gs.session)return;
+      await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'});
+      if(session!==gs.session)return;
+      n++;
+    }
+    if(session!==gs.session)return;
     gs.st='';ui.msg=n?'Données en ligne supprimées. Une prochaine synchronisation les recréera : déconnecte-toi pour l\u2019éviter.':'Aucune donnée en ligne trouvée.';
-  }catch(e){gs.st=errText(e)}
-  finally{gs.busy=false;render(true)}
+  }catch(e){if(session===gs.session)gs.st=errText(e)}
+  finally{gs.busy=false;gs.again=false;refreshGbar();render(true)}
 }
 function statusText(){
   if(gs.st)return gs.st;
@@ -789,7 +820,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v40';
+const APP_V='v41';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
