@@ -312,7 +312,7 @@ function makeCoreHarness() {
   vm.createContext(sandbox);
   new vm.Script(
     coreEngineSource +
-    '\nglobalThis.miciScoreCore = { FEATS, PF, FOODS, store, levels, penalty, rawScore, single, scoreOf, refG, pfOf, effL, profMul, K, BW, UW };',
+    '\nglobalThis.miciScoreCore = { FEATS, PF, RAW, FOODS, store, levels, penalty, rawScore, single, scoreOf, refG, pfOf, effL, profMul, K, BW, UW };',
     { filename: 'index.html:score-core' }
   ).runInContext(sandbox);
   return sandbox.miciScoreCore;
@@ -333,6 +333,9 @@ function makeFood(id, L, extra = {}) {
 test('score core loads and parses a large, valid food catalogue', () => {
   const core = makeCoreHarness();
   assert.ok(core.FOODS.length >= 450, 'unexpectedly few foods parsed');
+  const rawRows = core.RAW.reduce((total, row) => total + row[1].length, 0);
+  assert.equal(core.FOODS.length, rawRows,
+    'one or more food catalogue rows were silently skipped during parsing');
   const ids = new Set();
   for (const food of core.FOODS) {
     assert.ok(food.id && typeof food.id === 'string');
