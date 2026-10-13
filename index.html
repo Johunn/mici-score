@@ -215,7 +215,7 @@ body[data-layout="cartes"] .row .info{position:absolute;top:0;right:0;width:40px
 'use strict';
 
 /*CORE_START*/
-// Caractéristiques : g gras, l lactose, f fibres insolubles, h fermentescibles (gaz), e épices/acidité, s stimulants, c sucres concentrés ; b = bonus épaississant
+// Niveaux bruts : 0–3 en général ; certaines estimations de plats composés atteignent 4. Le calcul plafonne chaque caractéristique à 4.
 const FEATS=[
  {k:'g',n:'Gras',w:1.2,d:'Friture, crème, beurre, fromages gras',ev:"Opinion d'expert",sr:"Hull NHS (fiche poche, guide patient) : viandes riches en graisses, aliments transformés (« Processed products and meats high in fat may make diarrhoea worse ») et poissons gras (« Oily fish such as mackerel, sardines may make diarrhoea worse ») peuvent aggraver la diarrhée ; la revue d'Ardalan (2020) juge raisonnable d'éviter un apport élevé en graisses (extrait partiel, raisonnement physiologique) ; une revue systématique 2024 sur l'alimentation en poche conclut à des résultats contradictoires et à l'absence de recommandations fondées sur les preuves. Aucun seuil de quantité. Le lien gras → acides biliaires → selles avec poche : preuve insuffisante."},
  {k:'l',n:'Lactose',w:1.5,d:'Lait, crème, fromages frais, glaces',ev:"Guides patients",sr:"CCUK : la RCH n'a pas plus d'intolérance au lactose que la population générale ; en parler à l'équipe avant de supprimer. Test personnel utile."},
@@ -794,7 +794,7 @@ const PROF={poche:{f:0.8,o:0.3},general:{}};   // o = poids des oligosaccharides
 const UW=0.3;       // additifs / ultra-transformés : estimation arbitraire, preuve faible
 const oMul=()=>{const o=(PROF[store.prof]||{}).o;return o==null?1:o};
 const effL=(f,i,lv)=>f.k==='h'?lv.L[i]-(lv.ho||0)*(1-oMul()):lv.L[i];
-const RULES={R0:'non classé (50 % oligosaccharides / 50 % fructose-polyols par défaut)',R1:'fructanes (alliacées, artichaut, asperge)',R2:'GOS (légumineuses, pistache, cajou)',R3:'raffinose/fructanes (crucifères, betterave)',R4:'fructanes du blé',R5:'polyols (mannitol/sorbitol)',R6:'fructose en excès/polyols (fruits)',R7:'fructose/polyols ajoutés',RO:'poids calibré sur ton vécu, conservé tel quel',RC:'plat composé estimé : somme des ingrédients en portions réalistes (voir composition), niveaux plafonnés à 3',U1:'boisson sucrée ou édulcorée',U2:'aliment ultra-transformé typique',U3:'catégorie snacks'};
+const RULES={R0:'non classé (50 % oligosaccharides / 50 % fructose-polyols par défaut)',R1:'fructanes (alliacées, artichaut, asperge)',R2:'GOS (légumineuses, pistache, cajou)',R3:'raffinose/fructanes (crucifères, betterave)',R4:'fructanes du blé',R5:'polyols (mannitol/sorbitol)',R6:'fructose en excès/polyols (fruits)',R7:'fructose/polyols ajoutés',RO:'poids calibré sur ton vécu, conservé tel quel',RC:'plat composé estimé : somme des ingrédients en portions réalistes (voir composition) ; certains niveaux bruts dépassent 3, le calcul les plafonne à 4',U1:'boisson sucrée ou édulcorée',U2:'aliment ultra-transformé typique',U3:'catégorie snacks'};
 const MODS={sten:{f:1.5}};
 const profMul=k=>((PROF[store.prof]||{})[k]||1)*((store.mods&&store.mods.sten&&MODS.sten[k])||1);
 const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
@@ -870,7 +870,7 @@ function validateBackup(p){
   if(p.custom&&p.custom.length>1000)fail();
 
   const custom=(p.custom||[]).map(f=>{
-    if(!record(f)||!id(f.id)||!text(f.n,200,true)||!Number.isInteger(f.c)||f.c<0||f.c>=CATS.length||!arrNums(f.L,7,0,4)||!num(f.b,0,2))fail();
+    if(!record(f)||!id(f.id)||!text(f.n,200,true)||!Number.isInteger(f.c)||f.c<0||f.c>=CATS.length||!arrNums(f.L,7,0,3)||!num(f.b,0,2))fail();
     const o={id:f.id,n:f.n.trim(),c:f.c,L:f.L.slice(),b:f.b};
     if(f.obs!==undefined){if(typeof f.obs!=='boolean')fail();o.obs=f.obs}
     ['ho','u'].forEach(k=>{if(f[k]!==undefined){if(!num(f[k],0,4))fail();o[k]=f[k]}});
@@ -1415,8 +1415,8 @@ function detailHTML(){
   <p style="margin-top:14px"><button class="btn block" data-act="addDetail" data-id="${esc(f.id)}">${inPlate?'Retirer de l\u2019assiette':'Ajouter à l\u2019assiette'}</button></p>
   ${ui.msg?`<p class="small good" role="status">${esc(ui.msg)}</p>`:''}
   <div class="card"><h3>Caractéristiques</h3>
-    <p class="muted small">Niveau de 0 à 3 pour une portion normale.</p>
-    ${FEATS.map((ft,i)=>`<div class="meter"><span class="nm">${ft.n}</span><span class="bar"><i style="width:${f.L[i]/3*100}%"></i></span><span class="v">${fmt(f.L[i])}</span></div>`).join('')}
+    <p class="muted small">Niveaux estimés de 0 à 4. Les aliments simples sont généralement notés de 0 à 3 ; certains plats composés peuvent atteindre 4.</p>
+    ${FEATS.map((ft,i)=>`<div class="meter"><span class="nm">${ft.n}</span><span class="bar"><i style="width:${Math.min(100,f.L[i]/4*100)}%"></i></span><span class="v">${fmt(f.L[i])}</span></div>`).join('')}
     ${f.ho>0?`<p class="small muted" style="margin:6px 0 0">Dont oligosaccharides : ${fmt(f.ho)} (poids ${fmt(oMul())} dans ce profil) · gaz possibles. Fructose/polyols : hypothèse à tester, non démontrée.</p>`:''}
     ${f.u>0?`<p class="small muted" style="margin:6px 0 0">Additifs / ultra-transformés : niveau ${fmt(f.u)} (estimation, preuve faible, poids 0,3).</p>`:''}
     ${attentionHTML(levels([{f,p:1}],{}))}
@@ -1569,7 +1569,7 @@ function sourcesHTML(){
     <p class="small">Le MICI Score est une estimation personnelle de la tolérance digestive, construite pour une rectocolite avec poche en J. Ce n'est ni un diagnostic, ni un traitement, ni un avis médical. Il n'a pas été validé cliniquement. Tes notes du journal priment toujours sur la grille.</p>
     <p class="small muted">Cet onglet explique d'où viennent les chiffres, pour qu'un médecin ou un diététicien puisse les vérifier et les corriger.</p></div>
   <div class="card"><h3>1. Comment le score est calculé</h3>
-    <p class="small">Chaque aliment a des niveaux de 0 à 3 (par demi-point) pour des caractéristiques. Pénalité = somme(poids × ta sensibilité × multiplicateur du profil × niveau) + 0,3 × additifs − 0,5 × bonus épaississant (minimum 0). Score = 10 × exp(−pénalité / 9), donc entre 0 et 10 (10 = très bien toléré). La forme exponentielle évite que tous les plats gras tombent à 0 ; elle et le diviseur 9 sont arbitraires.</p>
+    <p class="small">Les niveaux des aliments simples vont généralement de 0 à 3 (par demi-point). Certaines valeurs de plats composés sont des estimations agrégées pouvant atteindre 4 ; le calcul plafonne chaque caractéristique à 4. Pénalité = somme(poids × ta sensibilité × multiplicateur du profil × niveau) + 0,3 × additifs − 0,5 × bonus épaississant (minimum 0). Score = 10 × exp(−pénalité / 9), donc entre 0 et 10 (10 = très bien toléré). La forme exponentielle évite que tous les plats gras tombent à 0 ; elle et le diviseur 9 sont arbitraires.</p>
     <p class="small muted">Poids en grammes : le facteur est poids saisi / poids de référence de la portion normale, plafonné entre ×0,1 et ×3. Références tirées de la table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé ; seules les valeurs filet de poulet 160 g et croque-monsieur 135 g ont été revérifiées, les autres restent à vérifier) pour œuf 50 g, jambon cuit 45 g, fromage fondu 20 g, fromage en tranche 25 g, filet de poulet 160 g, saumon 180 g, darne de cabillaud 175 g, riz cuit 150 g, frites 250 g, lasagnes 400 g, croque-monsieur 135 g, croissant 50 g, pomme 140 g, banane 130 g, mayonnaise et ketchup en cuillère 25 g ; le pain (80 g, trois tranches) et la demi-baguette (130 g) en sont déduits ; les autres références (légumes 150 g, viandes 120 g, boissons 200 g, etc.) sont des estimations sans source. Portion : trace ×0,3 (sauces et condiments, par défaut dans l'assiette), petite ×0,6, normale ×1, grosse ×1,5. Questran pris : gras ×0,75. À jeun : lactose ×1,3. Les niveaux d'une assiette s'additionnent (plafonnés à 4) : un sandwich de 6 ingrédients compte donc 6 portions, d'où des scores très bas si les portions ne sont pas réduites. Les poids affichés sous Trace, Petite, Normale et Grosse dans l'assiette sont la référence de la portion normale multipliée par le coefficient (arrondis à 5 g) : ce sont des estimations. Ces ajustements sont arbitraires.</p>
     <p class="small muted">Lecture : 6 ou plus généralement bien toléré ; 4 à 6 à adapter ; moins de 4 plusieurs points d'attention. Seuils abaissés parce que l'ancienne échelle (7 et 5, gras à 2,0, diviseur 6,5) classait 90 % des plats en rouge : elle était calibrée sur de mauvais repas seulement. Ces seuils ne sont pas validés. Le score affiché combine l'estimation et ta moyenne personnelle quand tu as des notes.</p></div>
   <div class="card"><h3>2. Caractéristiques, poids et niveau de preuve</h3>
