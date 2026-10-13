@@ -99,7 +99,9 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
   assert.deepEqual(sandbox.store.plate, expected);
   sandbox.store = JSON.parse(values.get('mici:v2'));
   assert.deepEqual(copy(sandbox.platePersistenceTest.loadPlate()), expected);
-  assert.match(html, /plate:loadPlate\(\)/);\n  assert.match(html, /plate:Array\.isArray\(p\.plate\)\?p\.plate:null/);\n  assert.match(html, /const txt=JSON\.stringify\(Object\.assign\(\{},store,\{acct:null,plate:undefined\}\)\)/);
+  assert.match(html, /plate:loadPlate\(\)/);
+  assert.match(html, /plate:Array\.isArray\(p\.plate\)\?p\.plate:null/);
+  assert.match(html, /const txt=JSON\.stringify\(Object\.assign\(\{},store,\{acct:null,plate:undefined\}\)\)/);
   assert.match(html, /savePlate\(\);updateBar\(\)/);
   assert.match(html, /ui\.plate\[i\]\.g=.*?;savePlate\(\);render\(true\)/);
 });
