@@ -25,7 +25,7 @@ Aucun aliment n'est interdit. Un `*` indique un score corrigé par toi.
 
 ## Calcul
 
-Chaque aliment est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactose, fibres insolubles, oligosaccharides, fructose et polyols, épices et acidité, stimulants, sucres concentrés, additifs), avec un bonus épaississant. La pénalité est la somme pondérée de ces niveaux ; le score vaut `10 × exp(−pénalité / 9)`. Les poids, les coefficients de portion, les seuils de couleur et le diviseur sont des **choix arbitraires** ; les niveaux par aliment sont des estimations. Aucun score alimentaire validé n'existe pour la rectocolite ou la poche. Détail et niveaux de preuve dans l'onglet Sources de l'appli.
+Chaque aliment simple est noté de 0 à 3 sur plusieurs caractéristiques (gras, lactose, fibres insolubles, oligosaccharides, fructose et polyols, épices et acidité, stimulants, sucres concentrés, additifs), avec un bonus épaississant. Certaines valeurs de plats composés sont des estimations agrégées qui peuvent atteindre 4 ; le calcul plafonne chaque caractéristique à 4. Les aliments personnalisés restent notés de 0 à 3. La pénalité est la somme pondérée de ces niveaux ; le score vaut `10 × exp(−pénalité / 9)`. Les poids, les coefficients de portion, les seuils de couleur et le diviseur sont des **choix arbitraires** ; les niveaux par aliment sont des estimations. Aucun score alimentaire validé n'existe pour la rectocolite ou la poche. Détail et niveaux de preuve dans l'onglet Sources de l'appli.
 
 ## Installation sur Android
 
@@ -41,19 +41,30 @@ Pastille « Se connecter » en haut de l'appli ou Profil > « Compte Google et s
 
 ## Données
 
-Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est envoyé aux serveurs de l'éditeur. Le script de connexion de Google (Google Identity Services) est chargé quand tu ouvres l'onglet Profil : Google voit alors ton adresse IP, même sans connexion. Avec le compte, une copie est aussi dans ton Drive (voir ci-dessus). Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
+Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est envoyé aux serveurs de l'éditeur. Le script de connexion de Google (Google Identity Services) est chargé quand tu ouvres l'onglet Profil : Google voit alors ton adresse IP, même sans connexion. Avec le compte, une copie est aussi dans ton Drive (voir ci-dessus). Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Si le navigateur bloque le presse-papiers, l'appli affiche la sauvegarde pour une copie manuelle. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la. L'assiette en cours est conservée localement sur cet appareil (dans les données du navigateur et dans un brouillon distinct) pour permettre de reprendre après un rechargement ; elle n'est pas incluse dans la sauvegarde exportée ni dans la synchronisation Google Drive. Après une synchronisation Google qui supprime un aliment personnalisé sur un autre appareil, cet aliment est retiré du brouillon local s’il n’existe plus. Le brouillon de l’assiette reste exclu des exports et de Drive.
 
-## Contenu du dépôt
+## Structure du dépôt
 
-- `index.html` : toute l'application (données et code embarqués)
-- `fonts/` : polices Bricolage Grotesque, Figtree et Montserrat hébergées avec l'appli (licence SIL OFL 1.1, textes dans `fonts/licences/`) : aucune requête vers Google Fonts
-- `manifest.webmanifest`, `sw.js`, `icons/` : installation et mode « réseau d'abord » (le service worker ignore les requêtes vers d'autres sites)
-- `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google
-- `LISEZ-MOI.txt` : notes d'installation
+- `index.html` : interface, journal local, sauvegarde et intégration Google.
+- `score-core.js` : catalogue des aliments et moteur de calcul des scores. Il est chargé par `index.html` et mis en cache par le service worker pour rester disponible hors ligne.
+- `sw.js`, `manifest.webmanifest`, `icons/` : installation PWA et cache « réseau d'abord » ; le service worker ignore les requêtes vers d'autres sites.
+- `tests/regression.test.cjs` : tests de régression sur le chargement, le calcul, la validation des sauvegardes, l'assiette conservée localement, OAuth et le cache.
+- `.github/workflows/regression-tests.yml` : lance automatiquement les tests lors des pull requests et des pushs sur les branches prévues.
+- `fonts/` : polices Bricolage Grotesque, Figtree et Montserrat hébergées avec l'appli (licence SIL OFL 1.1, textes dans `fonts/licences/`) : aucune requête vers Google Fonts.
+- `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google.
+- `LISEZ-MOI.txt` : notes d'installation.
+
+## Tests locaux
+
+Avec Node.js 24 installé, lance depuis la racine du dépôt :
+
+```sh
+node --test tests/regression.test.cjs
+```
 
 ## Mise à jour
 
-Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée discrètement en haut à gauche de l'écran et en bas de l'onglet Profil. Le journal n'est pas touché.
+Les fichiers de l'application doivent être publiés ensemble à la racine du dépôt : `index.html`, `score-core.js` et `sw.js` (avec les autres ressources déjà présentes). Le cache du service worker doit être incrémenté lorsqu'un changement de ressources nécessite de forcer le renouvellement hors ligne. Après le déploiement GitHub Pages, vérifie la version affichée en haut à gauche et dans Profil. Les fichiers de code ne modifient pas directement le journal enregistré dans le navigateur ; teste tout de même une sauvegarde avant une mise à jour importante.
 
 ## Limites
 

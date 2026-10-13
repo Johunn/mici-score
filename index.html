@@ -32,6 +32,11 @@
 :root[data-theme="amoled"]{--bg:#000000;--surface:#0E0E0E;--ink:#F5F5F5;--muted:#9A9A9A;--line:#262626;--accent:#5EEAD4;--on-accent:#00120F;--good:#5FBF86;--mid:#E0B04F;--bad:#E2756D}
 :root[data-theme="mici"]{--bg:#FFF7F1;--surface:#FFFFFF;--ink:#2B1740;--muted:#6B5F78;--line:#E6D9E2;--accent:#512178;--on-accent:#FFFFFF;--hi:#BF9F00;--good:#2F7D4F;--mid:#8A6A00;--bad:#B23A32;--f-display:'Montserrat',system-ui,sans-serif;--f-body:'Montserrat',system-ui,sans-serif}
 :root[data-theme="micinuit"]{--bg:#160D21;--surface:#231433;--ink:#F3EBF8;--muted:#B8A7C8;--line:#3A2750;--accent:#E0BE1A;--on-accent:#1A0F26;--hi:#E0BE1A;--good:#5FBF86;--mid:#E0B04F;--bad:#E2756D;--f-display:'Montserrat',system-ui,sans-serif;--f-body:'Montserrat',system-ui,sans-serif}
+/* Harmonise les menus natifs avec le thème : évite le texte clair sur fond blanc. */
+:root{color-scheme:light}
+:root[data-theme="dark"],:root[data-theme="ocean"],:root[data-theme="charbon"],:root[data-theme="amoled"],:root[data-theme="micinuit"]{color-scheme:dark}
+@media (prefers-color-scheme:dark){:root[data-theme="system"]{color-scheme:dark}}
+
 /* Fond Aurore : halos colorés + cartes en verre dépoli (thèmes sombres) */
 :root[data-theme="dark"],:root[data-theme="ocean"],:root[data-theme="charbon"],:root[data-theme="amoled"],:root[data-theme="micinuit"]{--glass:rgba(255,255,255,.07);--glassline:rgba(255,255,255,.12);--bf:blur(14px);--navbg:color-mix(in srgb,var(--surface) 75%,transparent)}
 :root[data-theme="micinuit"]{--g1:rgba(132,56,206,.62);--g2:rgba(224,190,26,.22);--g3:rgba(196,48,150,.34)}
@@ -62,6 +67,8 @@ button{cursor:pointer}
 .ibtn{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0;align-self:center}
 .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
 input[type=search],input[type=text],input[type=number],textarea,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--glass,var(--surface));color:var(--ink);font:inherit}
+select option{background-color:var(--surface);color:var(--ink)}
+
 input[type=number]::placeholder{color:var(--muted,var(--ink));opacity:.55}
 textarea{min-height:76px;resize:vertical}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 0 4px}
@@ -210,629 +217,21 @@ body[data-layout="cartes"] .row .info{position:absolute;top:0;right:0;width:40px
   <button data-tab="sources">Sources</button>
 </nav>
 
+<script src="score-core.js"></script>
 <script>
 (function(){
 'use strict';
 
-/*CORE_START*/
-// Caractéristiques : g gras, l lactose, f fibres insolubles, h fermentescibles (gaz), e épices/acidité, s stimulants, c sucres concentrés ; b = bonus épaississant
-const FEATS=[
- {k:'g',n:'Gras',w:1.2,d:'Friture, crème, beurre, fromages gras',ev:"Opinion d'expert",sr:"Hull NHS (fiche poche, guide patient) : viandes riches en graisses, aliments transformés (« Processed products and meats high in fat may make diarrhoea worse ») et poissons gras (« Oily fish such as mackerel, sardines may make diarrhoea worse ») peuvent aggraver la diarrhée ; la revue d'Ardalan (2020) juge raisonnable d'éviter un apport élevé en graisses (extrait partiel, raisonnement physiologique) ; une revue systématique 2024 sur l'alimentation en poche conclut à des résultats contradictoires et à l'absence de recommandations fondées sur les preuves. Aucun seuil de quantité. Le lien gras → acides biliaires → selles avec poche : preuve insuffisante."},
- {k:'l',n:'Lactose',w:1.5,d:'Lait, crème, fromages frais, glaces',ev:"Guides patients",sr:"CCUK : la RCH n'a pas plus d'intolérance au lactose que la population générale ; en parler à l'équipe avant de supprimer. Test personnel utile."},
- {k:'f',n:'Fibres insolubles',w:1.0,d:'Peaux, pépins, crudités, céréales complètes',ev:"Preuve insuffisante",sr:"ECCO : preuves insuffisantes pour des fibres hautes ou basses ; réduire les fibres de volume seulement en cas de sténose de Crohn avec symptômes obstructifs (déclaration 21.1, EL5 : aucune donnée, raisonnement mécanistique). Pas de limite générale (CCUK)."},
- {k:'h',n:'Fermentescibles (gaz)',w:1.0,d:'Oligosaccharides (oignon, ail, blé, légumineuses, chou) et fructose en excès / polyols (pomme, poire, champignon, édulcorants)',ev:"Opinion d'expert (oligosaccharides) / faible (fructose, polyols)",sr:"Oligosaccharides : aucun essai ; des guides patients de poche (Hull NHS, PENG, IA, Pouch Support) les associent à gaz, ballonnements et odeur, pas clairement à des selles plus liquides : poids 0,3, hypothèse à tester. Fructose/polyols : cibles du Monash Pouch Diet, hypothèse non démontrée. ECCO 2025 : low FODMAP recommandé pour symptômes de type SII en rémission, pas comme traitement de fond ; ECCO 2025, déclaration 25.1 (poche, EL4, consensus 100 %) : les fibres fermentescibles pourraient améliorer la fonction de la poche ; preuve insuffisante pour les fibres non fermentescibles ; les données citées sont de faible niveau et contradictoires (voir l'onglet Sources). Si le low FODMAP sert un jour pour un SII : temporaire, en phases, avec diététicien, jamais permanent."},
- {k:'e',n:'Épices et acidité',w:1.2,d:'Piment, moutarde, tomate, vinaigre, agrumes',ev:"Opinion d'expert",sr:"CCUK : certaines personnes tolèrent mal les plats épicés. Pas de preuve solide."},
- {k:'s',n:'Stimulants',w:1.3,d:'Café, alcool, boissons gazeuses',ev:"Opinion d'expert",sr:"CCUK : caféine, alcool, édulcorants peuvent aggraver la diarrhée. Alcool et poussées : preuves de faible qualité."},
- {k:'c',n:'Sucres concentrés',w:0.7,d:'Jus, confiture, sodas, bonbons',ev:"Opinion d'expert",sr:"Guides patients : limiter sucres et jus (1 petit verre de jus par jour). Pas de donnée spécifique poche."}
-];
-const BW=0.5;            // bonus par niveau d'épaississant
-const PF=[0.6,1,1.5,0.3];    // petite, normale, grosse, trace (sauce, garniture)
-const CATS=['Légumes','Fruits','Féculents et pains','Viandes et poissons','Œufs et produits laitiers','Légumineuses, noix et graines','Sauces et condiments','Graisses, épices et herbes','Boissons','Petit-déjeuner','Plats et restauration','Snacks et apéritif','Sandwichs','Desserts et sucré'];
-// format : "Nom|g,l,f,h,e,s,c,b" ; 3e champ "o" = calibré sur les retours de l'utilisateur
-const RAW=[
-[0,[
-"Carotte cuite|0,0,1,0,0,0,0.5,0",
-"Carotte crue|0,0,2,0.5,0,0,0,0||0.25;0;R0;",
-"Courgette cuite sans peau|0,0,0.5,0.5,0,0,0,0||0.25;0;R0;",
-"Courgette crue|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Aubergine grillée|1,0,1,0.5,0,0,0,0||0.25;0;R0;",
-"Potiron ou butternut cuit|0,0,0.5,1.5,0,0,0.5,0||0;0;R5;",
-"Potimarron cuit|0,0,0.5,0.5,0,0,0.5,0||0.25;0;R0;",
-"Haricots verts cuits|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Petits pois|0,0,2,2.5,0,0,0,0||2.25;0;R2;",
-"Épinards cuits|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Épinards crus|0,0,2,0.5,0,0,0,0||0.25;0;R0;",
-"Poireau cuit (blanc)|0,0,1,2,0,0,0,0||0;0;R6;",
-"Poireau cuit (vert)|0,0,1.5,0.5,0,0,0,0||0;0;R6;",
-"Oignon cuit|0,0,0.5,3,0,0,0,0|o|0;0;RO;",
-"Oignon cru|0,0,1,3,1,0,0,0||3;0;R1;",
-"Ail cuit|0,0,0,2,0.5,0,0,0||2;0;R1;",
-"Échalote|0,0,0.5,2.5,0.5,0,0,0||2.5;0;R1;",
-"Tomate crue|0,0,1.5,0.5,1.5,0,0,0||0.25;0;R0;",
-"Tomate cuite sans peau|0,0,0.5,0.5,1.5,0,0,0||0.25;0;R0;",
-"Concombre|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Poivron cru|0,0,2,1,0.5,0,0,0||0.5;0;R0;",
-"Poivron cuit|0,0,1.5,1,0.5,0,0,0||0.5;0;R0;",
-"Brocoli cuit|0,0,2,2.5,0,0,0,0||1.5;0;R3;",
-"Chou-fleur cuit|0,0,1.5,3,0,0,0,0||1.8;0;R3;",
-"Chou blanc ou rouge cru|0,0,2.5,2.5,0,0,0,0||1.5;0;R3;",
-"Chou cuit|0,0,2,2.5,0,0,0,0||1.5;0;R3;",
-"Choux de Bruxelles|0,0,2,3,0,0,0,0||1.8;0;R3;",
-"Pak choï|0,0,1,0.5,0,0,0,0||0.25;0;R0;",
-"Chou kale|0,0,2.5,1,0,0,0,0||0.6;0;R3;",
-"Fenouil cuit|0,0,1.5,1,0,0,0,0||0.5;0;R0;",
-"Céleri branche cru|0,0,2.5,2,0,0,0,0||0;0;R5;",
-"Céleri-rave cuit|0,0,1,1,0,0,0,0||0;0;R5;",
-"Artichaut|0,0,2,3,0,0,0,0||3;0;R1;",
-"Asperges|0,0,1.5,2.5,0,0,0,0||2.5;0;R1;",
-"Betterave cuite|0,0,1,2.5,0,0,0.5,0||1.5;0;R3;",
-"Radis|0,0,1.5,0.5,1,0,0,0||0.25;0;R0;",
-"Navet cuit|0,0,1,0.5,0,0,0,0||0.25;0;R0;",
-"Panais cuit|0,0,1,0.5,0,0,0.5,0||0.25;0;R0;",
-"Champignons de Paris cuits|0,0,1.5,3,0,0,0,0||0;0;R5;",
-"Salade verte (laitue)|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Roquette ou mâche|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Endive crue|0,0,1.5,1.5,0,0,0,0||0.75;0;R0;",
-"Endive cuite|0,0,1,1,0,0,0,0||0.5;0;R0;",
-"Maïs doux|0,0,2.5,1.5,0,0,0,0||0;0;R5;",
-"Patate douce cuite|0,0,1,1.5,0,0,0.5,0||0;0;R5;",
-"Olives|1.5,0,1,0.5,1,0,0,0||0.25;0;R0;",
-"Cornichons|0,0,1,0.5,2,0,0,0||0.25;0;R0;",
-"Soupe de légumes mixée|0,0,1,1,0,0,0,0||0.5;0;R0;",
-"Soupe de légumes avec morceaux|0,0,1.5,1,0,0,0,0||0.5;0;R0;",
-"Velouté de légumes à la crème|1.5,1,1,1.5,0,0,0,0||0.75;0;R0;",
-"Ratatouille|1.5,0,2,1.5,1,0,0,0||0.75;0;R0;",
-"Légumes grillés à l'huile|1.5,0,1.5,1,0,0,0,0||0.5;0;R0;",
-"Gratin de légumes|2.5,1.5,1,1,0,0,0,0||0.5;0;R0;",
-"Purée de légumes|0.5,0,0.5,0.5,0,0,0,0||0.25;0;R0;",
-"Salsifis ou crosnes|0,0,1.5,2,0,0,0,0||2;0;R1;",
-"Rhubarbe cuite|0,0,1,0.5,1.5,0,1.5,0||0.25;0;R0;",
-"Algues (nori, wakamé)|0,0,1,0.5,0,0,0,0||0.25;0;R0;",
-"Germes de soja|0,0,1.5,1,0,0,0,0||0.9;0;R2;",
-"Patisson ou courge spaghetti|0,0,0.5,0.5,0,0,0,0||0.4;0;R4;"
-]],
-[1,[
-"Banane bien mûre|0,0,0.5,1,0,0,0.5,1.5||0;0;R6;",
-"Banane pas mûre|0,0,1,0.5,0,0,0,1.5||0;0;R6;",
-"Pomme crue avec peau|0,0,2,2.5,0,0,1,0||0;0;R6;",
-"Pomme crue sans peau|0,0,1,2.5,0,0,1,0||0;0;R6;",
-"Pomme cuite sans peau|0,0,0.5,2,0,0,1,0.5||0;0;R6;",
-"Compote sans morceaux|0,0,0.5,2,0,0,1,0.5||0;0;R7;",
-"Compote allégée (polyols)|0,0,0.5,3,0,0,0.5,0||0;0;R7;",
-"Poire|0,0,2,3,0,0,1.5,0||0;0;R6;",
-"Pêche|0,0,1.5,2.5,0,0,1,0||0;0;R6;",
-"Nectarine|0,0,1.5,2.5,0,0,1,0||0;0;R6;",
-"Abricot frais|0,0,1.5,2,0,0,1,0||0;0;R6;",
-"Abricots secs|0,0,2.5,3,0,0,2,0||0;0;R6;",
-"Prune|0,0,1.5,3,0,0,1,0||0;0;R6;",
-"Cerises|0,0,1,3,0,0,1,0||0;0;R6;",
-"Raisin|0,0,1.5,1.5,0,0,1.5,0||0.75;0;R0;",
-"Fraises|0,0,2,0.5,0.5,0,0.5,0||0.25;0;R0;",
-"Framboises|0,0,3,0.5,0,0,0.5,0||0.25;0;R0;",
-"Myrtilles|0,0,2,0.5,0,0,0.5,0||0.25;0;R0;",
-"Mûres|0,0,3,3,0,0,0.5,0||0;0;R6;",
-"Melon|0,0,0.5,2,0,0,1,0||1;0;R0;",
-"Pastèque|0,0,0,3,0,0,1,0||0;0;R6;",
-"Orange|0,0,1.5,1,1.5,0,1,0||0.5;0;R0;",
-"Mandarine ou clémentine|0,0,1,1,1.5,0,1,0||0.5;0;R0;",
-"Pamplemousse|0,0,1.5,1,2.5,0,0.5,0||0.5;0;R0;",
-"Citron (jus)|0,0,0,0,2.5,0,0,0",
-"Kiwi|0,0,1.5,0.5,1.5,0,0.5,0||0.25;0;R0;",
-"Ananas|0,0,1,0.5,1.5,0,1,0||0.25;0;R0;",
-"Mangue|0,0,1,2.5,0,0,1.5,0||0;0;R6;",
-"Papaye|0,0,1,0.5,0,0,1,0||0.25;0;R0;",
-"Figue fraîche|0,0,2,2.5,0,0,1,0||0;0;R6;",
-"Figues sèches|0,0,3,3,0,0,2,0||0;0;R6;",
-"Dattes|0,0,2,3,0,0,2.5,0||0;0;R6;",
-"Pruneaux|0,0,2.5,3,0,0,2,0||0;0;R6;",
-"Raisins secs|0,0,2,2,0,0,2.5,0||1;0;R0;",
-"Grenade|0,0,2.5,1.5,0,0,1,0||0.75;0;R0;",
-"Avocat|2,0,1,2,0,0,0,0||0;0;R5;",
-"Litchi|0,0,0.5,3,0,0,1.5,0||0;0;R6;",
-"Fruit de la passion|0,0,2.5,1,1,0,0.5,0||0.5;0;R0;",
-"Salade de fruits frais|0,0,1.5,1.5,1,0,1,0||0.75;0;R0;",
-"Fruits au sirop (conserve)|0,0,0.5,1.5,0,0,2.5,0||0;0;R7;",
-"Coing cuit|0,0,1.5,1.5,0,0,1,0.5||0.75;0;R0;",
-"Cassis ou groseilles|0,0,2.5,1,1.5,0,0.5,0||0.5;0;R0;"
-]],
-[2,[
-"Riz blanc|0,0,0.5,0,0,0,0,1.5",
-"Riz complet|0,0,2.5,0.5,0,0,0,0||0.25;0;R0;",
-"Riz au lait|1,2.5,0,0,0,0,1.5,0",
-"Risotto au parmesan|2,1,0.5,1.5,0,0,0,0||0.75;0;R0;",
-"Pâtes blanches nature|0,0,0.5,1,0,0,0,0||0.8;0;R4;",
-"Pâtes complètes|0,0,2.5,1.5,0,0,0,0||1.2;0;R4;",
-"Pâtes à l'huile d'olive|1.5,0,0.5,1,0,0,0,0||0.8;0;R4;",
-"Pâtes au beurre|2,0.5,0.5,1,0,0,0,0||0.8;0;R4;",
-"Gnocchis|0.5,0,0.5,0.5,0,0,0,0.5||0.25;0;R0;",
-"Semoule de couscous|0,0,0.5,1,0,0,0,0.5||0.8;0;R4;",
-"Boulgour|0,0,2,1.5,0,0,0,0||1.2;0;R4;",
-"Quinoa cuit|0,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Polenta|0.5,0,0.5,0,0,0,0,1",
-"Pomme de terre vapeur sans peau|0,0,0.5,0,0,0,0,1",
-"Purée à l'eau|0,0,0.5,0,0,0,0,1",
-"Purée maison (lait, beurre)|1.5,1.5,0.5,0,0,0,0,0.5",
-"Pommes de terre au four avec peau|0.5,0,2,0.5,0,0,0,0.5||0;0;R6;",
-"Frites|3,0,1,0.5,0,0,0,0||0.25;0;R0;",
-"Pommes de terre sautées|2,0,1,0.5,0,0,0,0.5||0;0;R6;",
-"Gratin dauphinois|3,2.5,0.5,1,0,0,0,0||0.5;0;R0;",
-"Baguette ou pain blanc|0,0,0.5,1,0,0,0,0.5||0.8;0;R4;",
-"Pain de mie nature|0.5,0,0.5,1,0,0,0.5,0.5||0.8;0;R4;",
-"Pain complet|0,0,2.5,1.5,0,0,0,0||1.2;0;R4;",
-"Pain aux céréales ou graines|0.5,0,3,1.5,0,0,0,0||1.2;2;R4;U2",
-"Pain de seigle|0,0,2.5,2.5,0,0,0,0||2;0;R4;",
-"Pain sans gluten|0.5,0,0.5,0.5,0,0,0,0||0.4;0;R4;",
-"Pain au levain blanc|0,0,0.5,0.5,0,0,0,0.5||0.4;0;R4;",
-"Galettes de riz|0,0,0.5,0,0,0,0,1",
-"Tortilla ou wrap de blé|1,0,0.5,1.5,0,0,0,0||0.75;0;R0;",
-"Crêpe nature maison|1.5,1.5,0.5,1,0,0,1,0||0.5;0;R0;",
-"Vermicelles ou nouilles de riz|0,0,0.5,0,0,0,0,1",
-"Nouilles de blé|0.5,0,0.5,1,0,0,0,0||0.5;0;R0;",
-"Tapioca ou perles du Japon|0,0,0,0,0,0,0.5,1",
-"Semoule au lait|1,2.5,0,0.5,0,0,1.5,0||0.4;0;R4;",
-"Pâtes farcies (raviolis)|1.5,0.5,0.5,1.5,0,0,0,0||1.2;0;R4;",
-"Blé cuit (type Ebly)|0,0,2,1.5,0,0,0,0||1.2;0;R4;",
-"Pain pita|0.5,0,0.5,1,0,0,0,0.5||0.8;0;R4;"
-]],
-[3,[
-"Poulet grillé sans peau|0.5,0,0,0,0,0,0,0",
-"Poulet avec la peau|1.5,0,0,0,0,0,0,0",
-"Cuisse de poulet rôtie|2,0,0,0,0,0,0,0",
-"Escalope de dinde|0.5,0,0,0,0,0,0,0",
-"Bœuf haché 5 %|1,0,0,0,0,0,0,0",
-"Bœuf haché 15-20 %|2,0,0,0,0,0,0,0",
-"Steak grillé|1.5,0,0,0,0,0,0,0",
-"Entrecôte|2.5,0,0,0,0,0,0,0",
-"Rôti de bœuf maigre|1,0,0,0,0,0,0,0",
-"Bœuf bourguignon|2,0,0.5,1.5,0,0.5,0,0||0.75;0;R0;",
-"Escalope de veau|0.5,0,0,0,0,0,0,0",
-"Filet de porc|1,0,0,0,0,0,0,0",
-"Côte de porc|2,0,0,0,0,0,0,0",
-"Rôti de porc|1.5,0,0,0,0,0,0,0",
-"Gigot d'agneau|2.5,0,0,0,0,0,0,0",
-"Jambon blanc|0.5,0,0,0.5,0,0,0,0||0.25;0;R0;",
-"Jambon cru|1.5,0,0,0,0.5,0,0,0",
-"Lardons ou bacon|3,0,0,0,0,0,0,0",
-"Saucisse de porc|3,0,0,0.5,0.5,0,0,0||0.25;2;R0;U2",
-"Merguez|3,0,0,0.5,3,0,0,0||0.25;0;R0;",
-"Chorizo|3,0,0,0.5,2.5,0,0,0||0.25;0;R0;",
-"Saucisson sec|3,0,0,0,1,0,0,0",
-"Pâté ou rillettes|3,0,0,0.5,0,0,0,0||0.25;0;R0;",
-"Foie gras|3,0,0,0,0,0,0,0",
-"Boudin noir|2,0,0,1,0.5,0,0,0||0.5;0;R0;",
-"Andouillette|3,0,0,1,1,0,0,0||0.5;0;R0;",
-"Cabillaud ou colin vapeur|0,0,0,0,0,0,0,0",
-"Saumon cuit|1.5,0,0,0,0,0,0,0",
-"Truite|1,0,0,0,0,0,0,0",
-"Thon en boîte au naturel|0.5,0,0,0,0,0,0,0",
-"Thon à l'huile|2,0,0,0,0,0,0,0",
-"Sardines à l'huile|2,0,0,0,0,0,0,0",
-"Maquereau|2.5,0,0,0,0,0,0,0",
-"Crevettes cuites|0.5,0,0,0,0,0,0,0",
-"Moules (cuisson au vin blanc)|0.5,0,0,1.5,0,0.5,0,0||0.75;0;R0;",
-"Calamars frits|3,0,0,0.5,0,0,0,0||0.25;0;R0;",
-"Surimi|0.5,0,0,1,0,0,0.5,0||0.5;0;R0;",
-"Poisson pané|2,0,0.5,0.5,0,0,0,0||0.25;0;R0;",
-"Saumon fumé|1.5,0,0,0,0.5,0,0,0",
-"Huîtres|0,0,0,0,0,0,0,0",
-"Coquilles Saint-Jacques|0.5,0,0,0,0,0,0,0",
-"Canard (magret)|3,0,0,0,0,0,0,0",
-"Lapin|1,0,0,0,0,0,0,0",
-"Poulet rôti du commerce|2,0,0,1,0.5,0,0,0||0.5;0;R0;",
-"Cordon bleu|2.5,1,0.5,0.5,0,0,0,0||0.25;2;R0;U2",
-"Blanc de poulet pané|2.5,0,0.5,0.5,0,0,0,0||0.25;0;R0;",
-"Poisson blanc grillé à l'huile|1,0,0,0,0,0,0,0",
-"Foie de volaille|1,0,0,0,0,0,0,0",
-"Tripes ou abats|2,0,0,1,0,0,0,0||0.5;0;R0;",
-"Pâté crème (type Aoste)|3,0.25,0,0.5,0.25,0,0,0||0.25;1;R0;"
-]],
-[4,[
-"Œuf dur|1,0,0,0,0,0,0,0",
-"Œuf au plat|2,0,0,0,0,0,0,0",
-"Omelette nature|1.5,0,0,0,0,0,0,0",
-"Omelette au fromage|2.5,1,0,0,0,0,0,0",
-"Œufs brouillés (beurre, lait)|2,1,0,0,0,0,0,0",
-"Œuf poché ou à la coque|0.5,0,0,0,0,0,0,0",
-"Lait entier (verre 25 cl)|1,3,0,0,0,0,0,0",
-"Lait demi-écrémé (verre 25 cl)|0.5,3,0,0,0,0,0,0|o",
-"Lait sans lactose (verre 25 cl)|0.5,0,0,0,0,0,1,0",
-"Boisson à l'avoine|0.5,0,0.5,1,0,0,1,0||0.5;0;R0;",
-"Boisson à l'amande|0.5,0,0.5,0,0,0,0.5,0",
-"Boisson au soja|0.5,0,0.5,2,0,0,0.5,0||1.8;0;R2;",
-"Boisson au riz|0,0,0,0,0,0,1,0.5",
-"Yaourt nature|1,1,0,0,0,0,0,0",
-"Yaourt grec|2.5,0.5,0,0,0,0,0,0",
-"Yaourt aux fruits sucré|0.5,1,0,0.5,0,0,2,0||0.25;0;R0;",
-"Yaourt sans lactose|1,0,0,0,0,0,0,0",
-"Fromage blanc 0 %|0,1.5,0,0,0,0,0,0",
-"Fromage blanc entier|1.5,1.5,0,0,0,0,0,0",
-"Skyr|0,1,0,0,0,0,0,0",
-"Petit-suisse|1.5,1.5,0,0,0,0,1,0",
-"Crème fraîche épaisse 30 %|3,1.5,0,0,0,0,0,0",
-"Crème liquide|3,1.5,0,0,0,0,0,0",
-"Crème légère 15 %|1.5,1.5,0,0,0,0,0,0",
-"Beurre (fine couche)|1,0,0,0,0,0,0,0",
-"Beurre (tartine généreuse)|2.5,0,0,0,0,0,0,0",
-"Margarine (fine couche)|1,0,0,0,0,0,0,0",
-"Mozzarella|1.5,0.5,0,0,0,0,0,0",
-"Emmental ou gruyère|2,0,0,0,0,0,0,0",
-"Comté|2,0,0,0,0,0,0,0",
-"Parmesan râpé|1.5,0,0,0,0,0,0,0",
-"Camembert ou brie|2,0.5,0,0,0,0,0,0",
-"Reblochon|2.5,0.5,0,0,0,0,0,0",
-"Chèvre frais|1.5,1.5,0,0,0,0,0,0",
-"Chèvre affiné|2,0.5,0,0,0,0,0,0",
-"Feta|2,0.5,0,0,0.5,0,0,0",
-"Roquefort ou bleu|2.5,0.5,0,0,0.5,0,0,0",
-"Fromage à raclette|2.5,0.5,0,0,0,0,0,0",
-"Mascarpone|3,1.5,0,0,0,0,0,0",
-"Ricotta|1.5,2,0,0,0,0,0,0",
-"Fromage à tartiner (type Philadelphia)|2.5,1.5,0,0,0,0,0,0",
-"Fromage fondu en portion|2,1.5,0,0,0,0,0,0",
-"Fromage râpé|2,0.5,0,0,0,0,0,0",
-"Glace (boule)|1.5,2.5,0,0,0,0,2,0",
-"Crème dessert ou flan|1,2.5,0,0,0,0,2,0",
-"Mousse au chocolat|2.5,1.5,0,0,0,0.5,2,0||0;2;;U1",
-"Chantilly|3,1.5,0,0,0,0,1,0",
-"Sorbet|0,0,0,1,0,0,2.5,0||0.5;0;R0;",
-"Lait concentré sucré|1.5,3,0,0,0,0,3,0",
-"Kéfir|1,1,0,0.5,0,0,0,0||0.25;0;R0;"
-]],
-[5,[
-"Lentilles cuites|0,0,2.5,3,0,0,0,0||2.7;0;R2;",
-"Lentilles corail|0,0,1.5,2.5,0,0,0,0||2.25;0;R2;",
-"Pois chiches|0.5,0,2.5,3,0,0,0,0||2.7;0;R2;",
-"Houmous|2,0,1.5,3,0,0,0,0||2.7;0;R2;",
-"Haricots rouges|0,0,2.5,3,0,0,0,0||1.5;0;R0;",
-"Haricots blancs|0,0,2.5,3,0,0,0,0||1.5;0;R0;",
-"Flageolets|0,0,2.5,3,0,0,0,0||2.7;0;R2;",
-"Fèves|0,0,2.5,3,0,0,0,0||2.7;0;R2;",
-"Edamame|0.5,0,2,2,0,0,0,0||1.8;0;R2;",
-"Tofu ferme|0.5,0,0,0.5,0,0,0,0||0.25;0;R0;",
-"Tofu soyeux|0,0,0,2,0,0,0,0||1;0;R0;",
-"Tempeh|1,0,1,1,0,0,0,0||0.5;0;R0;",
-"Cacahuètes|2.5,0,2,1,0,0,0,0||0.5;0;R0;",
-"Beurre de cacahuète|3,0,1.5,1,0,0,0.5,0||0.5;0;R0;",
-"Amandes|2.5,0,2.5,2.5,0,0,0,0||1.25;0;R0;",
-"Noix|3,0,2,1,0,0,0,0||0.5;0;R0;",
-"Noisettes|2.5,0,2.5,2,0,0,0,0||1;0;R0;",
-"Noix de cajou|2.5,0,1,3,0,0,0,0||2.7;0;R2;",
-"Pistaches|2.5,0,2,3,0,0,0,0||2.7;0;R2;",
-"Noix de pécan|3,0,2,0.5,0,0,0,0||0.25;0;R0;",
-"Graines de chia|1,0,3,1,0,0,0,0||0.5;0;R0;",
-"Graines de lin|1.5,0,3,0.5,0,0,0,0||0.25;0;R0;",
-"Graines de sésame|2,0,3,0.5,0,0,0,0||0.25;0;R0;",
-"Graines de tournesol|2.5,0,2.5,0.5,0,0,0,0||0.25;0;R0;",
-"Noix de coco râpée|2.5,0,2.5,1,0,0,0,0||0.5;0;R0;",
-"Tahini (purée de sésame)|3,0,1.5,0.5,0,0,0,0||0.25;0;R0;",
-"Pois cassés|0,0,2.5,3,0,0,0,0||2.7;0;R2;",
-"Falafels|2.5,0,2,3,0,0,0,0||2.7;0;R2;",
-"Steak végétal (soja)|1.5,0,1,2,0,0,0,0||1.8;0;R2;",
-"Mélange de fruits secs et noix|2,0,2.5,2.5,0,0,2,0||0;0;R6;"
-]],
-[6,[
-"Oignon frit (croustillant)|2.5,0,0.5,2.5,0,0,0,0||2.5;1;R1;U2",
-"Ketchup|0,0,0,1,1.5,0,1.5,0||0.5;2;R0;U2",
-"Moutarde de Dijon|0,0,0,0,2.5,0,0,0",
-"Moutarde à l'ancienne|0,0,0.5,0,2.5,0,0,0",
-"Mayonnaise|2.5,0,0,0,0.5,0,0,0||0;2;;U2",
-"Mayonnaise allégée|1.5,0,0,0,1,0,0.5,0||0;2;;U2",
-"Sauce béarnaise|3,0.5,0,0.5,1,0,0,0||0.25;0;R0;",
-"Sauce hollandaise|3,0.5,0,0,0.5,0,0,0",
-"Sauce tomate nature maison|0.5,0,0.5,0.5,2,0,0,0||0.25;0;R0;",
-"Sauce tomate du commerce (oignon, ail)|1,0,0.5,2,2,0,1,0||2;0;R1;",
-"Sauce bolognaise|2,0,0.5,2,2,0,0,0||1;0;R0;",
-"Sauce arrabiata|1,0,0.5,2,3,0,0,0||1;0;R0;",
-"Pesto|3,0.5,0.5,2,0.5,0,0,0||1;0;R0;",
-"Sauce aux champignons et crème|2.5,1.5,0.5,2.5,0,0,0,0||0;0;R5;",
-"Béchamel|1.5,2.5,0,0.5,0,0,0,0||0.25;0;R0;",
-"Sauce au poivre à la crème|2.5,1.5,0,0,1.5,0,0,0",
-"Sauce quatre fromages|3,2,0,0,0,0,0,0",
-"Sauce carbonara (crème)|3,1.5,0,0.5,0,0,0,0||0.25;0;R0;",
-"Sauce barbecue|0,0,0,1,1.5,0,2,0||0.5;0;R0;",
-"Sauce soja|0,0,0,0.5,0.5,0,0,0||0.45;0;R2;",
-"Sauce teriyaki|0,0,0,1.5,0.5,0,2,0||0.75;0;R0;",
-"Sauce piquante (tabasco, sriracha)|0,0,0,0.5,3,0,0,0||0.25;0;R0;",
-"Harissa|0.5,0,0,1,3,0,0,0||0.5;0;R0;",
-"Wasabi|0,0,0,0,2.5,0,0,0",
-"Sauce samouraï|2.5,0,0,0.5,3,0,0,0||0.25;0;R0;",
-"Sauce andalouse|2.5,0,0,0.5,1.5,0,0,0||0.25;0;R0;",
-"Sauce curry|2.5,0,0,1,2,0,0,0||0.5;0;R0;",
-"Sauce aigre-douce|0,0,0,1,1,0,2.5,0||0.5;0;R0;",
-"Vinaigrette huile et vinaigre|2.5,0,0,0,1.5,0,0,0",
-"Vinaigrette à la moutarde|2,0,0,0,2,0,0,0",
-"Vinaigrette allégée|1,0,0,1,2,0,1,0||0;0;R7;",
-"Vinaigre balsamique|0,0,0,1,2,0,1,0||0.5;0;R0;",
-"Vinaigre|0,0,0,0,2.5,0,0,0",
-"Sauce César|3,1,0,1,1,0,0,0||0.5;0;R0;",
-"Tzatziki|1.5,2,0.5,1.5,0,0,0,0||0.75;0;R0;",
-"Guacamole|2,0,1,2.5,0.5,0,0,0||1.25;0;R0;",
-"Sauce tartare|2.5,0,0,0,1,0,0,0",
-"Aïoli|3,0,0,2,0,0,0,0||1;0;R0;",
-"Sauce au poisson (nuoc-mâm)|0,0,0,0.5,1,0,0,0||0.25;0;R0;",
-"Câpres|0,0,0.5,0,2,0,0,0",
-"Chutney|0,0,0.5,2,1.5,0,2,0||1;0;R0;",
-"Miso|0.5,0,0,1,0.5,0,0,0||0.5;0;R0;",
-"Bouillon cube|0.5,0,0,1.5,0.5,0,0,0||0.75;0;R0;",
-"Jus de viande ou gravy|1.5,0,0,1.5,0,0,0,0||0.75;0;R0;",
-"Sauce au vin rouge|1,0,0,1,0.5,1,0,0||0.5;0;R0;",
-"Coulis de fruits rouges|0,0,1.5,1,0.5,0,2,0||0.5;0;R0;",
-"Sauce aux champignons (sans crème)|1,0,0.5,2.5,0,0,0,0||0;0;R5;",
-"Sauce moutarde à la crème|2.5,1.5,0,0,2,0,0,0",
-"Sauce roquefort|3,1,0,0,0.5,0,0,0",
-"Pâte de curry rouge ou verte|1,0,0.5,1.5,3,0,0,0||0.75;0;R0;",
-"Sauce chili douce|0,0,0,1,1.5,0,2.5,0||0.5;0;R0;"
-]],
-[7,[
-"Huile d'olive (1 cuillère)|1.5,0,0,0,0,0,0,0",
-"Huile de tournesol ou colza|1.5,0,0,0,0,0,0,0",
-"Huile de coco|2,0,0,0,0,0,0,0",
-"Saindoux ou graisse animale|2.5,0,0,0,0,0,0,0",
-"Poivre noir|0,0,0,0,1,0,0,0",
-"Piment (frais ou en poudre)|0,0,0.5,0,3,0,0,0",
-"Paprika doux|0,0,0,0,0.5,0,0,0",
-"Paprika fort|0,0,0,0,2,0,0,0",
-"Curry en poudre|0,0,0,0.5,1.5,0,0,0||0.25;0;R0;",
-"Cumin|0,0,0,0,0.5,0,0,0",
-"Curcuma|0,0,0,0,0.5,0,0,0",
-"Cannelle|0,0,0,0,0.5,0,0,0",
-"Gingembre frais|0,0,0.5,0,1,0,0,0",
-"Noix de muscade|0,0,0,0,0.5,0,0,0",
-"Herbes de Provence|0,0,0,0,0,0,0,0",
-"Persil, coriandre, basilic frais|0,0,0.5,0,0,0,0,0",
-"Thym ou romarin|0,0,0,0,0,0,0,0",
-"Menthe|0,0,0,0,0.5,0,0,0",
-"Ciboulette|0,0,0,0.5,0,0,0,0||0.25;0;R0;",
-"Ail en poudre|0,0,0,2,0,0,0,0||2;0;R1;",
-"Oignon en poudre|0,0,0,2.5,0,0,0,0||2.5;0;R1;",
-"Sel|0,0,0,0,0,0,0,0",
-"Vanille|0,0,0,0,0,0,0,0",
-"Graines de moutarde|0,0,0.5,0,1.5,0,0,0",
-"Mélange d'épices cajun ou tex-mex|0,0,0,0.5,2,0,0,0||0.25;0;R0;"
-]],
-[8,[
-"Eau plate|0,0,0,0,0,0,0,0.5",
-"Eau gazeuse|0,0,0,1.5,0,1,0,0||0.75;0;R0;",
-"Thé noir nature|0,0,0,0,0,1.5,0,0",
-"Thé vert|0,0,0,0,0,1,0,0",
-"Infusion (verveine, camomille)|0,0,0,0,0,0,0,0",
-"Infusion de menthe|0,0,0,0,0.5,0,0,0",
-"Café noir|0,0,0,0,0,3,0,0|o",
-"Expresso|0,0,0,0,0,3,0,0",
-"Café au lait|0.5,2,0,0,0,2.5,0.5,0",
-"Café glacé au lait (25 cl)|0.5,2,0,0,0,2,0.5,0|o",
-"Café glacé au lait sans lactose (25 cl)|0.5,0,0,0,0,2,0.5,0",
-"Cappuccino|1,2,0,0,0,2.5,0.5,0",
-"Chocolat chaud au lait|1,2.5,0,0,0,1,2,0||0;2;;U1",
-"Cola|0,0,0,1,0,2.5,2.5,0||0.5;2;R0;U1",
-"Soda light (édulcorants)|0,0,0,1.5,0,2.5,0,0||0;2;R7;U1",
-"Limonade|0,0,0,1,0,1.5,2.5,0||0.5;2;R0;U1",
-"Jus d'orange|0,0,0,1,1.5,0,2.5,0||0.5;0;R0;",
-"Jus de pomme|0,0,0,3,0,0,2.5,0||0;0;R6;",
-"Jus de tomate|0,0,0,0.5,2,0,0.5,0||0.25;0;R0;",
-"Jus de raisin|0,0,0,1.5,0,0,3,0||0;0;R7;",
-"Smoothie aux fruits|0,0,1,2.5,1,0,2.5,0||1.25;0;R0;",
-"Boisson énergisante|0,0,0,1,0,3,2.5,0||0.5;2;R0;U1",
-"Boisson isotonique|0,0,0,0.5,0,0,1.5,0||0.25;0;R0;",
-"Solution de réhydratation orale|0,0,0,0,0,0,0,1.5",
-"Bouillon clair|0,0,0,0.5,0,0,0,0.5||0.25;0;R0;",
-"Bière blonde|0,0,0,2,0,2.5,0.5,0|o|0;0;RO;",
-"Bière sans alcool|0,0,0,2,0,1,0.5,0||1;0;R0;",
-"Vin rouge|0,0,0,0.5,0.5,2,0,0||0.25;0;R0;",
-"Vin blanc|0,0,0,0.5,1,2,0,0||0.25;0;R0;",
-"Champagne ou mousseux|0,0,0,1.5,1,2.5,0.5,0||0.75;0;R0;",
-"Cidre|0,0,0,2.5,0.5,2,1,0||1.25;0;R0;",
-"Spiritueux (whisky, vodka, rhum)|0,0,0,0,1,3,0,0",
-"Cocktail sucré|0,0,0,1,1,3,2.5,0||0.5;0;R0;",
-"Liqueur à la crème|2,1.5,0,0,0,2.5,2.5,0",
-"Pastis|0,0,0,0.5,0.5,3,0,0||0.25;0;R0;",
-"Eau pétillante aromatisée|0,0,0,1.5,0,1,0.5,0||0.75;0;R0;",
-"Thé glacé du commerce|0,0,0,0.5,0.5,1.5,2,0||0.25;0;R0;",
-"Lait fermenté (lassi)|1,1.5,0,0.5,0,0,1,0||0.25;0;R0;"
-]],
-[9,[
-"Croissant (1 pièce)|2,0,0.5,0.5,0,0,0.5,0|o|0;0;RO;",
-"Pain au chocolat|2.5,0.5,0.5,0.5,0,0.5,1,0||0.4;2;R4;U1",
-"Brioche|2,0.5,0.5,1,0,0,1.5,0||0.5;0;R0;",
-"Pain aux raisins|2,0.5,1,1,0,0,2,0||0.8;0;R4;",
-"Chausson aux pommes|2.5,0.5,0.5,2,0,0,1.5,0||0;0;R6;",
-"Gaufre|2,1,0.5,1,0,0,2,0||0.5;0;R0;",
-"Pancakes|1.5,1,0.5,1,0,0,1.5,0||0.5;0;R0;",
-"Pain perdu|2,1,0.5,1,0,0,1.5,0||0.8;0;R4;",
-"Muffin|2,0.5,0.5,1,0,0,2,0||0.5;0;R0;",
-"Petits-beurre ou biscuits secs|0.5,0.5,0.5,0.5,0,0,1,0||0.4;2;R4;U2",
-"Confiture d'abricot ou de pêche|0,0,0,0.5,0,0,1.5,0||0;0;R6;",
-"Confiture de fraise (pépins)|0,0,1,0.5,0,0,1.5,0||0.25;0;R0;",
-"Gelée de fraise ou de groseille|0,0,0,0.5,0,0,1.5,0||0.25;0;R0;",
-"Miel|0,0,0,3,0,0,2,0||0;0;R7;",
-"Sirop d'érable|0,0,0,0.5,0,0,2,0||0;0;R7;",
-"Pâte à tartiner chocolat-noisette|2.5,0.5,0.5,1,0,0.5,2.5,0||0.5;2;R0;U1",
-"Porridge à l'eau|0,0,1,1,0,0,0,1||0.5;0;R0;",
-"Porridge au lait|1,2.5,1,1,0,0,0.5,0.5||0.5;0;R0;",
-"Sucre (1 cuillère)|0,0,0,0,0,0,1,0",
-"Édulcorant (aspartame, stévia)|0,0,0,0.5,0,0,0,0||0;0;R7;",
-"Crêpe sucrée (sucre ou confiture)|1.5,1.5,0.5,1,0,0,2,0||0.5;0;R0;",
-"Crêpe à la pâte à tartiner|2.5,1.5,0.5,1,0,0.5,2.5,0||0.5;2;R0;U2",
-"Barre de céréales|1.5,0.5,1.5,1.5,0,0,2.5,0||0.75;2;R0;U2",
-"Compote de pomme sans sucre ajouté|0,0,0.5,2,0,0,0.5,0.5||0;0;R6;",
-"Biscottes classiques|0,0,0.5,1,0,0,0.5,0.5||0.8;0;R4;",
-"Krisprolls nature|0,0,0.5,0.5,0,0,0.5,0.5||0.4;0;R4;",
-"Krisprolls complet ou graines|1,0,2.5,1.5,0,0,0.5,0||1.2;0;R4;",
-"Flocons d'avoine cuits à l'eau|0,0,1,1,0,0,0,1||0.5;0;R0;",
-"Müesli|1,0,2.5,2,0,0,1.5,0||1;0;R0;",
-"Corn flakes|0,0,0.5,1,0,0,1.5,0||0.5;0;R0;",
-"Céréales chocolatées|0.5,0,1,1.5,0,0,2.5,0||0.75;2;R0;U1"
-]],
-[10,[
-"Assiette poulet grillé, riz blanc, carottes cuites|0.5,0,1.5,0,0,0,0.5,1.5||0;0;RC;;Poulet grillé sans peau ×1 + Riz blanc ×1 + Carotte cuite ×1",
-"Burger maison (bœuf haché 5 %, fromage, salade)|2.25,0,1.5,1.5,1,0,0.5,0.5||1.1;0.5;RC;;Bœuf haché 5 % ×1 + Baguette ou pain blanc ×1 + Emmental ou gruyère ×0,6 + Salade verte ×0,3 + Tomate crue ×0,3 + Ketchup ×0,3",
-"Tartiflette|3,1,0.5,1,0,0,0,0|o|0;0;RO;",
-"Raclette (fromage, charcuterie, pommes de terre)|3,0.5,0.5,0.5,0,0,0,0||0;0;R6;",
-"Fondue savoyarde|3,1,0,0.5,0,1,0,0||0.25;0;R0;",
-"Spaghettis carbonara à la crème|2.5,1,0,0.5,0,0,0,0|o|0;0;RO;",
-"Lasagnes|2.5,1.5,0.5,1.5,1.5,0,0,0||1.2;0;R4;",
-"Spaghetti bolognaise|1.5,0,0.5,1.5,1.5,0,0,0||1.2;0;R4;",
-"Pâtes sauce tomate|0.5,0,0.5,1,2,0,0,0||0.8;0;R4;",
-"Plat tomaté ou épicé (générique)|1,0,1,1,3,0,0,0|o|0;0;RO;",
-"Chili con carne|1.5,0,2.5,3,2.5,0,0,0||1.5;0;R0;",
-"Curry de poulet au lait de coco|2.5,0,0.5,1.5,2.5,0,0,0||0.75;0;R0;",
-"Tajine|1.5,0,1.5,1.5,1.5,0,0,0||0.75;0;R0;",
-"Couscous royal|2.5,0,2,1.5,2,0,0,0||1.2;0;R4;",
-"Paella|1.5,0,0.5,1.5,1,0,0,0||0.75;0;R0;",
-"Risotto aux champignons|2,1,0.5,2.5,0,0,0,0||0;0;R5;",
-"Pizza margherita|1.5,1,0.5,1.5,1.5,0,0,0||1.2;2;R4;U2",
-"Pizza quatre fromages|2.5,2,0.5,1,1,0,0,0||0.8;2;R4;U2",
-"Pizza à la charcuterie|3,1,0.5,1.5,1.5,0,0,0||1.2;2;R4;U2",
-"Burger (fast-food)|3,1,0.5,1.5,1,0,0,0||0.75;2;R0;U2",
-"Kebab|3,1.5,0.5,2,2,0,0,0||1;2;R0;U2",
-"Nuggets de poulet|3,0,0.5,0.5,0,0,0,0||0.25;2;R0;U2",
-"Tacos français|3,2,0.5,1.5,2,0,0,0||0.75;0;R0;",
-"Sushis (maki, poisson)|0.5,0,0,0.5,0.5,0,0.5,0.5||0.25;0;R0;",
-"Sushis saumon-avocat|1.5,0,0,1.5,0.5,0,0.5,0.5||0;0;R5;",
-"Ramen|2,0,0.5,2,1.5,0,0,0||1;0;R0;",
-"Pad thaï|2,0,1,1.5,1.5,0,0.5,0||0.75;0;R0;",
-"Poulet frit (fast-food)|3,0,0.5,0.5,1,0,0,0||0.25;2;R0;U2",
-"Fish and chips|3,0,1,0.5,0,0,0,0||0.25;2;R0;U2",
-"Quiche lorraine|3,1,0.5,1,0,0,0,0||0.5;0;R0;",
-"Salade composée de crudités|1.5,0,2,1.5,1,0,0,0||0.75;0;R0;",
-"Salade César|3,1,1.5,1,1,0,0,0||0.5;0;R0;",
-"Pot-au-feu|1.5,0,1.5,1.5,0,0,0,0||0.75;0;R0;",
-"Blanquette de veau|2,1.5,0.5,1.5,0,0,0,0||0.75;0;R0;",
-"Steak-frites|3,0,1,0.5,0,0,0,0||0.25;0;R0;",
-"Poulet et riz blanc|0.5,0,0.5,0.5,0,0,0,1||0.25;0;R0;",
-"Poisson et riz vapeur|0.5,0,0.5,0.5,0,0,0,1||0.25;0;R0;",
-"Hachis parmentier|2,1.5,0.5,1.5,0,0,0,0||0.75;0;R0;",
-"Gratin de pâtes au jambon|2.5,2,0.5,1,0,0,0,0||0.8;0;R4;",
-"Moussaka|2.5,1.5,1.5,1.5,0.5,0,0,0||0.75;0;R0;",
-"Cassoulet|3,0,2.5,3,0,0,0,0||1.5;0;R0;",
-"Choucroute garnie|3,0,2.5,2.5,1,0,0,0||1.5;0;R3;",
-"Moules-frites|2.5,0,1,2,0,0.5,0,0||1;0;R0;",
-"Gaufre de Liège (snack)|2,1,0.5,1,0,0,2.5,0||0.5;0;R0;",
-"Croquettes de fromage ou de crevettes|3,1,0.5,0.5,0,0,0,0||0.25;0;R0;",
-"Boulets sauce lapin|2.5,0,0.5,1.5,0.5,0,1.5,0||0.75;0;R0;",
-"Stoemp (purée de légumes et lardons)|2.5,1,1,1.5,0,0,0,0||0.75;0;R0;",
-"Waterzooi|2,2,1,1.5,0,0,0,0||0.75;0;R0;",
-"Filet américain|2,0,0,1,1,0,0,0||0.5;0;R0;",
-"Couscous poulet et merguez|4,0,2.75,4,2.5,0,0.25,0.5||2.06;0;RC;;Poulet avec la peau ×0,8 + Merguez ×0,6 + Semoule de couscous ×1 + Carotte cuite ×0,5 + Courgette cuite sans peau ×0,5 + Navet cuit ×0,4 + Pois chiches ×0,3 + Oignon cuit ×0,4 + Tomate cuite sans peau ×0,3 + Cumin ×0,3 + Huile d'olive (1 cuillère) ×0,5",
-"Curry japonais (poulet, roux, pommes de terre, carottes, riz)|1.5,0,1.75,2,1,0,0.25,2||0.26;0;RC;;Poulet grillé sans peau ×1 + Beurre (fine couche) ×1 + Curry en poudre ×0,5 + Oignon cuit ×0,5 + Pomme de terre vapeur sans peau ×0,7 + Carotte cuite ×0,5 + Riz blanc ×1,2 + Sauce soja ×0,3",
-"Giouvetsi (agneau, orzo, sauce tomate)|4,0,1.25,3,1.75,0,0,0||1.56;0;RC;;Gigot d'agneau ×0,8 + Pâtes blanches nature ×1,2 + Sauce tomate nature maison ×0,8 + Oignon cuit ×0,3 + Ail cuit ×0,2 + Huile d'olive (1 cuillère) ×1 + Cannelle ×0,3 + Parmesan râpé ×0,3",
-"Paella aux fruits de mer|2.25,0,1.5,1.75,0.75,0.25,0,1.75||1.12;0;RC;;Riz blanc ×1,2 + Crevettes cuites ×0,8 + Moules (cuisson au vin blanc) ×0,6 + Poivron cuit ×0,4 + Tomate cuite sans peau ×0,3 + Ail cuit ×0,2 + Huile d'olive (1 cuillère) ×1 + Persil, coriandre, basilic frais ×0,3",
-"Risotto à la saucisse épicée et au fenouil|4,0.5,2,3.25,1.5,0,0,1.75||0.93;1.6;RC;;Saucisse de porc ×0,8 + Riz blanc ×1,2 + Oignon cuit ×0,5 + Fenouil cuit ×0,7 + Piment (frais ou en poudre) ×0,3 + Mascarpone ×0,25 + Parmesan râpé ×0,3 + Beurre (fine couche) ×1 + Bouillon cube ×0,5",
-"Carbonades flamandes|2.25,0,0.5,4,1.5,0.75,1.25,0.25||0.17;0;RC;;Steak grillé ×1,2 + Oignon cuit ×1 + Beurre (fine couche) ×0,5 + Bière blonde ×0,3 + Bouillon clair ×0,7 + Moutarde de Dijon ×0,3 + Sucre (1 cuillère) ×1 + Vinaigre ×0,3"
-]],
-[11,[
-"Chips nature|3,0,1,0.5,0.5,0,0,0||0.25;2;R0;U2",
-"Chips aromatisées|3,0.5,1,1,1.5,0,0,0||0.5;2;R0;U2",
-"Biscuits apéritifs|2.5,0.5,0.5,1,0,0,0,0||0.8;2;R4;U2",
-"Popcorn|1.5,0,3,0.5,0,0,0,0||0.25;2;R0;U3",
-"Bretzels|0.5,0,0.5,1,0,0,0,0||0.5;2;R0;U3",
-"Crackers|1.5,0,0.5,1,0,0,0,0||0.5;2;R0;U3",
-"Cubes de fromage|2,0.5,0,0,0,0,0,0||0;2;;U3",
-"Barre chocolatée|2.5,1.5,0.5,0.5,0,1,3,0||0.25;2;R0;U1",
-"Bonbons|0,0,0,1,0,0,3,0||0.5;2;R0;U2",
-"Chewing-gum ou bonbons sans sucre (polyols)|0,0,0,3,0,0,0,0||0;2;R7;U2",
-"Réglisse|0,0,0.5,0.5,0,0,2.5,0||0.25;2;R0;U3",
-"Guimauves|0,0,0,0.5,0,0,3,0||0.25;2;R0;U3",
-"Cacahuètes salées|2.5,0,2,1,0,0,0,0||0.5;2;R0;U3",
-"Tortilla chips et salsa|2.5,0,1,1.5,2,0,0,0||0.75;2;R0;U2",
-"Nachos au fromage|3,1.5,1,1.5,1.5,0,0,0||0.75;2;R0;U3",
-"Tapas : olives et charcuterie|3,0,0.5,0.5,1,0,0,0||0.25;2;R0;U3",
-"Rouleaux de printemps frits|2.5,0,1,1.5,0,0,0.5,0||0.75;2;R0;U3",
-"Samoussas ou nems|3,0,1,1.5,1,0,0,0||0.75;2;R0;U3",
-"Mini-pizzas ou feuilletés apéritifs|3,1,0.5,1,0,0,0,0||0.8;2;R4;U2",
-"Crudités et dips|1.5,0.5,2,1.5,0,0,0,0||0.75;2;R0;U3"
-]],
-[12,[
-"Sandwich poulet, fromage fondu, andalouse, carotte, oignon frit|3,1,1.75,2.25,0.5,0,0,0.5||1.78;0.25;RC;;Poulet grillé sans peau ×1 + Fromage fondu en portion ×0,6 + Sauce andalouse ×0,3 + Carotte crue ×0,6 + Oignon frit ×0,3 + Baguette ou pain blanc ×1",
-"Sandwich poulet-crudités (sans sauce)|0.5,0,3,2,1,0,0,0.5||1.25;0;RC;;Poulet grillé sans peau ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Concombre ×0,6 + Baguette ou pain blanc ×1",
-"Sandwich poulet-crudités mayonnaise|1.25,0,3,2,1,0,0,0.5||1.25;0.5;RC;;Poulet grillé sans peau ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Concombre ×0,6 + Mayonnaise ×0,3 + Baguette ou pain blanc ×1",
-"Sandwich jambon blanc-fromage|2.75,0,0.5,1.5,0,0,0,0.5||1.05;0;RC;;Jambon blanc ×1 + Emmental ou gruyère ×0,6 + Beurre ×1 + Baguette ou pain blanc ×1",
-"Wrap poulet-crudités|2.25,0,2.25,2,1,0,0,0||1.05;0.5;RC;;Poulet grillé sans peau ×1 + Tortilla ou wrap de blé ×1 + Salade verte ×0,6 + Tomate crue ×0,6 + Mayonnaise ×0,3",
-"Hot-dog|3,0.5,0,1,1.5,0,0,0||0.5;0;R0;",
-"Croque-monsieur|2.5,2,0.5,1,0,0,0,0||0.5;0;R0;",
-"Sandwich jambon-beurre|1.5,0,0.5,1,0,0,0,0||0.5;0;R0;",
-"Sandwich thon-mayonnaise|2.5,0,0.5,1,0.5,0,0,0||0.5;2;R0;U2",
-"Panini fromage et jambon|2.5,1.5,0.5,1,0,0,0,0||0.5;0;R0;",
-"Pain-saucisse ou friture de rue|3,0,0.5,1,1,0,0,0||0.8;2;R4;U2",
-"Sandwich américain (frites, viande, sauces)|3,0.5,1,1.5,1.5,0,0,0||0.75;0;R0;",
-"Sandwich pâté crème (type Aoste)|1.5,0,0.5,1.25,0,0,0,0.5||0.93;0.5;RC;;Baguette ou pain blanc ×1 + Pâté crème (type Aoste) ×0,5",
-"Sandwich salami, fromage fondu, mayonnaise|3.25,1,0.5,1,0.5,0,0,0.5||0.8;0.6;RC;;Baguette ou pain blanc ×1 + Saucisson sec ×0,4 + Fromage fondu en portion ×0,6 + Mayonnaise ×0,3",
-"Sandwich poulet curry|2,0,0.5,1.25,0.75,0,0,0.5||0.88;1.2;RC;;Baguette ou pain blanc ×1 + Poulet grillé sans peau ×0,8 + Mayonnaise ×0,6 + Curry en poudre ×0,3"
-]],
-[13,[
-"Beignet ou donut|3,0.5,0.5,0.5,0,0,2,0||0.25;0;R0;",
-"Cake ou quatre-quarts|2.5,0.5,0.5,0.5,0,0,2,0||0.25;0;R0;",
-"Tarte aux pommes|2,0.5,1,2,0,0,2,0||0;0;R6;",
-"Tarte au citron meringuée|2,0.5,0.5,0.5,1.5,0,2.5,0||0.25;0;R0;",
-"Éclair au chocolat|2.5,2,0.5,0.5,0,0.5,2.5,0||0.25;2;R0;U1",
-"Tiramisu|2.5,2.5,0.5,0.5,0,2,2,0||0.25;0;R0;",
-"Cookies|2,0.5,1,1,0,0.5,2.5,0||0.5;0;R0;",
-"Chocolat noir 70 %|2.5,0,1,0.5,0,1.5,1.5,0||0.25;2;R0;U1",
-"Chocolat au lait|2,1.5,0.5,0.5,0,1,2.5,0||0.25;2;R0;U1",
-"Chocolat blanc|2.5,2,0,0.5,0,0,3,0||0.25;2;R0;U1",
-"Macaron|1.5,0,0.5,0.5,0,0,3,0||0.25;0;R0;",
-"Bûche ou gâteau à la crème|3,2,0.5,0.5,0,0,2.5,0||0.4;2;R4;U2",
-"Pâte d'amande (massepain)|2,0,1,1.5,0,0,3,0||1.2;0;R4;"
-]]
-];
-
-const FOODS=[],_seen={};
-const slug=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-RAW.forEach(([c,list])=>list.forEach(str=>{
-  const p=str.split('|');if(p.length<2)return;
-  const v=p[1].split(',').map(Number);
-  if(v.length!==8||v.some(x=>isNaN(x)))return;
-  let id=slug(p[0]);if(_seen[id]){let i=2;while(_seen[id+'-'+i])i++;id=id+'-'+i}_seen[id]=1;
-  const ex=(p[3]||'').split(';');
-  FOODS.push({id,n:p[0],c,L:v.slice(0,7),b:v[7],obs:p[2]==='o',ho:+ex[0]||0,u:+ex[1]||0,rf:ex[2]||'',ru:ex[3]||'',comp:ex[4]||''});
-}));
-
-let store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',sort:'cat',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,onb:false,flags:{},ep:0,mt:0,del:{},acct:null};
-const sensOf=k=>(store.sens[k]!=null?store.sens[k]:1);
-/* Profil : multiplicateurs ARBITRAIRES (aucune source chiffrée). Sens : FODMAP plus lourds, fibres insolubles moins lourdes avec une poche (Ardalan 2020 pour les FODMAP, preuve faible ; fibres insolubles : valeur arbitraire, ECCO 25.1 : preuve insuffisante). */
-const PROF={poche:{f:0.8,o:0.3},general:{}};   // o = poids des oligosaccharides : 0,3 = opinion d'expert (guides patients poche), hypothèse à tester
-const UW=0.3;       // additifs / ultra-transformés : estimation arbitraire, preuve faible
-const oMul=()=>{const o=(PROF[store.prof]||{}).o;return o==null?1:o};
-const effL=(f,i,lv)=>f.k==='h'?lv.L[i]-(lv.ho||0)*(1-oMul()):lv.L[i];
-const RULES={R0:'non classé (50 % oligosaccharides / 50 % fructose-polyols par défaut)',R1:'fructanes (alliacées, artichaut, asperge)',R2:'GOS (légumineuses, pistache, cajou)',R3:'raffinose/fructanes (crucifères, betterave)',R4:'fructanes du blé',R5:'polyols (mannitol/sorbitol)',R6:'fructose en excès/polyols (fruits)',R7:'fructose/polyols ajoutés',RO:'poids calibré sur ton vécu, conservé tel quel',RC:'plat composé estimé : somme des ingrédients en portions réalistes (voir composition), niveaux plafonnés à 3',U1:'boisson sucrée ou édulcorée',U2:'aliment ultra-transformé typique',U3:'catégorie snacks'};
-const MODS={sten:{f:1.5}};
-const profMul=k=>((PROF[store.prof]||{})[k]||1)*((store.mods&&store.mods.sten&&MODS.sten[k])||1);
-const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
-/* Poids de référence d'une portion normale (grammes) : valeurs NUBEL (Conseil supérieur de la Santé, Belgique) pour les aliments cités par nom ; le reste = estimations par catégorie, à corriger. */
-const REFG_CAT=[150,140,150,120,100,60,25,5,200,40,300,40,200,60];
-const ORD=[0,1,2,3,4,5,6,7,8,9,13,12,10,11];   // ordre d'affichage des catégories (les index restent stables pour tes aliments perso)
-const REFG_NOM=[[/jambon cru|fum/i,25],[/jambon/i,45],[/fromage fondu/i,20],[/fromage|emmental|gruy|edam|gouda|mozzarella/i,25],[/œuf|oeuf|omelette/i,50],[/baguette/i,130],[/pistolet/i,45],[/pain/i,80],[/wrap|tortilla/i,60],[/yaourt/i,125],[/poulet/i,160],[/saumon/i,180],[/cabillaud|colin/i,175],[/frites/i,250],[/lasagne/i,400],[/spaghetti/i,300],[/croque/i,135],[/croissant/i,50],[/purée|puree/i,160],[/riz/i,150],[/mayonnaise|ketchup/i,25],[/huile/i,10],[/beurre/i,10],[/pomme(?! de terre)/i,140],[/banane/i,130],[/orange/i,140],[/poire/i,160]];
-const refG=f=>{for(const [rx,g] of REFG_NOM)if(rx.test(f.n))return g;return REFG_CAT[f.c]||100};
-const pfOf=it=>it.g>0?Math.min(3,Math.max(0.1,it.g/refG(it.f))):PF[it.p];
-const grOf=(f,k)=>{const g=refG(f)*PF[k];return g<10?Math.round(g):Math.round(g/5)*5};   // poids estimé affiché sous chaque portion
-function levels(items,ctx){
-  const L=Array(7).fill(0);let b=0,ho=0,u=0;
-  items.forEach(it=>{const P=pfOf(it);it.f.L.forEach((v,i)=>{L[i]+=v*P});b+=it.f.b*P;ho+=(it.f.ho||0)*P;u+=(it.f.u||0)*P});
-  if(ctx&&ctx.quest)L[0]*=0.75;
-  if(ctx&&ctx.jeun)L[1]*=1.3;
-  const Lc=L.map(v=>Math.min(4,v));
-  return{L:Lc,b:Math.min(2,b),ho:Math.min(ho,Lc[3]),u:Math.min(4,u)};
-}
-const K=9; // score = 10 × exp(−pénalité / K) : évite que les plats très gras tombent tous à 0
-function penalty(lv){
-  let p=-BW*lv.b;
-  FEATS.forEach((f,i)=>{p+=f.w*sensOf(f.k)*profMul(f.k)*effL(f,i,lv)});
-  p+=UW*(lv.u||0);
-  return Math.max(0,p);
-}
-function rawScore(lv){return 10*Math.exp(-penalty(lv)/K)}
-function single(f){return clamp(rawScore(levels([{f,p:1}])),0,10)}
-function scoreOf(items,ctx){
-  const lv=levels(items,ctx);
-  let s=rawScore(lv);
-  items.forEach(it=>{const ov=store.over[it.f.id];if(ov!=null)s+=(ov-single(it.f))*pfOf(it)});
-  const parts=FEATS.map((f,i)=>({n:f.n,v:f.w*sensOf(f.k)*profMul(f.k)*effL(f,i,lv)}));
-  parts.push({n:'Additifs / ultra-transformés',v:UW*(lv.u||0)});
-  const tot=parts.reduce((a,x)=>a+x.v,0);
-  const pen=tot>0.5?parts.map(x=>({n:x.n,v:x.v/tot*100})).filter(x=>x.v>=15).sort((a,b)=>b.v-a.v).slice(0,3):[];
-  return{score:clamp(s,0,10),lv,pen};
-}
-/*CORE_END*/
+/* Moteur de calcul extrait dans score-core.js pour faciliter les tests et la maintenance. */
+const SCORE_CORE=window.MICI_SCORE_CORE;
+if(!SCORE_CORE)throw new Error('MICI Score: moteur de calcul indisponible.');
+const {
+  FEATS,BW,PF,CATS,RAW,FOODS,slug,store:initialStore,setStoreProvider,
+  sensOf,PROF,UW,oMul,effL,RULES,MODS,profMul,clamp,
+  REFG_CAT,ORD,REFG_NOM,refG,pfOf,grOf,levels,K,penalty,rawScore,single,scoreOf
+}=SCORE_CORE;
+let store=initialStore;
+setStoreProvider(()=>store);
 
 /* ---------- Stockage ---------- */
 const KEY='mici:v2';
@@ -851,7 +250,100 @@ const THEMES=[
 function norm(p){
   let th=(['system','dark','ocean','charbon','amoled','micinuit','mici','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
   if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
-  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
+  return{custom:p.custom||[],entries:p.entries||[],plate:Array.isArray(p.plate)?p.plate:null,over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
+}
+
+/* Validation stricte des sauvegardes importées : ne jamais injecter de données JSON
+   directement dans le modèle de données de l'application. */
+function validateBackup(p){
+  const fail=()=>{throw new Error('invalid-backup')};
+  const record=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
+  const num=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
+  const text=(v,max,nonempty=false)=>typeof v==='string'&&v.length<=max&&(!nonempty||v.trim().length>0);
+  const id=v=>text(v,200,true)&&/^[A-Za-z0-9][A-Za-z0-9_-]{0,199}$/.test(v)&&!['constructor','prototype','toString','valueOf','hasOwnProperty','isPrototypeOf','propertyIsEnumerable','__defineGetter__','__defineSetter__','__lookupGetter__','__lookupSetter__'].includes(v);
+  const date=v=>Number.isSafeInteger(v)&&v>=0&&v<=8640000000000000;
+  const map=(v)=>record(v);
+  const arrNums=(v,n,min,max)=>Array.isArray(v)&&v.length===n&&v.every(x=>num(x,min,max));
+  if(!record(p)||!Array.isArray(p.entries)||p.entries.length>10000)fail();
+  ['custom','over','sens','mods','flags','del'].forEach(k=>{if(p[k]!==undefined&&(k==='custom'?!Array.isArray(p[k]):!map(p[k])))fail()});
+  if(p.custom&&p.custom.length>1000)fail();
+
+  const custom=(p.custom||[]).map(f=>{
+    if(!record(f)||!id(f.id)||!text(f.n,200,true)||!Number.isInteger(f.c)||f.c<0||f.c>=CATS.length||!arrNums(f.L,7,0,3)||!num(f.b,0,2))fail();
+    const o={id:f.id,n:f.n.trim(),c:f.c,L:f.L.slice(),b:f.b};
+    if(f.obs!==undefined){if(typeof f.obs!=='boolean')fail();o.obs=f.obs}
+    ['ho','u'].forEach(k=>{if(f[k]!==undefined){if(!num(f[k],0,4))fail();o[k]=f[k]}});
+    ['rf','ru'].forEach(k=>{if(f[k]!==undefined){if(!text(f[k],20)||!(f[k]===''||Object.prototype.hasOwnProperty.call(RULES,f[k])))fail();o[k]=f[k]}});
+    if(f.comp!==undefined){if(!text(f.comp,2000))fail();o.comp=f.comp}
+    return o;
+  });
+  if(new Set(custom.map(f=>f.id)).size!==custom.length||custom.some(f=>FOODS.some(base=>base.id===f.id)))fail();
+
+  const entries=p.entries.map(e=>{
+    if(!record(e))fail();
+    let eid=e.id;
+    if(typeof eid==='string'&&/^[0-9]{1,16}$/.test(eid))eid=Number(eid);
+    const ts=e.ts===undefined?eid:(typeof e.ts==='string'&&/^[0-9]{1,16}$/.test(e.ts)?Number(e.ts):e.ts);
+    if(!Number.isSafeInteger(eid)||eid<0||!date(ts)||!num(e.r,0,10))fail();
+    ['quest','jeun','q','j'].forEach(k=>{if(e[k]!==undefined&&typeof e[k]!=='boolean')fail()});
+    let sourceItems=e.items;
+    /* Compatibilité avec les anciennes sauvegardes à un seul aliment par entrée. */
+    if(!Array.isArray(sourceItems)&&text(e.name,200,true)){
+      sourceItems=[{id:'legacy',n:e.name,p:Number.isInteger(e.p)&&e.p>=0&&e.p<=3?e.p:1,g:0}];
+    }
+    if(!Array.isArray(sourceItems)||sourceItems.length>250)fail();
+    const items=sourceItems.map(it=>{
+      if(!record(it)||!id(it.id)||!text(it.n,200,true))fail();
+      const portion=it.p===undefined?1:it.p,grams=it.g===undefined?0:it.g;
+      if(!Number.isInteger(portion)||portion<0||portion>3||!num(grams,0,1500))fail();
+      return{id:it.id,n:it.n,p:portion,g:grams};
+    });
+    const o={id:eid,ts,items,r:e.r,quest:e.quest===true||e.q===true,jeun:e.jeun===true||e.j===true,note:e.note===undefined?'':e.note};
+    if(!text(o.note,10000))fail();
+    if(e.L===null||e.L===undefined)o.L=null;else{if(!arrNums(e.L,7,0,4))fail();o.L=e.L.slice()}
+    if(e.score!==undefined){if(!num(e.score,0,10))fail();o.score=e.score}
+    if(e.edited!==undefined){if(!date(e.edited))fail();o.edited=e.edited}
+    return o;
+  });
+  if(new Set(entries.map(e=>e.id)).size!==entries.length)fail();
+
+  const over={};
+  Object.keys(p.over||{}).forEach(k=>{if(!id(k)||!num(p.over[k],0,10))fail();over[k]=p.over[k]});
+  const sens={};
+  const featureKeys=['g','l','f','h','e','s','c'];
+  Object.keys(p.sens||{}).forEach(k=>{if(!featureKeys.includes(k)||!num(p.sens[k],0.5,2))fail();sens[k]=p.sens[k]});
+  const mods={};
+  Object.keys(p.mods||{}).forEach(k=>{if(!['sten','crohn'].includes(k)||typeof p.mods[k]!=='boolean')fail();mods[k]=p.mods[k]});
+  const flags={};
+  Object.keys(p.flags||{}).forEach(k=>{if(!id(k)||!['suspect','confirm','clear'].includes(p.flags[k]))fail();flags[k]=p.flags[k]});
+  const del={};
+  Object.keys(p.del||{}).forEach(k=>{if(!id(k)||!date(p.del[k]))fail();del[k]=p.del[k]});
+
+  const themes=['system','dark','ocean','charbon','amoled','micinuit','mici','custom'];
+  if(p.theme!==undefined&&!themes.includes(p.theme))fail();
+  if(p.layout!==undefined&&!['liste','compact','cartes'].includes(p.layout))fail();
+  if(p.sort!==undefined&&!['cat','nom','scd','sca'].includes(p.sort))fail();
+  if(p.cbg!==undefined&&!/^#[0-9a-f]{6}$/i.test(p.cbg))fail();
+  if(p.cac!==undefined&&!/^#[0-9a-f]{6}$/i.test(p.cac))fail();
+  ['aurora','onb'].forEach(k=>{if(p[k]!==undefined&&typeof p[k]!=='boolean')fail()});
+  ['ep','mt'].forEach(k=>{if(p[k]!==undefined&&!date(p[k]))fail()});
+
+  /* Retourner uniquement les propriétés reconnues : ne pas recopier des clés JSON inconnues. */
+  return {
+    custom,entries,over,sens,mods,flags,del,
+    prof:p.prof,
+    theme:p.theme,
+    layout:p.layout,
+    sort:p.sort,
+    cbg:p.cbg,
+    cac:p.cac,
+    ver:p.ver,
+    aurora:p.aurora,
+    onb:p.onb,
+    ep:p.ep,
+    mt:p.mt,
+    acct:null
+  };
 }
 const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
 const rgb2hex=a=>'#'+a.map(v=>Math.round(clamp(v,0,255)).toString(16).padStart(2,'0')).join('');
@@ -860,12 +352,14 @@ const mixc=(a,b,t)=>{const x=hex2rgb(a),y=hex2rgb(b);return rgb2hex(x.map((v,i)=
 const THEME_VARS=['--bg','--surface','--ink','--muted','--line','--accent','--on-accent','--good','--mid','--bad','--g1','--g2','--g3','--glass','--glassline','--bf','--navbg'];
 function applyTheme(){
   const r=document.documentElement;
+  r.style.removeProperty('color-scheme');
   r.setAttribute('data-theme',store.theme);
   r.setAttribute('data-aurora',store.aurora?'on':'off');
   document.body.setAttribute('data-layout',store.layout);
   THEME_VARS.forEach(v=>r.style.removeProperty(v));
   if(store.theme==='custom'){
     const bg=store.cbg,ac=store.cac,dark=lum(bg)<0.4;
+    r.style.colorScheme=dark?'dark':'light';
     const ink=dark?'#F2F2F2':'#14181A';
     const vals={'--bg':bg,'--surface':mixc(bg,dark?'#FFFFFF':'#FFFFFF',dark?0.07:0.7),'--ink':ink,'--muted':mixc(ink,bg,0.38),'--line':mixc(bg,ink,0.16),'--accent':ac,'--on-accent':lum(ac)>0.45?'#111111':'#FFFFFF',
       '--good':dark?'#5FBF86':'#2F7D4F','--mid':dark?'#E0B04F':'#9A6A0F','--bad':dark?'#E2756D':'#B23A32'};
@@ -895,12 +389,15 @@ const GOOGLE_CLIENT_ID='953065605103-h9vk0soc9sm2qi01t6gemuolst0hs51n.apps.googl
 const G_SCOPE='openid email https://www.googleapis.com/auth/drive.appdata';
 const G_FILE='mici-score.json';
 const cid=()=>GOOGLE_CLIENT_ID||(function(){try{return localStorage.getItem('mici:cid')||''}catch(e){return ''}})();
-const gs={tok:null,exp:0,client:null,busy:false,again:false,st:'',timer:null,last:0};
+const gs={tok:null,exp:0,client:null,busy:false,again:false,st:'',timer:null,last:0,session:0};
 const dataHash=()=>JSON.stringify([store.custom,store.entries,store.over,store.sens,store.prof,store.mods,store.flags,store.del]);
 let _h=dataHash(),_applying=false;
 function save(){
-  try{const h=dataHash();if(h!==_h){_h=h;if(!_applying){store.mt=Date.now();schedSync()}}}catch(e){}
-  try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}
+  let h=null,changed=false;
+  try{h=dataHash();changed=h!==_h;if(changed&&!_applying)store.mt=Date.now()}catch(e){}
+  try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){return false}
+  if(h!==null){_h=h;if(changed&&!_applying)schedSync()}
+  return true;
 }
 const snap=()=>JSON.parse(JSON.stringify({app:'mici-score',fmt:1,ep:store.ep||0,mt:store.mt||0,custom:store.custom,entries:store.entries,over:store.over,sens:store.sens,prof:store.prof,mods:store.mods,flags:store.flags,del:store.del||{}}));
 const sig=o=>JSON.stringify([o.ep||0,o.custom,o.entries,o.over,o.sens,o.prof,o.mods,o.flags,o.del]);
@@ -929,13 +426,30 @@ function loadGIS(){
   });
   return _gisP;
 }
-/* Appli installée (écran d'accueil) : la fenêtre popup de Google reste blanche (v25). On passe par une redirection de la page entière.
+/* Appli installée (écran d'accueil) : la fenêtre popup de Google reste blanche (v25), donc une redirection plein écran est utilisée.
+   Limite connue : ce chemin utilise le flux implicite historique (response_type=token), que Google déconseille désormais pour les SPA.
+   Le flux code + PKCE recommandé demande un endpoint backend et un échange de code côté serveur ; ne pas exposer de secret client dans ce fichier statique.
    Nécessite l'URI de redirection https://johunn.github.io/mici-score/ dans la console Google (voir GUIDE-GOOGLE-CLOUD.md). */
 const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: minimal-ui)').matches||navigator.standalone===true}catch(e){return false}};
 const redirUri=()=>location.origin+location.pathname.replace(/[^\/]*$/,'');
+function createOAuthState(){
+  if(!window.crypto||typeof window.crypto.getRandomValues!=='function')throw new Error('secure-random');
+  const bytes=new Uint8Array(32);
+  window.crypto.getRandomValues(bytes);
+  return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function acceptTokenResponse(r){
+  const token=r&&typeof r.access_token==='string'?r.access_token:'';
+  const tokenType=r&&typeof r.token_type==='string'?r.token_type.toLowerCase():'';
+  const lifetime=Number(r&&r.expires_in);
+  if(!token||token.length>8192||tokenType!=='bearer'||!Number.isFinite(lifetime)||lifetime<=0||lifetime>86400)throw new Error('oauth-response');
+  gs.tok=token;
+  gs.exp=Date.now()+lifetime*1000;
+  return token;
+}
 function startRedirect(){
-  const st=Math.random().toString(36).slice(2)+Date.now().toString(36);
-  try{localStorage.setItem('mici:gstate',st)}catch(e){}
+  const st=createOAuthState();
+  try{localStorage.setItem('mici:gstate',st)}catch(e){throw new Error('state-storage')}
   const p=new URLSearchParams({client_id:cid(),redirect_uri:redirUri(),response_type:'token',scope:G_SCOPE,state:st,include_granted_scopes:'true'});
   if(store.acct&&store.acct.email)p.set('login_hint',store.acct.email);
   location.assign('https://accounts.google.com/o/oauth2/v2/auth?'+p.toString());
@@ -945,13 +459,17 @@ function readRedirect(){
   const p=new URLSearchParams(location.hash.slice(1));
   let ok=false;
   try{const s=localStorage.getItem('mici:gstate');ok=!!s&&p.get('state')===s;localStorage.removeItem('mici:gstate')}catch(e){}
+  /* Retire le jeton éventuel de l'URL avant tout autre rendu de l'application. */
   try{history.replaceState(history.state,'',location.pathname+location.search)}catch(e){}
   if(!ok){gs.st='Connexion Google invalide ou interrompue : réessaie.';return}
-  if(p.get('error')||!p.get('access_token')){gs.st=p.get('error')==='access_denied'?'Connexion Google refusée.':'Connexion Google impossible ('+(p.get('error')||'réponse vide')+').';return}
-  gs.tok=p.get('access_token');gs.exp=Date.now()+(+p.get('expires_in')||3600)*1000;
+  if(p.get('error')){gs.st=p.get('error')==='access_denied'?'Connexion Google refusée.':'Connexion Google impossible ('+p.get('error')+').';return}
+  try{acceptTokenResponse({access_token:p.get('access_token'),token_type:p.get('token_type'),expires_in:p.get('expires_in')})}
+  catch(e){gs.st='Réponse OAuth invalide ou expirée. Réessaie la connexion.'}
 }
 function getToken(interactive){
+  const requestSession=gs.session;
   return new Promise((res,rej)=>{
+    if(requestSession!==gs.session)return rej(new Error('cancelled'));
     if(gs.tok&&Date.now()<gs.exp-60000)return res(gs.tok);
     if(isStandalone()){
       if(!interactive)return rej(new Error('popup'));
@@ -960,10 +478,12 @@ function getToken(interactive){
     }
     if(interactive)setTimeout(()=>rej(new Error('timeout')),180000);
     loadGIS().then(()=>{
+      if(requestSession!==gs.session)return rej(new Error('cancelled'));
       if(!gs.client)gs.client=google.accounts.oauth2.initTokenClient({client_id:cid(),scope:G_SCOPE,callback:()=>{}});
       gs.client.callback=r=>{
+        if(requestSession!==gs.session)return rej(new Error('cancelled'));
         if(r&&r.error)return rej(new Error(r.error));
-        gs.tok=r.access_token;gs.exp=Date.now()+(+r.expires_in||3600)*1000;res(gs.tok);
+        try{res(acceptTokenResponse(r))}catch(e){rej(e)}
       };
       gs.client.error_callback=e=>rej(new Error((e&&e.type)||'popup'));
       const o={prompt:interactive?'':'none'};
@@ -978,6 +498,14 @@ async function gapi(tok,path,opt){
   const r=await fetch('https://www.googleapis.com'+path,o);
   if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
   return r;
+}
+async function verifyGoogleAccount(tok){
+  const u=await (await gapi(tok,'/oauth2/v3/userinfo')).json();
+  const email=typeof u.email==='string'?u.email.trim():'';
+  if(!email||u.email_verified===false)throw new Error('account-email');
+  const expected=store.acct&&typeof store.acct.email==='string'?store.acct.email.trim().toLowerCase():'';
+  if(expected&&email.toLowerCase()!==expected)throw new Error('account-mismatch');
+  return email;
 }
 async function findFile(tok){
   const q=encodeURIComponent("name='"+G_FILE+"' and trashed=false");
@@ -1016,6 +544,11 @@ function errText(e){
   if(e&&e.status===401){gs.tok=null;return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».'}
   if(e&&e.status===403)return 'Accès refusé par Google (autorisation Drive ou API Drive non activée).';
   if(e&&e.status===429)return 'Trop de requêtes : réessaie dans quelques minutes.';
+  if(e&&e.message==='account-mismatch')return 'Le compte Google autorisé ne correspond pas au compte mémorisé. Déconnecte-toi puis reconnecte-toi avec le bon compte. Aucune donnée n’a été synchronisée.';
+  if(e&&e.message==='account-email')return 'Impossible de vérifier l’identité du compte Google. Aucune donnée n’a été synchronisée ; réessaie.';
+  if(e&&e.message==='oauth-response')return 'Google a renvoyé une réponse d’autorisation invalide. Réessaie la connexion.';
+  if(e&&e.message==='secure-random')return 'Ce navigateur ne permet pas de générer un état de connexion sécurisé. Mets ton navigateur à jour.';
+  if(e&&e.message==='state-storage')return 'Le navigateur ne permet pas de vérifier la connexion en toute sécurité. Autorise le stockage du site puis réessaie.';
   if(e&&e.message==='timeout')return 'La fenêtre Google n’a pas répondu. Si tu utilises l’icône installée, ouvre l’appli dans le navigateur (onglet normal) pour te connecter.';
   if(e&&e.message==='gis')return 'Connexion Google indisponible sur cette adresse ou hors ligne.';
   if(e&&(e.message==='popup_closed'||e.message==='popup_failed_to_open'||e.message==='access_denied'||e.message==='interaction_required'||e.message==='user_logged_out'||e.message==='immediate_failed'||e.message==='popup'))return 'Reconnexion nécessaire : touche « Synchroniser maintenant ».';
@@ -1023,35 +556,51 @@ function errText(e){
   return 'Synchronisation impossible (hors ligne ou service injoignable). Tes données restent sur cet appareil.';
 }
 async function syncNow(interactive){
-  if(!cid())return;
+  if(!cid()||(!interactive&&!store.acct&&!gs.tok))return;
   if(!navigator.onLine&&!interactive){setSt('Hors ligne : synchronisation en attente.');return}
   if(gs.busy){gs.again=true;return}
   gs.busy=true;setSt('Synchronisation…');
+  const session=gs.session;
   try{
     const tok=await getToken(!!interactive);
-    let email=store.acct&&store.acct.email;
-    if(!email){try{const u=await (await gapi(tok,'/oauth2/v3/userinfo')).json();email=u.email||''}catch(e){email=''}}
+    if(session!==gs.session)return;
+    /* Vérifier le compte avant de lire, fusionner ou écrire la sauvegarde Drive. */
+    const email=await verifyGoogleAccount(tok);
+    if(session!==gs.session)return;
     let id=await findFile(tok),R=null;
+    if(session!==gs.session)return;
     if(id){
       const raw=await (await gapi(tok,'/drive/v3/files/'+id+'?alt=media')).text();
+      if(session!==gs.session)return;
       try{R=JSON.parse(raw)}catch(e){R=null}
       if(!R||R.app!=='mici-score'||!Array.isArray(R.entries))throw new Error('bad');
     }
+    if(session!==gs.session)return;
     const L=snap(),M=R?mergeSnap(L,R):L;
     if(R&&!store.onb&&((R.entries||[]).length||(R.custom||[]).length||Object.keys(R.over||{}).length)){store.onb=true;hideOnb()}
     else if(!R&&freshStore())setTimeout(maybeOnb,0);
     if(R&&sig(M)!==sig(L)){
+      if(session!==gs.session)return;
       try{localStorage.setItem(KEY+':avant-synchro',JSON.stringify(store))}catch(e){}
       _applying=true;
       store.ep=M.ep;store.mt=M.mt;store.custom=M.custom;store.entries=M.entries;store.over=M.over;store.sens=M.sens;store.prof=M.prof;store.mods=M.mods;store.flags=M.flags;store.del=M.del;
-      save();_applying=false;
+      savePlate();save();_applying=false;
     }
-    if(!R||sig(M)!==sig(R))await putFile(tok,id,M);
+    if(session!==gs.session)return;
+    if(!R||sig(M)!==sig(R)){
+      await putFile(tok,id,M);
+      if(session!==gs.session)return;
+    }
+    if(session!==gs.session)return;
     gs.last=Date.now();store.acct={email:email||'',last:gs.last};save();
     gs.st='';
     if(R&&sig(M)!==sig(L)){ui.msg='Données synchronisées depuis ton Drive.'}
-  }catch(e){gs.st=errText(e)}
-  finally{gs.busy=false;refreshGbar();if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);if(gs.again){gs.again=false;setTimeout(()=>syncNow(false),500)}}
+  }catch(e){if(session===gs.session)gs.st=errText(e)}
+  finally{
+    gs.busy=false;refreshGbar();
+    if(ui&&ui.tab==='profil'||ui&&ui.msg)render(true);
+    if(gs.again){gs.again=false;if(store.acct&&cid())setTimeout(()=>syncNow(false),500)}
+  }
 }
 function schedSync(){
   if(!store.acct||!cid())return;
@@ -1059,19 +608,36 @@ function schedSync(){
 }
 function gDisconnect(){
   ui.gmenu=false;
+  gs.session++;
+  if(gs.timer){clearTimeout(gs.timer);gs.timer=null}
+  gs.again=false;
   const t=gs.tok;gs.tok=null;gs.exp=0;
   try{if(t&&window.google&&google.accounts&&google.accounts.oauth2)google.accounts.oauth2.revoke(t,()=>{})}catch(e){}
-  store.acct=null;save();gs.st='';ui.msg='Déconnecté. Tes données restent sur cet appareil et dans ton Drive.';render(true);
+  store.acct=null;const saved=save();gs.st='';ui.msg=saved?'Déconnecté. Tes données restent sur cet appareil et dans ton Drive.':'Déconnecté pour cette session, mais le navigateur n’a pas pu enregistrer ce choix. Libère de l’espace de stockage puis réessaie, ou retire l’accès à MICI Score dans ton compte Google.';render(true);
 }
 async function gDeleteOnline(){
+  if(gs.busy){gs.st='Une opération Google est déjà en cours. Attends qu’elle se termine.';render(true);return}
+  if(gs.timer){clearTimeout(gs.timer);gs.timer=null}
+  gs.again=false;
   gs.busy=true;setSt('Suppression en ligne…');
+  const session=gs.session;
   try{
     const tok=await getToken(true);
+    if(session!==gs.session)return;
+    /* Ne jamais supprimer un fichier Drive avant d'avoir vérifié le compte autorisé. */
+    await verifyGoogleAccount(tok);
+    if(session!==gs.session)return;
     let id,n=0;
-    while((id=await findFile(tok))&&n<5){await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'});n++}
+    while((id=await findFile(tok))&&n<5){
+      if(session!==gs.session)return;
+      await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'});
+      if(session!==gs.session)return;
+      n++;
+    }
+    if(session!==gs.session)return;
     gs.st='';ui.msg=n?'Données en ligne supprimées. Une prochaine synchronisation les recréera : déconnecte-toi pour l\u2019éviter.':'Aucune donnée en ligne trouvée.';
-  }catch(e){gs.st=errText(e)}
-  finally{gs.busy=false;render(true)}
+  }catch(e){if(session===gs.session)gs.st=errText(e)}
+  finally{gs.busy=false;gs.again=false;refreshGbar();render(true)}
 }
 function statusText(){
   if(gs.st)return gs.st;
@@ -1084,7 +650,7 @@ function acctHTML(){
   let b;
   if(!c){
     b=`<p class="small muted">Connexion Google non configurée sur cet appareil. Colle l\u2019identifiant client créé dans Google Cloud (se termine par .apps.googleusercontent.com).</p>
-    <div class="field"><input type="text" id="cid" placeholder="123456-abc.apps.googleusercontent.com" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:100%"></div>
+    <div class="field"><label for="cid">Identifiant client Google</label><input type="text" id="cid" placeholder="123456-abc.apps.googleusercontent.com" autocomplete="off" autocapitalize="off" spellcheck="false" style="width:100%"></div>
     <p><button class="btn block" data-act="gcid">Enregistrer l\u2019identifiant</button></p>`;
   }else if(!a){
     loadGIS().catch(()=>{});
@@ -1201,9 +767,43 @@ function flagCard(f){
     <p style="margin:10px 0 0">${st==='confirm'||st==='clear'?btn('none','Retirer le statut'):btn('confirm','Confirmer comme déclencheur')+btn('clear','Écarter (hors de cause)')}</p></div>`;
 }
 
+const PLATE_KEY='mici:plate:v1';
+function normalizePlate(items){
+  if(!Array.isArray(items))return [];
+  const seen=new Set();
+  return items.slice(0,100).filter(p=>{
+    if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.id!=='string'||!byId(p.id)||seen.has(p.id))return false;
+    if(!Number.isInteger(p.p)||![0,1,2,3].includes(p.p))return false;
+    if(p.g!==undefined&&(!Number.isInteger(p.g)||p.g<0||p.g>1500))return false;
+    seen.add(p.id);
+    return true;
+  }).map(p=>({id:p.id,p:p.p,g:p.g||0}));
+}
+function loadPlate(){
+  try{
+    if(Array.isArray(store.plate))return normalizePlate(store.plate);
+    return normalizePlate(JSON.parse(localStorage.getItem(PLATE_KEY)||'null'));
+  }catch(e){return []}
+}
+function savePlate(){
+  const plate=normalizePlate(ui.plate);
+  ui.plate=plate;
+  store.plate=plate;
+  try{save()}catch(e){}
+  try{localStorage.setItem(PLATE_KEY,JSON.stringify(plate))}catch(e){}
+}
+
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:[],quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',ov:5,
+const ui={tab:'calc',view:'list',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),quest:false,jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
   newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false};
+function backupText(){
+  return JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
+}
+function showBackupCopyFallback(txt){
+  ui.exportText=txt;
+  ui.msg='Copie automatique impossible. Sélectionne le texte de la sauvegarde ci-dessous et copie-le.';
+  render(true);
+}
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
 
@@ -1224,7 +824,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v27';
+const APP_V='v4.3';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1322,8 +922,8 @@ function detailHTML(){
   <p style="margin-top:14px"><button class="btn block" data-act="addDetail" data-id="${esc(f.id)}">${inPlate?'Retirer de l\u2019assiette':'Ajouter à l\u2019assiette'}</button></p>
   ${ui.msg?`<p class="small good" role="status">${esc(ui.msg)}</p>`:''}
   <div class="card"><h3>Caractéristiques</h3>
-    <p class="muted small">Niveau de 0 à 3 pour une portion normale.</p>
-    ${FEATS.map((ft,i)=>`<div class="meter"><span class="nm">${ft.n}</span><span class="bar"><i style="width:${f.L[i]/3*100}%"></i></span><span class="v">${fmt(f.L[i])}</span></div>`).join('')}
+    <p class="muted small">Niveaux estimés de 0 à 4. Les aliments simples sont généralement notés de 0 à 3 ; certains plats composés peuvent atteindre 4.</p>
+    ${FEATS.map((ft,i)=>`<div class="meter"><span class="nm">${ft.n}</span><span class="bar"><i style="width:${Math.min(100,f.L[i]/4*100)}%"></i></span><span class="v">${fmt(f.L[i])}</span></div>`).join('')}
     ${f.ho>0?`<p class="small muted" style="margin:6px 0 0">Dont oligosaccharides : ${fmt(f.ho)} (poids ${fmt(oMul())} dans ce profil) · gaz possibles. Fructose/polyols : hypothèse à tester, non démontrée.</p>`:''}
     ${f.u>0?`<p class="small muted" style="margin:6px 0 0">Additifs / ultra-transformés : niveau ${fmt(f.u)} (estimation, preuve faible, poids 0,3).</p>`:''}
     ${attentionHTML(levels([{f,p:1}],{}))}
@@ -1378,11 +978,11 @@ function journalHTML(){
     ${hid>0?`<p class="small muted">${hid} autre${hid>1?'s':''} suspect${hid>1?'s':''} masqué${hid>1?'s':''} (limite de ${SUSP_MAX}) : traite d'abord ceux-ci.</p>`:''}
     ${conf.length?`<p class="small"><b>Confirmés :</b> ${conf.map(esc).join(', ')}</p>`:''}</div>`:''}
   <div class="card"${bilan.length?'':' style="margin-top:0"'}><h3>Historique</h3>
-    ${ents.map(e=>`<div class="entry"><span class="badge ${cls(e.r)}">${e.r}</span><div class="body"><b>${esc((e.items||[]).map(i=>i.n).join(' + '))}</b>
+    ${ents.map(e=>`<div class="entry"><span class="badge ${cls(e.r)}">${fmt(e.r)}</span><div class="body"><b>${esc((e.items||[]).map(i=>i.n).join(' + '))}</b>
       <span class="muted small" style="display:block">${dt(e.ts)}${e.quest?' · Questran':''}${e.jeun?' · à jeun':''}${e.score!=null?' · calculé '+fmt(e.score):''}</span>
       ${e.note?`<span class="small" style="display:block">${esc(e.note)}</span>`:''}
       ${e.edited?`<span class="muted small" style="display:block">Corrigé le ${dt(e.edited)}</span>`:''}
-      ${String(ui.editId)===String(e.id)?`<div class="field" style="margin-top:8px"><label for="eress">Digestion : <span class="rangeval" id="eressv">${ui.eR}</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="${ui.eR}"><textarea id="enote" placeholder="Note (facultatif)">${esc(ui.eNote)}</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="${e.id}">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>`:`<button class="btn ghost" style="margin:6px 0 0;padding:6px 12px" data-act="editEntry" data-id="${e.id}">Corriger la note</button>`}</div>
+      ${String(ui.editId)===String(e.id)?`<div class="field" style="margin-top:8px"><label for="eress">Digestion : <span class="rangeval" id="eressv">${ui.eR}</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="${ui.eR}"><label for="enote">Note (facultatif)</label><textarea id="enote" placeholder="Note (facultatif)">${esc(ui.eNote)}</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="${e.id}">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>`:`<button class="btn ghost" style="margin:6px 0 0;padding:6px 12px" data-act="editEntry" data-id="${e.id}">Corriger la note</button>`}</div>
       <button class="del" data-act="delEntry" data-id="${e.id}">Supprimer</button></div>`).join('')}
   </div>`}`;
 }
@@ -1449,9 +1049,10 @@ function profilHTML(){
   <div class="card"><h3>Sauvegarde</h3>
     <p class="muted small">Tes données sont stockées uniquement dans ce navigateur. Vider les données de Chrome les efface. Copie une sauvegarde de temps en temps et garde-la dans une note.</p>
     <p><button class="btn block" data-act="export">Copier la sauvegarde</button></p>
+    ${ui.exportText ? `<div class="field"><label for="backupOut">Sauvegarde à copier manuellement</label><textarea id="backupOut" rows="8" readonly>${esc(ui.exportText)}</textarea><button class="btn ghost block" style="margin-top:8px" data-act="selectBackup">Sélectionner le texte de la sauvegarde</button><p class="small muted">Le texte est sélectionné ; copie-le avec Ctrl+C (ou la commande Copier de ton appareil).</p></div>` : ``}
     <div class="field"><label for="imp">Restaurer depuis une sauvegarde</label><textarea id="imp" placeholder="Colle ici le texte copié"></textarea></div>
     <p style="margin:10px 0 0"><button class="btn ghost block" data-act="import">Restaurer</button></p>
-    ${ui.msg?`<p class="small" role="status" style="margin:10px 0 0">${esc(ui.msg)}</p>`:''}
+    <p id="profileStatus" class="small" role="status" style="margin:10px 0 0;display:${ui.msg?'block':'none'}">${esc(ui.msg)}</p>
   </div>
   <div class="card"><h3>Effacer</h3>
     <p class="muted small">Supprime notes, corrections, sensibilités et aliments ajoutés.</p>
@@ -1476,7 +1077,7 @@ function sourcesHTML(){
     <p class="small">Le MICI Score est une estimation personnelle de la tolérance digestive, construite pour une rectocolite avec poche en J. Ce n'est ni un diagnostic, ni un traitement, ni un avis médical. Il n'a pas été validé cliniquement. Tes notes du journal priment toujours sur la grille.</p>
     <p class="small muted">Cet onglet explique d'où viennent les chiffres, pour qu'un médecin ou un diététicien puisse les vérifier et les corriger.</p></div>
   <div class="card"><h3>1. Comment le score est calculé</h3>
-    <p class="small">Chaque aliment a des niveaux de 0 à 3 (par demi-point) pour des caractéristiques. Pénalité = somme(poids × ta sensibilité × multiplicateur du profil × niveau) + 0,3 × additifs − 0,5 × bonus épaississant (minimum 0). Score = 10 × exp(−pénalité / 9), donc entre 0 et 10 (10 = très bien toléré). La forme exponentielle évite que tous les plats gras tombent à 0 ; elle et le diviseur 9 sont arbitraires.</p>
+    <p class="small">Les niveaux des aliments simples vont généralement de 0 à 3 (par demi-point). Certaines valeurs de plats composés sont des estimations agrégées pouvant atteindre 4 ; le calcul plafonne chaque caractéristique à 4. Pénalité = somme(poids × ta sensibilité × multiplicateur du profil × niveau) + 0,3 × additifs − 0,5 × bonus épaississant (minimum 0). Score = 10 × exp(−pénalité / 9), donc entre 0 et 10 (10 = très bien toléré). La forme exponentielle évite que tous les plats gras tombent à 0 ; elle et le diviseur 9 sont arbitraires.</p>
     <p class="small muted">Poids en grammes : le facteur est poids saisi / poids de référence de la portion normale, plafonné entre ×0,1 et ×3. Références tirées de la table belge NUBEL « Poids et mesures » (Conseil supérieur de la Santé ; seules les valeurs filet de poulet 160 g et croque-monsieur 135 g ont été revérifiées, les autres restent à vérifier) pour œuf 50 g, jambon cuit 45 g, fromage fondu 20 g, fromage en tranche 25 g, filet de poulet 160 g, saumon 180 g, darne de cabillaud 175 g, riz cuit 150 g, frites 250 g, lasagnes 400 g, croque-monsieur 135 g, croissant 50 g, pomme 140 g, banane 130 g, mayonnaise et ketchup en cuillère 25 g ; le pain (80 g, trois tranches) et la demi-baguette (130 g) en sont déduits ; les autres références (légumes 150 g, viandes 120 g, boissons 200 g, etc.) sont des estimations sans source. Portion : trace ×0,3 (sauces et condiments, par défaut dans l'assiette), petite ×0,6, normale ×1, grosse ×1,5. Questran pris : gras ×0,75. À jeun : lactose ×1,3. Les niveaux d'une assiette s'additionnent (plafonnés à 4) : un sandwich de 6 ingrédients compte donc 6 portions, d'où des scores très bas si les portions ne sont pas réduites. Les poids affichés sous Trace, Petite, Normale et Grosse dans l'assiette sont la référence de la portion normale multipliée par le coefficient (arrondis à 5 g) : ce sont des estimations. Ces ajustements sont arbitraires.</p>
     <p class="small muted">Lecture : 6 ou plus généralement bien toléré ; 4 à 6 à adapter ; moins de 4 plusieurs points d'attention. Seuils abaissés parce que l'ancienne échelle (7 et 5, gras à 2,0, diviseur 6,5) classait 90 % des plats en rouge : elle était calibrée sur de mauvais repas seulement. Ces seuils ne sont pas validés. Le score affiché combine l'estimation et ta moyenne personnelle quand tu as des notes.</p></div>
   <div class="card"><h3>2. Caractéristiques, poids et niveau de preuve</h3>
@@ -1559,7 +1160,7 @@ document.querySelector('nav.tabs').addEventListener('click',e=>{
   render();
 });
 
-document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){ui.plate[i].g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));render(true)}}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){ui.plate[i].g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));savePlate();render(true)}}});
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='qs'){ui.qs=t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML();const cb=document.querySelector('.searchbox .clear');if(cb)cb.hidden=!t.value}
@@ -1602,13 +1203,13 @@ document.addEventListener('click',e=>{
     const i=ui.plate.findIndex(x=>x.id===id),row=b.closest('.row');
     if(i>=0){ui.plate.splice(i,1);row.classList.remove('sel');b.setAttribute('aria-pressed','false')}
     else{ui.plate.push({id,p:defP(id)});row.classList.add('sel');b.setAttribute('aria-pressed','true')}
-    updateBar();
+    savePlate();updateBar();
   }
   else if(a==='clearq'){ui.qs='';ui.page=0;const q=document.getElementById('qs');q.value='';document.getElementById('list').innerHTML=listHTML();b.hidden=true;q.focus()}
   else if(a==='info'){openDetail(id)}
-  else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}render(true)}
+  else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}savePlate();render(true)}
   else if(a==='openPlate'){ui.view='plate';render()}
-  else if(a==='clearBar'){ui.plate=[];document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
+  else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
   else if(a==='back'){if(navDepth>0){history.back()}else{ui.view='list';ui.msg='';render()}}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
   else if(a==='home'){ui.tab='calc';ui.view='list';ui.sel=null;ui.qs='';ui.cat=-1;ui.page=0;ui.msg='';ui.resetArmed=false;ui.delArmed=false;render()}
@@ -1619,14 +1220,14 @@ document.addEventListener('click',e=>{
   else if(a==='gdisc'){gDisconnect()}
   else if(a==='gdelonline'){if(!ui.delArmed){ui.delArmed=true;render(true);return}ui.delArmed=false;gDeleteOnline()}
   else if(a==='pg'){ui.page=Math.max(0,(ui.page||0)+(+b.dataset.d));document.getElementById('list').innerHTML=listHTML();window.scrollTo(0,0)}
-  else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;render(true)}
-  else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);if(!ui.plate.length)ui.view='list';render(true)}
-  else if(a==='clearPlate'){ui.plate=[];ui.view='list';ui.note='';ui.ress=7;render()}
+  else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;savePlate();render(true)}
+  else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);savePlate();if(!ui.plate.length)ui.view='list';render(true)}
+  else if(a==='clearPlate'){ui.plate=[];savePlate();ui.view='list';ui.note='';ui.ress=7;render()}
   else if(a==='saveEntry'){
     const items=plateItems();if(!items.length)return;
     const r=scoreOf(items,ui);
     store.entries.push({id:Date.now(),ts:Date.now(),items:items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0})),r:ui.ress,quest:ui.quest,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
-    save();ui.plate=[];ui.view='list';ui.note='';ui.ress=7;ui.tab='journal';render();
+    save();ui.plate=[];savePlate();ui.view='list';ui.note='';ui.ress=7;ui.tab='journal';render();
   }
   else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
   else if(a==='cancelEdit'){ui.editId=null;render(true)}
@@ -1644,7 +1245,7 @@ document.addEventListener('click',e=>{
     save();ui.qs='';ui.msg='';openDetail(nid);
   }
   else if(a==='delFood'){
-    store.del=store.del||{};store.del[id]=Date.now();store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);save();ui.view='list';render();
+    store.del=store.del||{};store.del[id]=Date.now();store.custom=store.custom.filter(x=>x.id!==id);delete store.over[id];if(store.flags)delete store.flags[id];ui.plate=ui.plate.filter(x=>x.id!==id);savePlate();save();ui.view='list';render();
   }
   else if(a==='flag'){
     const v=b.dataset.v;store.flags=store.flags||{};
@@ -1679,22 +1280,51 @@ document.addEventListener('click',e=>{
   else if(a==='mod'){store.mods=store.mods||{};store.mods[id]=!store.mods[id];save();render(true)}
   else if(a==='resetSens'){store.sens={};save();render(true)}
   else if(a==='export'){
-    const txt=JSON.stringify(Object.assign({},store,{acct:null}));
-    const done=()=>{ui.msg='Sauvegarde copiée.';render(true)},fail=()=>{ui.msg='Copie impossible sur ce navigateur.';render(true)};
+    const txt=backupText();
+    const done=()=>{ui.exportText='';ui.msg='Sauvegarde copiée.';render(true)},fail=()=>showBackupCopyFallback(txt);
     try{navigator.clipboard.writeText(txt).then(done,fail)}catch(err){fail()}
+  }
+  else if(a==='selectBackup'){
+    const el=document.getElementById('backupOut');
+    if(el){el.focus();el.select()}
   }
   else if(a==='import'){
     const raw=(document.getElementById('imp').value||'').trim();
+    let restored;
     try{
-      const p=JSON.parse(raw);
-      if(!p||!Array.isArray(p.entries))throw 0;
-      const ac=store.acct;store=norm(p);store.acct=ac;store.del={};store.ep=Date.now();store.mt=Date.now();save();applyTheme();ui.msg='Sauvegarde restaurée.';
-    }catch(err){ui.msg='Texte invalide. Colle la sauvegarde complète.'}
+      if(raw.length>8000000)throw new Error('backup-too-large');
+      restored=norm(validateBackup(JSON.parse(raw)));
+    }catch(err){
+      ui.msg=err&&err.message==='backup-too-large'
+        ?'Sauvegarde trop volumineuse (limite : 8 Mo). Aucune donnée n’a été modifiée.'
+        :'Sauvegarde invalide ou incompatible. Aucune donnée n’a été modifiée.';
+      const status=document.getElementById('profileStatus');
+      if(status){status.textContent=ui.msg;status.style.display='block'}
+      return;
+    }
+    const previousStore=store,previousPlate=ui.plate,previousExportText=ui.exportText;
+    restored.acct=store.acct;
+    restored.del={};
+    restored.ep=Date.now();
+    restored.mt=Date.now();
+    restored.plate=[];
+    store=restored;
+    ui.plate=[];store.plate=[];
+    if(!save()){
+      store=previousStore;ui.plate=previousPlate;ui.exportText=previousExportText;
+      ui.msg='Impossible d’enregistrer la sauvegarde dans ce navigateur. Aucune donnée n’a été modifiée.';
+      const status=document.getElementById('profileStatus');
+      if(status){status.textContent=ui.msg;status.style.display='block'}
+      return;
+    }
+    try{localStorage.setItem(PLATE_KEY,'[]')}catch(e){}
+    ui.exportText='';ui.view='list';ui.editId=null;
+    applyTheme();ui.msg='Sauvegarde restaurée.';
     render(true);
   }
   else if(a==='reset'){
     if(!ui.resetArmed){ui.resetArmed=true;render(true);return}
-    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];ui.resetArmed=false;ui.msg='Données effacées.';render(true);
+    {const ac=store.acct;store=norm({});store.acct=ac;store.ep=Date.now();store.mt=Date.now()}save();applyTheme();ui.plate=[];savePlate();ui.exportText='';ui.resetArmed=false;ui.msg='Données effacées.';render(true);
   }
 });
 
