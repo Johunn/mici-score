@@ -202,6 +202,64 @@ body[data-layout="cartes"] .row .info{position:absolute;top:0;right:0;width:40px
 .onb-note{font-size:14px;color:var(--muted);border-left:4px solid var(--accent);padding:6px 10px;margin:10px 0}
 .onb-acts{display:flex;gap:10px;margin-top:16px}
 .onb-acts .btn{flex:1;margin:0}
+
+/* Refonte UI v4.6 — lisibilité clinique, actions plus lisibles, navigation mobile */
+:root{--navh:66px}
+main{max-width:760px;padding:18px clamp(16px,3vw,28px) 28px}
+#appfoot{max-width:760px;padding-right:clamp(16px,3vw,28px);padding-left:clamp(16px,3vw,28px)}
+.appbar-in{max-width:760px;padding:10px clamp(16px,3vw,28px) 8px}
+#appbar{border-bottom:1px solid color-mix(in srgb,var(--line) 58%,transparent);background:color-mix(in srgb,var(--bg) 92%,transparent)}
+.brand{font-size:23px;letter-spacing:-.035em}
+h1{font-size:clamp(28px,4vw,34px);letter-spacing:-.035em;line-height:1.08}
+h2{letter-spacing:-.025em;line-height:1.15}
+h3{letter-spacing:-.015em}
+.card{border-radius:18px;padding:clamp(16px,2.8vw,22px);margin-top:18px;box-shadow:0 8px 24px rgba(0,0,0,.09)}
+.rows{border-radius:16px}
+.row .name{min-height:54px;padding:14px 10px 14px 16px;font-weight:550;line-height:1.3}
+.row .info{width:50px;min-height:54px}
+.badge{min-width:48px;border-radius:10px}
+.group{margin-top:24px}
+.group>h3{margin-bottom:10px;font-size:13px;letter-spacing:.045em;text-transform:uppercase}
+input[type=search],input[type=text],input[type=number],textarea,select{border-radius:12px;border-width:1px;padding:13px 14px}
+input[type=search]:focus,input[type=text]:focus,input[type=number]:focus,textarea:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.chips{gap:7px;padding:10px 0 6px}
+.chip{padding:9px 13px;border-width:1px;background:color-mix(in srgb,var(--surface) 72%,transparent)}
+.chip[aria-pressed=true]{box-shadow:0 2px 8px color-mix(in srgb,var(--accent) 20%,transparent)}
+.btn{border-radius:12px;padding:13px 17px}
+.btn.ghost,.btn.danger{border-width:1px}
+.ibtn{border-width:1px}
+nav.tabs{justify-content:center;padding:7px max(10px,calc((100vw - 760px)/2)) calc(7px + env(safe-area-inset-bottom,0px));gap:6px;background:color-mix(in srgb,var(--surface) 91%,transparent);box-shadow:0 -8px 28px rgba(0,0,0,.08)}
+nav.tabs button{max-width:190px;min-height:48px;padding:12px 8px;border:0;border-radius:12px;font-size:13px}
+nav.tabs button[aria-current=page]{color:var(--accent);background:color-mix(in srgb,var(--accent) 13%,var(--surface));box-shadow:none}
+#bar{padding:9px 16px}
+#bar .wrap{max-width:720px}
+#bar button{min-height:48px;border-radius:14px;box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.notice{border-radius:0 12px 12px 0;padding:11px 14px}
+.entry{padding:15px 0}
+.empty{padding:32px 12px}
+.theme{border-radius:12px;padding:12px}
+.theme[aria-pressed=true]{box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 75%,transparent)}
+#onb .dlg{border-radius:22px;padding:clamp(20px,4vw,28px);box-shadow:0 18px 55px rgba(0,0,0,.24)}
+.onb-opt{border-radius:14px}
+@media(min-width:760px){
+  main{padding-top:24px}
+  .appbar-in{padding-top:12px;padding-bottom:10px}
+  nav.tabs button{font-size:14px}
+  .card{margin-top:20px}
+}
+@media(max-width:420px){
+  main{padding-top:14px;padding-right:14px;padding-left:14px}
+  .row .name{padding-left:12px}
+  .row .info{width:44px}
+  nav.tabs{gap:2px;padding-left:8px;padding-right:8px}
+  nav.tabs button{padding-left:3px;padding-right:3px;font-size:12px}
+  #bar{padding-left:10px;padding-right:10px}
+}
+@media(prefers-reduced-motion:no-preference){
+  button,.btn,.chip,.theme,.row,input,textarea,select{transition:background-color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+  button:active,.btn:active{transform:translateY(1px)}
+}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
@@ -841,7 +899,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v4.5';
+const APP_V='v4.6';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
