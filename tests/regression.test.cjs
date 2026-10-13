@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v4.2';"));
+  assert.ok(html.includes("const APP_V='v4.3';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -68,7 +68,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v29';/);
+  assert.match(swSource, /const CACHE='mici-score-v30';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -334,7 +334,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v4.2';"));
+  assert.ok(html.includes("const APP_V='v4.3';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -688,6 +688,57 @@ const disconnectSource = extractBetween(
   'function gDisconnect(){',
   '\nasync function gDeleteOnline()'
 );
+
+
+const getTokenSource = extractBetween(
+  html,
+  'function getToken(interactive){',
+  '\nasync function gapi'
+);
+
+test('late Google token responses cannot restore a token after disconnect', async () => {
+  let client;
+  const sandbox = {
+    gs: { tok: null, exp: 0, client: null, session: 4 },
+    store: { acct: { email: 'person@example.com' } },
+    isStandalone() { return false; },
+    loadGIS() { return Promise.resolve(); },
+    cid() { return 'test-client'; },
+    G_SCOPE: 'openid email',
+    google: { accounts: { oauth2: {
+      initTokenClient() {
+        client = {
+          callback: null,
+          error_callback: null,
+          requestAccessToken() {}
+        };
+        return client;
+      }
+    }}},
+    acceptTokenResponse(response) {
+      sandbox.gs.tok = response.access_token;
+      sandbox.gs.exp = Date.now() + Number(response.expires_in) * 1000;
+      return response.access_token;
+    }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(getTokenSource + '\nglobalThis.getTokenForTest = getToken;').runInContext(sandbox);
+
+  const pending = sandbox.getTokenForTest(false);
+  await Promise.resolve();
+  await Promise.resolve();
+  assert.equal(typeof client.callback, 'function');
+
+  sandbox.gs.session++;
+  sandbox.store.acct = null;
+  sandbox.gs.tok = null;
+  client.callback({ access_token: 'late-token', token_type: 'Bearer', expires_in: 3600 });
+
+  await assert.rejects(pending, { message: 'cancelled' });
+  assert.equal(sandbox.gs.tok, null);
+  assert.equal(sandbox.store.acct, null);
+});
+
 
 test('disconnect invalidates a sync session and clears its scheduled timer', () => {
   const cleared = [];
