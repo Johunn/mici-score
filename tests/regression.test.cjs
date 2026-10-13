@@ -53,18 +53,18 @@ test('app shell loads the scoring module before its inline code', () => {
 test('settings and journal note fields have accessible labels and focus support', () => {
   assert.ok(html.includes('<label for="cid">Identifiant client Google</label><input type="text" id="cid"'));
   assert.ok(html.includes('<label for="enote">Note (facultatif)</label><textarea id="enote"'));
-  assert.match(html, /:focus-visible\\{outline:3px solid var\\(--accent\\);outline-offset:2px\\}/);
-  assert.match(html, /<nav class="tabs" aria-label="Navigation">/);
-  assert.match(html, /@media \\(prefers-reduced-motion:no-preference\\)/);
+  assert.ok(html.includes(':focus-visible{outline:3px solid var(--accent);outline-offset:2px}'));
+  assert.ok(html.includes('<nav class="tabs" aria-label="Navigation">'));
+  assert.ok(html.includes('@media (prefers-reduced-motion:no-preference)'));
 });
 
 test('offline shell caches the app engine and local fonts without intercepting external origins', () => {
-  assert.match(swSource, /const CORE=\\[[^\\]]*'index\\.html'[^\\]]*'score-core\\.js'/);
-  assert.match(swSource, /'fonts\\/bricolage-grotesque-latin-opsz-normal\\.woff2'/);
-  assert.match(swSource, /'fonts\\/figtree-latin-wght-normal\\.woff2'/);
-  assert.match(swSource, /'fonts\\/montserrat-latin-wght-normal\\.woff2'/);
-  assert.match(swSource, /new URL\\(r\\.url\\)\\.origin!==self\\.location\\.origin\\)return/);
-  assert.match(swSource, /catch\\(\\)=>caches\\.open\\(CACHE\\)\\.then\\(c=>c\\.match\\(r\\)\\)/);
+  assert.ok(swSource.includes("'index.html','score-core.js'"));
+  assert.ok(swSource.includes("'fonts/bricolage-grotesque-latin-opsz-normal.woff2'"));
+  assert.ok(swSource.includes("'fonts/figtree-latin-wght-normal.woff2'"));
+  assert.ok(swSource.includes("'fonts/montserrat-latin-wght-normal.woff2'"));
+  assert.ok(swSource.includes("if(new URL(r.url).origin!==self.location.origin)return;"));
+  assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
