@@ -801,9 +801,13 @@ test('Google account is checked before Drive access', async (t) => {
   });
   const accountCall = html.indexOf('const email=await verifyGoogleAccount(tok);');
   const driveRead = html.indexOf('let id=await findFile(tok),R=null;');
-  const onlineDelete = html.indexOf('await verifyGoogleAccount(tok);\n    let id,n=0;');
+  const onlineDeleteStart = html.indexOf('async function gDeleteOnline(){');
+  const onlineDeleteEnd = html.indexOf('\nfunction statusText(){', onlineDeleteStart);
+  const onlineDelete = onlineDeleteStart >= 0 && onlineDeleteEnd > onlineDeleteStart
+    ? html.slice(onlineDeleteStart, onlineDeleteEnd) : '';
   assert.ok(accountCall >= 0 && accountCall < driveRead);
-  assert.ok(onlineDelete >= 0);
+  assert.ok(onlineDelete.includes('await verifyGoogleAccount(tok);'));
+  assert.ok(onlineDelete.indexOf('await verifyGoogleAccount(tok);') < onlineDelete.indexOf("await gapi(tok,'/drive/v3/files/'+id,{method:'DELETE'})"));
 });
 
 test('service worker only deletes MICI Score caches', async () => {
