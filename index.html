@@ -883,8 +883,10 @@ function validateBackup(p){
   const entries=p.entries.map(e=>{
     if(!record(e))fail();
     let eid=e.id;
-    if(typeof eid==='string'&&/^\\d{1,16}$/.test(eid))eid=Number(eid);
-    if(!Number.isSafeInteger(eid)||eid<0||!date(e.ts)||!num(e.r,0,10))fail();
+    if(typeof eid==='string'&&/^[0-9]{1,16}$/.test(eid))eid=Number(eid);
+    const ts=e.ts===undefined?eid:(typeof e.ts==='string'&&/^[0-9]{1,16}$/.test(e.ts)?Number(e.ts):e.ts);
+    if(!Number.isSafeInteger(eid)||eid<0||!date(ts)||!num(e.r,0,10))fail();
+    ['quest','jeun','q','j'].forEach(k=>{if(e[k]!==undefined&&typeof e[k]!=='boolean')fail()});
     let sourceItems=e.items;
     /* Compatibilité avec les anciennes sauvegardes à un seul aliment par entrée. */
     if(!Array.isArray(sourceItems)&&text(e.name,200,true)){
@@ -897,7 +899,7 @@ function validateBackup(p){
       if(!Number.isInteger(portion)||portion<0||portion>3||!num(grams,0,1500))fail();
       return{id:it.id,n:it.n,p:portion,g:grams};
     });
-    const o={id:eid,ts:e.ts,items,r:e.r,quest:e.quest===true||e.q===true,jeun:e.jeun===true||e.j===true,note:e.note===undefined?'':e.note};
+    const o={id:eid,ts,items,r:e.r,quest:e.quest===true||e.q===true,jeun:e.jeun===true||e.j===true,note:e.note===undefined?'':e.note};
     if(!text(o.note,10000))fail();
     if(e.L===null||e.L===undefined)o.L=null;else{if(!arrNums(e.L,7,0,4))fail();o.L=e.L.slice()}
     if(e.score!==undefined){if(!num(e.score,0,10))fail();o.score=e.score}
