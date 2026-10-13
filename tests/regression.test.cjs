@@ -55,9 +55,9 @@ test('service worker pre-caches the extracted scoring module', () => {
 });
 
 test('score formula and scale explanations stay consistent', () => {
-  assert.match(html, /const K=9;/);
-  assert.match(html, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v30';/);
+  assert.match(coreModuleSource, /const K=9;/);
+  assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
+  assert.match(html, /const APP_V='v31';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
