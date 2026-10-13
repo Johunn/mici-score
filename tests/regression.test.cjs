@@ -425,7 +425,7 @@ test('failed import preserves pasted text and leaves existing data untouched', (
     render() { throw new Error('must not rebuild the screen on failed import'); }
   };
   vm.createContext(sandbox);
-  new vm.Script(importer).runInContext(sandbox);
+  new vm.Script("(function(){\\n" + importer + "\\n}).call(globalThis);").runInContext(sandbox);
 
   assert.equal(input.value, '{not-json');
   assert.deepEqual(copy(sandbox.store), initialSnapshot);
