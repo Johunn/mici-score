@@ -260,6 +260,63 @@ nav.tabs button[aria-current=page]{color:var(--accent);background:color-mix(in s
   button:active,.btn:active{transform:translateY(1px)}
 }
 
+
+/* Refonte renforcée v4.7 : changement visuel perceptible sur mobile */
+:root{--navh:76px}
+body{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,var(--bg)) 0,var(--bg) 300px);background-attachment:fixed}
+#appbar{background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.appbar-in{min-height:58px}
+.brand{font-size:25px;letter-spacing:-.045em}
+main{padding-top:20px;padding-bottom:36px}
+main#app>p.muted:first-child{font-size:13px!important;line-height:1.55!important;text-align:left!important;font-style:normal!important;opacity:1!important;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 14px 14px 0;padding:13px 15px;margin:0 0 16px!important}
+.searchbox{margin:16px 0 10px}
+.searchbox input{min-height:56px!important;border-radius:16px!important;border:2px solid var(--accent)!important;background:var(--surface)!important;font-size:16px!important;padding-left:17px!important;box-shadow:0 5px 18px color-mix(in srgb,var(--accent) 10%,transparent)}
+.searchbox input:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 20%,transparent)!important}
+.chips{display:flex;flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;padding:10px 2px 13px;gap:8px}
+.chip{flex:0 0 auto;border-radius:999px!important;padding:10px 15px!important;font-size:13px;font-weight:650;background:var(--surface)!important;border:1px solid var(--line)!important}
+.chip[aria-pressed=true]{background:var(--accent)!important;color:var(--on-accent,var(--bg))!important;border-color:var(--accent)!important;box-shadow:0 3px 10px color-mix(in srgb,var(--accent) 25%,transparent)!important}
+.seg{gap:6px}
+.seg button{border-radius:10px!important;padding:10px 11px!important}
+.group{margin-top:23px}
+.group>h3{display:flex;align-items:center;gap:9px;font-size:13px!important;letter-spacing:.06em!important;text-transform:uppercase;color:var(--muted);margin:0 0 10px!important}
+.group>h3:before{content:"";display:inline-block;width:5px;height:17px;border-radius:5px;background:var(--accent);flex:none}
+.rows{display:grid;gap:7px;background:transparent!important;border:0!important;overflow:visible!important}
+.row{border:1px solid var(--line)!important;border-radius:13px!important;background:var(--surface)!important;overflow:hidden;box-shadow:0 2px 7px rgba(0,0,0,.035);transition:border-color .15s,box-shadow .15s}
+.row.sel{border-color:var(--accent)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent),0 4px 12px color-mix(in srgb,var(--accent) 12%,transparent)}
+.row .name{font-weight:600!important;min-height:58px!important;padding-left:15px!important}
+.row .badge{align-self:center;margin:0 2px;min-width:48px;padding:8px 5px;border-radius:10px!important;font-weight:750}
+.row .info{min-height:58px!important;width:44px!important;font-size:24px!important;color:var(--accent)}
+.card{border-radius:20px!important;border:1px solid var(--line)!important;background:var(--surface)!important;box-shadow:0 8px 26px rgba(0,0,0,.07)!important;padding:20px!important;margin-top:18px!important}
+.card h3{font-size:17px;margin-top:0}
+.btn{min-height:48px;border-radius:13px!important;font-weight:700}
+.btn:not(.ghost):not(.danger){box-shadow:0 5px 14px color-mix(in srgb,var(--accent) 18%,transparent)}
+.notice{border-left:4px solid var(--accent);border-radius:0 14px 14px 0;background:color-mix(in srgb,var(--accent) 8%,var(--surface));padding:14px 15px}
+#bar{padding:10px 14px}
+#bar .wrap{max-width:720px}
+#bar button{min-height:52px;border-radius:16px;box-shadow:0 7px 22px rgba(0,0,0,.2);font-weight:750}
+nav.tabs{padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));gap:6px;background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.09)}
+nav.tabs button{flex:1;min-height:50px;border-radius:13px!important;padding:11px 4px!important;font-size:13px!important;font-weight:700!important;box-shadow:none!important;color:var(--muted)}
+nav.tabs button[aria-current=page]{background:var(--accent)!important;color:var(--on-accent,var(--bg))!important;box-shadow:0 3px 10px color-mix(in srgb,var(--accent) 24%,transparent)!important}
+#appfoot{padding-top:12px;padding-bottom:18px;line-height:1.6}
+@media(min-width:760px){
+ main{padding-top:26px}
+ .chips{flex-wrap:wrap;overflow:visible}
+ .rows{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .row{min-width:0}
+ nav.tabs{left:50%;right:auto;transform:translateX(-50%);width:min(100%,760px);border-left:1px solid var(--line);border-right:1px solid var(--line);border-radius:16px 16px 0 0}
+}
+@media(max-width:420px){
+ main{padding-left:14px;padding-right:14px;padding-top:16px}
+ .row .name{padding-left:11px!important;font-size:14px}
+ .row .badge{min-width:42px;font-size:13px}
+ .row .info{width:34px!important}
+ nav.tabs{gap:4px;padding-left:6px;padding-right:6px}
+ nav.tabs button{font-size:12px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
@@ -899,7 +956,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v4.6';
+const APP_V='v4.7';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
