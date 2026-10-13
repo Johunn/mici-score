@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v40';/);
+  assert.match(html, /const APP_V='v41';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -68,7 +68,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v26';/);
+  assert.match(swSource, /const CACHE='mici-score-v27';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -334,7 +334,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v40';/);
+  assert.match(html, /const APP_V='v41';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -680,6 +680,97 @@ test('OAuth redirect rejects a state mismatch', () => {
   h.helpers.readRedirect();
   assert.equal(h.gs.tok, null);
   assert.match(h.gs.st, /invalide/);
+});
+
+
+const disconnectSource = extractBetween(
+  html,
+  'function gDisconnect(){',
+  '\nasync function gDeleteOnline()'
+);
+
+test('disconnect invalidates a sync session and clears its scheduled timer', () => {
+  const cleared = [];
+  const sandbox = {
+    gs: { tok: 'access-token', exp: 500, session: 7, timer: 123, again: true, st: 'Synchronisation…' },
+    ui: { gmenu: true, msg: '' },
+    store: { acct: { email: 'person@example.com' } },
+    window: {},
+    clearTimeout(handle) { cleared.push(handle); },
+    save() { sandbox.saved = true; },
+    render(keep) { sandbox.renderKeep = keep; }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(disconnectSource + '\nglobalThis.disconnectForTest = gDisconnect;').runInContext(sandbox);
+  sandbox.disconnectForTest();
+
+  assert.equal(sandbox.gs.session, 8);
+  assert.equal(sandbox.gs.timer, null);
+  assert.equal(sandbox.gs.again, false);
+  assert.equal(sandbox.gs.tok, null);
+  assert.equal(sandbox.gs.exp, 0);
+  assert.equal(sandbox.store.acct, null);
+  assert.deepEqual(cleared, [123]);
+  assert.equal(sandbox.saved, true);
+  assert.equal(sandbox.renderKeep, true);
+});
+
+const syncSource = extractBetween(
+  html,
+  'async function syncNow(interactive){',
+  '\nfunction schedSync(){'
+);
+
+test('an in-flight sync stops after the user disconnects', async () => {
+  let resolveToken;
+  let verificationCalls = 0;
+  const pendingToken = new Promise(resolve => { resolveToken = resolve; });
+  const sandbox = {
+    cid() { return 'client-id'; },
+    navigator: { onLine: true },
+    gs: { tok: null, exp: 0, busy: false, again: false, st: '', timer: null, last: 0, session: 3 },
+    store: { acct: { email: 'person@example.com' } },
+    ui: { tab: 'calc', msg: '' },
+    setSt() {},
+    getToken() { return pendingToken; },
+    async verifyGoogleAccount() { verificationCalls++; return 'person@example.com'; },
+    async findFile() { throw new Error('should not read Drive after disconnect'); },
+    refreshGbar() {},
+    render() { throw new Error('no user message expected'); }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(syncSource + '\nglobalThis.syncForTest = syncNow;').runInContext(sandbox);
+
+  const pendingSync = sandbox.syncForTest(false);
+  assert.equal(sandbox.gs.busy, true);
+  sandbox.gs.session++;
+  sandbox.gs.tok = null;
+  sandbox.store.acct = null;
+  resolveToken('late-token');
+  await pendingSync;
+
+  assert.equal(verificationCalls, 0);
+  assert.equal(sandbox.store.acct, null);
+  assert.equal(sandbox.gs.busy, false);
+});
+
+test('online deletion refuses to overlap another Google operation', async () => {
+  const deleteSource = extractBetween(
+    html,
+    'async function gDeleteOnline(){',
+    '\nfunction statusText(){'
+  );
+  const sandbox = {
+    gs: { busy: true, st: 'Synchronisation…', again: false, timer: null, session: 1 },
+    ui: { msg: '' },
+    render(keep) { sandbox.renderKeep = keep; },
+    getToken() { throw new Error('must not request token during another Google operation'); }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(deleteSource + '\nglobalThis.deleteOnlineForTest = gDeleteOnline;').runInContext(sandbox);
+  await sandbox.deleteOnlineForTest();
+  assert.match(sandbox.gs.st, /opération Google est déjà en cours/);
+  assert.equal(sandbox.renderKeep, true);
 });
 
 const verifySource = extractBetween(
