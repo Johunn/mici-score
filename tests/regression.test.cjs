@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v37';/);
+  assert.match(html, /const APP_V='v38';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -276,7 +276,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v37';/);
+  assert.match(html, /const APP_V='v38';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -434,6 +434,57 @@ test('failed import preserves pasted text and leaves existing data untouched', (
   assert.match(status.textContent, /Aucune donnée n’a été modifiée/);
   assert.equal(status.style.display, 'block');
   assert.match(html, /id="profileStatus"/);
+});
+
+
+test('successful import replaces data, preserves the current account, and clears local draft state', () => {
+  const importer = extractBetween(
+    html,
+    "else if(a==='import'){",
+    "\n  else if(a==='reset')"
+  ).replace("else if(a==='import'){", "if(a==='import'){");
+  const input = { value: JSON.stringify(validBackup()) };
+  const initialStore = {
+    acct: { email: 'current@example.com' },
+    entries: [{ id: 1, r: 2 }],
+    custom: [{ id: 'old-custom' }],
+    plate: [{ id: 'old-draft' }]
+  };
+  const sandbox = {
+    a: 'import',
+    document: { getElementById(id) { return id === 'imp' ? input : null; } },
+    store: initialStore,
+    ui: {
+      msg: '', plate: [{ id: 'old-draft', p: 1, g: 0 }],
+      exportText: 'old-fallback', view: 'profile', editId: 123
+    },
+    norm(value) { return value; },
+    validateBackup: makeValidator(),
+    savePlate() { sandbox.store.plate = copy(sandbox.ui.plate); },
+    saveCount: 0,
+    save() { sandbox.saveCount++; },
+    applyTheme() { sandbox.themeApplied = true; },
+    render(keep) { sandbox.renderCount = (sandbox.renderCount || 0) + 1; sandbox.renderKeep = keep; }
+  };
+  vm.createContext(sandbox);
+  new vm.Script("(function(){\n" + importer + "\n}).call(globalThis);").runInContext(sandbox);
+
+  assert.equal(sandbox.store.acct.email, 'current@example.com');
+  assert.equal(sandbox.store.entries.length, 1);
+  assert.equal(sandbox.store.entries[0].r, 8);
+  assert.equal(sandbox.store.custom[0].id, 'custom-a');
+  assert.deepEqual(copy(sandbox.store.plate), []);
+  assert.deepEqual(copy(sandbox.ui.plate), []);
+  assert.equal(sandbox.ui.exportText, '');
+  assert.equal(sandbox.ui.view, 'list');
+  assert.equal(sandbox.ui.editId, null);
+  assert.match(sandbox.ui.msg, /Sauvegarde restaurée/);
+  assert.equal(sandbox.saveCount, 1);
+  assert.equal(sandbox.themeApplied, true);
+  assert.equal(sandbox.renderCount, 1);
+  assert.equal(sandbox.renderKeep, true);
+  assert.ok(Number.isFinite(sandbox.store.ep));
+  assert.ok(Number.isFinite(sandbox.store.mt));
 });
 
 const oauthSource = extractBetween(
