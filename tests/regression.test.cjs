@@ -44,13 +44,13 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v34';/);
+  assert.match(html, /const APP_V='v35';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v20';/);
+  assert.match(swSource, /const CACHE='mici-score-v21';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -161,10 +161,82 @@ test('assiette persistence caps a corrupted oversized draft', () => {
   assert.equal(sandbox.loadPlateForTest().length, 100);
 });
 
+
+test('assiette draft stays local and is excluded from sync and export payloads', () => {
+  const dataHashLine = html.match(/const dataHash=.*?;\n/)[0];
+  const snapLine = html.match(/const snap=.*?;\n/)[0];
+  const sandbox = {
+    store: {
+      ep: 4, mt: 5, custom: [], entries: [], over: {}, sens: {},
+      prof: 'poche', mods: {}, flags: {}, del: {},
+      plate: [{ id: 'secret-draft-food', p: 1, g: 0 }]
+    }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(dataHashLine + snapLine +
+    '\nglobalThis.syncIsolation = { dataHash, snap };'
+  ).runInContext(sandbox);
+  const originalHash = sandbox.syncIsolation.dataHash();
+  sandbox.store.plate.push({ id: 'another-draft-food', p: 2, g: 0 });
+  assert.equal(sandbox.syncIsolation.dataHash(), originalHash);
+
+  const remotePayload = sandbox.syncIsolation.snap();
+  assert.equal(Object.hasOwn(remotePayload, 'plate'), false);
+  assert.doesNotMatch(JSON.stringify(remotePayload), /secret-draft-food|another-draft-food/);
+
+  const exportSandbox = {
+    store: Object.assign({}, sandbox.store, { acct: { email: 'test@example.com' } })
+  };
+  vm.createContext(exportSandbox);
+  new vm.Script(
+    "const txt=JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));" +
+    "\nglobalThis.exportedBackup = txt;"
+  ).runInContext(exportSandbox);
+  assert.doesNotMatch(exportSandbox.exportedBackup, /secret-draft-food|another-draft-food/);
+  assert.match(html, /Object\.assign\(\{\},store,\{acct:null,plate:undefined\}\)/);
+});
+
+test('draft pruning removes custom foods that disappear during cloud sync', () => {
+  const syncApplySource = extractBetween(
+    html,
+    'if(R&&sig(M)!==sig(L)){',
+    '\n    if(!R||sig(M)!==sig(R))'
+  );
+  assert.match(syncApplySource, /store\.custom=M\.custom;[\s\S]*?savePlate\(\);[\s\S]*?_applying=false/);
+
+  const values = new Map();
+  const sandbox = {
+    store: {
+      custom: [{ id: 'custom-food', n: 'Test', c: 0, L: [0,0,0,0,0,0,0], b: 0 }],
+      plate: null,
+      entries: [], over: {}, sens: {}, prof: 'poche', mods: {}, flags: {}, del: {}
+    },
+    ui: { plate: [
+      { id: 'custom-food', p: 1, g: 0 },
+      { id: 'carotte-cuite', p: 1, g: 0 }
+    ] },
+    save() { values.set('mici:v2', JSON.stringify(sandbox.store)); },
+    localStorage: { setItem(key, value) { values.set(key, value); } },
+    byId(id) {
+      if (id === 'carotte-cuite') return { id };
+      return (sandbox.store.custom || []).find(f => f.id === id) || null;
+    }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(platePersistenceSource +
+    '\nglobalThis.reconcileDraft = savePlate;'
+  ).runInContext(sandbox);
+  sandbox.store.custom = [];
+  sandbox.reconcileDraft();
+  assert.deepEqual(copy(sandbox.ui.plate), [{ id: 'carotte-cuite', p: 1, g: 0 }]);
+  assert.deepEqual(copy(sandbox.store.plate), [{ id: 'carotte-cuite', p: 1, g: 0 }]);
+  assert.deepEqual(JSON.parse(values.get('mici:plate:v1')), [{ id: 'carotte-cuite', p: 1, g: 0 }]);
+});
+
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v34';/);
+  assert.match(html, /const APP_V='v35';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
