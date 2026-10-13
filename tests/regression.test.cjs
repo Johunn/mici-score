@@ -51,8 +51,8 @@ test('app shell loads the scoring module before its inline code', () => {
 
 
 test('settings and journal note fields have accessible labels and focus support', () => {
-  assert.match(html, /<label for="cid">Identifiant client Google<\\/label><input type="text" id="cid"/);
-  assert.match(html, /<label for="enote">Note \\(facultatif\\)<\\/label><textarea id="enote"/);
+  assert.ok(html.includes('<label for="cid">Identifiant client Google</label><input type="text" id="cid"'));
+  assert.ok(html.includes('<label for="enote">Note (facultatif)</label><textarea id="enote"'));
   assert.match(html, /:focus-visible\\{outline:3px solid var\\(--accent\\);outline-offset:2px\\}/);
   assert.match(html, /<nav class="tabs" aria-label="Navigation">/);
   assert.match(html, /@media \\(prefers-reduced-motion:no-preference\\)/);
