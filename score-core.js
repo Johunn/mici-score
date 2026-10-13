@@ -600,7 +600,6 @@ const grOf=(f,k)=>{const g=refG(f)*PF[k];return g<10?Math.round(g):Math.round(g/
 function levels(items,ctx){
   const L=Array(7).fill(0);let b=0,ho=0,u=0;
   items.forEach(it=>{const P=pfOf(it);it.f.L.forEach((v,i)=>{L[i]+=v*P});b+=it.f.b*P;ho+=(it.f.ho||0)*P;u+=(it.f.u||0)*P});
-  if(ctx&&ctx.quest)L[0]*=0.75;
   if(ctx&&ctx.jeun)L[1]*=1.3;
   const Lc=L.map(v=>Math.min(4,v));
   return{L:Lc,b:Math.min(2,b),ho:Math.min(ho,Lc[3]),u:Math.min(4,u)};
