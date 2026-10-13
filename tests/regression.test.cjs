@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v36';/);
+  assert.match(html, /const APP_V='v37';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -276,7 +276,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v36';/);
+  assert.match(html, /const APP_V='v37';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -390,6 +390,49 @@ test('failed import checks run before replacing store and report data preservati
   assert.ok(importer.indexOf('validateBackup(JSON.parse(raw))') < importer.indexOf('store=restored'));
   assert.match(importer, /Aucune donnée n’a été modifiée/);
   assert.match(importer, /raw\.length>8000000/);
+});
+
+test('failed import preserves pasted text and leaves existing data untouched', () => {
+  const importer = extractBetween(
+    html,
+    "else if(a==='import'){",
+    "\n  else if(a==='reset')"
+  ).replace(/^\\s*else\\s+if\\(a==='import'\\)\\{/, "if(a==='import'){");
+  const input = { value: '{not-json' };
+  const status = { textContent: '', style: { display: 'none' } };
+  const initialStore = {
+    acct: { email: 'keep@example.com' },
+    entries: [{ id: 123, r: 8 }],
+    custom: [{ id: 'custom-a' }]
+  };
+  const initialSnapshot = copy(initialStore);
+  const sandbox = {
+    document: {
+      getElementById(id) {
+        if (id === 'imp') return input;
+        if (id === 'profileStatus') return status;
+        return null;
+      }
+    },
+    store: initialStore,
+    ui: { msg: '', plate: [{ id: 'draft', p: 1, g: 0 }], exportText: 'backup', view: 'profile', editId: 7 },
+    norm(value) { return value; },
+    validateBackup() { throw new Error('invalid-backup'); },
+    savePlate() { throw new Error('must not clear draft on failed import'); },
+    save() { throw new Error('must not save on failed import'); },
+    applyTheme() { throw new Error('must not apply restored theme on failed import'); },
+    render() { throw new Error('must not rebuild the screen on failed import'); }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(importer).runInContext(sandbox);
+
+  assert.equal(input.value, '{not-json');
+  assert.deepEqual(copy(sandbox.store), initialSnapshot);
+  assert.deepEqual(copy(sandbox.ui.plate), [{ id: 'draft', p: 1, g: 0 }]);
+  assert.equal(sandbox.ui.exportText, 'backup');
+  assert.match(status.textContent, /Aucune donnée n’a été modifiée/);
+  assert.equal(status.style.display, 'block');
+  assert.match(html, /id="profileStatus"/);
 });
 
 const oauthSource = extractBetween(
