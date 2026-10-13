@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v41';/);
+  assert.match(html, /const APP_V='v42';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -68,7 +68,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v27';/);
+  assert.match(swSource, /const CACHE='mici-score-v28';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -334,7 +334,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v41';/);
+  assert.match(html, /const APP_V='v42';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -697,7 +697,7 @@ test('disconnect invalidates a sync session and clears its scheduled timer', () 
     store: { acct: { email: 'person@example.com' } },
     window: {},
     clearTimeout(handle) { cleared.push(handle); },
-    save() { sandbox.saved = true; },
+    save() { sandbox.saved = true; return true; },
     render(keep) { sandbox.renderKeep = keep; }
   };
   vm.createContext(sandbox);
@@ -720,6 +720,31 @@ const syncSource = extractBetween(
   'async function syncNow(interactive){',
   '\nfunction schedSync(){'
 );
+
+
+test('disconnect warns when local storage cannot persist the account choice', () => {
+  const source = extractBetween(
+    html,
+    'function gDisconnect(){',
+    '\nasync function gDeleteOnline()'
+  );
+  const sandbox = {
+    gs: { tok: null, exp: 0, session: 2, timer: null, again: false, st: '' },
+    ui: { gmenu: false, msg: '' },
+    store: { acct: { email: 'person@example.com' } },
+    window: {},
+    save() { return false; },
+    render() {}
+  };
+  vm.createContext(sandbox);
+  new vm.Script(source + '\nglobalThis.disconnectForTest = gDisconnect;').runInContext(sandbox);
+  sandbox.disconnectForTest();
+  assert.equal(sandbox.store.acct, null);
+  assert.equal(sandbox.gs.session, 3);
+  assert.match(sandbox.ui.msg, /n’a pas pu enregistrer ce choix/);
+  assert.match(sandbox.ui.msg, /retire l’accès à MICI Score dans ton compte Google/);
+});
+
 
 test('an in-flight sync stops after the user disconnects', async () => {
   let resolveToken;
