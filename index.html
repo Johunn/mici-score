@@ -467,7 +467,9 @@ function readRedirect(){
   catch(e){gs.st='Réponse OAuth invalide ou expirée. Réessaie la connexion.'}
 }
 function getToken(interactive){
+  const requestSession=gs.session;
   return new Promise((res,rej)=>{
+    if(requestSession!==gs.session)return rej(new Error('cancelled'));
     if(gs.tok&&Date.now()<gs.exp-60000)return res(gs.tok);
     if(isStandalone()){
       if(!interactive)return rej(new Error('popup'));
@@ -476,8 +478,10 @@ function getToken(interactive){
     }
     if(interactive)setTimeout(()=>rej(new Error('timeout')),180000);
     loadGIS().then(()=>{
+      if(requestSession!==gs.session)return rej(new Error('cancelled'));
       if(!gs.client)gs.client=google.accounts.oauth2.initTokenClient({client_id:cid(),scope:G_SCOPE,callback:()=>{}});
       gs.client.callback=r=>{
+        if(requestSession!==gs.session)return rej(new Error('cancelled'));
         if(r&&r.error)return rej(new Error(r.error));
         try{res(acceptTokenResponse(r))}catch(e){rej(e)}
       };
@@ -820,7 +824,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v4.2';
+const APP_V='v4.3';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
