@@ -407,6 +407,7 @@ test('failed import preserves pasted text and leaves existing data untouched', (
   };
   const initialSnapshot = copy(initialStore);
   const sandbox = {
+    a: 'import',
     document: {
       getElementById(id) {
         if (id === 'imp') return input;
