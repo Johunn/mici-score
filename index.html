@@ -250,7 +250,7 @@ const THEMES=[
 function norm(p){
   let th=(['system','dark','ocean','charbon','amoled','micinuit','mici','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
   if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
-  return{custom:p.custom||[],entries:p.entries||[],over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
+  return{custom:p.custom||[],entries:p.entries||[],plate:Array.isArray(p.plate)?p.plate:null,over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
 }
 
 /* Validation stricte des sauvegardes importées : ne jamais injecter de données JSON
@@ -742,10 +742,17 @@ function normalizePlate(items){
   }).map(p=>({id:p.id,p:p.p,g:p.g||0}));
 }
 function loadPlate(){
-  try{return normalizePlate(JSON.parse(localStorage.getItem(PLATE_KEY)||'null'))}catch(e){return []}
+  try{
+    if(Array.isArray(store.plate))return normalizePlate(store.plate);
+    return normalizePlate(JSON.parse(localStorage.getItem(PLATE_KEY)||'null'));
+  }catch(e){return []}
 }
 function savePlate(){
-  try{localStorage.setItem(PLATE_KEY,JSON.stringify(ui.plate))}catch(e){}
+  const plate=normalizePlate(ui.plate);
+  ui.plate=plate;
+  store.plate=plate;
+  try{save()}catch(e){}
+  try{localStorage.setItem(PLATE_KEY,JSON.stringify(plate))}catch(e){}
 }
 
 /* ---------- État de l'interface ---------- */
@@ -771,7 +778,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v33';
+const APP_V='v34';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1226,7 +1233,7 @@ document.addEventListener('click',e=>{
   else if(a==='mod'){store.mods=store.mods||{};store.mods[id]=!store.mods[id];save();render(true)}
   else if(a==='resetSens'){store.sens={};save();render(true)}
   else if(a==='export'){
-    const txt=JSON.stringify(Object.assign({},store,{acct:null}));
+    const txt=JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
     const done=()=>{ui.msg='Sauvegarde copiée.';render(true)},fail=()=>{ui.msg='Copie impossible sur ce navigateur.';render(true)};
     try{navigator.clipboard.writeText(txt).then(done,fail)}catch(err){fail()}
   }
