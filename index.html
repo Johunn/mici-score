@@ -393,8 +393,11 @@ const gs={tok:null,exp:0,client:null,busy:false,again:false,st:'',timer:null,las
 const dataHash=()=>JSON.stringify([store.custom,store.entries,store.over,store.sens,store.prof,store.mods,store.flags,store.del]);
 let _h=dataHash(),_applying=false;
 function save(){
-  try{const h=dataHash();if(h!==_h){_h=h;if(!_applying){store.mt=Date.now();schedSync()}}}catch(e){}
-  try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}
+  let h=null,changed=false;
+  try{h=dataHash();changed=h!==_h;if(changed&&!_applying)store.mt=Date.now()}catch(e){}
+  try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){return false}
+  if(h!==null){_h=h;if(changed&&!_applying)schedSync()}
+  return true;
 }
 const snap=()=>JSON.parse(JSON.stringify({app:'mici-score',fmt:1,ep:store.ep||0,mt:store.mt||0,custom:store.custom,entries:store.entries,over:store.over,sens:store.sens,prof:store.prof,mods:store.mods,flags:store.flags,del:store.del||{}}));
 const sig=o=>JSON.stringify([o.ep||0,o.custom,o.entries,o.over,o.sens,o.prof,o.mods,o.flags,o.del]);
@@ -786,7 +789,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v38';
+const APP_V='v39';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1264,13 +1267,24 @@ document.addEventListener('click',e=>{
       if(status){status.textContent=ui.msg;status.style.display='block'}
       return;
     }
+    const previousStore=store,previousPlate=ui.plate,previousExportText=ui.exportText;
     restored.acct=store.acct;
     restored.del={};
     restored.ep=Date.now();
     restored.mt=Date.now();
+    restored.plate=[];
     store=restored;
-    ui.plate=[];savePlate();ui.exportText='';ui.view='list';ui.editId=null;
-    save();applyTheme();ui.msg='Sauvegarde restaurée.';
+    ui.plate=[];store.plate=[];
+    if(!save()){
+      store=previousStore;ui.plate=previousPlate;ui.exportText=previousExportText;
+      ui.msg='Impossible d’enregistrer la sauvegarde dans ce navigateur. Aucune donnée n’a été modifiée.';
+      const status=document.getElementById('profileStatus');
+      if(status){status.textContent=ui.msg;status.style.display='block'}
+      return;
+    }
+    try{localStorage.setItem(PLATE_KEY,'[]')}catch(e){}
+    ui.exportText='';ui.view='list';ui.editId=null;
+    applyTheme();ui.msg='Sauvegarde restaurée.';
     render(true);
   }
   else if(a==='reset'){
