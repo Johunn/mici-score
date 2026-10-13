@@ -30,6 +30,11 @@ Profil > « Compte Google et synchronisation » > colle l'ID > « Enregistrer l'
 - Au premier passage, Google peut afficher « Google n'a pas validé cette appli » : « Paramètres avancés » > continuer. C'est normal pour ton propre projet en test.
 - Les données sont dans un dossier caché du Drive (pas visible dans « Mon Drive »). Pour l'effacer : bouton « Supprimer mes données en ligne » dans l'appli, ou Drive > Paramètres > Gérer les applications.
 
+### Limite technique du flux de connexion
+La version actuelle utilise Google Identity Services dans le navigateur normal. Dans l'application installée, elle utilise encore une redirection OAuth historique (`response_type=token`) car la fenêtre popup y a posé problème. **Google considère le flux implicite direct comme non sécurisé pour les SPA et recommande le flux avec code d'autorisation + PKCE.** La documentation Google précise que ce flux de code nécessite un endpoint backend qui reçoit le code et échange celui-ci côté serveur. GitHub Pages ne fournit pas cet endpoint.
+
+La version de test renforce déjà le paramètre `state` avec des valeurs cryptographiquement aléatoires, vérifie la réponse du jeton et contrôle que le compte Google correspond au compte mémorisé avant de lire, écrire ou supprimer la sauvegarde Drive. Ces mesures réduisent certains risques mais **ne remplacent pas une migration vers une architecture avec backend**. Ne place jamais un secret OAuth client dans `index.html`. Une migration backend demanderait aussi de revoir la confidentialité, car les données de santé passeraient alors par un service supplémentaire.
+
 ## Dépannage
 - **« Accès bloqué : … n'a pas terminé la procédure de validation de Google », Erreur 403 : access_denied** : le compte avec lequel tu te connectes n'est pas dans les testeurs. Console Google Cloud > Audience (ou Écran de consentement > Utilisateurs de test) > **Add users** > ajoute l'adresse Gmail affichée sur l'écran d'erreur > Enregistrer. Attends 1 à 5 minutes, puis réessaie dans la fenêtre Google. Alternative : **Publier l'application** (statut « En production ») ; plus aucun testeur à ajouter.
 - **« Accès refusé par Google » dans l'appli après connexion** : l'API Google Drive n'est pas activée (étape 2) ou le champ d'application `drive.appdata` manque (étape 3).
