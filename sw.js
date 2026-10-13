@@ -1,4 +1,4 @@
-/* MICI Score : service worker « réseau d'abord » (v23). Ignore les requêtes vers d'autres sites. */
+/* MICI Score : service worker « réseau d'abord » (v24). Ignore les requêtes vers d'autres sites. */
 const CACHE='mici-score-v24';
 const CORE=['./','index.html','score-core.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon-512-maskable.png','fonts/bricolage-grotesque-latin-opsz-normal.woff2','fonts/figtree-latin-wght-normal.woff2','fonts/montserrat-latin-wght-normal.woff2'];
 self.addEventListener('install',e=>{
