@@ -143,7 +143,7 @@ test('assiette persistence caps a corrupted oversized draft', () => {
   const values = new Map([['mici:plate:v1', JSON.stringify(saved)]]);
   const sandbox = {
     localStorage: { getItem(key) { return values.get(key) || null; } },
-    byId(id) { return /^food-\\d+$/.test(id) ? { id } : null; }
+    byId(id) { return id.startsWith('food-') ? { id } : null; }
   };
   vm.createContext(sandbox);
   new vm.Script(platePersistenceSource +
