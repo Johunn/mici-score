@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v4.3';"));
+  assert.ok(html.includes("const APP_V='v4.5';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -67,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v30';/);
+test('service worker pre-caches the extracted scoring module and uses the v32 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v32';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -331,10 +331,18 @@ test('backup export has a manual fallback when clipboard access fails', () => {
   assert.match(html, /const done=\(\)=>\{ui\.exportText='';ui\.msg='Sauvegarde copiée\.'/);
 });
 
+test('backup import discards unknown journal fields', () => {
+  const backup = validBackup();
+  backup.entries[0].obsoleteContext = true;
+  const parsed = makeValidator()(backup);
+  assert.equal(parsed.entries[0].r, 8);
+  assert.equal(Object.hasOwn(parsed.entries[0], 'obsoleteContext'), false);
+});
+
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v4.3';"));
+  assert.ok(html.includes("const APP_V='v4.5';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -359,6 +367,29 @@ function makeValidator() {
   return sandbox.validateBackupForTest;
 }
 
+test('journal entry migration keeps recognized fields and drops obsolete fields', () => {
+  const source = extractBetween(
+    html,
+    "const JOURNAL_FIELDS=",
+    "\nfunction norm(p){"
+  );
+  const sandbox = {};
+  vm.createContext(sandbox);
+  new vm.Script(source + "\nglobalThis.cleanEntriesForTest=cleanJournalEntries;").runInContext(sandbox);
+  const entries = sandbox.cleanEntriesForTest([{
+    id: 123,
+    ts: 123,
+    items: [],
+    r: 8,
+    jeun: false,
+    note: "",
+    obsoleteContext: true
+  }]);
+  assert.equal(entries[0].r, 8);
+  assert.equal(entries[0].jeun, false);
+  assert.equal(Object.hasOwn(entries[0], 'obsoleteContext'), false);
+});
+
 function validBackup() {
   return {
     custom: [{
@@ -373,7 +404,6 @@ function validBackup() {
       ts: 1720000000001,
       items: [{ id: 'carotte-cuite', n: 'Carotte cuite', p: 1, g: 0 }],
       r: 8,
-      quest: false,
       jeun: false,
       note: 'Repas de test',
       L: [0, 0, 1, 0, 0, 0, 0],
@@ -980,7 +1010,7 @@ test('neutral food scores 10 and a single feature follows the documented formula
   assert.ok(Math.abs(core.single(fat) - expected) < 1e-12);
 });
 
-test('portion factors and contextual adjustments are applied before the level cap', () => {
+test('portion factors and fasting adjustment are applied before the level cap', () => {
   const core = makeCoreHarness();
   const food = makeFood('portion-test', [2, 2, 0, 0, 0, 0, 0]);
 
@@ -994,9 +1024,9 @@ test('portion factors and contextual adjustments are applied before the level ca
   assert.equal(normal.L[0], 2);
   assert.equal(large.L[0], 3);
 
-  const context = core.levels([{ f: food, p: 1 }], { quest: true, jeun: true });
-  assert.equal(context.L[0], 1.5);
-  assert.ok(Math.abs(context.L[1] - 2.6) < 1e-12);
+  const context = core.levels([{ f: food, p: 1 }], { jeun: true });
+  assert.equal(context.L[0], normal.L[0], 'unrelated context must not change fat level');
+  assert.ok(Math.abs(context.L[1] - 2.6) < 1e-12, 'fasting adjustment remains');
 });
 
 test('combined feature levels are capped at 4 and scores remain within 0–10', () => {
