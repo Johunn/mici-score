@@ -303,3 +303,141 @@ test('service worker only deletes MICI Score caches', async () => {
   await activation;
   assert.deepEqual(deleted.sort(), ['mici-score-v14', 'mici-score-v15']);
 });
+
+
+const coreEngineSource = extractBetween(html, '/*CORE_START*/', '/*CORE_END*/');
+
+function makeCoreHarness() {
+  const sandbox = {};
+  vm.createContext(sandbox);
+  new vm.Script(
+    coreEngineSource +
+    '\nglobalThis.miciScoreCore = { FEATS, PF, FOODS, store, levels, penalty, rawScore, single, scoreOf, refG, pfOf, effL, profMul, K, BW, UW };',
+    { filename: 'index.html:score-core' }
+  ).runInContext(sandbox);
+  return sandbox.miciScoreCore;
+}
+
+function makeFood(id, L, extra = {}) {
+  return Object.assign({
+    id,
+    n: id,
+    c: 0,
+    L,
+    b: 0,
+    ho: 0,
+    u: 0
+  }, extra);
+}
+
+test('score core loads and parses a large, valid food catalogue', () => {
+  const core = makeCoreHarness();
+  assert.ok(core.FOODS.length >= 450, 'unexpectedly few foods parsed');
+  const ids = new Set();
+  for (const food of core.FOODS) {
+    assert.ok(food.id && typeof food.id === 'string');
+    assert.ok(!ids.has(food.id), 'duplicate food id: ' + food.id);
+    ids.add(food.id);
+    assert.equal(food.L.length, 7, 'expected 7 features for ' + food.n);
+    food.L.forEach((level, i) => {
+      assert.ok(Number.isFinite(level) && level >= 0 && level <= 4,
+        'invalid feature ' + i + ' for ' + food.n + ': ' + level);
+    });
+    assert.ok(Number.isFinite(food.b) && food.b >= 0 && food.b <= 2,
+      'invalid thickener bonus for ' + food.n);
+    assert.ok(Number.isFinite(food.ho) && food.ho >= 0);
+    assert.ok(Number.isFinite(food.u) && food.u >= 0 && food.u <= 4);
+  }
+});
+
+test('neutral food scores 10 and a single feature follows the documented formula', () => {
+  const core = makeCoreHarness();
+  core.store.prof = 'general';
+  core.store.sens = {};
+  core.store.mods = {};
+  core.store.over = {};
+
+  const neutral = makeFood('neutral', [0, 0, 0, 0, 0, 0, 0]);
+  assert.equal(core.single(neutral), 10);
+
+  const fat = makeFood('one-fat-point', [1, 0, 0, 0, 0, 0, 0]);
+  const expected = 10 * Math.exp(-(1.2) / 9);
+  assert.ok(Math.abs(core.single(fat) - expected) < 1e-12);
+});
+
+test('portion factors and contextual adjustments are applied before the level cap', () => {
+  const core = makeCoreHarness();
+  const food = makeFood('portion-test', [2, 2, 0, 0, 0, 0, 0]);
+
+  const trace = core.levels([{ f: food, p: 3 }], {});
+  const small = core.levels([{ f: food, p: 0 }], {});
+  const normal = core.levels([{ f: food, p: 1 }], {});
+  const large = core.levels([{ f: food, p: 2 }], {});
+
+  assert.ok(Math.abs(trace.L[0] - 0.6) < 1e-12);
+  assert.ok(Math.abs(small.L[0] - 1.2) < 1e-12);
+  assert.equal(normal.L[0], 2);
+  assert.equal(large.L[0], 3);
+
+  const context = core.levels([{ f: food, p: 1 }], { quest: true, jeun: true });
+  assert.equal(context.L[0], 1.5);
+  assert.ok(Math.abs(context.L[1] - 2.6) < 1e-12);
+});
+
+test('combined feature levels are capped at 4 and scores remain within 0–10', () => {
+  const core = makeCoreHarness();
+  core.store.prof = 'general';
+  core.store.sens = {};
+  core.store.mods = {};
+  core.store.over = {};
+
+  const food = makeFood('high-fat', [3, 0, 0, 0, 0, 0, 0]);
+  const lv = core.levels([{ f: food, p: 2 }, { f: food, p: 2 }], {});
+  assert.equal(lv.L[0], 4);
+  const result = core.scoreOf([{ f: food, p: 2 }, { f: food, p: 2 }], {});
+  assert.ok(Number.isFinite(result.score));
+  assert.ok(result.score >= 0 && result.score <= 10);
+});
+
+test('pouch profile applies the documented lower oligosaccharide weight', () => {
+  const core = makeCoreHarness();
+  core.store.sens = {};
+  core.store.mods = {};
+  core.store.over = {};
+  const oligoFood = makeFood('oligosaccharide-test', [0, 0, 0, 2, 0, 0, 0], { ho: 1 });
+
+  core.store.prof = 'poche';
+  const pouchPenalty = core.penalty(core.levels([{ f: oligoFood, p: 1 }], {}));
+  core.store.prof = 'general';
+  const generalPenalty = core.penalty(core.levels([{ f: oligoFood, p: 1 }], {}));
+
+  assert.ok(Math.abs(pouchPenalty - 1.3) < 1e-12);
+  assert.ok(Math.abs(generalPenalty - 2) < 1e-12);
+  assert.ok(pouchPenalty < generalPenalty);
+});
+
+test('personal score correction replaces a food score and final results are clamped', () => {
+  const core = makeCoreHarness();
+  core.store.prof = 'general';
+  core.store.sens = {};
+  core.store.mods = {};
+  const food = makeFood('override-test', [1, 0, 0, 0, 0, 0, 0]);
+
+  core.store.over = { 'override-test': 8.5 };
+  assert.ok(Math.abs(core.scoreOf([{ f: food, p: 1 }], {}).score - 8.5) < 1e-12);
+
+  core.store.over = { 'override-test': 10 };
+  assert.equal(core.scoreOf([{ f: food, p: 2 }], {}).score, 10);
+
+  core.store.over = { 'override-test': 0 };
+  assert.equal(core.scoreOf([{ f: food, p: 2 }], {}).score, 0);
+});
+
+test('feature weights and scoring constants are finite and non-negative', () => {
+  const core = makeCoreHarness();
+  assert.equal(core.FEATS.length, 7);
+  assert.ok(core.FEATS.every(f => Number.isFinite(f.w) && f.w >= 0));
+  assert.ok(Number.isFinite(core.K) && core.K > 0);
+  assert.ok(Number.isFinite(core.BW) && core.BW >= 0);
+  assert.ok(Number.isFinite(core.UW) && core.UW >= 0);
+});
