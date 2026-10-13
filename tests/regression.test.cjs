@@ -101,7 +101,7 @@ test('the assiette draft survives reload and rejects invalid saved items', () =>
   assert.deepEqual(copy(sandbox.platePersistenceTest.loadPlate()), expected);
   assert.match(html, /plate:loadPlate\(\)/);
   assert.match(html, /plate:Array\.isArray\(p\.plate\)\?p\.plate:null/);
-  assert.match(html, /const txt=JSON\.stringify\(Object\.assign\(\{},store,\{acct:null,plate:undefined\}\)\)/);
+  assert.match(html, /function backupText\(\)[\s\S]*?plate:undefined/);
   assert.match(html, /savePlate\(\);updateBar\(\)/);
   assert.match(html, /ui\.plate\[i\]\.g=.*?;savePlate\(\);render\(true\)/);
 });
@@ -241,6 +241,7 @@ const backupExportSource = extractBetween(
 );
 
 test('backup export has a manual fallback when clipboard access fails', () => {
+  let renderedKeep;
   const sandbox = {
     store: {
       acct: { email: 'private@example.com' },
@@ -249,7 +250,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
       over: {}, sens: {}, prof: 'poche', mods: {}, flags: {}, del: {}
     },
     ui: { exportText: '', msg: '' },
-    render(keep) { this.renderKeep = keep; }
+    render(keep) { renderedKeep = keep; }
   };
   vm.createContext(sandbox);
   new vm.Script(backupExportSource +
@@ -265,7 +266,7 @@ test('backup export has a manual fallback when clipboard access fails', () => {
   sandbox.backupExportTest.showBackupCopyFallback(txt);
   assert.equal(sandbox.ui.exportText, txt);
   assert.match(sandbox.ui.msg, /Copie automatique impossible/);
-  assert.equal(sandbox.renderKeep, true);
+  assert.equal(renderedKeep, true);
   assert.match(html, /id="backupOut" rows="8" readonly/);
   assert.match(html, /data-act="selectBackup"/);
   assert.match(html, /else if\(a==='selectBackup'\)[\s\S]*?el\.select\(\)/);
