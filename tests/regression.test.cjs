@@ -180,7 +180,7 @@ test('assiette storage is updated by edits and cleared by completed or destructi
   assert.match(clickSource, /else if\(a==='clearPlate'\)\{ui\.plate=\[\];savePlate\(\)/);
   assert.match(clickSource, /else if\(a==='saveEntry'\)[\s\S]*?save\(\);ui\.plate=\[\];savePlate\(\)/);
   assert.match(clickSource, /else if\(a==='delFood'\)[\s\S]*?ui\.plate=ui\.plate\.filter[\s\S]*?savePlate\(\)/);
-  assert.match(html, /store=restored;\s*ui\.plate=\[\];savePlate\(\)/);
+  assert.match(html, /store=restored;\s*ui\.plate=\[\];store\.plate=\[\]/);
   assert.match(html, /store=norm\(\{\}\)[\s\S]*?ui\.plate=\[\];savePlate\(\)/);
 });
 
