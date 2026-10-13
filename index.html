@@ -862,7 +862,7 @@ function validateBackup(p){
   const num=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
   const text=(v,max,nonempty=false)=>typeof v==='string'&&v.length<=max&&(!nonempty||v.trim().length>0);
   const id=v=>text(v,200,true)&&/^[A-Za-z0-9][A-Za-z0-9_-]{0,199}$/.test(v)&&!['constructor','prototype','toString','valueOf','hasOwnProperty','isPrototypeOf','propertyIsEnumerable','__defineGetter__','__defineSetter__','__lookupGetter__','__lookupSetter__'].includes(v);
-  const date=v=>num(v,0,8640000000000000);
+  const date=v=>Number.isSafeInteger(v)&&v>=0&&v<=8640000000000000;
   const map=(v)=>record(v);
   const arrNums=(v,n,min,max)=>Array.isArray(v)&&v.length===n&&v.every(x=>num(x,min,max));
   if(!record(p)||!Array.isArray(p.entries)||p.entries.length>10000)fail();
