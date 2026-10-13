@@ -48,7 +48,7 @@ Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est 
 - `index.html` : interface, journal local, sauvegarde et intégration Google.
 - `score-core.js` : catalogue des aliments et moteur de calcul des scores. Il est chargé par `index.html` et mis en cache par le service worker pour rester disponible hors ligne.
 - `sw.js`, `manifest.webmanifest`, `icons/` : installation PWA et cache « réseau d'abord » ; le service worker ignore les requêtes vers d'autres sites.
-- `tests/regression.test.cjs` : tests de régression sur le chargement, le calcul, les sauvegardes, OAuth et le cache.
+- `tests/regression.test.cjs` : tests de régression sur le chargement, le calcul, la validation des sauvegardes, l'assiette conservée localement, OAuth et le cache.
 - `.github/workflows/regression-tests.yml` : lance automatiquement les tests lors des pull requests et des pushs sur les branches prévues.
 - `fonts/` : polices Bricolage Grotesque, Figtree et Montserrat hébergées avec l'appli (licence SIL OFL 1.1, textes dans `fonts/licences/`) : aucune requête vers Google Fonts.
 - `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google.
