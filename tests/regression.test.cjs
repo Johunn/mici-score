@@ -44,13 +44,13 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.match(html, /const APP_V='v35';/);
+  assert.match(html, /const APP_V='v36';/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
 
 test('service worker pre-caches the extracted scoring module', () => {
-  assert.match(swSource, /const CACHE='mici-score-v21';/);
+  assert.match(swSource, /const CACHE='mici-score-v22';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -233,10 +233,49 @@ test('draft pruning removes custom foods that disappear during cloud sync', () =
   assert.deepEqual(JSON.parse(values.get('mici:plate:v1')), [{ id: 'carotte-cuite', p: 1, g: 0 }]);
 });
 
+
+const backupExportSource = extractBetween(
+  html,
+  'function backupText(){',
+  '\nconst app='
+);
+
+test('backup export has a manual fallback when clipboard access fails', () => {
+  const sandbox = {
+    store: {
+      acct: { email: 'private@example.com' },
+      plate: [{ id: 'draft-only-food', p: 1, g: 0 }],
+      custom: [], entries: [{ id: 123, ts: 123, items: [], r: 8 }],
+      over: {}, sens: {}, prof: 'poche', mods: {}, flags: {}, del: {}
+    },
+    ui: { exportText: '', msg: '' },
+    render(keep) { this.renderKeep = keep; }
+  };
+  vm.createContext(sandbox);
+  new vm.Script(backupExportSource +
+    '\nglobalThis.backupExportTest = { backupText, showBackupCopyFallback };'
+  ).runInContext(sandbox);
+
+  const txt = sandbox.backupExportTest.backupText();
+  const parsed = JSON.parse(txt);
+  assert.equal(parsed.acct, null);
+  assert.equal(Object.hasOwn(parsed, 'plate'), false);
+  assert.doesNotMatch(txt, /draft-only-food|private@example.com/);
+
+  sandbox.backupExportTest.showBackupCopyFallback(txt);
+  assert.equal(sandbox.ui.exportText, txt);
+  assert.match(sandbox.ui.msg, /Copie automatique impossible/);
+  assert.equal(sandbox.renderKeep, true);
+  assert.match(html, /id="backupOut" rows="8" readonly/);
+  assert.match(html, /data-act="selectBackup"/);
+  assert.match(html, /else if\(a==='selectBackup'\)[\s\S]*?el\.select\(\)/);
+  assert.match(html, /const done=\(\)=>\{ui\.exportText='';ui\.msg='Sauvegarde copiée\.'/);
+});
+
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.match(html, /const APP_V='v35';/);
+  assert.match(html, /const APP_V='v36';/);
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
