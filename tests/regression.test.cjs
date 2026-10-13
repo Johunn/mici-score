@@ -347,6 +347,12 @@ test('score core loads and parses a large, valid food catalogue', () => {
       'invalid thickener bonus for ' + food.n);
     assert.ok(Number.isFinite(food.ho) && food.ho >= 0);
     assert.ok(Number.isFinite(food.u) && food.u >= 0 && food.u <= 4);
+    const calculated = core.single(food);
+    assert.ok(Number.isFinite(calculated) && calculated >= 0 && calculated <= 10,
+      'invalid single-food score for ' + food.n + ': ' + calculated);
+    if (food.L.some(level => level > 3)) {
+      assert.equal(food.rf, 'RC', 'only estimated composite foods may exceed level 3: ' + food.n);
+    }
   }
 });
 
