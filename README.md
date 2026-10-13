@@ -43,17 +43,28 @@ Pastille « Se connecter » en haut de l'appli ou Profil > « Compte Google et s
 
 Sans compte Google, tout reste dans le navigateur (`localStorage`) : rien n'est envoyé aux serveurs de l'éditeur. Le script de connexion de Google (Google Identity Services) est chargé quand tu ouvres l'onglet Profil : Google voit alors ton adresse IP, même sans connexion. Avec le compte, une copie est aussi dans ton Drive (voir ci-dessus). Vider les données du navigateur efface le journal. Utilise Profil > « Copier la sauvegarde » de temps en temps. Une autre adresse a un autre stockage : copie la sauvegarde, puis restaure-la.
 
-## Contenu du dépôt
+## Structure du dépôt
 
-- `index.html` : toute l'application (données et code embarqués)
-- `fonts/` : polices Bricolage Grotesque, Figtree et Montserrat hébergées avec l'appli (licence SIL OFL 1.1, textes dans `fonts/licences/`) : aucune requête vers Google Fonts
-- `manifest.webmanifest`, `sw.js`, `icons/` : installation et mode « réseau d'abord » (le service worker ignore les requêtes vers d'autres sites)
-- `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google
-- `LISEZ-MOI.txt` : notes d'installation
+- `index.html` : interface, journal local, sauvegarde et intégration Google.
+- `score-core.js` : catalogue des aliments et moteur de calcul des scores. Il est chargé par `index.html` et mis en cache par le service worker pour rester disponible hors ligne.
+- `sw.js`, `manifest.webmanifest`, `icons/` : installation PWA et cache « réseau d'abord » ; le service worker ignore les requêtes vers d'autres sites.
+- `tests/regression.test.cjs` : tests de régression sur le chargement, le calcul, les sauvegardes, OAuth et le cache.
+- `.github/workflows/regression-tests.yml` : lance automatiquement les tests lors des pull requests et des pushs sur les branches prévues.
+- `fonts/` : polices Bricolage Grotesque, Figtree et Montserrat hébergées avec l'appli (licence SIL OFL 1.1, textes dans `fonts/licences/`) : aucune requête vers Google Fonts.
+- `GUIDE-GOOGLE-CLOUD.md` : création de l'identifiant Google.
+- `LISEZ-MOI.txt` : notes d'installation.
+
+## Tests locaux
+
+Avec Node.js 24 installé, lance depuis la racine du dépôt :
+
+```sh
+node --test tests/regression.test.cjs
+```
 
 ## Mise à jour
 
-Remplace `index.html` (et `sw.js` si fourni) à la racine du dépôt (même nom), attends 1 à 2 minutes le déploiement GitHub Pages, puis vérifie la version affichée discrètement en haut à gauche de l'écran et en bas de l'onglet Profil. Le journal n'est pas touché.
+Les fichiers de l'application doivent être publiés ensemble à la racine du dépôt : `index.html`, `score-core.js` et `sw.js` (avec les autres ressources déjà présentes). Le cache du service worker doit être incrémenté lorsqu'un changement de ressources nécessite de forcer le renouvellement hors ligne. Après le déploiement GitHub Pages, vérifie la version affichée en haut à gauche et dans Profil. Les fichiers de code ne modifient pas directement le journal enregistré dans le navigateur ; teste tout de même une sauvegarde avant une mise à jour importante.
 
 ## Limites
 
