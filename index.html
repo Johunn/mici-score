@@ -63,6 +63,13 @@ p{margin:0 0 10px}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.searchbox input:focus-visible{outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.item .seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;border:0;overflow:visible}
+.item .seg button{min-width:0;min-height:54px;padding:8px 3px;border:1px solid var(--line);border-radius:12px;background:var(--surface);line-height:1.2}
+.item .seg button+button{border-left:1px solid var(--line)}
+.item .seg button[aria-pressed=true]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 13%,var(--surface));color:var(--ink);box-shadow:inset 0 0 0 1px var(--accent)}
+.item .seg button small{margin-top:5px;color:var(--muted);font-size:11px!important}
+@media(max-width:380px){.item .seg{gap:3px}.item .seg button{font-size:12px;padding:7px 1px}}
 .rib{width:.6em;height:.8em;margin-left:9px;color:var(--ribbon,#8A4FBF);vertical-align:-.04em;flex:none}
 .ibtn{flex:none;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0;align-self:center}
 .top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px}
@@ -126,6 +133,14 @@ nav.tabs button[aria-current=page]{color:var(--accent);box-shadow:inset 0 3px 0 
 .notice{border-left:4px solid var(--mid);padding:8px 12px;background:var(--surface);border-radius:0 8px 8px 0;font-size:14px;color:var(--muted);margin-top:14px}
 .entry{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
 .entry:last-child{border-bottom:0}
+.recent-meals{border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px;background:color-mix(in srgb,var(--accent) 5%,var(--surface))}
+.recent-meals .exp-section-head{margin-bottom:12px}
+.recent-meals .exp-section-head h2{font-size:24px}
+.recent-meals .exp-row{padding:12px 0}
+.recent-meals .exp-row .btn{white-space:normal}
+.meal-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.meal-actions .btn{margin-top:0!important}
+@media(max-width:420px){.recent-meals .exp-row{align-items:flex-start;flex-wrap:wrap}.recent-meals .exp-row-main{min-width:calc(100% - 70px)}.recent-meals .exp-row>.btn{margin-left:auto}.meal-actions{flex-direction:column;align-items:stretch}.meal-actions .btn{width:100%}}
 .entry .body{flex:1;min-width:0}
 .entry .del{background:none;border:0;color:var(--muted);padding:6px;font-size:14px;text-decoration:underline}
 .empty{padding:24px 8px;text-align:center;color:var(--muted)}
@@ -531,6 +546,7 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 </nav>
 
 <script src="score-core.js"></script>
+<script src="recipes.js"></script>
 <script>
 (function(){
 'use strict';
@@ -1124,8 +1140,8 @@ function savePlate(){
 }
 
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'home',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
-  newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false,journalDays:30};
+const ui={tab:'calc',view:'home',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),jeun:false,ress:7,editId:null,mealEditId:null,mealEditReturn:'calc',eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
+  recipeId:null,newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false,journalDays:30};
 function backupText(){
   return JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
 }
@@ -1154,7 +1170,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v6.0';
+const APP_V='v6.1';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1209,20 +1225,37 @@ function homeHTML(){
     '<div class="today-stats"><div class="today-stat"><span>Repas notés aujourd’hui</span><strong>'+today.length+'</strong><small>'+(today.length===1?'Une observation enregistrée':today.length>1?'Observations enregistrées':'Rien de noté pour le moment')+'</small></div><div class="today-stat"><span>Ressenti moyen · 7 jours</span><strong>'+(average===null?'—':fmt(average)+'/10')+'</strong><small>'+week.length+' repas avec une note personnelle</small></div></div>',
     '<button class="btn block" style="min-height:56px;font-size:16px" data-act="startCompose">＋ Composer un repas</button>',
     '<div class="today-actions"><button class="btn ghost" data-act="explore">Trouver un aliment <span aria-hidden="true">→</span></button><button class="btn ghost" data-act="openJournal">Comprendre mon historique <span aria-hidden="true">→</span></button></div></section>',
+    '<section class="exp-section recent-meals"><div class="exp-section-head"><div><span class="exp-eyebrow">MÉMOIRE RÉCENTE</span><h2>Derniers repas</h2></div><span class="exp-muted">'+entries.length+' au total</span></div>',
+    entries.length?'<div class="exp-rows">'+entries.slice(0,3).map(e=>'<div class="exp-row"><span class="exp-score '+cls(e.r)+'">'+fmt(e.r)+'</span><div class="exp-row-main"><b>'+esc(meal(e))+'</b><small>'+dt(e.ts)+' · ressenti après repas</small></div><button class="btn ghost" data-act="repeatEntry" data-id="'+esc(e.id)+'">Reprendre et modifier</button></div>').join('')+'</div><button class="link" data-act="openJournal">Tout le journal →</button>':'<div class="exp-empty">Ton suivi commence par un premier repas. Après l’avoir composé, note simplement ce que tu as ressenti.</div>',
+    '</section>',
     '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">MON HISTORIQUE</span><h2>Les 7 derniers jours</h2></div><span class="exp-muted">'+week.length+' repas</span></div>',
     week.length?'<p class="exp-muted">Moyenne du ressenti que tu as saisi après chaque repas. Un trait vide signifie qu’aucune note n’a été enregistrée.</p><div class="trend-grid" aria-label="Ressenti journalier sur sept jours">'+points.map(p=>'<div class="trend-col" title="'+p.label+' : '+(p.value===null?'aucun repas':fmt(p.value)+'/10')+'"><span class="trend-score">'+(p.value===null?'—':fmt(p.value))+'</span><div class="trend-track"><i style="height:'+(p.value===null?3:Math.max(5,p.value*7))+'px"></i></div><small>'+p.short+'</small></div>').join('')+'</div>':'<p class="exp-empty">Les notes apparaîtront ici lorsque tu auras enregistré quelques repas. Elles reflètent ton ressenti déclaré, pas une mesure médicale.</p>',
     '</section>',
     '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">À EXAMINER, PAS À CONCLURE</span><h2>Pistes personnelles</h2></div></div>',
     suspects.length?'<div class="exp-rows">'+suspects.map(x=>'<div class="exp-row"><div class="exp-row-main"><b>'+esc(x.name)+'</b><small>'+x.n+' repas · moyenne avec : '+fmt(x.mean)+' · sans : '+fmt(x.meanWo)+'</small></div><span class="exp-score '+cls(x.mean)+'">'+fmt(x.mean)+'</span></div>').join('')+'</div><p class="exp-muted">Une différence observée ne prouve pas qu’un aliment est responsable. Vérifie les notes et le contexte dans le journal avant de modifier tes habitudes.</p>':'<p class="exp-empty">Pas de piste suffisamment étayée pour le moment. L’application préfère attendre plusieurs observations comparables plutôt que conclure trop vite.</p>',
     '<button class="link" data-act="openJournal">Voir le détail de mes observations →</button></section>',
-    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">MÉMOIRE RÉCENTE</span><h2>Derniers repas</h2></div><span class="exp-muted">'+entries.length+' au total</span></div>',
-    entries.length?'<div class="exp-rows">'+entries.slice(0,3).map(e=>'<div class="exp-row"><span class="exp-score '+cls(e.r)+'">'+fmt(e.r)+'</span><div class="exp-row-main"><b>'+esc(meal(e))+'</b><small>'+dt(e.ts)+' · ressenti après repas</small></div><button class="btn ghost" data-act="repeatEntry" data-id="'+esc(e.id)+'">Reprendre</button></div>').join('')+'</div><button class="link" data-act="openJournal">Tout le journal →</button>':'<div class="exp-empty">Ton suivi commence par un premier repas. Après l’avoir composé, note simplement ce que tu as ressenti.</div>',
-    '</section>',
     '<section class="exp-shortcuts" aria-label="Outils complémentaires"><button data-act="openProfile">Sauvegarde et profil<small>Données, préférences, synchronisation</small></button><button data-act="openSources">Comprendre le score<small>Sources et limites</small></button></section>'
   ].join('');
 }
 
+function recipesHTML(){
+  const recipes=window.MICI_RECIPES||[];
+  const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const resolve=ing=>allFoods().find(f=>ing.names.some(n=>norm(f.n)===norm(n)))||allFoods().find(f=>ing.names.some(n=>norm(f.n).startsWith(norm(n)+' ')));
+  const detail=recipes.find(r=>r.id===ui.recipeId);
+  const card=r=>{
+    const matches=r.ingredients.map(i=>({ingredient:i,food:resolve(i)}));
+    const missing=matches.filter(x=>!x.food);
+    const scoreItems=matches.filter(x=>x.food).map(x=>({f:x.food,p:1,g:x.ingredient.grams}));
+    const score=scoreItems.length?scoreOf(scoreItems,ui).score:null;
+    const selected=ui.recipeId===r.id;
+    return `<article class="card" style="margin-top:12px"><div class="exp-eyebrow">${esc(r.category)}</div><h2 style="margin:5px 0 8px;font-size:20px">${esc(r.title)}</h2><p>${esc(r.summary)}</p><p class="small muted">${r.servings} portion · ${matches.length-missing.length}/${matches.length} ingrédients reconnus${missing.length?' · score incomplet':''}</p>${score===null?'':`<div class="exp-row"><span class="exp-score ${cls(score)}">${fmt(score)}/10</span><span class="small muted">${missing.length?'Estimation partielle — ingrédients manquants':'Estimation selon les quantités indiquées'}</span></div>`}${selected?`<ul>${matches.map(x=>`<li>${esc(x.ingredient.names[0])} — ${x.ingredient.grams} g ${x.food?'':'<b>(non reconnu dans le catalogue)</b>'}</li>`).join('')}</ul><h3>Préparation</h3><ol>${r.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p><a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${esc(r.sourceLabel)} ↗</a></p>${missing.length?`<p class="notice">Le score est incomplet. Ajoute d’abord les aliments manquants au catalogue, puis reviens à cette recette. Aucun score complet n’est affiché.</p>`:`<button class="btn block" data-act="addRecipe" data-id="${esc(r.id)}">Ajouter les ingrédients à mon assiette</button>`}<button class="btn ghost block" data-act="closeRecipe">Fermer le détail</button>`:`<button class="btn ghost block" data-act="showRecipe" data-id="${esc(r.id)}">Voir la recette et son estimation</button>`}</article>`;
+  };
+  return `<button class="link" data-act="back">‹ Retour</button><section class="explore-head"><span class="exp-eyebrow">CATALOGUE LOCAL</span><h1>Recettes à explorer</h1><p>Ces recettes sont des idées, pas une garantie de tolérance. Le score est une estimation calculée par le moteur existant à partir des ingrédients reconnus et des quantités indiquées. La tolérance varie selon les personnes.</p></section>${recipes.map(card).join('')}<p class="small muted" style="margin-top:16px">Les liens de source permettent de consulter les ressources d’origine. Ce catalogue fonctionne hors ligne ; les liens externes nécessitent une connexion.</p>`;
+}
+
 function calcHTML(){
+  if(ui.view==='recipes')return recipesHTML();
   if(ui.view==='add')return addHTML();
   if(ui.view==='detail'&&ui.sel)return detailHTML();
   if(ui.view==='plate')return plateHTML();
@@ -1239,10 +1272,12 @@ function calcHTML(){
 
 function plateHTML(){
   const items=plateItems();
-  if(!items.length)return '<section class="compose-empty"><span class="exp-eyebrow">COMPOSITION EN COURS</span><h1>Prépare ton prochain repas</h1><p class="today-lede">Commence par les aliments que tu vas manger. Tu pourras adapter les portions, puis noter ton ressenti après le repas.</p><ol class="steps"><li>Choisis les ingrédients du repas.</li><li>Ajuste les portions si nécessaire.</li><li>Après le repas, note comment tu te sens.</li></ol><button class="btn block" data-act="explore">Choisir des aliments</button><p class="small muted" style="margin-top:12px">Ton brouillon est conservé localement. Rien n’est ajouté au journal tant que tu ne l’enregistres pas.</p></section>';
+  if(ui.view==='recipes')return recipesHTML();
+  if(!items.length)return '<section class="compose-empty"><span class="exp-eyebrow">COMPOSITION EN COURS</span><h1>Prépare ton prochain repas</h1><p class="today-lede">Commence par les aliments que tu vas manger. Tu pourras adapter les portions, puis noter ton ressenti après le repas.</p><ol class="steps"><li>Choisis les ingrédients du repas.</li><li>Ajuste les portions si nécessaire.</li><li>Après le repas, note comment tu te sens.</li></ol><button class="btn block" data-act="explore">Choisir des aliments</button><button class="btn ghost block" style="margin-top:8px" data-act="openRecipes">Parcourir les recettes</button><p class="small muted" style="margin-top:12px">Ton brouillon est conservé localement. Rien n’est ajouté au journal tant que tu ne l’enregistres pas.</p></section>';
   const r=scoreOf(items,ui);
   return `<button class="link" data-act="back">‹ Retour</button>
-  <h2 style="margin-top:6px">Mon assiette</h2>
+  <h2 style="margin-top:6px">${ui.mealEditId?'Modifier le repas enregistré':'Mon assiette'}</h2>${ui.mealEditId?'<p class="notice">Tu modifies un repas existant : l’enregistrement mettra à jour ce repas sans en créer un nouveau.</p>':''}
+  <p><button class="btn ghost" data-act="openRecipes">Trouver une recette</button></p>
   <div class="card dialwrap ${cls(r.score)}" style="margin-top:0">
     ${dial(r.score)}
     <div class="verdict">${verdict(r.score)}</div>
@@ -1259,14 +1294,14 @@ function plateHTML(){
     <label class="toggle"><input type="checkbox" data-act="jeun" ${ui.jeun?'checked':''}> À jeun</label>
     <p class="muted small" style="margin:0">À jeun amplifie l'effet du lactose (+30 %). Cet ajustement est arbitraire.</p>
   </div>
-  <div class="card"><h3>Noter mon ressenti</h3>
+  <div class="card"><h3>${ui.mealEditId?'Modifier mon ressenti':'Noter mon ressenti'}</h3>
     <div class="field"><label for="ress">Digestion : <span class="rangeval" id="ressv">${ui.ress}</span> / 10</label>
       <input type="range" id="ress" min="0" max="10" step="1" value="${ui.ress}">
       <div class="muted small" style="display:flex;justify-content:space-between"><span>Très mal</span><span>Aucun souci</span></div></div>
     <div class="field"><label for="note">Détails (selles, gaz, brûlures, délai, repas de la veille)</label>
       <textarea id="note" placeholder="Facultatif">${esc(ui.note)}</textarea></div>
-    <p style="margin:14px 0 0"><button class="btn block" data-act="saveEntry">Enregistrer dans le journal</button>
-    <button class="btn danger block" data-act="clearPlate">Vider l'assiette</button></p>
+    <p style="margin:14px 0 0"><button class="btn block" data-act="saveEntry">${ui.mealEditId?'Enregistrer les modifications':'Enregistrer dans le journal'}</button>
+    ${ui.mealEditId?'<button class="btn ghost block" style="margin-top:8px" data-act="cancelMealEdit">Annuler la modification</button>':'<button class="btn danger block" data-act="clearPlate">Vider l’assiette</button>'}</p>
   </div>`;
 }
 
@@ -1349,6 +1384,11 @@ function journalHTML(){
   return [
     '<section class="journal-intro"><span class="exp-eyebrow">DONNÉES PERSONNELLES</span><h1>Ce que tu observes</h1><p>Compare ton ressenti, les repas et tes notes. Les moyennes décrivent ton historique : elles ne prouvent pas à elles seules la cause d’un symptôme.</p><div class="journal-stats"><div class="journal-stat"><span>Repas avec une note</span><strong>'+ents.length+'</strong></div><div class="journal-stat"><span>Ressenti moyen</span><strong>'+(mean===null?'—':fmt(mean)+'/10')+'</strong></div></div>',
     '<div class="exp-section-head"><div><span class="exp-eyebrow">PÉRIODE</span><h2>Choisir le recul</h2></div></div><div class="journal-period" role="group" aria-label="Période du journal">'+periodButton(7,'7 jours')+periodButton(30,'30 jours')+periodButton(0,'Tout')+'</div></section>',
+    '<section class="exp-section recent-meals"><div class="exp-section-head"><div><span class="exp-eyebrow">HISTORIQUE</span><h2>Repas enregistrés</h2></div><span class="exp-muted">'+ents.length+' repas</span></div>',
+    ents.length?'<div class="exp-rows">'+ents.map(e=>'<article class="exp-row"><span class="exp-score '+cls(e.r)+'">'+fmt(e.r)+'</span><div class="exp-row-main"><b>'+esc(meal(e))+'</b><small>'+dt(e.ts)+(e.jeun?' · à jeun':'')+(e.score!=null?' · estimation calculée '+fmt(e.score):'')+'</small>'+
+      (e.note?'<small>'+esc(e.note)+'</small>':'')+(e.edited?'<small>Note corrigée le '+dt(e.edited)+'</small>':'')+
+      (String(ui.editId)===String(e.id)?'<div class="field" style="margin-top:8px"><label for="eress">Ressenti : <span class="rangeval" id="eressv">'+ui.eR+'</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="'+ui.eR+'"><label for="enote">Note personnelle</label><textarea id="enote" placeholder="Facultatif">'+esc(ui.eNote)+'</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="'+e.id+'">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>':'<div class="meal-actions"><button class="btn" style="margin:7px 0 0;padding:7px 11px" data-act="repeatEntry" data-id="'+esc(e.id)+'">Reprendre et modifier</button><button class="btn ghost" style="margin:7px 0 0;padding:7px 11px" data-act="editEntry" data-id="'+e.id+'">Corriger la note</button></div>')+'</div><button class="del" data-act="delEntry" data-id="'+e.id+'">Supprimer</button></article>').join('')+'</div>':'<div class="exp-empty">Aucun repas dans cette période.</div>',
+    '</section>',
     '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">ÉVOLUTION</span><h2>Ressenti par jour</h2></div><span class="exp-muted">Sur 10</span></div>',
     ents.length?'<p class="exp-muted">Moyenne des notes que tu as saisies, avec le nombre de repas observés chaque jour.</p><div class="trend-grid" aria-label="Moyenne journalière du ressenti sur sept jours">'+points.map(p=>'<div class="trend-col" title="'+p.label+' : '+(p.value===null?'aucun repas':fmt(p.value)+'/10')+'"><span class="trend-score">'+(p.value===null?'—':fmt(p.value))+'</span><div class="trend-track"><i style="height:'+(p.value===null?3:Math.max(5,p.value*7))+'px"></i></div><small>'+p.short+'</small></div>').join('')+'</div>':'<div class="exp-empty">Aucune note sur cette période. Essaie une période plus large ou enregistre ton prochain repas.</div>',
     '</section>',
@@ -1356,11 +1396,7 @@ function journalHTML(){
     suspects.length?'<div class="exp-rows">'+suspects.map(x=>'<div class="exp-row"><div class="exp-row-main"><b>'+esc(x.name)+'</b><small>'+x.n+' repas · '+x.bad+' notes basses · '+x.good+' notes hautes<br>Avec : '+fmt(x.mean)+' · sans : '+fmt(x.meanWo)+(x.n<4?' · échantillon limité':'')+'</small></div><span class="exp-score '+cls(x.mean)+'">'+fmt(x.mean)+'</span><button class="btn ghost" data-act="flag" data-id="'+esc(x.id)+'" data-v="clear">Écarter</button></div>').join('')+'</div>':'<p class="exp-empty">Aucune piste ne remplit actuellement les critères de comparaison. C’est préférable à une conclusion fragile sur trop peu de repas.</p>',
     conf.length?'<p class="small">Déclencheurs confirmés par toi : <b>'+conf.map(esc).join(', ')+'</b></p>':'',
     '<div class="exp-caution">Une association entre un aliment et un ressenti moins bon ne démontre pas une causalité. Le statut « à surveiller » ne change pas le calcul ; confirme une piste seulement après examen de tes notes et du contexte.</div></section>',
-    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">HISTORIQUE</span><h2>Repas enregistrés</h2></div><span class="exp-muted">'+ents.length+' repas</span></div>',
-    ents.length?'<div class="exp-rows">'+ents.map(e=>'<article class="exp-row"><span class="exp-score '+cls(e.r)+'">'+fmt(e.r)+'</span><div class="exp-row-main"><b>'+esc(meal(e))+'</b><small>'+dt(e.ts)+(e.jeun?' · à jeun':'')+(e.score!=null?' · estimation calculée '+fmt(e.score):'')+'</small>'+
-      (e.note?'<small>'+esc(e.note)+'</small>':'')+(e.edited?'<small>Note corrigée le '+dt(e.edited)+'</small>':'')+
-      (String(ui.editId)===String(e.id)?'<div class="field" style="margin-top:8px"><label for="eress">Ressenti : <span class="rangeval" id="eressv">'+ui.eR+'</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="'+ui.eR+'"><label for="enote">Note personnelle</label><textarea id="enote" placeholder="Facultatif">'+esc(ui.eNote)+'</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="'+e.id+'">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>':'<button class="btn ghost" style="margin:7px 0 0;padding:7px 11px" data-act="editEntry" data-id="'+e.id+'">Corriger la note</button>')+'</div><button class="del" data-act="delEntry" data-id="'+e.id+'">Supprimer</button></article>').join('')+'</div>':'<div class="exp-empty">Aucun repas dans cette période.</div>',
-    '</section>'
+
   ].join('');
 }
 
@@ -1588,6 +1624,13 @@ document.addEventListener('click',e=>{
   else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}savePlate();render(true)}
   else if(a==='openPlate'){ui.tab='compose';ui.view='plate';render()}
   else if(a==='startCompose'){ui.tab='compose';ui.view='plate';ui.msg='';render()}
+  else if(a==='openRecipes'){ui.tab='compose';ui.view='recipes';ui.recipeId=null;render()}
+  else if(a==='showRecipe'){ui.recipeId=id;ui.view='recipes';render(true)}
+  else if(a==='closeRecipe'){ui.recipeId=null;ui.view='recipes';render(true)}
+  else if(a==='addRecipe'){
+    const recipe=(window.MICI_RECIPES||[]).find(r=>r.id===id);
+    if(recipe){const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();const next=recipe.ingredients.map(ing=>({ing,food:allFoods().find(f=>ing.names.some(n=>norm(f.n)===norm(n)))||allFoods().find(f=>ing.names.some(n=>norm(f.n).startsWith(norm(n)+' ')))}));if(next.every(x=>x.food)){ui.plate=next.map(x=>({id:x.food.id,p:1,g:x.ing.grams})).slice(0,100);savePlate();ui.view='plate';ui.tab='compose';ui.msg='Ingrédients ajoutés. Vérifie les quantités avant d’enregistrer le repas.';ui.recipeId=null;render()}else{ui.msg='Certains ingrédients ne sont pas reconnus : score complet indisponible.';render(true)}}
+  }
   else if(a==='explore'){ui.tab='compose';ui.view='list';ui.qs='';ui.cat=-1;ui.page=0;render();const q=document.getElementById('qs');if(q)q.focus()}
   else if(a==='openJournal'){ui.tab='journal';ui.msg='';render()}
   else if(a==='openProfile'){ui.tab='profil';ui.msg='';render()}
@@ -1595,7 +1638,7 @@ document.addEventListener('click',e=>{
   else if(a==='journalRange'){ui.journalDays=+b.dataset.days;render(true)}
   else if(a==='repeatEntry'){
     const e=store.entries.find(x=>String(x.id)===String(id));
-    if(e){ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=7;ui.note='';ui.view='plate';ui.tab='compose';render()}
+    if(e){ui.mealEditId=e.id;ui.mealEditReturn=ui.tab==='journal'?'journal':'calc';ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=Number.isFinite(+e.r)?Math.max(0,Math.min(10,+e.r)):7;ui.note=e.note||'';ui.view='plate';ui.tab='compose';ui.msg='';render()}
   }
   else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
   else if(a==='back'){if(ui.view==='list'){ui.view='plate';ui.tab='compose'}else{ui.view='list';ui.tab='compose'}ui.msg='';render()}
@@ -1611,11 +1654,13 @@ document.addEventListener('click',e=>{
   else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;savePlate();render(true)}
   else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);savePlate();if(!ui.plate.length)ui.view='list';render(true)}
   else if(a==='clearPlate'){ui.plate=[];savePlate();ui.view='list';ui.note='';ui.ress=7;render()}
+  else if(a==='cancelMealEdit'){ui.mealEditId=null;ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.tab=ui.mealEditReturn==='journal'?'journal':'calc';ui.msg='';render()}
   else if(a==='saveEntry'){
     const items=plateItems();if(!items.length)return;
-    const r=scoreOf(items,ui);
-    store.entries.push({id:Date.now(),ts:Date.now(),items:items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0})),r:ui.ress,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
-    save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.tab='journal';render();
+    const r=scoreOf(items,ui),now=Date.now(),savedItems=items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0}));
+    if(ui.mealEditId){const existing=store.entries.find(x=>String(x.id)===String(ui.mealEditId));if(!existing){ui.mealEditId=null;ui.msg='Ce repas n’existe plus dans le journal. Enregistre-le comme un nouveau repas si nécessaire.';render(true);return}existing.items=savedItems;existing.r=ui.ress;existing.jeun=ui.jeun;existing.note=ui.note.trim();existing.L=r.lv.L;existing.score=r.score;existing.edited=now;}
+    else store.entries.push({id:now,ts:now,items:savedItems,r:ui.ress,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
+    const wasEditing=!!ui.mealEditId,returnTab=ui.mealEditReturn;save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.mealEditId=null;ui.tab=wasEditing?(returnTab==='journal'?'journal':'calc'):'journal';ui.msg='';render();
   }
   else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
   else if(a==='cancelEdit'){ui.editId=null;render(true)}

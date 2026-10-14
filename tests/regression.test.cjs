@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v6.0';"));
+  assert.ok(html.includes("const APP_V='v6.1';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -68,7 +68,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v41';/);
+  assert.match(swSource, /const CACHE='mici-score-v42';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -342,7 +342,7 @@ test('backup import discards unknown journal fields', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v6.0';"));
+  assert.ok(html.includes("const APP_V='v6.1';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -1126,7 +1126,7 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
   assert.match(html, /data-act="repeatEntry"/);
   assert.match(html, /const ui=\{tab:'calc',view:'home'/);
   assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
-  assert.ok(html.includes("const APP_V='v6.0';"));
+  assert.ok(html.includes("const APP_V='v6.1';"));
 });
 
 
@@ -1159,4 +1159,46 @@ test('v6 provides four task-oriented navigation items and direct settings access
   assert.match(html, /data-tab="catalogue"/);
   assert.match(html, /data-act="openProfile" aria-label="Paramètres et données"/);
   assert.match(html, /target==='catalogue'[\s\S]*?ui.view='list'/);
+});
+
+
+test('recipe catalogue loads locally and uses the existing scoring and plate flow', () => {
+  assert.ok(html.includes('<script src="recipes.js"></script>'));
+  assert.match(html, /function recipesHTML\(\)/);
+  assert.match(html, /scoreOf\(scoreItems,ui\)/);
+  assert.match(html, /data-act="addRecipe"/);
+  assert.match(swSource, /mici-score-v42/);
+  assert.match(swSource, /'recipes\.js'/);
+  assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
+});
+
+test('search focus has a single explicit focus-visible treatment and portion steps remain accessible', () => {
+  assert.match(html, /\.searchbox input:focus-visible\{outline:none;/);
+  assert.match(html, /\.item \.seg button\[aria-pressed=true\]/);
+  assert.match(html, /data-act="pp" data-i=/);
+  assert.match(html, /aria-pressed="\$\{!it\.g&&it\.p===k\}"/);
+});
+
+
+test('reopening a journal meal restores its saved feeling and notes for editing', () => {
+  assert.match(html, /ui\.mealEditId=e\.id[\s\S]*?ui\.ress=Number\.isFinite\(\+e\.r\)[\s\S]*?ui\.note=e\.note\|\|''/);
+  assert.match(html, /data-act="repeatEntry"[\s\S]*?Reprendre et modifier/);
+  assert.match(html, /data-act="cancelMealEdit"/);
+});
+
+test('saving an edited meal updates the existing journal entry instead of duplicating it', () => {
+  assert.match(html, /if\(ui\.mealEditId\)\{const existing=store\.entries\.find\(x=>String\(x\.id\)===String\(ui\.mealEditId\)\)/);
+  assert.match(html, /existing\.items=savedItems;existing\.r=ui\.ress;existing\.jeun=ui\.jeun;existing\.note=ui\.note\.trim\(\)/);
+  assert.match(html, /else store\.entries\.push\(\{id:now,ts:now/);
+  assert.match(html, /existing\.edited=now/);
+});
+
+test('last meals are promoted on the home screen and journal with full meal-edit actions', () => {
+  const home = extractBetween(html, 'function homeHTML(){', 'function recipesHTML(){');
+  const journal = extractBetween(html, 'function journalHTML(){', 'function learning()');
+  assert.ok(home.indexOf('MÉMOIRE RÉCENTE') < home.indexOf('MON HISTORIQUE'));
+  assert.ok(journal.indexOf('HISTORIQUE') < journal.indexOf('ÉVOLUTION'));
+  assert.match(journal, /Reprendre et modifier/);
+  assert.match(journal, /Corriger la note/);
+  assert.match(html, /\.recent-meals\{border:1px solid var\(--line\);border-radius:16px/);
 });
