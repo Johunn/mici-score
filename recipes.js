@@ -985,31 +985,8 @@ window.MICI_RECIPES = [
     "source": "https://www.crohn-larectocoliteetnous.be/potage-de-chou-fleur-au-saumon-fume/",
     "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
     "summary": "Potage simplifié à partir de la recette publiée ; le chou-fleur et le saumon fumé ne sont pas tolérés de la même façon par tout le monde.",
-    "ingredients": [
-      {
-        "names": [
-          "Chou-fleur cuit"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Lait demi-écrémé"
-        ],
-        "grams": 25
-      },
-      {
-        "names": [
-          "Saumon fumé"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Cuire le chou-fleur jusqu’à ce qu’il soit très tendre.",
-      "Mixer avec le lait jusqu’à obtenir la texture souhaitée.",
-      "Ajouter le saumon fumé en petits morceaux et réchauffer doucement."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1029,31 +1006,8 @@ window.MICI_RECIPES = [
     "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-de-pates-mediterraneenne/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [
-      {
-        "names": [
-          "Pâtes blanches nature"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Saumon fumé"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
@@ -1070,31 +1024,8 @@ window.MICI_RECIPES = [
     "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/chicons-braises-a-la-creme-de-celeri-rave-filet-de-dinde-et-puree-de-pommes-de-terre-gratinee/",
     "sourceLabel": "Crohn / La rectocolite et nous — titre et lien individuel confirmés dans l’index de Nathalie ; ingrédients originaux non vérifiés",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
@@ -1111,31 +1042,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-aux-chicons/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale",
-    "ingredients": [
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Lait demi-écrémé"
-        ],
-        "grams": 25
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1152,40 +1060,21 @@ window.MICI_RECIPES = [
     "title": "Tartinade de carottes",
     "category": "Collation",
     "servings": 1,
-    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
+    "summary": "La liste originale des ingrédients a été vérifiée sur la source. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-tartinade-de-carottes/",
-    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "sourceLabel": "Crohn / La rectocolite et nous — ingrédients originaux vérifiés sur la recette individuelle",
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
+      "4 carottes",
+      "2 cuillères à soupe de ketchup",
+      "2 cuillères à soupe de mayonnaise light",
+      "2 cuillères à soupe de vinaigre balsamique",
+      "Poivre et sel"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1196,31 +1085,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-gateau-aux-carottes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1247,31 +1113,8 @@ window.MICI_RECIPES = [
     "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/potage-de-panais-au-dukkah/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Lait demi-écrémé"
-        ],
-        "grams": 25
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
@@ -1288,31 +1131,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-nouilles-de-riz-aux-legumes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pâtes blanches nature"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Saumon fumé"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1339,31 +1159,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-au-potiron-digeste/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Lait demi-écrémé"
-        ],
-        "grams": 25
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1382,31 +1179,8 @@ window.MICI_RECIPES = [
     "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-vive-chou-fleur-roti-oeuf-mimosa/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
@@ -1423,31 +1197,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/plat-au-four-facile-digerer/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1471,31 +1222,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-digeste-au-poulet-curry/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale de salade digeste au poulet curry ; adaptation MICI Score non validée",
-    "ingredients": [
-      {
-        "names": [
-          "Poulet grillé sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Purée à l'eau"
-        ],
-        "grams": 200
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1516,31 +1244,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-filet-de-saumon-au-four-et-carottes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1565,31 +1270,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-soupe-de-carottes-gingembredelicieuse/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Lait demi-écrémé"
-        ],
-        "grams": 25
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1611,31 +1293,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-diplomate-aux-framboises/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1657,31 +1316,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/mousse-de-cafe-au-lait/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1703,31 +1339,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/spaghettis-a-la-bolognaise-classique-sauce-a-cuisson-lente/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Poulet grillé sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Purée à l'eau"
-        ],
-        "grams": 200
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1756,31 +1369,8 @@ window.MICI_RECIPES = [
     "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/un-fabuleux-crumble-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
@@ -1797,31 +1387,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-petit-gateau-a-la-compote-de-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1841,31 +1408,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-gateaux-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1886,31 +1430,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-shepherds-pie-minute/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Poulet grillé sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Purée à l'eau"
-        ],
-        "grams": 200
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1942,31 +1463,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-biscuits-aux-dattes-et-amandes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -1988,31 +1486,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-dinde-et-chili-a-la-patate-douce/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Poulet grillé sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Purée à l'eau"
-        ],
-        "grams": 200
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2044,31 +1519,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-soupe-au-potiron-au-lait-de-coco-et-curry/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Lait demi-écrémé"
-        ],
-        "grams": 25
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2099,31 +1551,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-cake-banane-upside-down-caramelise/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2150,25 +1579,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-chips-legumes-cuits-four/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2189,31 +1601,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/wrap-festif-au-fromage-frais-et-au-saumon-fume/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2234,25 +1623,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/tortilla-espagnole/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pain de mie nature"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2276,31 +1648,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-courgette-farcie/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2321,25 +1670,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-wraps-a-lavocat-et-a-la-courgette-grillee/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pain de mie nature"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2361,31 +1693,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-crepes-aux-flocons-davoine-et-aux-fraises/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2406,31 +1715,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recettes-apero-light/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2450,31 +1736,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-tiramisu-leger/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2497,31 +1760,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-macaroni-au-potiron/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pâtes blanches nature"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Saumon fumé"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2543,31 +1783,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-croque-thon-legere/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2589,25 +1806,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/bagel-courgettes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pain de mie nature"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2630,31 +1830,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-pates-au-saumon/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2675,31 +1852,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-mousse-au-chocolat-legere/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2718,31 +1872,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-roulades-de-poulet-aux-epinards/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Poulet grillé sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Purée à l'eau"
-        ],
-        "grams": 200
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2766,31 +1897,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-filet-de-poulet-aux-chicons-et-a-la-creme-de-butternut/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Poulet grillé sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Purée à l'eau"
-        ],
-        "grams": 200
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2816,31 +1924,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/pates-sauce-legere-fromage/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pâtes blanches nature"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Saumon fumé"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2864,31 +1949,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/courgette-farcie-au-thon/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Saumon cuit"
-        ],
-        "grams": 120
-      },
-      {
-        "names": [
-          "Cabillaud ou colin vapeur"
-        ],
-        "grams": 130
-      },
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2909,31 +1971,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/mug-cake-sain-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -2956,31 +1995,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/pizza-fond-en-chou-fleur/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3003,31 +2019,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-beignets-aux-pommes-delicieusement-sains/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3049,31 +2042,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-delicieux-crumble-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3096,25 +2066,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-wrap-avec-une-salade-doeufs-saine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pain de mie nature"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Courgette cuite sans peau"
-        ],
-        "grams": 100
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3137,31 +2090,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-biscuits-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3183,31 +2113,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-eau-fruitee/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3226,31 +2133,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-smoothie-aux-fruits-rouges/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Riz blanc"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Carotte cuite"
-        ],
-        "grams": 80
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
-      "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
-      "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3270,25 +2154,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score ; les ingrédients et quantités ne reproduisent pas nécessairement la recette publiée. Consulter la source.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-mug-cake-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Banane bien mûre"
-        ],
-        "grams": 60
-      },
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour la recette et les quantités originales.",
-      "Préparer les ingrédients de cette adaptation simplifiée.",
-      "Cuire jusqu’à ce que la préparation soit prise, en vérifiant la cuisson."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
@@ -3311,31 +2178,8 @@ window.MICI_RECIPES = [
     "summary": "Adaptation simplifiée MICI Score ; la recette source peut contenir d’autres ingrédients et proportions. Consulter la source.",
     "source": "https://www.crohn-larectocoliteetnous.be/crumble-croustillant-aux-pommes-et-aux-myrtilles/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Pomme de terre vapeur sans peau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Flocons d'avoine cuits à l'eau"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Huile d'olive"
-        ],
-        "grams": 5
-      }
-    ],
-    "steps": [
-      "Consulter la fiche source pour les ingrédients et quantités originales.",
-      "Préparer les fruits et la garniture selon la fiche source.",
-      "Cuire au four jusqu’à ce que le crumble soit cuit."
-    ],
+    "ingredients": [],
+    "steps": [],
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
