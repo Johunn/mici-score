@@ -1215,9 +1215,9 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
   assert.ok(recipes.every(r => r.title && r.category && r.summary && r.source.startsWith('https://')));
   assert.ok(html.includes('Recettes à tester selon ta tolérance'));
-  assert.match(html, /IDÉES DE REPAS · \\$\\{recipes.length\\} RECETTES/);
-  assert.match(html, /Source : <a href=\\"\\$\\{esc\\(r\\.source\\)\\}/);
-  assert.match(html, /\\$\\{esc\\(r\\.sourceLabel\\)\\}/);
+  assert.ok(html.includes('IDÉES DE REPAS · ${recipes.length} RECETTES'));
+  assert.ok(html.includes('Source : <a href="${esc(r.source)}"'));
+  assert.ok(html.includes('${esc(r.sourceLabel)} ↗</a>'));
   const coreSandbox = { window: {} };
   vm.createContext(coreSandbox);
   new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(coreSandbox);
