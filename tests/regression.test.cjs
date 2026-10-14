@@ -1168,18 +1168,31 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v48/);
+  assert.match(swSource, /mici-score-v49/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
 
-test('search focus has a single explicit focus-visible treatment and portion steps remain accessible', () => {
+test('search focus remains accessible and portions use a progressive touch-friendly scale', () => {
   assert.match(html, /\.searchbox input:focus-visible\{outline:none;/);
-  assert.match(html, /\.item \.seg button\[aria-pressed=true\]/);
-  assert.match(html, /data-act="pp" data-i=/);
-  assert.match(html, /aria-pressed="\$\{!it\.g&&it\.p===k\}"/);
+  assert.match(html, /type="range" min="0" max="3" step="1" value="\$\{it\.g\?2:/);
+  assert.match(html, /data-pr="\$\{i\}"/);
+  assert.match(html, /aria-label="Niveau de portion pour/);
+  assert.match(html, /data-gi="\$\{i\}"/);
+  assert.match(html, /else if\(t\.dataset&&t\.dataset\.pr!=null\)[\s\S]*?savePlate\(\);render\(true\)/);
+  assert.match(html, /portion-scale/);
 });
 
+
+
+test('recipe controls are compact and score badges have a distinct high-contrast treatment', () => {
+  assert.match(html, /class="recipe-controls"/);
+  assert.match(html, /class="field recipe-query"/);
+  assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{height:42px/);
+  assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
+  assert.match(html, /background:color-mix\(in srgb,currentColor 15%,var\(--surface\)\)/);
+  assert.match(html, /const CACHE='mici-score-v49';/);
+});
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
   assert.match(html, /ui\.mealEditId=e\.id[\s\S]*?ui\.ress=Number\.isFinite\(\+e\.r\)[\s\S]*?ui\.note=e\.note\|\|''/);
