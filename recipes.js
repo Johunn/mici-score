@@ -1,4 +1,4 @@
-/* Recettes adaptées par MICI Score à partir de ressources spécialisées. Les sources directes et adaptations sont précisées dans chaque fiche. */
+/* Recettes adaptées par MICI Score. Les adaptations sont signalées dans chaque fiche. Les scores sont indicatifs et la tolérance individuelle varie. */
 window.MICI_RECIPES = [
   {
     "id": "bol-riz-poulet",
@@ -976,6 +976,360 @@ window.MICI_RECIPES = [
       "Égoutter le thon.",
       "Mélanger le thon avec le fromage à tartiner.",
       "Étaler sur le pain de mie et ajouter quelques fines tranches de concombre si elles sont bien tolérées."
+    ]
+  },
+  {
+    "id": "overnight-oats-curcuma",
+    "title": "Overnight oats au curcuma (adaptés)",
+    "category": "Petit-déjeuner",
+    "source": "https://www.crohn-larectocoliteetnous.be/overnight-oats-au-curcuma/",
+    "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
+    "summary": "Adaptation utilisant les ingrédients du catalogue ; la recette source contient aussi du curcuma et des garnitures. L’avoine et le lait peuvent ne pas convenir à tout le monde.",
+    "ingredients": [
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 60
+      }
+    ],
+    "steps": [
+      "Mélanger les flocons d’avoine avec le lait.",
+      "Laisser reposer au réfrigérateur plusieurs heures ou toute la nuit.",
+      "Ajouter la banane écrasée. Le curcuma et les garnitures de la recette source ne sont pas inclus dans cette adaptation."
+    ]
+  },
+  {
+    "id": "bagel-salade-oeufs-adapte",
+    "title": "Salade d’œufs au fromage frais (adaptée)",
+    "category": "Petit-déjeuner",
+    "source": "https://www.crohn-larectocoliteetnous.be/bagels-de-paques-avec-fromage-cremeux-et-salade-doeufs/",
+    "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
+    "summary": "Version sur pain de mie, avec œuf, fromage à tartiner et une petite quantité de mayonnaise ; ce n’est pas la recette originale complète.",
+    "ingredients": [
+      {
+        "names": [
+          "Pain de mie nature"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Œuf"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Fromage à tartiner (type Philadelphia)"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Mayonnaise allégée"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Cuire l’œuf dur puis l’écraser à la fourchette.",
+      "Mélanger avec le fromage à tartiner et une petite quantité de mayonnaise.",
+      "Servir sur du pain de mie. La recette source utilise des bagels et comporte d’autres garnitures."
+    ]
+  },
+  {
+    "id": "potage-chou-fleur-saumon-adapte",
+    "title": "Potage de chou-fleur au saumon fumé (adapté)",
+    "category": "Soupe",
+    "source": "https://www.crohn-larectocoliteetnous.be/potage-de-chou-fleur-au-saumon-fume/",
+    "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
+    "summary": "Potage simplifié à partir de la recette publiée ; le chou-fleur et le saumon fumé ne sont pas tolérés de la même façon par tout le monde.",
+    "ingredients": [
+      {
+        "names": [
+          "Chou-fleur cuit"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Saumon fumé"
+        ],
+        "grams": 100
+      }
+    ],
+    "steps": [
+      "Cuire le chou-fleur jusqu’à ce qu’il soit très tendre.",
+      "Mixer avec le lait jusqu’à obtenir la texture souhaitée.",
+      "Ajouter le saumon fumé en petits morceaux et réchauffer doucement."
+    ]
+  },
+  {
+    "id": "tortilla-espagnole-adaptee",
+    "title": "Tortilla espagnole (adaptée)",
+    "category": "Repas complet",
+    "source": "https://www.crohn-larectocoliteetnous.be/tortilla-espagnole/",
+    "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
+    "summary": "Version simple à base d’œufs et de pommes de terre, sans prétendre reproduire tous les détails de la recette source.",
+    "ingredients": [
+      {
+        "names": [
+          "Œuf"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Cuire les pommes de terre jusqu’à ce qu’elles soient tendres puis les couper en rondelles.",
+      "Battre les œufs et les verser sur les pommes de terre.",
+      "Cuire à feu doux avec un peu d’huile jusqu’à ce que l’œuf soit pris."
+    ]
+  },
+  {
+    "id": "courgette-farcie-thon-adaptee",
+    "title": "Courgette farcie au thon (adaptée)",
+    "category": "Repas complet",
+    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée",
+    "summary": "Adaptation courte à base de courgette cuite et de thon ; vérifier la fiche d’origine pour la version complète.",
+    "ingredients": [
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Thon en boîte au naturel"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Riz blanc"
+        ],
+        "grams": 180
+      }
+    ],
+    "steps": [
+      "Couper la courgette en deux et cuire la chair jusqu’à ce qu’elle soit tendre.",
+      "Mélanger le thon égoutté avec un peu de riz cuit.",
+      "Garnir la courgette et réchauffer au four."
+    ]
+  },
+  {
+    "id": "wrap-avocat-courgette-adapte",
+    "title": "Pain garni à l’avocat et à la courgette (adapté)",
+    "category": "Repas rapide",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-wraps-a-lavocat-et-a-la-courgette-grillee/",
+    "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
+    "summary": "Adaptation sur pain de mie, car le wrap de la recette source n’est pas un ingrédient distinct du catalogue MICI Score.",
+    "ingredients": [
+      {
+        "names": [
+          "Pain de mie nature"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Avocat"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      }
+    ],
+    "steps": [
+      "Cuire la courgette jusqu’à ce qu’elle soit tendre.",
+      "Écraser l’avocat et l’étaler sur le pain.",
+      "Ajouter la courgette cuite et servir."
+    ]
+  },
+  {
+    "id": "pates-sauce-fromage-legere",
+    "title": "Pâtes au thon, courgettes et sauce légère au fromage",
+    "category": "Repas complet",
+    "source": "https://www.crohn-larectocoliteetnous.be/pates-sauce-legere-fromage/",
+    "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
+    "summary": "Adaptation de la recette publiée : macaronis, thon, courgettes et sauce légère au lait et au fromage. La maïzena et les assaisonnements de la source ne sont pas tous représentés dans le catalogue.",
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Thon en boîte au naturel"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Fromage râpé"
+        ],
+        "grams": 20
+      }
+    ],
+    "steps": [
+      "Cuire les pâtes selon les indications.",
+      "Faire cuire la courgette en dés jusqu’à ce qu’elle soit tendre, puis ajouter le thon égoutté.",
+      "Préparer une sauce légère avec le lait et le fromage râpé, mélanger aux pâtes et servir."
+    ]
+  },
+  {
+    "id": "ccf-pancakes-banane",
+    "title": "Pancakes à la banane (adaptés)",
+    "category": "Petit-déjeuner",
+    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
+    "sourceLabel": "Crohn’s & Colitis Foundation — adaptation simplifiée d’une recette mise en avant",
+    "summary": "Version simplifiée à base de banane, œuf et avoine. La recette originale peut comporter des ingrédients et garnitures différents.",
+    "ingredients": [
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Œuf"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 25
+      }
+    ],
+    "steps": [
+      "Écraser la banane et mélanger avec l’œuf, les flocons et un peu de lait.",
+      "Déposer de petites portions dans une poêle légèrement huilée.",
+      "Cuire à feu moyen jusqu’à ce que les pancakes soient pris des deux côtés."
+    ]
+  },
+  {
+    "id": "ccf-saumon-concombre-aneth",
+    "title": "Saumon et sauce au concombre (adaptés)",
+    "category": "Repas complet",
+    "source": "https://www.crohnscolitisfoundation.org/sites/default/files/2025-07/2025_GFR_Global_Gut_Guide.pdf",
+    "sourceLabel": "Crohn’s & Colitis Foundation — adaptation simplifiée d’une recette publiée",
+    "summary": "Version simplifiée du saumon au four accompagné d’une sauce au concombre. L’aneth et les autres détails de la sauce originale ne sont pas tous représentés dans le catalogue.",
+    "ingredients": [
+      {
+        "names": [
+          "Saumon cuit"
+        ],
+        "grams": 120
+      },
+      {
+        "names": [
+          "Concombre"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Yaourt sans lactose"
+        ],
+        "grams": 10
+      },
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 180
+      }
+    ],
+    "steps": [
+      "Cuire le saumon à cœur au four.",
+      "Mélanger le concombre finement coupé avec le yaourt pour préparer une sauce simple.",
+      "Servir avec les pommes de terre vapeur."
+    ]
+  },
+  {
+    "id": "ccf-chips-legumes-racines",
+    "title": "Légumes-racines rôtis (adaptés)",
+    "category": "Accompagnement",
+    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
+    "sourceLabel": "Crohn’s & Colitis Foundation — adaptation simplifiée d’une recette mise en avant",
+    "summary": "Adaptation limitée à la carotte disponible dans le catalogue ; la recette source utilise plusieurs légumes-racines.",
+    "ingredients": [
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Couper la carotte en morceaux fins.",
+      "Mélanger avec une petite quantité d’huile d’olive.",
+      "Cuire au four jusqu’à la texture souhaitée. Cette version ne reproduit pas le mélange de légumes de la source."
     ]
   }
 ];
