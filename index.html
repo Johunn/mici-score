@@ -574,34 +574,25 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 @media(max-width:360px){.recipe-controls{gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:13px;padding:7px 8px}}
 
 
-/* Correctifs explicites : recherche compacte, focus sans halo et pastilles de score repensées. */
-.recipe-controls{grid-template-columns:minmax(0,1fr) 132px!important;gap:8px}
-.recipe-controls .recipe-query{grid-column:1!important;grid-row:1!important}
-.recipe-controls .field:nth-child(2){grid-column:1/-1!important;grid-row:2!important}
-.recipe-controls .field:nth-child(3){grid-column:2!important;grid-row:1!important}
-.recipe-controls input[type=search]{min-width:0}
-#app .searchbox:focus-within{outline:none!important;box-shadow:none!important}
-#app .searchbox input[type=search]:focus,
-#app .searchbox input[type=search]:focus-visible{border:1px solid var(--line)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
-#app .recipe-controls input[type=search]:focus,
-#app .recipe-controls input[type=search]:focus-visible{border:1px solid var(--line)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
-.badge{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px;min-height:46px;padding:0;border:2px solid currentColor;border-radius:50%!important;background:radial-gradient(circle at 32% 22%,color-mix(in srgb,currentColor 24%,var(--surface)),var(--surface) 72%);font:900 15px/1 var(--f-display);font-variant-numeric:tabular-nums;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 12%,transparent),inset 0 0 0 2px var(--surface)!important}
-.badge:before{content:none!important}
-.exp-score{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px;min-height:58px;padding:0 0 9px;border:2px solid currentColor;border-radius:50%!important;background:radial-gradient(circle at 30% 22%,color-mix(in srgb,currentColor 25%,var(--surface)),var(--surface) 74%);font:900 19px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.04em;box-shadow:0 0 0 4px color-mix(in srgb,currentColor 10%,transparent),inset 0 0 0 2px var(--surface)!important}
-.exp-score:before{content:'';position:absolute;inset:4px;border:1px dashed color-mix(in srgb,currentColor 52%,transparent);border-radius:50%;background:none}
-.exp-score:after{content:'MICI';position:absolute;bottom:7px;font:900 7px/1 var(--f-body);letter-spacing:.15em;opacity:.85}
-@media(max-width:380px){.recipe-controls{grid-template-columns:minmax(0,1fr) 108px!important;gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:12px;padding:7px 7px}}
 
+/* Correctif définitif : recherche + tri sur une ligne et chiffres de scores réellement agrandis/gras. */
+#app .catalog-tools{display:grid!important;grid-template-columns:minmax(0,1fr) 132px!important;align-items:center!important;gap:8px!important}
+#app .catalog-tools .searchbox{grid-column:1!important;grid-row:1!important;min-width:0!important;margin:0!important}
+#app .catalog-tools .catalog-sort{grid-column:2!important;grid-row:1!important;min-width:0!important}
+#app .catalog-tools .searchbox input,#app .catalog-tools .catalog-sort select{width:100%!important;min-width:0!important;box-sizing:border-box!important}
+#app .recipe-controls{display:grid!important;grid-template-columns:minmax(0,1fr) 132px!important;gap:8px!important;align-items:end!important}
+#app .recipe-controls .recipe-query{grid-column:1!important;grid-row:1!important;min-width:0!important}
+#app .recipe-controls .field:nth-child(2){grid-column:1/-1!important;grid-row:2!important;min-width:0!important}
+#app .recipe-controls .field:nth-child(3){grid-column:2!important;grid-row:1!important;min-width:0!important}
+#app .recipe-controls input[type=search],#app .recipe-controls select{width:100%!important;min-width:0!important;box-sizing:border-box!important}
+#app .badge,#app .exp-score{font-family:var(--f-display)!important;font-size:24px!important;font-weight:900!important;line-height:1!important;font-variant-numeric:tabular-nums!important;letter-spacing:-.04em!important}
+#app .recipe-score-pill{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important;line-height:1!important}
+@media(max-width:380px){
+ #app .catalog-tools{grid-template-columns:minmax(0,1fr) 104px!important;gap:6px!important}
+ #app .recipe-controls{grid-template-columns:minmax(0,1fr) 104px!important;gap:6px!important}
+ #app .catalog-tools .catalog-sort select,#app .recipe-controls select{font-size:12px!important;padding:7px 6px!important}
+}
 
-/* Champs de recherche cohérents : aucun contour/halo autour du conteneur, focus limité au champ. */
-#app .searchbox{outline:none!important;box-shadow:none!important;border:0!important}
-#app .searchbox:focus-within{outline:none!important;box-shadow:none!important;border:0!important}
-#app .searchbox input[type=search]:focus,#app .searchbox input[type=search]:focus-visible{border:2px solid var(--accent)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
-#app .recipe-controls input[type=search]:focus,#app .recipe-controls input[type=search]:focus-visible{border:2px solid var(--accent)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
-.badge,.exp-score{position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:56px;min-height:46px;padding:7px 12px;border:1.5px solid color-mix(in srgb,currentColor 70%,var(--line))!important;border-radius:13px!important;background:linear-gradient(145deg,color-mix(in srgb,currentColor 20%,var(--surface)),color-mix(in srgb,currentColor 7%,var(--surface)))!important;font:900 22px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.04em;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 5px color-mix(in srgb,currentColor 12%,transparent)!important}
-.badge:before,.exp-score:before{content:none!important}
-.exp-score:after{content:none!important}
-.recipe-score-pill{min-width:58px;min-height:48px;padding:7px 12px;font-size:23px!important;font-weight:900;line-height:1;letter-spacing:-.04em}
 
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
