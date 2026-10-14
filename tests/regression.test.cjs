@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v4.5';"));
+  assert.ok(html.includes("const APP_V='v6.0';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -52,9 +52,9 @@ test('app shell loads the scoring module before its inline code', () => {
 
 test('settings and journal note fields have accessible labels and focus support', () => {
   assert.ok(html.includes('<label for="cid">Identifiant client Google</label><input type="text" id="cid"'));
-  assert.ok(html.includes('<label for="enote">Note (facultatif)</label><textarea id="enote"'));
+  assert.ok(/<label for="enote">Note personnelle<\/label><textarea id="enote"/.test(html));
   assert.ok(html.includes(':focus-visible{outline:3px solid var(--accent);outline-offset:2px}'));
-  assert.ok(html.includes('<nav class="tabs" aria-label="Navigation">'));
+  assert.ok(html.includes('<nav class="tabs" aria-label="Navigation principale">'));
   assert.ok(html.includes('@media (prefers-reduced-motion:no-preference)'));
 });
 
@@ -67,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module and uses the v32 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v32';/);
+test('service worker pre-caches the extracted scoring module and uses the v39 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v39';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -342,7 +342,7 @@ test('backup import discards unknown journal fields', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v4.5';"));
+  assert.ok(html.includes("const APP_V='v6.0';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -1117,4 +1117,46 @@ test('scoring functions follow the app store provider when app state is replaced
   const after = core.single(food);
   assert.ok(after < before, 'the engine should use the currently active app store');
   assert.ok(Math.abs(after - 10 * Math.exp(-2.4 / 9)) < 1e-12);
+});
+
+
+test('home dashboard prioritizes tasks and safely restores a previously logged meal', () => {
+  assert.match(html, /function homeHTML\(\)/);
+  assert.match(html, /data-act="startCompose"/);
+  assert.match(html, /data-act="repeatEntry"/);
+  assert.match(html, /const ui=\{tab:'calc',view:'home'/);
+  assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
+  assert.ok(html.includes("const APP_V='v6.0';"));
+});
+
+
+test('v6 merges the personal dashboard with the fast task-oriented entry point', () => {
+  assert.ok(html.includes('Moins de recherche.<br>Plus de repères.'));
+  assert.match(html, /data-act="startCompose">＋ Composer un repas/);
+  assert.match(html, /Comprendre mon historique/);
+  assert.match(html, /Ressenti moyen · 7 jours/);
+});
+
+test('v5 uses a dedicated meal composer and personal-observation journal', () => {
+  assert.match(html, /data-tab="calc"><span class="tab-icon"/);
+  assert.match(html, /data-tab="compose"><span class="tab-icon"/);
+  assert.match(html, /function homeHTML\(\)[\s\S]*?Ressenti moyen · 7 jours/);
+  assert.match(html, /function calcHTML\(\)[\s\S]*?COMPOSITION · ÉTAPE 1/);
+  assert.match(html, /data-act="journalRange"/);
+  assert.match(html, /journalDays:30/);
+  assert.match(html, /else if\(a==='journalRange'\)/);
+  assert.match(html, /data-act="openProfile"/);
+  assert.match(html, /data-act="openSources"/);
+  assert.match(html, /mici:plate:v1/);
+  assert.match(html, /function plateHTML\(\)[\s\S]*?Ton brouillon est conservé localement/);
+});
+
+
+test('v6 provides four task-oriented navigation items and direct settings access', () => {
+  assert.match(html, /data-tab="calc"/);
+  assert.match(html, /data-tab="compose"/);
+  assert.match(html, /data-tab="journal"/);
+  assert.match(html, /data-tab="catalogue"/);
+  assert.match(html, /data-act="openProfile" aria-label="Paramètres et données"/);
+  assert.match(html, /target==='catalogue'[\s\S]*?ui.view='list'/);
 });
