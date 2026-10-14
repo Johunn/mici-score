@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v4.8';"));
+  assert.ok(html.includes("const APP_V='v4.9';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -67,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module and uses the v33 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v35';/);
+test('service worker pre-caches the extracted scoring module and uses the v36 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v36';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1117,4 +1117,14 @@ test('scoring functions follow the app store provider when app state is replaced
   const after = core.single(food);
   assert.ok(after < before, 'the engine should use the currently active app store');
   assert.ok(Math.abs(after - 10 * Math.exp(-2.4 / 9)) < 1e-12);
+});
+
+
+test('home dashboard prioritizes tasks and safely restores a previously logged meal', () => {
+  assert.match(html, /function homeHTML\(\)/);
+  assert.match(html, /data-act="startCompose"/);
+  assert.match(html, /data-act="repeatEntry"/);
+  assert.match(html, /const ui=\{tab:'calc',view:'home'/);
+  assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
+  assert.match(html, /APP_V='v4\.9'/);
 });
