@@ -1325,7 +1325,12 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "750 g de potiron en dés",
+      "2 blancs de poireaux",
+      "1,5 l de bouillon de poulet (frais ou en cube)"
+    ]
   },
   {
     "id": "vive-chou-fleur-oeuf",
