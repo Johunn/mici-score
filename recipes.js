@@ -1521,15 +1521,15 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "8 c. à soupe de fromage aux fines herbes light",
+      "8 cuillères à soupe de fromage aux fines herbes light",
       "400 à 600 g de filet de saumon",
-      "12 à 16 c. à soupe de chapelure",
+      "12 à 16 cuillères à soupe de chapelure",
       "Sel et poivre",
-      "La liste des ingrédients de l’accompagnement carottes doit être transcrite depuis la suite de la source."
+      "La source mentionne aussi un accompagnement de carottes ; sa liste détaillée n’est pas entièrement transcrite ici."
     ],
-    "originalIngredientsVerified": true
+    "originalIngredientsVerified": false
   },
   {
     "id": "soupe-carottes-gingembre",
@@ -2937,11 +2937,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "La page source doit être consultée pour transcrire la liste d’origine sans inférer les quantités."
+      "La fiche source doit être vérifiée à nouveau : la page ouverte ne permet pas de garantir ici la transcription complète des ingrédients et quantités."
     ],
-    "originalIngredientsVerified": true
+    "originalIngredientsVerified": false
   },
   {
     "id": "biscuits-avoine",
