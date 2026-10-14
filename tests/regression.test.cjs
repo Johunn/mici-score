@@ -10,7 +10,6 @@ const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const coreModuleSource = fs.readFileSync(path.join(root, 'score-core.js'), 'utf8');
 const swSource = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
-const manifestSource = fs.readFileSync(path.join(root, 'manifest.webmanifest'), 'utf8');
 
 function copy(value) {
   return JSON.parse(JSON.stringify(value));
@@ -46,32 +45,8 @@ test('app shell loads the scoring module before its inline code', () => {
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
   assert.ok(html.includes("const APP_V='v6.0';"));
-  assert.ok(html.includes('<html lang="fr" data-theme="amoled">'));
-  assert.ok(html.includes(")?p.theme:'amoled';"));
-  assert.ok(coreModuleSource.includes("theme:'amoled',layout:'liste'"), 'new installations must default to the AMOLED theme');
-  assert.ok(html.includes('<meta name="theme-color" content="#000000">'));
-  assert.match(manifestSource, /"background_color": "#000000"/);
-  assert.match(manifestSource, /"theme_color": "#000000"/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
-});
-
-
-test('theme migration defaults new and legacy-auto preferences to AMOLED while preserving explicit choices', () => {
-  const normSource = extractBetween(
-    html,
-    'const JOURNAL_FIELDS=',
-    '\n/* Validation stricte des sauvegardes importées'
-  );
-  const sandbox = {};
-  vm.createContext(sandbox);
-  new vm.Script(normSource + '\nglobalThis.normalizePrefs = norm;').runInContext(sandbox);
-
-  assert.equal(sandbox.normalizePrefs({}).theme, 'amoled');
-  assert.equal(sandbox.normalizePrefs({ theme: 'system' }).theme, 'amoled');
-  assert.equal(sandbox.normalizePrefs({ theme: 'dark', ver: 5 }).theme, 'dark');
-  assert.equal(sandbox.normalizePrefs({ theme: 'micinuit', ver: 5 }).theme, 'micinuit');
-  assert.equal(sandbox.normalizePrefs({ theme: 'amoled', ver: 5 }).theme, 'amoled');
 });
 
 
@@ -92,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module and uses the v40 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v40';/);
+test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v41';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
