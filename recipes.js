@@ -119,9 +119,9 @@ window.MICI_RECIPES = [
     "title": "Flocons d’avoine à la banane (adaptés)",
     "category": "Petit-déjeuner",
     "servings": 1,
-    "summary": "Version simplifiée inspirée d’une recette d’overnight oats publiée par l’association belge.",
+    "summary": "Adaptation MICI Score libre inspirée de la recette originale d’overnight oats au curcuma. La fiche proposée est un porridge à la banane et ne reproduit pas la recette source ; consulter la source pour la recette originale.",
     "source": "https://www.crohn-larectocoliteetnous.be/overnight-oats-au-curcuma/",
-    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
+    "sourceLabel": "Inspiration — recette originale « Overnight oats au curcuma » (adaptée librement, ingrédients différents)",
     "ingredients": [
       {
         "names": [
@@ -1470,7 +1470,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-digeste-au-poulet-curry/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale de salade digeste au poulet curry ; adaptation MICI Score non validée",
     "ingredients": [
       {
         "names": [
