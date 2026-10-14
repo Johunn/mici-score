@@ -1124,7 +1124,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v5.0';
+const APP_V='v5.1';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1175,10 +1175,10 @@ function homeHTML(){
   }
   const suspects=suspectList().slice(0,2);
   return [
-    '<section class="today-intro"><span class="exp-eyebrow">MICI SCORE · TON SUIVI</span><h1>Comment ça se passe aujourd’hui&nbsp;?</h1><p class="today-lede">Le plus utile n’est pas de prédire ta digestion : c’est de garder des observations comparables et de voir ce qui se répète chez toi.</p>',
+    '<section class="today-intro"><span class="exp-eyebrow">MICI SCORE · TON SUIVI</span><h1>Moins de recherche.<br>Plus de repères.</h1><p class="today-lede">Compose un repas, note comment tu te sens et compare tes propres observations. Le score donne un repère indicatif, pas une prédiction médicale.</p>',
     '<div class="today-stats"><div class="today-stat"><span>Repas notés aujourd’hui</span><strong>'+today.length+'</strong><small>'+(today.length===1?'Une observation enregistrée':today.length>1?'Observations enregistrées':'Rien de noté pour le moment')+'</small></div><div class="today-stat"><span>Ressenti moyen · 7 jours</span><strong>'+(average===null?'—':fmt(average)+'/10')+'</strong><small>'+week.length+' repas avec une note personnelle</small></div></div>',
-    '<button class="btn block" style="min-height:56px;font-size:16px" data-act="startCompose">＋ Noter un repas</button>',
-    '<div class="today-actions"><button class="btn ghost" data-act="explore">Chercher un aliment</button><button class="btn ghost" data-act="openJournal">Analyser mes observations</button></div></section>',
+    '<button class="btn block" style="min-height:56px;font-size:16px" data-act="startCompose">＋ Composer un repas</button>',
+    '<div class="today-actions"><button class="btn ghost" data-act="explore">Trouver un aliment <span aria-hidden="true">→</span></button><button class="btn ghost" data-act="openJournal">Comprendre mon historique <span aria-hidden="true">→</span></button></div></section>',
     '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">MON HISTORIQUE</span><h2>Les 7 derniers jours</h2></div><span class="exp-muted">'+week.length+' repas</span></div>',
     week.length?'<p class="exp-muted">Moyenne du ressenti que tu as saisi après chaque repas. Un trait vide signifie qu’aucune note n’a été enregistrée.</p><div class="trend-grid" aria-label="Ressenti journalier sur sept jours">'+points.map(p=>'<div class="trend-col" title="'+p.label+' : '+(p.value===null?'aucun repas':fmt(p.value)+'/10')+'"><span class="trend-score">'+(p.value===null?'—':fmt(p.value))+'</span><div class="trend-track"><i style="height:'+(p.value===null?3:Math.max(5,p.value*7))+'px"></i></div><small>'+p.short+'</small></div>').join('')+'</div>':'<p class="exp-empty">Les notes apparaîtront ici lorsque tu auras enregistré quelques repas. Elles reflètent ton ressenti déclaré, pas une mesure médicale.</p>',
     '</section>',
