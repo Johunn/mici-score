@@ -1261,7 +1261,7 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
   const recipes = recipeSandbox.window.MICI_RECIPES;
   assert.ok(recipes.length >= 25, 'expected an expanded recipe catalogue');
   assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
-  const normalize = value => String(value).normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   assert.equal(new Set(recipes.map(r => normalize(r.title))).size, recipes.length, 'recipe titles must be unique');
   const coreSandbox = { window: {} };
   vm.createContext(coreSandbox);
