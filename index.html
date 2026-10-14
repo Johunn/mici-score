@@ -484,20 +484,50 @@ nav.tabs button{font-size:clamp(10px,2.85vw,12px);line-height:1.2;padding:11px 1
 .compose-empty .btn{min-height:54px}
 @media(min-width:440px){.today-actions{grid-template-columns:1fr 1fr}.today-stat{padding:16px}.trend-grid{gap:10px}.exp-shortcuts{grid-template-columns:repeat(3,1fr)}}
 
+
+/* V6 — direction visuelle prune et navigation simplifiée, sans changer les règles métier. */
+:root[data-theme="micinuit"]{--bg:#170D20;--surface:#25152F;--ink:#F8F0FA;--muted:#C0B0C9;--line:#402A4C;--accent:#FFD23F;--on-accent:#24172B;--hi:#FFD23F;--good:#55C878;--mid:#F3BD47;--bad:#FF827B;--navbg:rgba(28,15,37,.94);--glass:rgba(255,255,255,.055);--glassline:rgba(255,255,255,.12)}
+body{background:var(--bg)}
+#appbar{background:color-mix(in srgb,var(--bg) 92%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.appbar-in{padding:12px 18px 8px}.brand{font-size:23px;letter-spacing:-.045em}.ibtn.sm{width:38px;height:38px;border-color:var(--line);background:var(--surface)}
+main{padding:16px 16px 30px}.today-intro{border:0;padding:4px 0 12px;margin-bottom:8px}
+.exp-eyebrow{font-size:10px;letter-spacing:.14em;color:var(--accent)}
+.today-intro h1{font-size:clamp(32px,8.4vw,40px);max-width:12ch;line-height:1.02;letter-spacing:-.05em;margin:12px 0}
+.today-lede{font-size:14px;line-height:1.55;max-width:38ch;color:var(--muted)}
+.today-stats{gap:10px;margin:18px 0}.today-stat,.card,.journal-stat{background:linear-gradient(145deg,color-mix(in srgb,var(--surface) 96%,white 4%),var(--surface));border:1px solid var(--line);border-radius:18px;box-shadow:0 7px 20px rgba(0,0,0,.12)}
+.today-stat{padding:15px 14px}.today-stat strong{font-size:28px;letter-spacing:-.04em}
+.btn{border-radius:15px}.btn:not(.ghost):not(.danger){font-weight:750;box-shadow:0 5px 18px color-mix(in srgb,var(--accent) 17%,transparent)}
+.today-intro>.btn.block,.compose-empty>.btn.block{min-height:56px;background:var(--accent);color:var(--on-accent);border:0;border-radius:16px;font-size:16px}
+.today-actions{gap:8px}.today-actions .btn{border-radius:13px;min-height:48px;border-color:var(--line)}
+.exp-section{margin-top:26px}.exp-section-head h2{font-size:22px;letter-spacing:-.035em}
+.trend-track{height:78px;border:0;border-radius:9px;background:color-mix(in srgb,var(--surface) 78%,transparent);overflow:hidden}
+.trend-track i{width:min(22px,66%);background:linear-gradient(180deg,#FFD23F,#F08C46);border-radius:7px 7px 2px 2px}
+.exp-row{border-color:color-mix(in srgb,var(--line) 80%,transparent)}.exp-score{border:1px solid var(--line);border-radius:12px;padding:7px 5px;background:var(--surface)}
+.exp-shortcuts button{background:var(--surface);border-radius:15px;border-color:var(--line);min-height:64px}
+nav.tabs{min-height:64px;justify-content:space-around;padding:6px 8px calc(5px + env(safe-area-inset-bottom,0px));gap:4px;background:var(--navbg);border-top:1px solid var(--line);box-shadow:0 -8px 25px rgba(0,0,0,.18)}
+nav.tabs button{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:50px;padding:4px 2px;border-radius:13px;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:0;box-shadow:none!important}
+nav.tabs button .tab-icon{display:block;font-size:22px;line-height:1.05;font-weight:500}
+nav.tabs button[aria-current=page]{color:var(--accent);background:color-mix(in srgb,var(--accent) 11%,transparent)}
+nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
+#bar{bottom:calc(64px + env(safe-area-inset-bottom,0px))}#appfoot{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+.searchbox input{border-radius:15px;background:var(--surface)}.chip{border-radius:999px}.chip[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.journal-intro h1{font-size:36px}.journal-period button{border-radius:999px;padding:10px 5px}.journal-period button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
+@media(min-width:760px){main{padding-top:22px}.appbar-in{padding-left:24px;padding-right:24px}}
+@media(max-width:360px){.today-stats{grid-template-columns:1fr}.today-intro h1{font-size:31px}nav.tabs button{font-size:9px}}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
-<header id="appbar"><span id="appver" title="Version de l'application"></span><div class="appbar-in"><button class="brand" id="brand" data-act="home" aria-label="MICI Score : retour à l'accueil"></button><div class="appbar-r"><span id="gbar"></span><button class="ibtn sm" data-act="share" aria-label="Partager l\u2019appli" title="Partager l\u2019appli"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button></div></div></header>
+<header id="appbar"><span id="appver" title="Version de l'application"></span><div class="appbar-in"><button class="brand" id="brand" data-act="home" aria-label="MICI Score : retour à l'accueil"></button><div class="appbar-r"><span id="gbar"></span><button class="ibtn sm" data-act="share" aria-label="Partager l\u2019appli" title="Partager l\u2019appli"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.5l6.8-4M8.6 13.5l6.8 4"/></svg></button><button class="ibtn sm" data-act="openProfile" aria-label="Paramètres et données" title="Paramètres et données"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.7 2.94-.08-.02a1.7 1.7 0 0 0-1.72.45l-.05.06h-3.4l-.04-.08a1.7 1.7 0 0 0-1.48-1.02 1.7 1.7 0 0 0-1.1.4l-.07.05-2.94-1.7.02-.08a1.7 1.7 0 0 0-.45-1.72l-.06-.05v-3.4l.08-.04a1.7 1.7 0 0 0 1.02-1.48 1.7 1.7 0 0 0-.4-1.1l-.05-.07 1.7-2.94.08.02a1.7 1.7 0 0 0 1.72-.45l.05-.06h3.4l.04.08a1.7 1.7 0 0 0 1.48 1.02 1.7 1.7 0 0 0 1.1-.4l.07-.05 2.94 1.7-.02.08a1.7 1.7 0 0 0 .45 1.72l.06.05v3.4z"/></svg></button></div></div></header>
 <main id="app"></main>
 <footer id="appfoot">MICI Score : estimation personnelle de la tolérance digestive d'aliments. Ni diagnostic ni traitement. · <a href="confidentialite.html">Politique de confidentialité</a></footer>
 <div id="bar"></div>
-<nav class="tabs" aria-label="Navigation">
-  <button data-tab="calc">Aujourd’hui</button>
-  <button data-tab="compose">Composer</button>
-  <button data-tab="journal">Journal</button>
-  <button data-tab="profil">Mes données</button>
-  <button data-tab="sources">Limites</button>
+<nav class="tabs" aria-label="Navigation principale">
+  <button data-tab="calc"><span class="tab-icon" aria-hidden="true">⌂</span><span>Aujourd’hui</span></button>
+  <button data-tab="compose"><span class="tab-icon" aria-hidden="true">＋</span><span>Composer</span></button>
+  <button data-tab="journal"><span class="tab-icon" aria-hidden="true">▤</span><span>Journal</span></button>
+  <button data-tab="catalogue"><span class="tab-icon" aria-hidden="true">◫</span><span>Catalogue</span></button>
 </nav>
 
 <script src="score-core.js"></script>
@@ -1124,7 +1154,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v5.1';
+const APP_V='v6.0';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1493,7 +1523,7 @@ function render(keep){
   const k=navKey();
   if(k!==lastKey){lastKey=k;if(!fromPop){try{history.pushState({tab:ui.tab,view:ui.view,sel:ui.sel},'');navDepth++}catch(e){}}}
   const y=window.scrollY;
-  document.querySelectorAll('nav.tabs button').forEach(b=>{if(b.dataset.tab===ui.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  document.querySelectorAll('nav.tabs button').forEach(b=>{const active=b.dataset.tab===ui.tab||(b.dataset.tab==='catalogue'&&ui.tab==='compose'&&ui.view==='list');if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   app.innerHTML=(ui.tab==='calc'||ui.tab==='compose')?calcHTML():ui.tab==='journal'?journalHTML():ui.tab==='sources'?sourcesHTML():profilHTML();
   updateBar();refreshGbar();
   window.scrollTo(0,keep?y:0);
@@ -1502,10 +1532,9 @@ function render(keep){
 /* ---------- Événements ---------- */
 document.querySelector('nav.tabs').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  ui.tab=b.dataset.tab;ui.msg='';ui.resetArmed=false;ui.delArmed=false;
-  if(ui.tab==='calc')ui.view='home';
-  else if(ui.tab==='compose')ui.view='plate';
-  else if(ui.tab==='journal')ui.editId=null;
+  const target=b.dataset.tab;ui.msg='';ui.resetArmed=false;ui.delArmed=false;
+  if(target==='catalogue'){ui.tab='compose';ui.view='list';ui.qs='';ui.cat=-1;ui.page=0}
+  else {ui.tab=target;if(ui.tab==='calc')ui.view='home';else if(ui.tab==='compose')ui.view='plate';else if(ui.tab==='journal')ui.editId=null}
   render();
 });
 
