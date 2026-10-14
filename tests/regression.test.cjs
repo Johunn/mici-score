@@ -1213,13 +1213,13 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   assert.ok(Array.isArray(recipes));
   assert.ok(recipes.length >= 15, 'recipe catalogue should contain more than four entries');
   assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
-  assert.ok(recipes.every(r => r.title && r.category && r.summary && /^https:\\/\\//.test(r.source)));
+  assert.ok(recipes.every(r => r.title && r.category && r.summary && r.source.startsWith('https://')));
   assert.ok(html.includes('Recettes à tester selon ta tolérance'));
   const coreSandbox = { window: {} };
   vm.createContext(coreSandbox);
   new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(coreSandbox);
   const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
-  const norm = value => String(value || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const norm = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   for (const recipe of recipes) {
     assert.ok(recipe.ingredients.length >= 2, 'recipe needs ingredients: ' + recipe.title);
     assert.ok(recipe.steps.length >= 2, 'recipe needs preparation steps: ' + recipe.title);
