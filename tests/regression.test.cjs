@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v47';/);
+  assert.match(swSource, /const CACHE='mici-score-v48';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v47/);
+  assert.match(swSource, /mici-score-v48/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1241,4 +1241,45 @@ test('recipes have a dedicated main-navigation entry and open the recipe catalog
   assert.match(html, /b\.dataset\.tab==='recipes'&&ui\.tab==='compose'&&ui\.view==='recipes'/);
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(recipesSource, /"id":/);
+});
+
+test('recipe catalogue supports ingredient search, category filtering, sorting, and preserves focus while typing', () => {
+  assert.match(html, /id="recipe-search"/);
+  assert.match(html, /id="recipe-category"/);
+  assert.match(html, /id="recipe-sort"/);
+  assert.match(html, /function recipeResultsHTML\(\)/);
+  assert.match(html, /norm\(\[r\.title,r\.summary,r\.category,\.\.\.r\.ingredients\.flatMap\(i=>i\.names\)\]\.join\(' '\)\)\.includes\(q\)/);
+  assert.match(html, /t\.id==='recipe-search'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
+  assert.match(html, /t\.id==='recipe-category'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
+  assert.match(html, /t\.id==='recipe-sort'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
+});
+
+test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:deduplication-test' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  assert.ok(recipes.length >= 25, 'expected an expanded recipe catalogue');
+  assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
+  const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  assert.equal(new Set(recipes.map(r => normalize(r.title))).size, recipes.length, 'recipe titles must be unique');
+  const coreSandbox = { window: {} };
+  vm.createContext(coreSandbox);
+  new vm.Script(coreModuleSource, { filename: 'score-core.js:food-catalogue-test' }).runInContext(coreSandbox);
+  const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
+  for (const recipe of recipes) {
+    for (const ingredient of recipe.ingredients) {
+      const found = foods.some(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
+        foods.some(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
+      assert.ok(found, recipe.title + ' ingredient must resolve: ' + ingredient.names[0]);
+    }
+  }
+});
+
+test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
+  assert.match(html, /cls\(e\.score!=null\?e\.score:e\.r\)/);
+  assert.match(html, /fmt\(e\.score!=null\?e\.score:e\.r\)/);
+  assert.match(html, /ressenti personnel '\+fmt\(e\.r\)\+'\/10/);
+  assert.match(html, /La pastille affiche le score MICI calculé/);
+  assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
