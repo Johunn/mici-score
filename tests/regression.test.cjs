@@ -1239,8 +1239,14 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
   const norm = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   for (const recipe of recipes) {
-    assert.ok(recipe.ingredients.length >= 2, 'recipe needs ingredients: ' + recipe.title);
-    assert.ok(recipe.steps.length >= 2, 'recipe needs preparation steps: ' + recipe.title);
+    if (recipe.adaptationVerified === false) {
+      assert.equal(recipe.scoreDisabled, true, 'unverified adaptation score must stay disabled: ' + recipe.title);
+      assert.equal(recipe.ingredients.length, 0, 'unverified adaptation must not retain placeholder ingredients: ' + recipe.title);
+      assert.equal(recipe.steps.length, 0, 'unverified adaptation must not retain placeholder steps: ' + recipe.title);
+      continue;
+    }
+    assert.ok(recipe.ingredients.length >= 2, 'verified recipe needs ingredients: ' + recipe.title);
+    assert.ok(recipe.steps.length >= 2, 'verified recipe needs preparation steps: ' + recipe.title);
     for (const ingredient of recipe.ingredients) {
       const found = foods.some(food => ingredient.names.some(name =>
         norm(food.n) === norm(name) || norm(food.n).startsWith(norm(name) + ' ')
