@@ -576,6 +576,9 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 
 
 /* Correctif définitif : recherche + tri sur une ligne et chiffres de scores réellement agrandis/gras. */
+#app .searchbox:focus-within{outline:none!important;box-shadow:none!important;border:0!important}
+#app .searchbox input[type=search]:focus,#app .searchbox input[type=search]:focus-visible{border:2px solid var(--accent)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
+
 #app .catalog-tools{display:grid!important;grid-template-columns:minmax(0,1fr) 132px!important;align-items:center!important;gap:8px!important}
 #app .catalog-tools .searchbox{grid-column:1!important;grid-row:1!important;min-width:0!important;margin:0!important}
 #app .catalog-tools .catalog-sort{grid-column:2!important;grid-row:1!important;min-width:0!important}
