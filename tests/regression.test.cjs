@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v50';/);
+  assert.match(swSource, /const CACHE='mici-score-v51';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,13 +1168,13 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v50/);
+  assert.match(swSource, /mici-score-v51/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
 
 test('catalog search and sort share a compact row and portions are continuously adjustable', () => {
-  assert.match(html, /\.searchbox input:focus-visible\{outline:2px/);
+  assert.match(html, /\.searchbox input:focus,.searchbox input:focus-visible\{border:2px solid var\(--accent\)!important;box-shadow:none!important;outline:none!important/);
   assert.match(html, /class="catalog-tools"/);
   assert.match(html, /class="catalog-sort"/);
   assert.match(html, /type="range" min="0" max="100" step="1" value="\$\{portionSliderValue\(/);
@@ -1191,10 +1191,10 @@ test('recipe controls are compact and score badges have a distinct high-contrast
   assert.match(html, /class="field recipe-query"/);
   assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{height:42px/);
   assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
-  assert.match(html, /background:color-mix\(in srgb,currentColor 27%,var\(--surface\)\)/);
+  assert.match(html, /\.exp-score:after\{content:'SCORE'/);\n  assert.match(html, /border-radius:16px 16px 16px 5px/);\n  assert.match(html, /grid-template-columns:minmax\(0,1\.2fr\) minmax\(0,\.9fr\) minmax\(0,\.8fr\)/);\n  assert.match(html, /\.recipe-controls \.recipe-query\{grid-column:auto\}/);
   assert.match(html, /\.catalog-tools\{display:grid;grid-template-columns:minmax\(0,1fr\) 132px/);
   assert.match(html, /height:44px;padding:8px 42px 8px 12px/);
-  assert.match(swSource, /const CACHE='mici-score-v50';/);
+  assert.match(swSource, /const CACHE='mici-score-v51';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
