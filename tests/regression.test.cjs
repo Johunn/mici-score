@@ -67,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module and uses the v39 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v39';/);
+test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v41';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
