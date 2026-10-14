@@ -1682,7 +1682,7 @@ document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='qs'){ui.qs=t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML();const cb=document.querySelector('.searchbox .clear');if(cb)cb.hidden=!t.value}
-  else if(t.id==='recipe-search'){ui.recipeSearch=t.value;const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML()}
+  else if(t.id==='recipe-search'){ui.recipeSearch=t.value;const clear=document.querySelector('.recipe-unified-search .clear');if(clear)clear.hidden=!t.value;const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML()}
   else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;const item=ui.plate[i];const label=document.getElementById('portion-label-'+i);if(item&&label){const g=portionGrams(item.f,+t.value);label.textContent=portionDisplay(item.f,1,g);t.setAttribute('aria-valuetext',label.textContent)}}
   else if(t.id==='ress'){ui.ress=+t.value;document.getElementById('ressv').textContent=t.value}
   else if(t.id==='note'){ui.note=t.value}
@@ -1710,6 +1710,7 @@ document.addEventListener('change',e=>{
   else if(a==='nb'){ui.newB=+t.value;refreshPrev()}
   else if(t.id==='newCat'){ui.newCat=+t.value}
   else if(t.id==='sort-control'){ui.sort=t.value;store.sort=t.value;save();ui.page=0;render(true)}
+  else if(t.id==='food-category'){ui.cat=+t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML()}
   else if(t.id==='recipe-category'){ui.recipeCategory=t.value;const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML()}
   else if(t.id==='recipe-sort'){ui.recipeSort=t.value;const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML()}
 });
@@ -1728,6 +1729,7 @@ document.addEventListener('click',e=>{
     savePlate();updateBar();
   }
   else if(a==='clearq'){ui.qs='';ui.page=0;const q=document.getElementById('qs');q.value='';document.getElementById('list').innerHTML=listHTML();b.hidden=true;q.focus()}
+  else if(a==='clearRecipeSearch'){ui.recipeSearch='';const q=document.getElementById('recipe-search');if(q)q.value='';const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML();b.hidden=true;if(q)q.focus()}
   else if(a==='info'){openDetail(id)}
   else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}savePlate();render(true)}
   else if(a==='openPlate'){ui.tab='compose';ui.view='plate';render()}
