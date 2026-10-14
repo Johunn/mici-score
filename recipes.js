@@ -1474,7 +1474,18 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "400 à 600 g de filet de saumon",
+      "8 c. à soupe de fromage aux fines herbes light (option sans lactose et sans fines herbes possible)",
+      "12 à 16 c. à soupe de chapelure (option sans gluten possible)",
+      "Sel et poivre",
+      "600 g de carottes",
+      "1 oignon (facultatif)",
+      "2 c. à café de beurre liquide (ou beurre de soja)",
+      "1 cube de bouillon de légumes maigre",
+      "Accompagnement suggéré : pommes de terre nature ou purée"
+    ]
   },
   {
     "id": "soupe-carottes-gingembre",
@@ -1510,7 +1521,15 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "500 g de carottes",
+      "2 cm de gingembre frais",
+      "2 litres de bouillon de poule (maison ou un cube)",
+      "1 c. à café de curry doux",
+      "½ c. à café de cumin (facultatif)",
+      "Sel et poivre"
+    ]
   },
   {
     "id": "diplomate-framboises",
@@ -2001,7 +2020,14 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "2 wraps de taille moyenne",
+      "Fromage frais light (quantité non précisée)",
+      "Saumon fumé (quantité non précisée)",
+      "Poivre et sel",
+      "Aneth frais ou séché"
+    ]
   },
   {
     "id": "tortilla-espagnole",
