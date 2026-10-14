@@ -61,11 +61,11 @@ test('theme migration defaults new and legacy-auto preferences to AMOLED while p
   const normSource = extractBetween(
     html,
     'const JOURNAL_FIELDS=',
-    '\\n/* Validation stricte des sauvegardes importées'
+    '\n/* Validation stricte des sauvegardes importées'
   );
   const sandbox = {};
   vm.createContext(sandbox);
-  new vm.Script(normSource + '\\nglobalThis.normalizePrefs = norm;').runInContext(sandbox);
+  new vm.Script(normSource + '\nglobalThis.normalizePrefs = norm;').runInContext(sandbox);
 
   assert.equal(sandbox.normalizePrefs({}).theme, 'amoled');
   assert.equal(sandbox.normalizePrefs({ theme: 'system' }).theme, 'amoled');
