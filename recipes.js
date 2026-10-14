@@ -1068,8 +1068,8 @@ window.MICI_RECIPES = [
     "category": "Repas complet",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/chicons-braises-a-la-creme-de-celeri-rave-filet-de-dinde-et-puree-de-pommes-de-terre-gratinee/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes ; fiche originale à confirmer",
     "ingredients": [
       {
         "names": [
