@@ -1132,7 +1132,7 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
 
 test('v6 merges the personal dashboard with the fast task-oriented entry point', () => {
   assert.ok(html.includes('Moins de recherche.<br>Plus de repères.'));
-  assert.match(html, /data-act=\"startCompose\">＋ Composer un repas/);
+  assert.match(html, /data-act="startCompose">＋ Composer un repas/);
   assert.match(html, /Comprendre mon historique/);
   assert.match(html, /Ressenti moyen · 7 jours/);
 });
