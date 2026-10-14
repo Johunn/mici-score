@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v43';/);
+  assert.match(swSource, /const CACHE='mici-score-v44';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v43/);
+  assert.match(swSource, /mici-score-v44/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
