@@ -1,5 +1,5 @@
 /* MICI Score : service worker « réseau d'abord » (v39). Ignore les requêtes vers d'autres sites. */
-const CACHE='mici-score-v56';
+const CACHE='mici-score-v57';
 const CORE=['./','index.html','score-core.js','recipes.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/icon-512-maskable.png','fonts/bricolage-grotesque-latin-opsz-normal.woff2','fonts/figtree-latin-wght-normal.woff2','fonts/montserrat-latin-wght-normal.woff2'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>Promise.allSettled(CORE.map(u=>c.add(u)))).then(()=>self.skipWaiting()));
