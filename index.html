@@ -592,6 +592,17 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 .exp-score:after{content:'MICI';position:absolute;bottom:7px;font:900 7px/1 var(--f-body);letter-spacing:.15em;opacity:.85}
 @media(max-width:380px){.recipe-controls{grid-template-columns:minmax(0,1fr) 108px!important;gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:12px;padding:7px 7px}}
 
+
+/* Champs de recherche cohérents : aucun contour/halo autour du conteneur, focus limité au champ. */
+#app .searchbox{outline:none!important;box-shadow:none!important;border:0!important}
+#app .searchbox:focus-within{outline:none!important;box-shadow:none!important;border:0!important}
+#app .searchbox input[type=search]:focus,#app .searchbox input[type=search]:focus-visible{border:2px solid var(--accent)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
+#app .recipe-controls input[type=search]:focus,#app .recipe-controls input[type=search]:focus-visible{border:2px solid var(--accent)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
+.badge,.exp-score{position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:48px;min-height:42px;padding:7px 10px;border:1.5px solid color-mix(in srgb,currentColor 70%,var(--line))!important;border-radius:13px!important;background:linear-gradient(145deg,color-mix(in srgb,currentColor 20%,var(--surface)),color-mix(in srgb,currentColor 7%,var(--surface)))!important;font:850 15px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.03em;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 5px color-mix(in srgb,currentColor 12%,transparent)!important}
+.badge:before,.exp-score:before{content:none!important}
+.exp-score:after{content:none!important}
+.recipe-score-pill{min-width:46px;min-height:42px;padding:7px 10px;font-size:15px}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
@@ -1309,11 +1320,17 @@ function homeHTML(){
 
 function recipeResultsHTML(){
   const allRecipes=window.MICI_RECIPES||[];
-  const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr').replace(/[^a-z0-9]+/g,' ').trim();
   const resolve=ing=>allFoods().find(f=>ing.names.some(n=>norm(f.n)===norm(n)))||allFoods().find(f=>ing.names.some(n=>norm(f.n).startsWith(norm(n)+' ')));
-  const q=norm(ui.recipeSearch),category=ui.recipeCategory||'Toutes';
-  const recipes=allRecipes.filter(r=>(category==='Toutes'||r.category===category)&&(!q||norm([r.title,r.summary,r.category,...r.ingredients.flatMap(i=>i.names)].join(' ')).includes(q)));
-  recipes.sort((a,b)=>ui.recipeSort==='category'?(COL.compare(a.category,b.category)||COL.compare(a.title,b.title)):ui.recipeSort==='score'?(recipeScore(b,resolve)-recipeScore(a,resolve))||COL.compare(a.title,b.title):COL.compare(a.title,b.title));
+  const q=norm(ui.recipeSearch),terms=q.split(/\\s+/).filter(Boolean),category=ui.recipeCategory||'Toutes';
+  const recipes=allRecipes.filter(r=>{
+    if(category!=='Toutes'&&r.category!==category)return false;
+    if(!terms.length)return true;
+    const searchable=norm([r.title,r.summary,r.category,...r.ingredients.flatMap(i=>i.names)].join(' '));
+    return terms.every(term=>searchable.includes(term));
+  });
+  const scoreSort=(a,b)=>recipeScore(a,resolve)-recipeScore(b,resolve);
+  recipes.sort((a,b)=>ui.recipeSort==='category'?(COL.compare(a.category,b.category)||COL.compare(a.title,b.title)):ui.recipeSort==='score'?(scoreSort(b,a)||COL.compare(a.title,b.title)):ui.recipeSort==='score-asc'?(scoreSort(a,b)||COL.compare(a.title,b.title)):COL.compare(a.title,b.title));
   const detail=recipes.find(r=>r.id===ui.recipeId);
   const card=r=>{
     const matches=r.ingredients.map(i=>({ingredient:i,food:resolve(i)}));
@@ -1321,7 +1338,7 @@ function recipeResultsHTML(){
     const scoreItems=matches.filter(x=>x.food).map(x=>({f:x.food,p:1,g:x.ingredient.grams}));
     const score=scoreItems.length?scoreOf(scoreItems,ui).score:null;
     const selected=ui.recipeId===r.id;
-    return `<article class="card" style="margin-top:12px"><div class="exp-eyebrow">${esc(r.category)}</div><h2 style="margin:5px 0 8px;font-size:20px">${esc(r.title)}</h2><p>${esc(r.summary)}</p><p class="small muted">Source : <a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${esc(r.sourceLabel)} ↗</a></p><p class="small muted">${r.servings} portion · ${matches.length-missing.length}/${matches.length} ingrédients reconnus${missing.length?' · score incomplet':''}</p>${score===null?'':`<div class="exp-row"><span class="exp-score ${cls(score)}">${fmt(score)}/10</span><span class="small muted">${missing.length?'Estimation partielle — ingrédients manquants':'Estimation selon les quantités indiquées'}</span></div>`}${selected?`<ul>${matches.map(x=>`<li>${esc(x.ingredient.names[0])} — ${x.ingredient.grams} g ${x.food?'':'<b>(non reconnu dans le catalogue)</b>'}</li>`).join('')}</ul><h3>Préparation</h3><ol>${r.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p><a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${esc(r.sourceLabel)} ↗</a></p>${missing.length?`<p class="notice">Le score est incomplet. Ajoute d’abord les aliments manquants au catalogue, puis reviens à cette recette. Aucun score complet n’est affiché.</p>`:`<button class="btn block" data-act="addRecipe" data-id="${esc(r.id)}">Ajouter les ingrédients à mon assiette</button>`}<button class="btn ghost block" data-act="closeRecipe">Fermer le détail</button>`:`<button class="btn ghost block" data-act="showRecipe" data-id="${esc(r.id)}">Voir la recette et son estimation</button>`}</article>`;
+    return `<article class="card" style="margin-top:12px"><div class="exp-eyebrow">${esc(r.category)}</div><h2 style="margin:5px 0 8px;font-size:20px">${esc(r.title)}</h2><p>${esc(r.summary)}</p><p class="small muted">Source : <a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${esc(r.sourceLabel)} ↗</a></p><p class="small muted">${r.servings} portion · ${matches.length-missing.length}/${matches.length} ingrédients reconnus${missing.length?' · score incomplet':''}</p>${score===null?'':`<div class="exp-row"><span class="exp-score recipe-score-pill ${cls(score)}" aria-label="Score MICI ${fmt(score)} sur 10">${fmt(score)}</span><span class="small muted">${missing.length?'Estimation partielle — ingrédients manquants':'Estimation selon les quantités indiquées'}</span></div>`}${selected?`<ul>${matches.map(x=>`<li>${esc(x.ingredient.names[0])} — ${x.ingredient.grams} g ${x.food?'':'<b>(non reconnu dans le catalogue)</b>'}</li>`).join('')}</ul><h3>Préparation</h3><ol>${r.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p><a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${esc(r.sourceLabel)} ↗</a></p>${missing.length?`<p class="notice">Le score est incomplet. Ajoute d’abord les aliments manquants au catalogue, puis reviens à cette recette. Aucun score complet n’est affiché.</p>`:`<button class="btn block" data-act="addRecipe" data-id="${esc(r.id)}">Ajouter les ingrédients à mon assiette</button>`}<button class="btn ghost block" data-act="closeRecipe">Fermer le détail</button>`:`<button class="btn ghost block" data-act="showRecipe" data-id="${esc(r.id)}">Voir la recette et son estimation</button>`}</article>`;
   };
   return recipes.length?recipes.map(card).join(''):'<div class="exp-empty">Aucune recette ne correspond à ta recherche. Essaie un autre ingrédient ou une autre catégorie.</div>';
 }
@@ -1332,7 +1349,7 @@ function recipeScore(r,resolve){
 function recipesHTML(){
   const recipes=window.MICI_RECIPES||[];
   const categories=['Toutes',...new Set(recipes.map(r=>r.category).sort((a,b)=>COL.compare(a,b)))];
-  return `<button class="link" data-act="back">‹ Retour</button><section class="explore-head"><span class="exp-eyebrow">IDÉES DE REPAS · ${recipes.length} RECETTES</span><h1>Recettes à tester selon ta tolérance</h1><p>Des idées de repas adaptées à partir de ressources d’information sur les MICI. Le score MICI est une estimation, pas une garantie de tolérance.</p><div class="recipe-controls"><div class="field recipe-query"><label for="recipe-search">Rechercher</label><input type="search" id="recipe-search" placeholder="Recette ou ingrédient…" value="${esc(ui.recipeSearch)}"></div><div class="field"><label for="recipe-category">Catégorie</label><select id="recipe-category">${categories.map(c=>'<option value="'+esc(c)+'" '+(ui.recipeCategory===c?'selected':'')+'>'+esc(c)+'</option>').join('')}</select></div><div class="field"><label for="recipe-sort">Trier</label><select id="recipe-sort"><option value="nom" ${ui.recipeSort==='nom'?'selected':''}>Nom A–Z</option><option value="category" ${ui.recipeSort==='category'?'selected':''}>Catégorie</option><option value="score" ${ui.recipeSort==='score'?'selected':''}>Score MICI ↓</option></select></div></div><p class="small muted recipe-count">${recipes.length} recettes · sources précisées dans chaque fiche</p></section><div id="recipe-results">${recipeResultsHTML()}</div><p class="small muted" style="margin-top:16px">Ce score est indicatif et ne garantit pas la tolérance individuelle. Les liens externes nécessitent une connexion.</p>`;
+  return `<button class="link" data-act="back">‹ Retour</button><section class="explore-head"><span class="exp-eyebrow">IDÉES DE REPAS · ${recipes.length} RECETTES</span><h1>Recettes à tester selon ta tolérance</h1><p>Des idées de repas adaptées à partir de ressources d’information sur les MICI. Le score MICI est une estimation, pas une garantie de tolérance.</p><div class="recipe-controls"><div class="field recipe-query"><label for="recipe-search">Rechercher</label><input type="search" id="recipe-search" placeholder="Recette ou ingrédient…" value="${esc(ui.recipeSearch)}"></div><div class="field"><label for="recipe-category">Catégorie</label><select id="recipe-category">${categories.map(c=>'<option value="'+esc(c)+'" '+(ui.recipeCategory===c?'selected':'')+'>'+esc(c)+'</option>').join('')}</select></div><div class="field"><label for="recipe-sort">Trier</label><select id="recipe-sort"><option value="nom" ${ui.recipeSort==='nom'?'selected':''}>Nom A–Z</option><option value="category" ${ui.recipeSort==='category'?'selected':''}>Catégorie</option><option value="score" ${ui.recipeSort==='score'?'selected':''}>Score MICI ↓</option><option value="score-asc" ${ui.recipeSort==='score-asc'?'selected':''}>Score MICI ↑</option></select></div></div><p class="small muted recipe-count">${recipes.length} recettes · sources précisées dans chaque fiche</p></section><div id="recipe-results">${recipeResultsHTML()}</div><p class="small muted" style="margin-top:16px">Ce score est indicatif et ne garantit pas la tolérance individuelle. Les liens externes nécessitent une connexion.</p>`;
 }
 function calcHTML(){
   if(ui.view==='recipes')return recipesHTML();
