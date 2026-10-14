@@ -1068,7 +1068,7 @@ window.MICI_RECIPES = [
     "category": "Repas complet",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "source": "https://www.crohn-larectocoliteetnous.be/chicons-braises-a-la-creme-de-celeri-rave-filet-de-dinde-et-puree-de-pommes-de-terre-gratinee/",
     "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
     "ingredients": [
       {
@@ -1109,7 +1109,7 @@ window.MICI_RECIPES = [
     "category": "Soupe",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-aux-chicons/",
     "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
     "ingredients": [
       {
@@ -1150,7 +1150,7 @@ window.MICI_RECIPES = [
     "category": "Collation",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-tartinade-de-carottes/",
     "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
     "ingredients": [
       {
@@ -1242,7 +1242,7 @@ window.MICI_RECIPES = [
     "category": "Soupe",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "source": "https://www.crohn-larectocoliteetnous.be/potage-de-panais-au-dukkah/",
     "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
     "ingredients": [
       {
@@ -1377,7 +1377,7 @@ window.MICI_RECIPES = [
     "category": "Repas complet",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-vive-chou-fleur-roti-oeuf-mimosa/",
     "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
     "ingredients": [
       {
@@ -1751,7 +1751,7 @@ window.MICI_RECIPES = [
     "category": "Dessert",
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
+    "source": "https://www.crohn-larectocoliteetnous.be/un-fabuleux-crumble-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
     "ingredients": [
       {
