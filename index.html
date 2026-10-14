@@ -1569,7 +1569,7 @@ document.addEventListener('click',e=>{
     if(e){ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=7;ui.note='';ui.view='plate';ui.tab='compose';render()}
   }
   else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
-  else if(a==='back'){if(ui.view==='plate'){ui.view='list';ui.tab='compose'}else if(ui.view==='detail'){ui.view='list';ui.tab='compose'}else{ui.view='plate';ui.tab='compose'}ui.msg='';render()}
+  else if(a==='back'){if(ui.view==='list'){ui.view='plate';ui.tab='compose'}else{ui.view='list';ui.tab='compose'}ui.msg='';render()}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
   else if(a==='home'){ui.tab='calc';ui.view='home';ui.sel=null;ui.qs='';ui.cat=-1;ui.page=0;ui.msg='';ui.resetArmed=false;ui.delArmed=false;render()}
   else if(a==='sort'){ui.sort=id;store.sort=id;save();ui.page=0;render(true)}
