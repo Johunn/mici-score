@@ -1011,11 +1011,14 @@ window.MICI_RECIPES = [
       "Ajouter le saumon fumé en petits morceaux et réchauffer doucement."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "Quantités d’origine non transcrites : la source doit être consultée."
+      "1 chou-fleur",
+      "2 blancs de poireaux",
+      "1 l de bouillon de légumes",
+      "Quelques lanières de saumon fumé"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "salade-pates-mediterr",
@@ -1431,11 +1434,18 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+      "600 g de pommes de terre",
+      "480 g de courgettes",
+      "1 cube de bouillon de légumes pauvre en matière grasse",
+      "8 c. à soupe de lait écrémé",
+      "Noix de muscade",
+      "Persil",
+      "Poivre et sel",
+      "Chapelure"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "salade-poulet-curry",
@@ -1511,11 +1521,15 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "8 c. à soupe de fromage aux fines herbes light",
+      "400 à 600 g de filet de saumon",
+      "12 à 16 c. à soupe de chapelure",
+      "Sel et poivre",
+      "La liste des ingrédients de l’accompagnement carottes doit être transcrite depuis la suite de la source."
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "soupe-carottes-gingembre",
@@ -1551,11 +1565,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "500 g de carottes",
+      "2 cm de gingembre frais",
+      "2 l de bouillon de poule",
+      "1 c. à café de curry doux",
+      "½ c. à café de cumin (facultatif si mal toléré)",
+      "Sel et poivre"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "diplomate-framboises",
@@ -1753,7 +1772,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "La page source doit être consultée pour transcrire la liste d’origine sans inférer les quantités."
     ],
     "originalIngredientsVerified": false
   },
@@ -2306,11 +2325,17 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "100 g de boudoirs",
+      "250 g de yaourt grec",
+      "1,25 dl de café refroidi",
+      "2 jaunes d’œuf",
+      "1 blanc d’œuf",
+      "50 g de sucre en poudre",
+      "Cacao en poudre (facultatif)"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "macaroni-potiron",
@@ -2346,11 +2371,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "200 g de macaronis non cuits",
+      "400 g de potiron",
+      "100 ml de lait demi-écrémé",
+      "300 g de poulet haché",
+      "Poivre et sel",
+      "Fromage râpé light"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "croque-thon",
@@ -2386,11 +2416,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "1 œuf dur",
+      "1 boîte de thon au naturel (environ 100 g)",
+      "3 c. à soupe de yaourt nature",
+      "4 tranches de pain",
+      "2 tranches de fromage light",
+      "Sel et poivre"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "bagel-courgettes",
@@ -2462,7 +2497,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "La page source doit être consultée pour transcrire la liste d’origine sans inférer les quantités."
     ],
     "originalIngredientsVerified": false
   },
@@ -2500,11 +2535,13 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "80 g de chocolat au lait",
+      "4 blancs d’œufs",
+      "40 g de sucre blanc"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "roulades-poulet-epinards",
@@ -2540,11 +2577,18 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "400 g d’épinards surgelés sans crème",
+      "150 g de filets de poulet",
+      "2 œufs",
+      "Poivre et sel",
+      "300 ml de lait demi-écrémé",
+      "3 c. à soupe de maïzena",
+      "70 g de fromage râpé light",
+      "Poivre, sel et noix de muscade"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "poulet-chicons-butternut",
@@ -2580,11 +2624,20 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "4 filets de poulet",
+      "1 kg de courge butternut",
+      "175 g de chicon",
+      "Le jus d’1 orange",
+      "3 à 4 brins de thym frais",
+      "1 c. à soupe de beurre",
+      "2 c. à soupe de miel liquide",
+      "2 c. à soupe d’huile d’olive",
+      "½ cube de bouillon de poulet",
+      "Poivre et sel"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "pates-fromage-legere",
@@ -2622,14 +2675,14 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "300 g de thon au naturel",
+      "400 g de macaronis",
+      "300 g de thon en conserve au naturel",
       "2 courgettes",
       "1 c. à café d’origan séché",
       "600 ml de lait demi-écrémé",
       "6 c. à soupe de maïzena",
       "150 g de fromage râpé maigre",
-      "Poivre, sel et noix de muscade",
-      "Macaronis : quantité à confirmer sur la liste complète de la source"
+      "Poivre, sel et noix de muscade"
     ],
     "originalIngredientsVerified": true
   },
@@ -2753,11 +2806,17 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "1 chou-fleur",
+      "1 œuf",
+      "5 c. à soupe de farine",
+      "1 c. à soupe d’herbes de Provence",
+      "Poivre et sel",
+      "1 c. à soupe d’huile d’olive",
+      "Garniture : quelques c. à soupe de passata de tomates, fromage râpé, poivre, sel et herbes de Provence"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "beignets-pommes",
@@ -2793,11 +2852,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "100 g de farine",
+      "150 ml de lait écrémé ou demi-écrémé, avec ou sans lactose",
+      "20 g de beurre liquide",
+      "1 œuf",
+      "Huile neutre pour la cuisson",
+      "1 pomme ferme"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "crumble-pommes",
@@ -2875,7 +2939,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "La page source doit être consultée pour transcrire la liste d’origine sans inférer les quantités."
     ],
     "originalIngredientsVerified": false
   },
@@ -2913,11 +2977,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "10 g d’amandes",
+      "1 banane",
+      "50 g de flocons d’avoine",
+      "10 g de noix de coco moulue",
+      "15 g de raisins secs",
+      "10 g de margarine liquide"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "eau-fruitee",
@@ -2955,7 +3024,9 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "Dépend de la variante : concombre + menthe + 1 l d’eau ; ou 100 g de framboises + menthe + 1 l d’eau ; ou 1 orange/citron + 1 l d’eau."
+      "Variante concombre : ½ concombre, une poignée de feuilles de menthe, 1 l d’eau plate ou pétillante.",
+      "Variante framboise : 100 g de framboises fraîches ou surgelées, une poignée de feuilles de menthe, 1 l d’eau.",
+      "Variante agrume : 1 orange ou 1 citron non traité, 1 l d’eau."
     ],
     "originalIngredientsVerified": true
   },
@@ -2998,7 +3069,7 @@ window.MICI_RECIPES = [
       "4 c. à soupe de fruits rouges",
       "1 banane",
       "3 c. à soupe de lait d’amande (ou lait ou yaourt)",
-      "Garnitures facultatives : fruits frais, granola ou canneberge séchée"
+      "Garniture facultative : fruits frais ou secs, granola, noix ou graines"
     ],
     "originalIngredientsVerified": true
   },
@@ -3030,11 +3101,13 @@ window.MICI_RECIPES = [
       "Cuire jusqu’à ce que la préparation soit prise, en vérifiant la cuisson."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "1 banane mûre",
+      "1 œuf",
+      "Flocons d’avoine — quantité telle que publiée dans la source à transcrire"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "crumble-pommes-myrtilles",
@@ -3070,10 +3143,17 @@ window.MICI_RECIPES = [
       "Cuire au four jusqu’à ce que le crumble soit cuit."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "2 pommes",
+      "100 g de myrtilles surgelées",
+      "Cannelle (facultatif)",
+      "70 g de flocons d’avoine",
+      "60 g de farine d’amandes",
+      "4 c. à soupe de sirop d’érable",
+      "4 c. à soupe de beurre ou d’huile de coco",
+      "Une pincée de sel"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   }
 ];
