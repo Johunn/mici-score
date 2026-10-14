@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v45';/);
+  assert.match(swSource, /const CACHE='mici-score-v46';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v45/);
+  assert.match(swSource, /mici-score-v46/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1215,6 +1215,9 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
   assert.ok(recipes.every(r => r.title && r.category && r.summary && r.source.startsWith('https://')));
   assert.ok(html.includes('Recettes à tester selon ta tolérance'));
+  assert.ok(html.includes('IDÉES DE REPAS · ${recipes.length} RECETTES'));
+  assert.ok(html.includes('Source : <a href="${esc(r.source)}"'));
+  assert.ok(html.includes('${esc(r.sourceLabel)} ↗</a>'));
   const coreSandbox = { window: {} };
   vm.createContext(coreSandbox);
   new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(coreSandbox);
