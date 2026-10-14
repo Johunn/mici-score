@@ -7,7 +7,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Riz, poulet et légumes cuits, à ajuster selon ta tolérance.",
     "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -47,7 +47,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une assiette simple avec une texture tendre.",
     "source": "https://www.crohnscolitisfoundation.org/es/node/121211",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -155,7 +155,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Poisson cuit, féculent simple et légume tendre.",
     "source": "https://www.crohnscolitisfoundation.org/es/node/121211",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -189,7 +189,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une combinaison tendre sans sauce lourde.",
     "source": "https://www.ibdcentrebc.ca/recipes/",
-    "sourceLabel": "IBD Centre of BC — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — IBD Centre of BC (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -223,7 +223,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Un plat à ingrédients faciles à identifier et à ajuster.",
     "source": "https://www.crohn-larectocoliteetnous.be/theme/nutrition-recettes/",
-    "sourceLabel": "Crohn / La rectocolite et nous — inspiration (adaptation)",
+    "sourceLabel": "Inspiration nutritionnelle — Crohn / La rectocolite et nous (pas une recette source exacte)",
     "ingredients": [
       {
         "names": [
@@ -291,7 +291,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une alternative au riz ou aux pâtes, à texture crémeuse.",
     "source": "https://www.ibdcentrebc.ca/recipes/",
-    "sourceLabel": "IBD Centre of BC — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — IBD Centre of BC (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -319,7 +319,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une variante avec quinoa ; la quantité de fibres reste à adapter.",
     "source": "https://www.crohnscolitisfoundation.org/patientsandcaregivers/diet-and-nutrition/what-should-i-eat",
-    "sourceLabel": "Crohn’s & Colitis Foundation — conseils alimentaires",
+    "sourceLabel": "Conseils alimentaires — Crohn’s & Colitis Foundation (pas une recette source exacte)",
     "ingredients": [
       {
         "names": [
@@ -353,7 +353,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une option rapide ; le jambon est un produit transformé.",
     "source": "https://www.ameli.fr/assure/sante/themes/rectocolite-hemorragique/suivi-medical-vie-quotidienne",
-    "sourceLabel": "Ameli — alimentation et rectocolite",
+    "sourceLabel": "Conseils généraux — Ameli (pas une recette source exacte)",
     "ingredients": [
       {
         "names": [
@@ -433,7 +433,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une collation sans cuisson si ces ingrédients te conviennent.",
     "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -461,7 +461,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une collation rapide ; le fromage blanc contient du lactose.",
     "source": "https://www.crohnscolitisfoundation.org/patientsandcaregivers/diet-and-nutrition/what-should-i-eat",
-    "sourceLabel": "Crohn’s & Colitis Foundation — conseils alimentaires",
+    "sourceLabel": "Conseils alimentaires — Crohn’s & Colitis Foundation (pas une recette source exacte)",
     "ingredients": [
       {
         "names": [
@@ -489,7 +489,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Deux ingrédients principaux avec une cuisson douce.",
     "source": "https://www.crohnscolitisfoundation.org/es/node/121211",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -517,7 +517,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Un plat tendre ; les fibres restent à adapter individuellement.",
     "source": "https://www.ibdcentrebc.ca/recipes/",
-    "sourceLabel": "IBD Centre of BC — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — IBD Centre of BC (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -551,7 +551,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une assiette classique dont la texture peut être adaptée.",
     "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
@@ -585,7 +585,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Une préparation simple à manger tiède ou froide.",
     "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette adaptée par MICI Score)",
     "ingredients": [
       {
         "names": [
