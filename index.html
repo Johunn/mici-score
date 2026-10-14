@@ -425,6 +425,65 @@ nav.tabs button{display:flex;align-items:center;justify-content:center;min-heigh
 }
 @media(prefers-reduced-motion:reduce){.welcome-panel *{transition:none!important}}
 
+
+/* MICI Score v5 — architecture orientée journée, composition et retours personnels */
+:root{--navh:48px}
+nav.tabs button{font-size:clamp(10px,2.85vw,12px);line-height:1.2;padding:11px 1px;letter-spacing:-.02em}
+.today-intro{padding:8px 0 22px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.exp-eyebrow{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--accent)}
+.today-intro h1,.explore-head h1,.compose-empty h1{font-size:clamp(31px,8vw,40px);letter-spacing:-.035em;margin:10px 0;max-width:13ch}
+.today-lede{font-size:15px;line-height:1.55;color:var(--muted);max-width:42ch}
+.today-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.today-stat{border:1px solid var(--line);border-radius:14px;padding:13px 14px;min-width:0}
+.today-stat span{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+.today-stat strong{display:block;font:700 27px/1.1 var(--f-display);margin-top:7px}
+.today-stat small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.today-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.today-actions .btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 8px;font-size:13px}
+.exp-section{margin:24px 0 0}
+.exp-section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:10px}
+.exp-section-head h2{margin:4px 0 0;font-size:21px}
+.exp-muted{font-size:12px;color:var(--muted)}
+.trend-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;align-items:end;margin-top:14px}
+.trend-col{display:flex;min-width:0;flex-direction:column;align-items:center;justify-content:end;gap:5px}
+.trend-score{font-size:11px;color:var(--muted);height:14px}
+.trend-track{height:72px;width:100%;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid var(--line)}
+.trend-track i{display:block;width:min(24px,70%);min-height:3px;border-radius:5px 5px 0 0;background:var(--accent)}
+.trend-col small{font-size:10px;color:var(--muted)}
+.exp-rows{border-top:1px solid var(--line)}
+.exp-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.exp-row-main{flex:1;min-width:0}
+.exp-row-main b{display:block;font-size:14px;overflow-wrap:anywhere}
+.exp-row-main small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.exp-score{min-width:46px;text-align:center;font:700 16px var(--f-display)}
+.exp-row .btn{font-size:12px;padding:8px 10px;margin:0}
+.exp-empty{padding:16px 0;color:var(--muted);font-size:13px;line-height:1.5}
+.exp-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}
+.exp-shortcuts button{min-height:56px;text-align:left;padding:11px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-size:13px;font-weight:650;color:var(--ink)}
+.exp-shortcuts small{display:block;color:var(--muted);font-weight:400;margin-top:3px;font-size:11px}
+.explore-head{margin:4px 0 18px}
+.explore-head .link{margin-bottom:12px}
+.explore-head p{color:var(--muted);font-size:14px;max-width:40ch}
+.explore-count{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.explore-count strong{color:var(--ink);font-size:14px}
+.journal-intro{padding:6px 0 18px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.journal-intro h1{font-size:34px;letter-spacing:-.03em;margin:8px 0}
+.journal-intro p{font-size:14px;color:var(--muted);max-width:42ch}
+.journal-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 20px}
+.journal-stat{padding:12px;border:1px solid var(--line);border-radius:12px}
+.journal-stat span{display:block;font-size:12px;color:var(--muted)}
+.journal-stat strong{display:block;font:700 24px var(--f-display);margin-top:5px}
+.journal-period{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:12px 0 8px}
+.journal-period button{border:1px solid var(--line);border-radius:10px;background:transparent;padding:9px 4px;font-size:12px;font-weight:650}
+.journal-period button[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.exp-caution{border-left:3px solid var(--mid);padding:9px 12px;color:var(--muted);font-size:12px;line-height:1.5;margin:14px 0}
+.compose-empty{padding:12px 0 28px}
+.compose-empty .steps{margin:20px 0;padding:0;list-style:none;counter-reset:step}
+.compose-empty .steps li{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--line);font-size:14px}
+.compose-empty .steps li:before{counter-increment:step;content:counter(step);display:grid;place-items:center;flex:none;width:28px;height:28px;border:1px solid var(--line);border-radius:50%;font-weight:700;color:var(--accent)}
+.compose-empty .btn{min-height:54px}
+@media(min-width:440px){.today-actions{grid-template-columns:1fr 1fr}.today-stat{padding:16px}.trend-grid{gap:10px}.exp-shortcuts{grid-template-columns:repeat(3,1fr)}}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
@@ -434,10 +493,11 @@ nav.tabs button{display:flex;align-items:center;justify-content:center;min-heigh
 <footer id="appfoot">MICI Score : estimation personnelle de la tolérance digestive d'aliments. Ni diagnostic ni traitement. · <a href="confidentialite.html">Politique de confidentialité</a></footer>
 <div id="bar"></div>
 <nav class="tabs" aria-label="Navigation">
-  <button data-tab="calc">Calculer</button>
+  <button data-tab="calc">Aujourd’hui</button>
+  <button data-tab="compose">Composer</button>
   <button data-tab="journal">Journal</button>
-  <button data-tab="profil">Profil</button>
-  <button data-tab="sources">Sources</button>
+  <button data-tab="profil">Mes données</button>
+  <button data-tab="sources">Limites</button>
 </nav>
 
 <script src="score-core.js"></script>
@@ -1035,7 +1095,7 @@ function savePlate(){
 
 /* ---------- État de l'interface ---------- */
 const ui={tab:'calc',view:'home',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
-  newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false};
+  newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false,journalDays:30};
 function backupText(){
   return JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
 }
@@ -1064,7 +1124,7 @@ function attentionHTML(lv){
   if((lv.u||0)>=2)L.push({lab:'Ultra-transformé',tip:'version maison ou plus simple'});
   return `<div class="card"><h3>Points d\u2019attention</h3>${L.length?L.map(a=>`<p class="small" style="margin:0 0 8px"><b>${a.lab}</b> <span class="muted">· ${a.tip}</span></p>`).join(''):'<p class="small muted" style="margin:0">Aucun point d\u2019attention particulier. Reste attentif à la quantité et à tes notes.</p>'}<p class="small muted" style="margin:8px 0 0">Ce sont des pistes d\u2019adaptation, pas des interdits : ton journal décide.</p></div>`;
 }
-const APP_V='v4.9';
+const APP_V='v5.0';
 {const _v=document.getElementById('appver');if(_v)_v.textContent=APP_V}
 const SORTS=[['cat','Catégories'],['nom','Nom A–Z'],['scd','Score ↓'],['sca','Score ↑']];
 const COL=new Intl.Collator('fr',{sensitivity:'base',numeric:true});
@@ -1097,32 +1157,39 @@ function listHTML(){
 
 
 function homeHTML(){
-  const entries=store.entries.slice().sort((a,b)=>b.ts-a.ts);
-  const recent=entries.slice(0,3);
-  const dt=ts=>new Date(ts).toLocaleDateString('fr-BE',{day:'numeric',month:'short'});
-  const meal=e=>(e.items||[]).map(i=>i.n).join(' + ')||'Repas sans détail';
-  return `
-  <section class="home-hero">
-    <div class="eyebrow">MICI SCORE · TON ESPACE REPAS</div>
-    <h1>Moins de recherche.<br>Plus de repères.</h1>
-    <p>Prépare un repas, note comment tu te sens, puis utilise ton propre historique pour repérer ce qui te convient.</p>
-    <button class="btn block home-primary" data-act="startCompose"><span class="home-plus">＋</span> Composer un repas</button>
-    <div class="home-disclaimer">Le score est une estimation, pas une prédiction médicale. Tes observations restent prioritaires.</div>
-  </section>
-  <section class="home-actions" aria-label="Actions rapides">
-    <button class="home-action" data-act="explore"><span class="home-action-icon">⌕</span><span><b>Trouver un aliment</b><small>Recherche et comparaison</small></span><span class="home-arrow">›</span></button>
-    <button class="home-action" data-act="openJournal"><span class="home-action-icon">↗</span><span><b>Comprendre mon historique</b><small>Notes et pistes personnelles</small></span><span class="home-arrow">›</span></button>
-  </section>
-  <section class="home-recent">
-    <div class="home-section-head"><div><span class="eyebrow">MÉMOIRE PERSONNELLE</span><h2>Mes derniers repas</h2></div><span class="home-count">${entries.length} noté${entries.length>1?'s':''}</span></div>
-    ${recent.length?recent.map(e=>`<article class="home-meal">
-      <div class="home-meal-score ${cls(e.r)}">${fmt(e.r)}<small>/10</small></div>
-      <div class="home-meal-body"><b>${esc(meal(e))}</b><small>${dt(e.ts)} · digestion ressentie : ${fmt(e.r)}/10</small></div>
-      <button class="home-repeat" data-act="repeatEntry" data-id="${esc(e.id)}" aria-label="Reprendre le repas du ${dt(e.ts)}">Reprendre</button>
-    </article>`).join(''):`<div class="home-empty"><div class="home-empty-mark">＋</div><b>Ton historique commence ici</b><p>Après un repas, note ton ressenti. Avec le temps, tu pourras comparer tes propres observations.</p><button class="btn ghost" data-act="startCompose">Créer mon premier repas</button></div>`}
-    ${entries.length>0?`<button class="home-all" data-act="openJournal">Voir tout le journal <span>→</span></button>`:''}
-  </section>
-  `;
+  const entries=store.entries.slice().sort((a,b)=>(+b.ts||0)-(+a.ts||0));
+  const midnight=new Date();midnight.setHours(0,0,0,0);
+  const today=entries.filter(e=>(+e.ts||0)>=midnight.getTime());
+  const weekStart=new Date(midnight);weekStart.setDate(weekStart.getDate()-6);
+  const week=entries.filter(e=>(+e.ts||0)>=weekStart.getTime()&&Number.isFinite(+e.r));
+  const average=week.length?week.reduce((a,e)=>a+(+e.r),0)/week.length:null;
+  const dt=ts=>new Date(+ts||0).toLocaleDateString('fr-BE',{day:'numeric',month:'short'});
+  const meal=e=>(e.items||[]).map(i=>i.n).filter(Boolean).join(' + ')||'Repas sans détail';
+  const points=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date(midnight);d.setDate(d.getDate()-i);
+    const start=d.getTime(),end=start+86400000;
+    const day=entries.filter(e=>(+e.ts||0)>=start&&(+e.ts||0)<end&&Number.isFinite(+e.r));
+    const value=day.length?day.reduce((a,e)=>a+(+e.r),0)/day.length:null;
+    points.push({label:d.toLocaleDateString('fr-BE',{day:'numeric',month:'short'}),short:d.toLocaleDateString('fr-BE',{weekday:'short'}).replace('.',''),n:day.length,value:value});
+  }
+  const suspects=suspectList().slice(0,2);
+  return [
+    '<section class="today-intro"><span class="exp-eyebrow">MICI SCORE · TON SUIVI</span><h1>Comment ça se passe aujourd’hui&nbsp;?</h1><p class="today-lede">Le plus utile n’est pas de prédire ta digestion : c’est de garder des observations comparables et de voir ce qui se répète chez toi.</p>',
+    '<div class="today-stats"><div class="today-stat"><span>Repas notés aujourd’hui</span><strong>'+today.length+'</strong><small>'+(today.length===1?'Une observation enregistrée':today.length>1?'Observations enregistrées':'Rien de noté pour le moment')+'</small></div><div class="today-stat"><span>Ressenti moyen · 7 jours</span><strong>'+(average===null?'—':fmt(average)+'/10')+'</strong><small>'+week.length+' repas avec une note personnelle</small></div></div>',
+    '<button class="btn block" style="min-height:56px;font-size:16px" data-act="startCompose">＋ Noter un repas</button>',
+    '<div class="today-actions"><button class="btn ghost" data-act="explore">Chercher un aliment</button><button class="btn ghost" data-act="openJournal">Analyser mes observations</button></div></section>',
+    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">MON HISTORIQUE</span><h2>Les 7 derniers jours</h2></div><span class="exp-muted">'+week.length+' repas</span></div>',
+    week.length?'<p class="exp-muted">Moyenne du ressenti que tu as saisi après chaque repas. Un trait vide signifie qu’aucune note n’a été enregistrée.</p><div class="trend-grid" aria-label="Ressenti journalier sur sept jours">'+points.map(p=>'<div class="trend-col" title="'+p.label+' : '+(p.value===null?'aucun repas':fmt(p.value)+'/10')+'"><span class="trend-score">'+(p.value===null?'—':fmt(p.value))+'</span><div class="trend-track"><i style="height:'+(p.value===null?3:Math.max(5,p.value*7))+'px"></i></div><small>'+p.short+'</small></div>').join('')+'</div>':'<p class="exp-empty">Les notes apparaîtront ici lorsque tu auras enregistré quelques repas. Elles reflètent ton ressenti déclaré, pas une mesure médicale.</p>',
+    '</section>',
+    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">À EXAMINER, PAS À CONCLURE</span><h2>Pistes personnelles</h2></div></div>',
+    suspects.length?'<div class="exp-rows">'+suspects.map(x=>'<div class="exp-row"><div class="exp-row-main"><b>'+esc(x.name)+'</b><small>'+x.n+' repas · moyenne avec : '+fmt(x.mean)+' · sans : '+fmt(x.meanWo)+'</small></div><span class="exp-score '+cls(x.mean)+'">'+fmt(x.mean)+'</span></div>').join('')+'</div><p class="exp-muted">Une différence observée ne prouve pas qu’un aliment est responsable. Vérifie les notes et le contexte dans le journal avant de modifier tes habitudes.</p>':'<p class="exp-empty">Pas de piste suffisamment étayée pour le moment. L’application préfère attendre plusieurs observations comparables plutôt que conclure trop vite.</p>',
+    '<button class="link" data-act="openJournal">Voir le détail de mes observations →</button></section>',
+    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">MÉMOIRE RÉCENTE</span><h2>Derniers repas</h2></div><span class="exp-muted">'+entries.length+' au total</span></div>',
+    entries.length?'<div class="exp-rows">'+entries.slice(0,3).map(e=>'<div class="exp-row"><span class="exp-score '+cls(e.r)+'">'+fmt(e.r)+'</span><div class="exp-row-main"><b>'+esc(meal(e))+'</b><small>'+dt(e.ts)+' · ressenti après repas</small></div><button class="btn ghost" data-act="repeatEntry" data-id="'+esc(e.id)+'">Reprendre</button></div>').join('')+'</div><button class="link" data-act="openJournal">Tout le journal →</button>':'<div class="exp-empty">Ton suivi commence par un premier repas. Après l’avoir composé, note simplement ce que tu as ressenti.</div>',
+    '</section>',
+    '<section class="exp-shortcuts" aria-label="Outils complémentaires"><button data-act="openProfile">Sauvegarde et profil<small>Données, préférences, synchronisation</small></button><button data-act="openSources">Comprendre le score<small>Sources et limites</small></button></section>'
+  ].join('');
 }
 
 function calcHTML(){
@@ -1130,38 +1197,19 @@ function calcHTML(){
   if(ui.view==='detail'&&ui.sel)return detailHTML();
   if(ui.view==='plate')return plateHTML();
   if(ui.view==='home')return homeHTML();
-  return `
-  ${ui.msg?`<p class="small" role="status" style="margin:-6px 0 10px">${esc(ui.msg)}</p>`:''}
-  <section class="welcome-panel">
-    <div class="welcome-copy">
-      <span class="eyebrow">TON REPÈRE DIGESTIF</span>
-      <h1>Construis ton assiette.</h1>
-      <p>Explore les aliments, compare leurs scores et compose un repas adapté à tes observations.</p>
-      <div class="welcome-meta"><span class="meta-dot"></span> Estimation personnalisée · pas un diagnostic</div>
-    </div>
-    <div class="welcome-orbit" aria-hidden="true"><div class="orbit-ring"></div><div class="orbit-core"><span>0–10</span><small>score</small></div><i class="orbit-dot dot-a"></i><i class="orbit-dot dot-b"></i><i class="orbit-dot dot-c"></i></div>
-  </section>
-  <section class="finder-panel" aria-label="Trouver un aliment">
-    <div class="finder-heading"><div><span class="eyebrow">EXPLORER</span><h2>Quel aliment cherches-tu ?</h2></div><span class="food-total">${allFoods().length}<small>aliments</small></span></div>
-    <div class="searchbox"><span class="search-symbol" aria-hidden="true">⌕</span><input type="search" id="qs" placeholder="Ex. : riz, yaourt, tomate…" value="${esc(ui.qs)}" aria-label="Rechercher"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" ${ui.qs?'':'hidden'}>✕</button></div>
-    <div class="filter-label">PAR CATÉGORIE</div>
-    <div class="chips" role="group" aria-label="Catégories">
-    <button class="chip" data-act="cat" data-i="-1" aria-pressed="${ui.cat<0}">Tout</button>
-    ${ORD.map(i=>`<button class="chip" data-act="cat" data-i="${i}" aria-pressed="${ui.cat===i}">${CHIPS[i]}</button>`).join('')}
-  </div>
-    <div class="sort-row"><span>Résultats</span><div class="seg" role="group" aria-label="Tri de la liste">${SORTS.map(t=>`<button data-act="sort" data-id="${t[0]}" aria-pressed="${(ui.sort||'cat')===t[0]}">${t[1]}</button>`).join('')}</div></div>
-  </section>
-  <section class="results-panel">
-    <div class="results-heading"><div><span class="eyebrow">SÉLECTION</span><h2>Les aliments</h2></div><span class="results-hint">Appuie pour ajouter à l’assiette</span></div>
-    <div id="list">${listHTML()}</div>
-  <p style="margin-top:20px"><button class="btn ghost block" data-act="newfood">Ajouter un aliment</button></p>
-  <p class="notice">Vert (6 ou plus) : généralement bien toléré ; orange (4 à 6) : à adapter (portion, cuisson, accompagnement) ; rouge : plusieurs points d'attention. Aucun aliment n'est interdit. Estimations générales, ni diagnostic ni traitement ; elles ne remplacent pas un avis médical.</p>
-  </section>`;
+  return (ui.msg?'<p class="small" role="status">'+esc(ui.msg)+'</p>':'')+
+  '<section class="explore-head"><button class="link" data-act="back">‹ Retour au repas'+(ui.plate.length?' · '+ui.plate.length+' aliment'+(ui.plate.length>1?'s':''):'')+'</button><span class="exp-eyebrow">COMPOSITION · ÉTAPE 1</span><h1>Ajouter des aliments</h1><p>Choisis les ingrédients et leurs portions. Ta sélection reste dans le brouillon tant que tu ne l’enregistres pas dans le journal.</p><div class="explore-count"><span>Catalogue alimentaire</span><strong>'+allFoods().length+' aliments</strong></div></section>'+
+  '<section><div class="searchbox"><input type="search" id="qs" placeholder="Rechercher un aliment…" value="'+esc(ui.qs)+'" aria-label="Rechercher un aliment"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" '+(ui.qs?'':'hidden')+'>✕</button></div>'+
+  '<div class="filter-label" style="margin-top:16px">FILTRER PAR CATÉGORIE</div><div class="chips" role="group" aria-label="Catégories"><button class="chip" data-act="cat" data-i="-1" aria-pressed="'+(ui.cat<0)+'">Tout</button>'+
+  ORD.map(i=>'<button class="chip" data-act="cat" data-i="'+i+'" aria-pressed="'+(ui.cat===i)+'">'+CHIPS[i]+'</button>').join('')+'</div>'+
+  '<div class="field" style="margin-top:12px"><label for="sort-control">Ordre des résultats</label><select id="sort-control" aria-label="Ordre des résultats" data-act="sortSelect">'+SORTS.map(t=>'<option value="'+t[0]+'" '+((ui.sort||'cat')===t[0]?'selected':'')+'>'+t[1]+'</option>').join('')+'</select></div>'+
+  '<div id="list">'+listHTML()+'</div><p style="margin-top:16px"><button class="btn ghost block" data-act="newfood">＋ Ajouter un aliment personnel</button></p>'+
+  '<p class="notice">Le score est une estimation générale, pas une prédiction individuelle. Aucun aliment n’est automatiquement interdit : tes observations personnelles priment.</p></section>';
 }
 
 function plateHTML(){
   const items=plateItems();
-  if(!items.length)return `<button class="link" data-act="back">‹ Retour</button><div class="empty">Ton assiette est vide.</div>`;
+  if(!items.length)return '<section class="compose-empty"><span class="exp-eyebrow">COMPOSITION EN COURS</span><h1>Prépare ton prochain repas</h1><p class="today-lede">Commence par les aliments que tu vas manger. Tu pourras adapter les portions, puis noter ton ressenti après le repas.</p><ol class="steps"><li>Choisis les ingrédients du repas.</li><li>Ajuste les portions si nécessaire.</li><li>Après le repas, note comment tu te sens.</li></ol><button class="btn block" data-act="explore">Choisir des aliments</button><p class="small muted" style="margin-top:12px">Ton brouillon est conservé localement. Rien n’est ajouté au journal tant que tu ne l’enregistres pas.</p></section>';
   const r=scoreOf(items,ui);
   return `<button class="link" data-act="back">‹ Retour</button>
   <h2 style="margin-top:6px">Mon assiette</h2>
@@ -1249,26 +1297,41 @@ function addHTML(){
 }
 
 function journalHTML(){
-  const ents=store.entries.slice().sort((a,b)=>b.ts-a.ts);
-  const sl=suspectList(),sus=sl.slice(0,SUSP_MAX),hid=sl.length-sus.length;
+  const all=store.entries.slice().sort((a,b)=>(+b.ts||0)-(+a.ts||0));
+  const days=[7,30,0].includes(+ui.journalDays)?+ui.journalDays:30;
+  const cutoff=days?Date.now()-days*86400000:0;
+  const ents=all.filter(e=>(+e.ts||0)>=cutoff&&Number.isFinite(+e.r));
+  const suspects=suspectList().slice(0,SUSP_MAX);
   const conf=Object.keys(store.flags||{}).filter(k=>store.flags[k]==='confirm').map(k=>{const f=byId(k);return f?f.n:null}).filter(Boolean);
-  const bilan=(sus.length||conf.length)?[1]:[];
-  const dt=ts=>new Date(ts).toLocaleString('fr-BE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-  return `<div class="top"><h1>Journal</h1></div>
-  ${!ents.length?`<div class="empty">Aucune note pour l'instant.<br>Compose une assiette dans « Calculer » puis note ton ressenti.</div>`:`
-  ${bilan.length?`<div class="card" style="margin-top:0"><h3>À surveiller</h3>
-    <p class="muted small">Aliments présents dans plusieurs repas mal notés (4 ou moins) et rarement dans les bons, comparés aux repas sans eux. Ça sert à choisir quoi tester, pas à conclure : retire-le quelques jours, un changement à la fois. Aucun effet sur le score tant que tu ne confirmes pas. Maximum ${SUSP_MAX} à la fois.</p>
-    ${sus.map(x=>`<div class="entry"><span class="badge ${cls(x.mean)}">${fmt(x.mean)}</span><div class="body"><b>${esc(x.name)}</b><span class="muted small" style="display:block">${x.n} repas : ${x.bad} mauvais, ${x.good} bons · sans lui : ${fmt(x.meanWo)}${x.n<4?' · peu fiable':''}</span><span style="display:flex;gap:8px;margin-top:6px"><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="flag" data-id="${esc(x.id)}" data-v="confirm">Confirmer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="flag" data-id="${esc(x.id)}" data-v="clear">Écarter</button></span></div></div>`).join('')}
-    ${hid>0?`<p class="small muted">${hid} autre${hid>1?'s':''} suspect${hid>1?'s':''} masqué${hid>1?'s':''} (limite de ${SUSP_MAX}) : traite d'abord ceux-ci.</p>`:''}
-    ${conf.length?`<p class="small"><b>Confirmés :</b> ${conf.map(esc).join(', ')}</p>`:''}</div>`:''}
-  <div class="card"${bilan.length?'':' style="margin-top:0"'}><h3>Historique</h3>
-    ${ents.map(e=>`<div class="entry"><span class="badge ${cls(e.r)}">${fmt(e.r)}</span><div class="body"><b>${esc((e.items||[]).map(i=>i.n).join(' + '))}</b>
-      <span class="muted small" style="display:block">${dt(e.ts)}${e.jeun?' · à jeun':''}${e.score!=null?' · calculé '+fmt(e.score):''}</span>
-      ${e.note?`<span class="small" style="display:block">${esc(e.note)}</span>`:''}
-      ${e.edited?`<span class="muted small" style="display:block">Corrigé le ${dt(e.edited)}</span>`:''}
-      ${String(ui.editId)===String(e.id)?`<div class="field" style="margin-top:8px"><label for="eress">Digestion : <span class="rangeval" id="eressv">${ui.eR}</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="${ui.eR}"><label for="enote">Note (facultatif)</label><textarea id="enote" placeholder="Note (facultatif)">${esc(ui.eNote)}</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="${e.id}">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>`:`<button class="btn ghost" style="margin:6px 0 0;padding:6px 12px" data-act="editEntry" data-id="${e.id}">Corriger la note</button>`}</div>
-      <button class="del" data-act="delEntry" data-id="${e.id}">Supprimer</button></div>`).join('')}
-  </div>`}`;
+  const mean=ents.length?ents.reduce((a,e)=>a+(+e.r),0)/ents.length:null;
+  const dt=ts=>new Date(+ts||0).toLocaleString('fr-BE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  const meal=e=>(e.items||[]).map(i=>i.n).filter(Boolean).join(' + ')||'Repas sans détail';
+  const periodButton=(v,label)=>'<button data-act="journalRange" data-days="'+v+'" aria-pressed="'+(days===v)+'">'+label+'</button>';
+  const points=[];
+  const today=new Date();today.setHours(0,0,0,0);
+  for(let i=6;i>=0;i--){
+    const d=new Date(today);d.setDate(d.getDate()-i);
+    const start=d.getTime(),end=start+86400000;
+    const group=ents.filter(e=>(+e.ts||0)>=start&&(+e.ts||0)<end);
+    const value=group.length?group.reduce((a,e)=>a+(+e.r),0)/group.length:null;
+    points.push({short:d.toLocaleDateString('fr-BE',{weekday:'short'}).replace('.',''),label:d.toLocaleDateString('fr-BE',{day:'numeric',month:'short'}),n:group.length,value:value});
+  }
+  return [
+    '<section class="journal-intro"><span class="exp-eyebrow">DONNÉES PERSONNELLES</span><h1>Ce que tu observes</h1><p>Compare ton ressenti, les repas et tes notes. Les moyennes décrivent ton historique : elles ne prouvent pas à elles seules la cause d’un symptôme.</p><div class="journal-stats"><div class="journal-stat"><span>Repas avec une note</span><strong>'+ents.length+'</strong></div><div class="journal-stat"><span>Ressenti moyen</span><strong>'+(mean===null?'—':fmt(mean)+'/10')+'</strong></div></div>',
+    '<div class="exp-section-head"><div><span class="exp-eyebrow">PÉRIODE</span><h2>Choisir le recul</h2></div></div><div class="journal-period" role="group" aria-label="Période du journal">'+periodButton(7,'7 jours')+periodButton(30,'30 jours')+periodButton(0,'Tout')+'</div></section>',
+    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">ÉVOLUTION</span><h2>Ressenti par jour</h2></div><span class="exp-muted">Sur 10</span></div>',
+    ents.length?'<p class="exp-muted">Moyenne des notes que tu as saisies, avec le nombre de repas observés chaque jour.</p><div class="trend-grid" aria-label="Moyenne journalière du ressenti sur sept jours">'+points.map(p=>'<div class="trend-col" title="'+p.label+' : '+(p.value===null?'aucun repas':fmt(p.value)+'/10')+'"><span class="trend-score">'+(p.value===null?'—':fmt(p.value))+'</span><div class="trend-track"><i style="height:'+(p.value===null?3:Math.max(5,p.value*7))+'px"></i></div><small>'+p.short+'</small></div>').join('')+'</div>':'<div class="exp-empty">Aucune note sur cette période. Essaie une période plus large ou enregistre ton prochain repas.</div>',
+    '</section>',
+    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">COMPARAISON PERSONNELLE</span><h2>Aliments à examiner</h2></div></div>',
+    suspects.length?'<div class="exp-rows">'+suspects.map(x=>'<div class="exp-row"><div class="exp-row-main"><b>'+esc(x.name)+'</b><small>'+x.n+' repas · '+x.bad+' notes basses · '+x.good+' notes hautes<br>Avec : '+fmt(x.mean)+' · sans : '+fmt(x.meanWo)+(x.n<4?' · échantillon limité':'')+'</small></div><span class="exp-score '+cls(x.mean)+'">'+fmt(x.mean)+'</span><button class="btn ghost" data-act="flag" data-id="'+esc(x.id)+'" data-v="clear">Écarter</button></div>').join('')+'</div>':'<p class="exp-empty">Aucune piste ne remplit actuellement les critères de comparaison. C’est préférable à une conclusion fragile sur trop peu de repas.</p>',
+    conf.length?'<p class="small">Déclencheurs confirmés par toi : <b>'+conf.map(esc).join(', ')+'</b></p>':'',
+    '<div class="exp-caution">Une association entre un aliment et un ressenti moins bon ne démontre pas une causalité. Le statut « à surveiller » ne change pas le calcul ; confirme une piste seulement après examen de tes notes et du contexte.</div></section>',
+    '<section class="exp-section"><div class="exp-section-head"><div><span class="exp-eyebrow">HISTORIQUE</span><h2>Repas enregistrés</h2></div><span class="exp-muted">'+ents.length+' repas</span></div>',
+    ents.length?'<div class="exp-rows">'+ents.map(e=>'<article class="exp-row"><span class="exp-score '+cls(e.r)+'">'+fmt(e.r)+'</span><div class="exp-row-main"><b>'+esc(meal(e))+'</b><small>'+dt(e.ts)+(e.jeun?' · à jeun':'')+(e.score!=null?' · estimation calculée '+fmt(e.score):'')+'</small>'+
+      (e.note?'<small>'+esc(e.note)+'</small>':'')+(e.edited?'<small>Note corrigée le '+dt(e.edited)+'</small>':'')+
+      (String(ui.editId)===String(e.id)?'<div class="field" style="margin-top:8px"><label for="eress">Ressenti : <span class="rangeval" id="eressv">'+ui.eR+'</span> / 10</label><input type="range" id="eress" min="0" max="10" step="1" value="'+ui.eR+'"><label for="enote">Note personnelle</label><textarea id="enote" placeholder="Facultatif">'+esc(ui.eNote)+'</textarea><span style="display:flex;gap:8px;margin-top:6px"><button class="btn" style="margin:0;padding:8px 12px" data-act="saveEdit" data-id="'+e.id+'">Enregistrer</button><button class="btn ghost" style="margin:0;padding:8px 12px" data-act="cancelEdit">Annuler</button></span></div>':'<button class="btn ghost" style="margin:7px 0 0;padding:7px 11px" data-act="editEntry" data-id="'+e.id+'">Corriger la note</button>')+'</div><button class="del" data-act="delEntry" data-id="'+e.id+'">Supprimer</button></article>').join('')+'</div>':'<div class="exp-empty">Aucun repas dans cette période.</div>',
+    '</section>'
+  ].join('');
 }
 
 function learning(){
@@ -1350,9 +1413,9 @@ function profilHTML(){
 
 function updateBar(){
   const n=ui.plate.length;
-  if(ui.tab!=='calc'||!n||ui.view==='plate'||ui.view==='add'){bar.innerHTML='';return}
+  if(ui.tab!=='compose'||!n||ui.view==='plate'||ui.view==='add'||ui.view==='detail'){bar.innerHTML='';return}
   const r=scoreOf(plateItems(),ui);
-  bar.innerHTML=`<div class="wrap"><button class="main" data-act="openPlate"><span class="badge ${cls(r.score)}">${fmt(r.score)}</span><span class="grow">Assiette · ${n} aliment${n>1?'s':''}</span><span>Voir ›</span></button><button class="clr" data-act="clearBar" aria-label="Vider l\u2019assiette">Vider</button></div>`;
+  bar.innerHTML=`<div class="wrap"><button class="main" data-act="openPlate"><span class="badge ${cls(r.score)}">${fmt(r.score)}</span><span class="grow">Repas en cours · ${n} aliment${n>1?'s':''}</span><span>Voir ›</span></button><button class="clr" data-act="clearBar" aria-label="Vider l\u2019assiette">Vider</button></div>`;
 }
 
 function sourcesHTML(){
@@ -1431,7 +1494,7 @@ function render(keep){
   if(k!==lastKey){lastKey=k;if(!fromPop){try{history.pushState({tab:ui.tab,view:ui.view,sel:ui.sel},'');navDepth++}catch(e){}}}
   const y=window.scrollY;
   document.querySelectorAll('nav.tabs button').forEach(b=>{if(b.dataset.tab===ui.tab)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
-  app.innerHTML=ui.tab==='calc'?calcHTML():ui.tab==='journal'?journalHTML():ui.tab==='sources'?sourcesHTML():profilHTML();
+  app.innerHTML=(ui.tab==='calc'||ui.tab==='compose')?calcHTML():ui.tab==='journal'?journalHTML():ui.tab==='sources'?sourcesHTML():profilHTML();
   updateBar();refreshGbar();
   window.scrollTo(0,keep?y:0);
 }
@@ -1440,7 +1503,9 @@ function render(keep){
 document.querySelector('nav.tabs').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   ui.tab=b.dataset.tab;ui.msg='';ui.resetArmed=false;ui.delArmed=false;
-  if(ui.tab==='calc'&&ui.view==='add')ui.view='list';
+  if(ui.tab==='calc')ui.view='home';
+  else if(ui.tab==='compose')ui.view='plate';
+  else if(ui.tab==='journal')ui.editId=null;
   render();
 });
 
@@ -1473,6 +1538,7 @@ document.addEventListener('change',e=>{
   else if(a==='nl'){ui.newL[+t.dataset.i]=+t.value;refreshPrev()}
   else if(a==='nb'){ui.newB=+t.value;refreshPrev()}
   else if(t.id==='newCat'){ui.newCat=+t.value}
+  else if(t.id==='sort-control'){ui.sort=t.value;store.sort=t.value;save();ui.page=0;render(true)}
 });
 
 function openDetail(id){ui.sel=id;ui.view='detail';ui.msg='';const f=byId(id);ui.ov=f?Math.round(foodScore(f)*2)/2:5;render()}
@@ -1491,16 +1557,19 @@ document.addEventListener('click',e=>{
   else if(a==='clearq'){ui.qs='';ui.page=0;const q=document.getElementById('qs');q.value='';document.getElementById('list').innerHTML=listHTML();b.hidden=true;q.focus()}
   else if(a==='info'){openDetail(id)}
   else if(a==='addDetail'){const i=ui.plate.findIndex(x=>x.id===id);if(i>=0){ui.plate.splice(i,1);ui.msg='Retiré de l\u2019assiette.'}else{ui.plate.push({id,p:defP(id)});ui.msg='Ajouté à l\u2019assiette.'}savePlate();render(true)}
-  else if(a==='openPlate'){ui.view='plate';render()}
-  else if(a==='startCompose'){ui.view='list';ui.qs='';ui.cat=-1;ui.page=0;ui.msg='';render()}
-  else if(a==='explore'){ui.view='list';ui.qs='';ui.cat=-1;ui.page=0;render();const q=document.getElementById('qs');if(q)q.focus()}
+  else if(a==='openPlate'){ui.tab='compose';ui.view='plate';render()}
+  else if(a==='startCompose'){ui.tab='compose';ui.view='plate';ui.msg='';render()}
+  else if(a==='explore'){ui.tab='compose';ui.view='list';ui.qs='';ui.cat=-1;ui.page=0;render();const q=document.getElementById('qs');if(q)q.focus()}
   else if(a==='openJournal'){ui.tab='journal';ui.msg='';render()}
+  else if(a==='openProfile'){ui.tab='profil';ui.msg='';render()}
+  else if(a==='openSources'){ui.tab='sources';ui.msg='';render()}
+  else if(a==='journalRange'){ui.journalDays=+b.dataset.days;render(true)}
   else if(a==='repeatEntry'){
     const e=store.entries.find(x=>String(x.id)===String(id));
-    if(e){ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=7;ui.note='';ui.view='plate';ui.tab='calc';render()}
+    if(e){ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=7;ui.note='';ui.view='plate';ui.tab='compose';render()}
   }
   else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
-  else if(a==='back'){if(navDepth>0){history.back()}else{ui.view='list';ui.msg='';render()}}
+  else if(a==='back'){if(ui.view==='plate'){ui.view='list';ui.tab='compose'}else if(ui.view==='detail'){ui.view='list';ui.tab='compose'}else{ui.view='plate';ui.tab='compose'}ui.msg='';render()}
   else if(a==='cat'){ui.cat=+b.dataset.i;ui.page=0;render(true)}
   else if(a==='home'){ui.tab='calc';ui.view='home';ui.sel=null;ui.qs='';ui.cat=-1;ui.page=0;ui.msg='';ui.resetArmed=false;ui.delArmed=false;render()}
   else if(a==='sort'){ui.sort=id;store.sort=id;save();ui.page=0;render(true)}
