@@ -1026,9 +1026,9 @@ window.MICI_RECIPES = [
     "title": "Salade de pâtes méditerranéenne",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-de-pates-mediterraneenne/",
-    "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
     "ingredients": [
       {
         "names": [
@@ -1057,19 +1057,19 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false
   },
   {
     "id": "chicons-celeri-rave-saumon",
-    "title": "Chicons braisés, crème de céleri-rave et filet de poisson",
+    "title": "Chicons braisés à la crème de céleri-rave, filet de dinde et purée de pommes de terre gratinée",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/blogueur/nathalie/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes ; fiche originale à confirmer",
+    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
+    "source": "https://www.crohn-larectocoliteetnous.be/chicons-braises-a-la-creme-de-celeri-rave-filet-de-dinde-et-puree-de-pommes-de-terre-gratinee/",
+    "sourceLabel": "Crohn / La rectocolite et nous — titre et lien individuel confirmés dans l’index de Nathalie ; ingrédients originaux non vérifiés",
     "ingredients": [
       {
         "names": [
@@ -1098,7 +1098,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+      "La page individuelle est identifiée via l’index de Nathalie, mais sa liste complète d’ingrédients n’a pas pu être récupérée. Ne pas utiliser cette fiche pour cuisiner tant que la liste originale n’est pas vérifiée."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false
@@ -1152,9 +1152,9 @@ window.MICI_RECIPES = [
     "title": "Tartinade de carottes",
     "category": "Collation",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-tartinade-de-carottes/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
     "ingredients": [
       {
         "names": [
@@ -1183,7 +1183,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false
@@ -1244,9 +1244,9 @@ window.MICI_RECIPES = [
     "title": "Potage de panais au dukkah",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/potage-de-panais-au-dukkah/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
     "ingredients": [
       {
         "names": [
@@ -1275,7 +1275,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "Source utilisée : index de recettes ; les quantités de la fiche individuelle restent à transcrire."
+      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false
@@ -1379,9 +1379,9 @@ window.MICI_RECIPES = [
     "title": "Filet de vive, chou-fleur rôti et œuf mimosa",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-vive-chou-fleur-roti-oeuf-mimosa/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
     "ingredients": [
       {
         "names": [
@@ -1410,7 +1410,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false
@@ -1753,9 +1753,9 @@ window.MICI_RECIPES = [
     "title": "Un fabuleux crumble à l’avoine",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
     "source": "https://www.crohn-larectocoliteetnous.be/un-fabuleux-crumble-a-lavoine/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
     "ingredients": [
       {
         "names": [
@@ -1784,7 +1784,7 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false
