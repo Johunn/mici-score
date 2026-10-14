@@ -1126,7 +1126,7 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
   assert.match(html, /data-act="repeatEntry"/);
   assert.match(html, /const ui=\{tab:'calc',view:'home'/);
   assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
-  assert.match(html, /APP_V='v5\.1'/);
+  assert.match(html, /APP_V='v6\\.0'/);
 });
 
 
@@ -1138,8 +1138,8 @@ test('v6 merges the personal dashboard with the fast task-oriented entry point',
 });
 
 test('v5 uses a dedicated meal composer and personal-observation journal', () => {
-  assert.match(html, /data-tab="calc">Aujourd’hui/);
-  assert.match(html, /data-tab="compose">Composer/);
+  assert.match(html, /data-tab="calc"><span class="tab-icon"/);
+  assert.match(html, /data-tab="compose"><span class="tab-icon"/);
   assert.match(html, /function homeHTML\(\)[\s\S]*?Ressenti moyen · 7 jours/);
   assert.match(html, /function calcHTML\(\)[\s\S]*?COMPOSITION · ÉTAPE 1/);
   assert.match(html, /data-act="journalRange"/);
@@ -1149,4 +1149,14 @@ test('v5 uses a dedicated meal composer and personal-observation journal', () =>
   assert.match(html, /data-act="openSources"/);
   assert.match(html, /mici:plate:v1/);
   assert.match(html, /function plateHTML\(\)[\s\S]*?Ton brouillon est conservé localement/);
+});
+
+
+test('v6 provides four task-oriented navigation items and direct settings access', () => {
+  assert.match(html, /data-tab="calc"/);
+  assert.match(html, /data-tab="compose"/);
+  assert.match(html, /data-tab="journal"/);
+  assert.match(html, /data-tab="catalogue"/);
+  assert.match(html, /data-act="openProfile" aria-label="Paramètres et données"/);
+  assert.match(html, /target==='catalogue'[\s\S]*?ui.view='list'/);
 });
