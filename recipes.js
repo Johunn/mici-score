@@ -2751,5 +2751,67 @@ window.MICI_RECIPES = [
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ]
+  },
+  {
+    "id": "mug-cake-pommes",
+    "title": "Mug cake aux pommes",
+    "category": "Dessert",
+    "servings": 1,
+    "summary": "Adaptation simplifiée MICI Score ; les ingrédients et quantités ne reproduisent pas nécessairement la recette publiée. Consulter la source.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-mug-cake-aux-pommes/",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
+    "ingredients": [
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 180
+      }
+    ],
+    "steps": [
+      "Consulter la fiche source pour la recette et les quantités originales.",
+      "Préparer les ingrédients de cette adaptation simplifiée.",
+      "Cuire jusqu’à ce que la préparation soit prise, en vérifiant la cuisson."
+    ]
+  },
+  {
+    "id": "crumble-pommes-myrtilles",
+    "title": "Crumble croustillant aux pommes et aux myrtilles",
+    "category": "Dessert",
+    "servings": 1,
+    "summary": "Adaptation simplifiée MICI Score ; la recette source peut contenir d’autres ingrédients et proportions. Consulter la source.",
+    "source": "https://www.crohn-larectocoliteetnous.be/crumble-croustillant-aux-pommes-et-aux-myrtilles/",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
+    "ingredients": [
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Consulter la fiche source pour les ingrédients et quantités originales.",
+      "Préparer les fruits et la garniture selon la fiche source.",
+      "Cuire au four jusqu’à ce que le crumble soit cuit."
+    ]
   }
 ];
