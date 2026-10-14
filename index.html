@@ -159,9 +159,14 @@ nav.tabs button[aria-current=page]{color:var(--accent);box-shadow:inset 0 3px 0 
 .sens{margin-top:14px}
 .sens label{display:flex;justify-content:space-between;font-weight:600}
 input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
-.searchbox{position:relative}
-.searchbox input{padding-right:48px}
-.searchbox .clear{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:40px;height:40px;border:0;border-radius:50%;background:none;color:var(--muted);font-size:18px}
+.catalog-tools{display:grid;grid-template-columns:minmax(0,1fr) 132px;align-items:center;gap:8px}
+.searchbox{position:relative;min-width:0}
+.searchbox input{height:44px;padding:8px 42px 8px 12px;border-radius:12px;font-size:14px;box-shadow:none}
+.searchbox input:focus-visible{outline:2px solid color-mix(in srgb,var(--accent) 65%,transparent);outline-offset:1px;box-shadow:none}
+.catalog-sort{min-width:0}
+.catalog-sort select{height:44px;padding:8px 10px;border-radius:12px;font-size:13px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.searchbox .clear{position:absolute;right:2px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:50%;background:none;color:var(--muted);font-size:18px}
 .themes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .theme{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:10px;border:1.5px solid var(--line);border-radius:10px;background:transparent;font-weight:500;text-align:left}
 .theme[aria-pressed=true]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
@@ -489,6 +494,8 @@ nav.tabs button{font-size:clamp(10px,2.85vw,12px);line-height:1.2;padding:11px 1
 .portion-control{padding:2px 2px 0}
 .portion-control input[type=range]{display:block;width:100%;height:34px;margin:0;touch-action:pan-y}
 .portion-scale{display:flex;justify-content:space-between;gap:3px;margin-top:-2px;color:var(--muted);font-size:11px;line-height:1.2}
+.portion-scale span{flex:1;text-align:center}
+.portion-scale span:first-child{text-align:left}.portion-scale span:last-child{text-align:right}
 .portion-current{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:2px}
 .portion-current strong{font:700 14px var(--f-display);color:var(--accent)}
 @media(max-width:360px){.recipe-controls{gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:13px;padding:7px 8px}}
@@ -541,12 +548,13 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 .searchbox input{border-radius:15px;background:var(--surface)}.chip{border-radius:999px}.chip[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .journal-intro h1{font-size:36px}.journal-period button{border-radius:999px;padding:10px 5px}.journal-period button[aria-pressed=true]{background:var(--accent);color:var(--on-accent)}
 @media(min-width:760px){main{padding-top:22px}.appbar-in{padding-left:24px;padding-right:24px}}
+@media(max-width:380px){.catalog-tools{grid-template-columns:minmax(0,1fr) 112px;gap:6px}.searchbox input{font-size:13px;padding-left:9px}.catalog-sort select{font-size:12px;padding:7px 6px}}
 @media(max-width:360px){.today-stats{grid-template-columns:1fr}.today-intro h1{font-size:31px}nav.tabs button{font-size:9px}}
 
 
 /* Ajustements visuels finaux : les pastilles restent lisibles dans tous les thèmes. */
-.badge{border-color:currentColor;background:color-mix(in srgb,currentColor 13%,var(--surface));border-radius:999px;font-weight:800;font-variant-numeric:tabular-nums}
-.exp-score{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:38px;padding:6px 10px;border:1.5px solid currentColor;border-radius:13px;background:color-mix(in srgb,currentColor 15%,var(--surface));font:800 16px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.badge{border:1.5px solid currentColor;background:color-mix(in srgb,currentColor 27%,var(--surface));border-radius:10px;font-weight:850;font-variant-numeric:tabular-nums;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 2px 7px color-mix(in srgb,currentColor 16%,transparent)}
+.exp-score{display:inline-flex;align-items:center;justify-content:center;min-width:50px;min-height:40px;padding:7px 11px;border:2px solid currentColor;border-radius:11px;background:color-mix(in srgb,currentColor 27%,var(--surface));font:850 16px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.025em;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 3px 9px color-mix(in srgb,currentColor 18%,transparent)}
 .recipe-controls{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
 .recipe-controls .field{margin:0;min-width:0}
 .recipe-controls .field label{display:block;margin:0 0 4px;font-size:11px;line-height:1.2;color:var(--muted);font-weight:700;letter-spacing:.02em}
@@ -1182,6 +1190,12 @@ function showBackupCopyFallback(txt){
   render(true);
 }
 const app=document.getElementById('app'),bar=document.getElementById('bar');
+const portionFactors=[0.3,0.6,1,1.5],portionStops=[0,33,67,100],portionNames=['Trace','Petite','Normale','Grosse'];
+function portionFactorAt(v){const x=Math.max(0,Math.min(100,+v||0));for(let i=0;i<3;i++){if(x<=portionStops[i+1]){const t=(x-portionStops[i])/(portionStops[i+1]-portionStops[i]);return portionFactors[i]+t*(portionFactors[i+1]-portionFactors[i])}}return portionFactors[3]}
+function portionSliderValue(f,p,g){if(g>0){const factor=Math.max(.3,Math.min(1.5,g/refG(f)));for(let i=0;i<3;i++){if(factor<=portionFactors[i+1])return Math.round(portionStops[i]+(factor-portionFactors[i])/(portionFactors[i+1]-portionFactors[i])*(portionStops[i+1]-portionStops[i]))}return 100}return portionStops[[3,0,1,2].indexOf(p)]??67}
+function portionGrams(f,v){return Math.max(1,Math.min(1500,Math.round(refG(f)*portionFactorAt(v))))}
+function portionNameAt(v){const x=Math.max(0,Math.min(100,+v||0));return portionNames[x<16.5?0:x<50?1:x<83.5?2:3]}
+function portionDisplay(f,p,g){const v=portionSliderValue(f,p,g);return portionNameAt(v)+' · ≈ '+(g>0?g:grOf(f,p))+' g'}
 const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
 
 /* ---------- Vues ---------- */
@@ -1304,10 +1318,9 @@ function calcHTML(){
   if(ui.view==='home')return homeHTML();
   return (ui.msg?'<p class="small" role="status">'+esc(ui.msg)+'</p>':'')+
   '<section class="explore-head"><button class="link" data-act="back">‹ Retour au repas'+(ui.plate.length?' · '+ui.plate.length+' aliment'+(ui.plate.length>1?'s':''):'')+'</button><span class="exp-eyebrow">COMPOSITION · ÉTAPE 1</span><h1>Ajouter des aliments</h1><p>Choisis les ingrédients et leurs portions. Ta sélection reste dans le brouillon tant que tu ne l’enregistres pas dans le journal.</p><div class="explore-count"><span>Catalogue alimentaire</span><strong>'+allFoods().length+' aliments</strong></div></section>'+
-  '<section><div class="searchbox"><input type="search" id="qs" placeholder="Rechercher un aliment…" value="'+esc(ui.qs)+'" aria-label="Rechercher un aliment"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" '+(ui.qs?'':'hidden')+'>✕</button></div>'+
-  '<div class="filter-label" style="margin-top:16px">FILTRER PAR CATÉGORIE</div><div class="chips" role="group" aria-label="Catégories"><button class="chip" data-act="cat" data-i="-1" aria-pressed="'+(ui.cat<0)+'">Tout</button>'+
-  ORD.map(i=>'<button class="chip" data-act="cat" data-i="'+i+'" aria-pressed="'+(ui.cat===i)+'">'+CHIPS[i]+'</button>').join('')+'</div>'+
-  '<div class="field" style="margin-top:12px"><label for="sort-control">Ordre des résultats</label><select id="sort-control" aria-label="Ordre des résultats" data-act="sortSelect">'+SORTS.map(t=>'<option value="'+t[0]+'" '+((ui.sort||'cat')===t[0]?'selected':'')+'>'+t[1]+'</option>').join('')+'</select></div>'+
+   '<section><div class="catalog-tools"><div class="searchbox"><input type="search" id="qs" placeholder="Rechercher un aliment…" value="'+esc(ui.qs)+'" aria-label="Rechercher un aliment"><button class="clear" data-act="clearq" aria-label="Effacer la recherche" '+(ui.qs?'':'hidden')+'>✕</button></div><div class="catalog-sort"><label class="sr-only" for="sort-control">Ordre des résultats</label><select id="sort-control" aria-label="Ordre des résultats" data-act="sortSelect">'+SORTS.map(t=>'<option value="'+t[0]+'" '+((ui.sort||'cat')===t[0]?'selected':'')+'>'+t[1]+'</option>').join('')+'</select></div></div>'+
+   '<div class="filter-label" style="margin-top:10px">FILTRER PAR CATÉGORIE</div><div class="chips" role="group" aria-label="Catégories"><button class="chip" data-act="cat" data-i="-1" aria-pressed="'+(ui.cat<0)+'">Tout</button>'+
+   ORD.map(i=>'<button class="chip" data-act="cat" data-i="'+i+'" aria-pressed="'+(ui.cat===i)+'">'+CHIPS[i]+'</button>').join('')+'</div>'+
   '<div id="list">'+listHTML()+'</div><p style="margin-top:16px"><button class="btn ghost block" data-act="newfood">＋ Ajouter un aliment personnel</button></p>'+
   '<p class="notice">Le score est une estimation générale, pas une prédiction individuelle. Aucun aliment n’est automatiquement interdit : tes observations personnelles priment.</p></section>';
 }
@@ -1328,7 +1341,7 @@ function plateHTML(){
   ${attentionHTML(r.lv)}
   <div class="card"><h3>Aliments</h3>
     ${items.map((it,i)=>`<div class="item"><div class="head"><span>${esc(it.f.n)}</span><button class="x" data-act="rm" data-i="${i}">Retirer</button></div>
-      <div class="portion-control"><div class="portion-current"><span class="small muted">Portion estimée</span><strong id="portion-label-${i}">${it.g?it.g+' g personnalisés':(['Trace','Petite','Normale','Grosse'][[3,0,1,2].indexOf(it.p)]||'Normale')+' · ≈ '+grOf(it.f,it.p)+' g'}</strong></div><input type="range" min="0" max="3" step="1" value="${it.g?2:Math.max(0,[3,0,1,2].indexOf(it.p))}" data-pr="${i}" aria-label="Niveau de portion pour ${esc(it.f.n)}" aria-valuetext="${it.g?it.g+' grammes personnalisés':(['Trace','Petite','Normale','Grosse'][[3,0,1,2].indexOf(it.p)]||'Normale')}"><div class="portion-scale" aria-hidden="true"><span>Trace</span><span>Petite</span><span>Normale</span><span>Grosse</span></div></div>
+      <div class="portion-control"><div class="portion-current"><span class="small muted">Portion estimée</span><strong id="portion-label-${i}">${portionDisplay(it.f,it.p,it.g)}</strong></div><input type="range" min="0" max="100" step="1" value="${portionSliderValue(it.f,it.p,it.g)}" data-pr="${i}" aria-label="Portion progressive pour ${esc(it.f.n)}" aria-valuetext="${portionDisplay(it.f,it.p,it.g)}"><div class="portion-scale" aria-hidden="true"><span>Trace</span><span>Petite</span><span>Normale</span><span>Grosse</span></div></div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><label class="small muted" for="grams-${i}">Ajuster précisément</label><input id="grams-${i}" type="number" inputmode="decimal" min="1" max="1500" step="1" data-gi="${i}" value="${it.g||''}" placeholder="${Math.round(refG(it.f))}" aria-label="Poids en grammes de ${esc(it.f.n)}" style="width:88px"><span class="small muted">g</span></div></div>`).join('')}
     <p style="margin:14px 0 0"><button class="btn ghost block" data-act="back">Ajouter un aliment</button></p>
   </div>
@@ -1617,12 +1630,12 @@ document.querySelector('nav.tabs').addEventListener('click',e=>{
   render();
 });
 
-document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){const g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));ui.plate[i].g=g; if(g>0)ui.plate[i].p=1;savePlate();render(true)}}else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;if(ui.plate[i]){const levels=[3,0,1,2];ui.plate[i].p=levels[Math.max(0,Math.min(3,+t.value||0))];ui.plate[i].g=0;savePlate();render(true)}}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){const g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));ui.plate[i].g=g; if(g>0)ui.plate[i].p=1;savePlate();render(true)}}else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;if(ui.plate[i]){const v=Math.max(0,Math.min(100,+t.value||0)),snap=portionStops.indexOf(v),levels=[3,0,1,2];if(snap>=0){ui.plate[i].p=levels[snap];ui.plate[i].g=0}else{ui.plate[i].p=1;ui.plate[i].g=portionGrams(byId(ui.plate[i].id),v)}savePlate();render(true)}}});
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='qs'){ui.qs=t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML();const cb=document.querySelector('.searchbox .clear');if(cb)cb.hidden=!t.value}
   else if(t.id==='recipe-search'){ui.recipeSearch=t.value;const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML()}
-  else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;const item=ui.plate[i];const label=document.getElementById('portion-label-'+i);if(item&&label){const names=['Trace','Petite','Normale','Grosse'];const grams=[3,0,1,2];const p=grams[Math.max(0,Math.min(3,+t.value||0))];label.textContent=names[Math.max(0,Math.min(3,+t.value||0))]+' · ≈ '+grOf(item.f,p)+' g';t.setAttribute('aria-valuetext',names[Math.max(0,Math.min(3,+t.value||0))])}}
+  else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;const item=ui.plate[i];const label=document.getElementById('portion-label-'+i);if(item&&label){const g=portionGrams(item.f,+t.value);label.textContent=portionDisplay(item.f,1,g);t.setAttribute('aria-valuetext',label.textContent)}}
   else if(t.id==='ress'){ui.ress=+t.value;document.getElementById('ressv').textContent=t.value}
   else if(t.id==='note'){ui.note=t.value}
   else if(t.id==='eress'){ui.eR=+t.value;const v=document.getElementById('eressv');if(v)v.textContent=t.value}
