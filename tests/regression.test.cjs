@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v52/);
+  assert.match(swSource, /mici-score-v53/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1193,7 +1193,7 @@ test('recipe search and sort share one row, search focus has no halo, and score 
   assert.match(html, /\.badge\{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px/);
   assert.match(html, /\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px/);
   assert.match(html, /content:'MICI'/);
-  assert.match(swSource, /const CACHE='mici-score-v52';/);
+  assert.match(swSource, /const CACHE='mici-score-v53';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
