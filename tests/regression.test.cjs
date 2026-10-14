@@ -10,6 +10,7 @@ const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const coreModuleSource = fs.readFileSync(path.join(root, 'score-core.js'), 'utf8');
 const swSource = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+const recipesSource = fs.readFileSync(path.join(root, 'recipes.js'), 'utf8');
 
 function copy(value) {
   return JSON.parse(JSON.stringify(value));
@@ -1201,4 +1202,32 @@ test('last meals are promoted on the home screen and journal with full meal-edit
   assert.match(journal, /Reprendre et modifier/);
   assert.match(journal, /Corriger la note/);
   assert.match(html, /\.recent-meals\{border:1px solid var\(--line\);border-radius:16px/);
+});
+
+
+test('recipe catalogue contains at least 15 documented ideas with resolvable local ingredients', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  assert.ok(Array.isArray(recipes));
+  assert.ok(recipes.length >= 15, 'recipe catalogue should contain more than four entries');
+  assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
+  assert.ok(recipes.every(r => r.title && r.category && r.summary && /^https:\\/\\//.test(r.source)));
+  assert.ok(html.includes('Recettes à tester selon ta tolérance'));
+  const coreSandbox = { window: {} };
+  vm.createContext(coreSandbox);
+  new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(coreSandbox);
+  const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
+  const norm = value => String(value || '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const recipe of recipes) {
+    assert.ok(recipe.ingredients.length >= 2, 'recipe needs ingredients: ' + recipe.title);
+    assert.ok(recipe.steps.length >= 2, 'recipe needs preparation steps: ' + recipe.title);
+    for (const ingredient of recipe.ingredients) {
+      const found = foods.some(food => ingredient.names.some(name =>
+        norm(food.n) === norm(name) || norm(food.n).startsWith(norm(name) + ' ')
+      ));
+      assert.ok(found, 'unresolvable ingredient in ' + recipe.title + ': ' + ingredient.names[0]);
+    }
+  }
 });
