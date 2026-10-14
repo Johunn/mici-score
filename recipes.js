@@ -1539,15 +1539,19 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "8 cuillères à soupe de fromage aux fines herbes light",
-      "400 à 600 g de filet de saumon",
-      "12 à 16 cuillères à soupe de chapelure",
-      "Sel et poivre",
-      "La source mentionne aussi un accompagnement de carottes ; sa liste détaillée n’est pas entièrement transcrite ici."
+      "Poisson : 8 c. à soupe de fromage aux fines herbes light",
+      "Poisson : 400 à 600 g de filet de saumon",
+      "Poisson : 12 à 16 c. à soupe de chapelure",
+      "Poisson : sel et poivre",
+      "Carottes : 600 g de carottes",
+      "Carottes : 1 oignon (facultatif si mal toléré)",
+      "Carottes : 2 c. à café de beurre liquide (ou beurre de soja)",
+      "Carottes : 1 cube de bouillon de légumes maigre",
+      "Carottes : sel et poivre"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -3106,11 +3110,17 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La fiche source doit être vérifiée à nouveau : la page ouverte ne permet pas de garantir ici la transcription complète des ingrédients et quantités."
+      "2 œufs durs",
+      "1 c. à soupe de mayonnaise light",
+      "1 c. à soupe de yaourt (sans lactose ou soja possible)",
+      "Persil finement haché",
+      "Poivre et sel",
+      "4 wraps",
+      "Roquette"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
