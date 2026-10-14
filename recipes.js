@@ -379,9 +379,9 @@ window.MICI_RECIPES = [
     "title": "Tartines à la salade d’œufs (adaptées)",
     "category": "Petit-déjeuner",
     "servings": 1,
-    "summary": "Adaptation simplifiée d’une recette de bagel à la salade d’œufs publiée par l’association belge.",
+    "summary": "Adaptation simplifiée en tartines inspirée de la recette source de bagels. La préparation MICI Score diffère de l’originale ; consulter la source pour la recette publiée.",
     "source": "https://www.crohn-larectocoliteetnous.be/bagels-de-paques-avec-fromage-cremeux-et-salade-doeufs/",
-    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
+    "sourceLabel": "Inspiration — recette originale de bagels avec fromage crémeux et salade d’œufs, adaptée en tartines par MICI Score",
     "ingredients": [
       {
         "names": [
