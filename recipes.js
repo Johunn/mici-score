@@ -1009,7 +1009,9 @@ window.MICI_RECIPES = [
       "Cuire le chou-fleur jusqu’à ce qu’il soit très tendre.",
       "Mixer avec le lait jusqu’à obtenir la texture souhaitée.",
       "Ajouter le saumon fumé en petits morceaux et réchauffer doucement."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "salade-pates-mediterr",
@@ -1043,7 +1045,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "chicons-celeri-rave-saumon",
@@ -1077,7 +1081,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "potage-chicons",
@@ -1111,7 +1117,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "tartinade-carottes",
@@ -1145,7 +1153,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "gateau-carottes",
@@ -1179,6 +1189,21 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "100 g de farine",
+      "100 g de carottes",
+      "1 banane",
+      "1 œuf",
+      "5 dattes",
+      "50 ml de lait écrémé",
+      "1 c. à café de cannelle",
+      "1 c. à café de mélange d’épices pour pain d’épice",
+      "1 c. à café de levure chimique",
+      "Quelques gouttes d’extrait de vanille",
+      "Une pincée de sel"
     ]
   },
   {
@@ -1213,7 +1238,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "nouilles-riz-legumes",
@@ -1247,6 +1274,21 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "1 courgette",
+      "2 carottes",
+      "Jus d’un demi-citron vert",
+      "2 cm de gingembre",
+      "200 g de nouilles de riz",
+      "200 ml de bouillon de poulet (frais ou préparé avec un demi-cube)",
+      "200 g de lanières de poulet cuites",
+      "2 c. à soupe de ketchup",
+      "3 c. à soupe d’huile d’olive",
+      "2 c. à soupe de sauce soja",
+      "Poivre et sel"
     ]
   },
   {
@@ -1281,7 +1323,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "vive-chou-fleur-oeuf",
@@ -1315,7 +1359,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "plat-four-digeste",
@@ -1349,7 +1395,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "salade-poulet-curry",
@@ -1383,7 +1431,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "saumon-carottes-four",
@@ -1417,7 +1467,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "soupe-carottes-gingembre",
@@ -1451,7 +1503,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "diplomate-framboises",
@@ -1485,7 +1539,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "mousse-cafe-lait",
@@ -1519,6 +1575,16 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "250 g de fromage blanc maigre",
+      "3 c. à soupe de lait écrémé",
+      "7 g de gélatine (ou feuilles de gélatine)",
+      "50 g de sucre",
+      "1 blanc d’œuf",
+      "10 cl de café"
     ]
   },
   {
@@ -1553,6 +1619,23 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "400 g de spaghettis",
+      "2 oignons",
+      "2 c. à soupe d’huile d’olive",
+      "500 g de filet américain (ou viande hachée mélangée)",
+      "3 gousses d’ail",
+      "1 grand verre de vin rouge",
+      "7,5 dl de coulis de tomates",
+      "2 carottes",
+      "2 branches de céleri",
+      "3 feuilles de laurier et 3 branches de thym frais",
+      "Sel et poivre",
+      "Quelques feuilles de basilic",
+      "Quelques tomates cerises"
     ]
   },
   {
@@ -1587,7 +1670,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "gateau-compote-pommes",
@@ -1621,6 +1706,14 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "1 œuf",
+      "60 g de sucre",
+      "60 g de farine fermentante (ou 60 g de farine classique + 2 g de levure chimique)",
+      "60 g de compote de pommes fine sans sucre"
     ]
   },
   {
@@ -1655,7 +1748,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "hachis-shepherd-pie",
@@ -1689,7 +1784,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "biscuits-dattes-amandes",
@@ -1723,7 +1820,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "dinde-chili-patate-douce",
@@ -1757,7 +1856,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "soupe-potiron-coco",
@@ -1791,7 +1892,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "cake-banane-renverse",
@@ -1825,7 +1928,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "chips-legumes-four",
@@ -1853,7 +1958,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "wrap-festif-saumon",
@@ -1887,7 +1994,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "tortilla-espagnole",
@@ -1915,7 +2024,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "courgette-farcie",
@@ -1949,6 +2060,17 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "1 courgette",
+      "300 g d’américain nature (bœuf haché maigre)",
+      "Sel et poivre",
+      "Herbes de Provence",
+      "Un peu de fromage râpé allégé",
+      "Optionnel : 1 oignon",
+      "Matière grasse pour la cuisson (1 c. à soupe indiquée dans la préparation)"
     ]
   },
   {
@@ -1977,7 +2099,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "crepes-avoine-fraises",
@@ -2011,7 +2135,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "apero-light",
@@ -2045,7 +2171,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "tiramisu-leger",
@@ -2079,7 +2207,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "macaroni-potiron",
@@ -2113,7 +2243,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "croque-thon",
@@ -2147,7 +2279,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "bagel-courgettes",
@@ -2175,7 +2309,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "pates-saumon",
@@ -2209,7 +2345,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "mousse-chocolat-legere",
@@ -2243,7 +2381,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "roulades-poulet-epinards",
@@ -2277,7 +2417,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "poulet-chicons-butternut",
@@ -2311,7 +2453,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "pates-fromage-legere",
@@ -2345,7 +2489,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "courgette-thon",
@@ -2379,7 +2525,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "mug-cake-avoine",
@@ -2413,7 +2561,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "pizza-chou-fleur",
@@ -2447,7 +2597,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "beignets-pommes",
@@ -2481,7 +2633,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "crumble-pommes",
@@ -2515,6 +2669,17 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "2 pommes",
+      "1 c. à café de cannelle",
+      "70 g de flocons d’avoine",
+      "60 g de farine d’amande",
+      "4 c. à soupe de sirop d’érable",
+      "4 c. à soupe de beurre ou d’huile de coco",
+      "Une pincée de sel"
     ]
   },
   {
@@ -2543,7 +2708,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "biscuits-avoine",
@@ -2577,7 +2744,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "eau-fruitee",
@@ -2611,7 +2780,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "smoothie-fruits-rouges-2",
@@ -2645,7 +2816,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients, quantités et consignes d’origine.",
       "Préparer les ingrédients proposés ici, en ajustant les textures et quantités à sa tolérance individuelle.",
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "mug-cake-pommes",
@@ -2673,7 +2846,9 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour la recette et les quantités originales.",
       "Préparer les ingrédients de cette adaptation simplifiée.",
       "Cuire jusqu’à ce que la préparation soit prise, en vérifiant la cuisson."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   },
   {
     "id": "crumble-pommes-myrtilles",
@@ -2707,6 +2882,8 @@ window.MICI_RECIPES = [
       "Consulter la fiche source pour les ingrédients et quantités originales.",
       "Préparer les fruits et la garniture selon la fiche source.",
       "Cuire au four jusqu’à ce que le crumble soit cuit."
-    ]
+    ],
+    "scoreDisabled": true,
+    "sourceIngredientsVerified": false
   }
 ];
