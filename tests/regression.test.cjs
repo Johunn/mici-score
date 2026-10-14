@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v6.0';"));
+  assert.ok(html.includes("const APP_V='v6.1';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -342,7 +342,7 @@ test('backup import discards unknown journal fields', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v6.0';"));
+  assert.ok(html.includes("const APP_V='v6.1';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -1126,7 +1126,7 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
   assert.match(html, /data-act="repeatEntry"/);
   assert.match(html, /const ui=\{tab:'calc',view:'home'/);
   assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
-  assert.ok(html.includes("const APP_V='v6.0';"));
+  assert.ok(html.includes("const APP_V='v6.1';"));
 });
 
 
@@ -1159,4 +1159,22 @@ test('v6 provides four task-oriented navigation items and direct settings access
   assert.match(html, /data-tab="catalogue"/);
   assert.match(html, /data-act="openProfile" aria-label="Paramètres et données"/);
   assert.match(html, /target==='catalogue'[\s\S]*?ui.view='list'/);
+});
+
+
+test('recipe catalogue loads locally and uses the existing scoring and plate flow', () => {
+  assert.ok(html.includes('<script src="recipes.js"></script>'));
+  assert.match(html, /function recipesHTML\(\)/);
+  assert.match(html, /scoreOf\(scoreItems,ui\)/);
+  assert.match(html, /data-act="addRecipe"/);
+  assert.match(html, /mici-score-v42/);
+  assert.match(swSource, /'recipes\.js'/);
+  assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
+});
+
+test('search focus has a single explicit focus-visible treatment and portion steps remain accessible', () => {
+  assert.match(html, /\.searchbox input:focus-visible\{outline:none;/);
+  assert.match(html, /\.item \.seg button\[aria-pressed=true\]/);
+  assert.match(html, /data-act="pp" data-i=/);
+  assert.match(html, /aria-pressed="\$\{!it\.g&&it\.p===k\}"/);
 });
