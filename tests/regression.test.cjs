@@ -57,6 +57,24 @@ test('app shell loads the scoring module before its inline code', () => {
 });
 
 
+test('theme migration defaults new and legacy-auto preferences to AMOLED while preserving explicit choices', () => {
+  const normSource = extractBetween(
+    html,
+    'const JOURNAL_FIELDS=',
+    '\\n/* Validation stricte des sauvegardes importées'
+  );
+  const sandbox = {};
+  vm.createContext(sandbox);
+  new vm.Script(normSource + '\\nglobalThis.normalizePrefs = norm;').runInContext(sandbox);
+
+  assert.equal(sandbox.normalizePrefs({}).theme, 'amoled');
+  assert.equal(sandbox.normalizePrefs({ theme: 'system' }).theme, 'amoled');
+  assert.equal(sandbox.normalizePrefs({ theme: 'dark', ver: 5 }).theme, 'dark');
+  assert.equal(sandbox.normalizePrefs({ theme: 'micinuit', ver: 5 }).theme, 'micinuit');
+  assert.equal(sandbox.normalizePrefs({ theme: 'amoled', ver: 5 }).theme, 'amoled');
+});
+
+
 test('settings and journal note fields have accessible labels and focus support', () => {
   assert.ok(html.includes('<label for="cid">Identifiant client Google</label><input type="text" id="cid"'));
   assert.ok(/<label for="enote">Note personnelle<\/label><textarea id="enote"/.test(html));
