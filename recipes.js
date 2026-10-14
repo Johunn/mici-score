@@ -3105,8 +3105,9 @@ window.MICI_RECIPES = [
     "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "Variante concombre : ½ concombre, une poignée de feuilles de menthe fraîche, 1 l d’eau plate ou pétillante.",
-      "Variantes framboise et agrumes : voir les variantes détaillées sur la page source."
+      "Variante concombre et menthe : ½ concombre, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
+      "Variante framboise et menthe : 100 g de framboises fraîches ou surgelées, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
+      "Variante orange ou citron : 1 orange ou 1 citron, de préférence non traité et bio, et 1 litre d’eau plate ou pétillante."
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false
