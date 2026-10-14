@@ -2429,11 +2429,14 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La source regroupe plusieurs petites recettes ; chaque préparation doit être séparée si elle est reproduite dans le catalogue."
+      "Œufs farcis : 4 œufs, 2 c. à soupe de yaourt ou fromage frais, poivre et sel, 1 c. à café de persil haché.",
+      "Mini-pizzas de wraps : 6 wraps, quelques cuillères à soupe de passata, ½ courgette, quelques cuillères à soupe de fromage râpé light, 100 g de julienne de jambon, herbes de Provence, poivre et sel.",
+      "Grissini au filet de Saxe : grissini et filet de Saxe (quantités non précisées).",
+      "Mousse de truite fumée : 200 g de truite fumée, 5 c. à soupe de crème de soja légère, 1 c. à soupe de persil, poivre et sel."
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
