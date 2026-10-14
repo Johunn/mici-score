@@ -1126,12 +1126,12 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
   assert.match(html, /data-act="repeatEntry"/);
   assert.match(html, /const ui=\{tab:'calc',view:'home'/);
   assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
-  assert.match(html, /APP_V='v5\.0'/);
+  assert.match(html, /APP_V='v5\.1'/);
 });
 
 
 test('v6 merges the personal dashboard with the fast task-oriented entry point', () => {
-  assert.match(html, /Moins de recherche\\\.<br>Plus de repères\\\./);
+  assert.ok(html.includes('Moins de recherche.<br>Plus de repères.'));
   assert.match(html, /data-act=\"startCompose\">＋ Composer un repas/);
   assert.match(html, /Comprendre mon historique/);
   assert.match(html, /Ressenti moyen · 7 jours/);
