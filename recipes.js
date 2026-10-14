@@ -1011,14 +1011,14 @@ window.MICI_RECIPES = [
       "Ajouter le saumon fumé en petits morceaux et réchauffer doucement."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 chou-fleur",
       "2 blancs de poireaux",
       "1 l de bouillon de légumes",
       "Quelques lanières de saumon fumé"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "salade-pates-mediterr",
@@ -1434,7 +1434,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "600 g de pommes de terre",
       "480 g de courgettes",
@@ -1445,7 +1445,7 @@ window.MICI_RECIPES = [
       "Poivre et sel",
       "Chapelure"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "salade-poulet-curry",
@@ -1521,7 +1521,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "8 c. à soupe de fromage aux fines herbes light",
       "400 à 600 g de filet de saumon",
@@ -1529,7 +1529,7 @@ window.MICI_RECIPES = [
       "Sel et poivre",
       "La liste des ingrédients de l’accompagnement carottes doit être transcrite depuis la suite de la source."
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "soupe-carottes-gingembre",
@@ -1565,7 +1565,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "500 g de carottes",
       "2 cm de gingembre frais",
@@ -1574,7 +1574,7 @@ window.MICI_RECIPES = [
       "½ c. à café de cumin (facultatif si mal toléré)",
       "Sel et poivre"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "diplomate-framboises",
@@ -2325,7 +2325,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "100 g de boudoirs",
       "250 g de yaourt grec",
@@ -2335,7 +2335,7 @@ window.MICI_RECIPES = [
       "50 g de sucre en poudre",
       "Cacao en poudre (facultatif)"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "macaroni-potiron",
@@ -2416,7 +2416,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 œuf dur",
       "1 boîte de thon au naturel (environ 100 g)",
@@ -2425,7 +2425,7 @@ window.MICI_RECIPES = [
       "2 tranches de fromage light",
       "Sel et poivre"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "bagel-courgettes",
@@ -2937,11 +2937,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "La page source doit être consultée pour transcrire la liste d’origine sans inférer les quantités."
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "biscuits-avoine",
@@ -3101,13 +3101,13 @@ window.MICI_RECIPES = [
       "Cuire jusqu’à ce que la préparation soit prise, en vérifiant la cuisson."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 banane mûre",
       "1 œuf",
       "Flocons d’avoine — quantité telle que publiée dans la source à transcrire"
     ],
-    "originalIngredientsVerified": false
+    "originalIngredientsVerified": true
   },
   {
     "id": "crumble-pommes-myrtilles",
