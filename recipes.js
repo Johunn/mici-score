@@ -664,5 +664,318 @@ window.MICI_RECIPES = [
       "Ajouter la courgette et la tomate cuites puis verser sur la base.",
       "Cuire au four jusqu’à ce que la garniture soit prise. Cette adaptation simplifie la pâte de la recette source."
     ]
+  },
+  {
+    "id": "pates-chicons-saumon",
+    "title": "Pâtes aux chicons et au saumon fumé",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Adaptation simplifiée d’une recette de l’association belge ; le chicon et le saumon fumé ne conviennent pas à toutes les personnes.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-pates-chicons-saumon/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée par MICI Score)",
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Endive cuite"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Saumon fumé"
+        ],
+        "grams": 100
+      }
+    ],
+    "steps": [
+      "Cuire les pâtes selon les indications.",
+      "Faire cuire les chicons jusqu’à ce qu’ils soient tendres.",
+      "Ajouter le saumon fumé en lanières et réchauffer brièvement, puis mélanger aux pâtes. La sauce de la recette originale n’est pas reprise dans cette version simplifiée."
+    ]
+  },
+  {
+    "id": "pates-thon-courgette-fromage",
+    "title": "Pâtes au thon, courgette et fromage léger",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Adaptation simplifiée d’une recette publiée par l’association belge ; le lait et le fromage sont à adapter selon la tolérance.",
+    "source": "https://www.crohn-larectocoliteetnous.be/pates-sauce-legere-fromage/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée par MICI Score)",
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Thon en boîte au naturel"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Lait demi-écrémé (verre 25 cl)"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Fromage râpé"
+        ],
+        "grams": 20
+      }
+    ],
+    "steps": [
+      "Cuire les pâtes.",
+      "Faire cuire la courgette en petits dés jusqu’à ce qu’elle soit tendre, puis ajouter le thon égoutté.",
+      "Faire chauffer doucement le lait et incorporer le fromage râpé pour former une sauce légère.",
+      "Mélanger les pâtes, la garniture et la sauce. Cette version réduit la recette originale et adapte les quantités."
+    ]
+  },
+  {
+    "id": "riz-thon-carottes",
+    "title": "Riz au thon et carottes fondantes",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Une assiette simple à base de riz, de poisson en conserve et de légumes bien cuits.",
+    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette composée par MICI Score, pas une recette source exacte)",
+    "ingredients": [
+      {
+        "names": [
+          "Riz blanc"
+        ],
+        "grams": 160
+      },
+      {
+        "names": [
+          "Thon en boîte au naturel"
+        ],
+        "grams": 90
+      },
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Cuire le riz jusqu’à la texture souhaitée.",
+      "Cuire les carottes jusqu’à ce qu’elles soient tendres.",
+      "Égoutter le thon, puis mélanger avec le riz et les carottes.",
+      "Ajouter un filet d’huile d’olive si souhaité."
+    ]
+  },
+  {
+    "id": "polenta-cabillaud-courgette",
+    "title": "Polenta souple, cabillaud et courgette",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Une alternative au riz ou aux pâtes, avec du poisson bien cuit et un légume tendre.",
+    "source": "https://www.ibdcentrebc.ca/recipes/",
+    "sourceLabel": "Inspiration générale — IBD Centre of BC (recette composée par MICI Score, pas une recette source exacte)",
+    "ingredients": [
+      {
+        "names": [
+          "Polenta"
+        ],
+        "grams": 200
+      },
+      {
+        "names": [
+          "Cabillaud ou colin vapeur"
+        ],
+        "grams": 130
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Cuire la polenta jusqu’à obtenir une texture souple.",
+      "Cuire le poisson à cœur à la vapeur ou au four.",
+      "Faire cuire la courgette jusqu’à ce qu’elle soit fondante.",
+      "Servir ensemble et ajouter un filet d’huile si souhaité."
+    ]
+  },
+  {
+    "id": "omelette-epinards-pain",
+    "title": "Œuf, épinards fondants et pain de mie",
+    "category": "Repas rapide",
+    "servings": 1,
+    "summary": "Une préparation rapide avec des épinards bien cuits ; le pain et la cuisson sont à ajuster selon les besoins individuels.",
+    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette composée par MICI Score, pas une recette source exacte)",
+    "ingredients": [
+      {
+        "names": [
+          "Œuf dur"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Épinards cuits"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Pain de mie nature"
+        ],
+        "grams": 60
+      }
+    ],
+    "steps": [
+      "Cuire les œufs durs puis les couper en morceaux.",
+      "Réchauffer les épinards cuits et bien les égoutter.",
+      "Servir avec le pain de mie. Pour une version chaude, écraser les œufs et les mélanger aux épinards."
+    ]
+  },
+  {
+    "id": "pdt-saumon-epinards",
+    "title": "Pommes de terre, saumon et épinards cuits",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Un repas avec féculent, poisson et légumes cuits. La portion d’épinards peut être adaptée à la tolérance.",
+    "source": "https://www.ibdcentrebc.ca/recipes/",
+    "sourceLabel": "Inspiration générale — IBD Centre of BC (recette composée par MICI Score, pas une recette source exacte)",
+    "ingredients": [
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 200
+      },
+      {
+        "names": [
+          "Saumon cuit"
+        ],
+        "grams": 120
+      },
+      {
+        "names": [
+          "Épinards cuits"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 5
+      }
+    ],
+    "steps": [
+      "Cuire les pommes de terre sans peau jusqu’à ce qu’elles soient tendres.",
+      "Cuire le saumon à cœur.",
+      "Faire cuire les épinards jusqu’à ce qu’ils soient tendres et les égoutter.",
+      "Servir ensemble avec un filet d’huile si souhaité."
+    ]
+  },
+  {
+    "id": "semoule-dinde-courgette",
+    "title": "Semoule, dinde et courgette fondante",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Une variante de repas complet avec de la dinde cuite à cœur et une courgette bien tendre.",
+    "source": "https://www.crohn-larectocoliteetnous.be/theme/nutrition-recettes/",
+    "sourceLabel": "Inspiration nutritionnelle — Crohn / La rectocolite et nous (recette composée par MICI Score, pas une recette source exacte)",
+    "ingredients": [
+      {
+        "names": [
+          "Semoule de couscous"
+        ],
+        "grams": 160
+      },
+      {
+        "names": [
+          "Escalope de dinde"
+        ],
+        "grams": 110
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      }
+    ],
+    "steps": [
+      "Préparer la semoule.",
+      "Cuire la dinde à cœur puis la couper en morceaux.",
+      "Faire cuire la courgette jusqu’à ce qu’elle soit tendre.",
+      "Servir la dinde et la courgette sur la semoule."
+    ]
+  },
+  {
+    "id": "tartines-thon-fromage-concombre",
+    "title": "Tartines au thon, fromage frais et concombre",
+    "category": "Repas rapide",
+    "servings": 1,
+    "summary": "Des tartines sans cuisson avec du thon au naturel ; le concombre cru peut être remplacé selon la tolérance.",
+    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
+    "sourceLabel": "Inspiration générale — Crohn’s & Colitis Foundation (recette composée par MICI Score, pas une recette source exacte)",
+    "ingredients": [
+      {
+        "names": [
+          "Pain de mie nature"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Thon en boîte au naturel"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Fromage à tartiner (type Philadelphia)"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Concombre"
+        ],
+        "grams": 30
+      }
+    ],
+    "steps": [
+      "Égoutter le thon.",
+      "Mélanger le thon avec le fromage à tartiner.",
+      "Étaler sur le pain de mie et ajouter quelques fines tranches de concombre si elles sont bien tolérées."
+    ]
   }
 ];
