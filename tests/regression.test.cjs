@@ -1191,7 +1191,7 @@ test('recipe controls are compact and score badges have a distinct high-contrast
   assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{height:42px/);
   assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
   assert.match(html, /background:color-mix\(in srgb,currentColor 15%,var\(--surface\)\)/);
-  assert.match(html, /const CACHE='mici-score-v49';/);
+  assert.match(swSource, /const CACHE='mici-score-v49';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
