@@ -543,6 +543,7 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
   <button data-tab="compose"><span class="tab-icon" aria-hidden="true">＋</span><span>Composer</span></button>
   <button data-tab="journal"><span class="tab-icon" aria-hidden="true">▤</span><span>Journal</span></button>
   <button data-tab="catalogue"><span class="tab-icon" aria-hidden="true">◫</span><span>Catalogue</span></button>
+  <button data-tab="recipes"><span class="tab-icon" aria-hidden="true">▧</span><span>Recettes</span></button>
 </nav>
 
 <script src="score-core.js"></script>
@@ -1559,7 +1560,7 @@ function render(keep){
   const k=navKey();
   if(k!==lastKey){lastKey=k;if(!fromPop){try{history.pushState({tab:ui.tab,view:ui.view,sel:ui.sel},'');navDepth++}catch(e){}}}
   const y=window.scrollY;
-  document.querySelectorAll('nav.tabs button').forEach(b=>{const active=b.dataset.tab===ui.tab||(b.dataset.tab==='catalogue'&&ui.tab==='compose'&&ui.view==='list');if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+  document.querySelectorAll('nav.tabs button').forEach(b=>{const active=b.dataset.tab===ui.tab||(b.dataset.tab==='catalogue'&&ui.tab==='compose'&&ui.view==='list')||(b.dataset.tab==='recipes'&&ui.tab==='compose'&&ui.view==='recipes');if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
   app.innerHTML=(ui.tab==='calc'||ui.tab==='compose')?calcHTML():ui.tab==='journal'?journalHTML():ui.tab==='sources'?sourcesHTML():profilHTML();
   updateBar();refreshGbar();
   window.scrollTo(0,keep?y:0);
@@ -1569,6 +1570,7 @@ function render(keep){
 document.querySelector('nav.tabs').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   const target=b.dataset.tab;ui.msg='';ui.resetArmed=false;ui.delArmed=false;
+  if(target==='recipes'){ui.tab='compose';ui.view='recipes';ui.recipeId=null;render();return}
   if(target==='catalogue'){ui.tab='compose';ui.view='list';ui.qs='';ui.cat=-1;ui.page=0}
   else {ui.tab=target;if(ui.tab==='calc')ui.view='home';else if(ui.tab==='compose')ui.view='plate';else if(ui.tab==='journal')ui.editId=null}
   render();
