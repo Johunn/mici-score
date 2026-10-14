@@ -573,6 +573,25 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 .portion-current strong{font:700 14px var(--f-display);color:var(--accent)}
 @media(max-width:360px){.recipe-controls{gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:13px;padding:7px 8px}}
 
+
+/* Correctifs explicites : recherche compacte, focus sans halo et pastilles de score repensées. */
+.recipe-controls{grid-template-columns:minmax(0,1fr) 132px!important;gap:8px}
+.recipe-controls .recipe-query{grid-column:1!important;grid-row:1!important}
+.recipe-controls .field:nth-child(2){grid-column:1/-1!important;grid-row:2!important}
+.recipe-controls .field:nth-child(3){grid-column:2!important;grid-row:1!important}
+.recipe-controls input[type=search]{min-width:0}
+#app .searchbox:focus-within{outline:none!important;box-shadow:none!important}
+#app .searchbox input[type=search]:focus,
+#app .searchbox input[type=search]:focus-visible{border:1px solid var(--line)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
+#app .recipe-controls input[type=search]:focus,
+#app .recipe-controls input[type=search]:focus-visible{border:1px solid var(--line)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important}
+.badge{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px;min-height:46px;padding:0;border:2px solid currentColor;border-radius:50%!important;background:radial-gradient(circle at 32% 22%,color-mix(in srgb,currentColor 24%,var(--surface)),var(--surface) 72%);font:900 15px/1 var(--f-display);font-variant-numeric:tabular-nums;box-shadow:0 0 0 3px color-mix(in srgb,currentColor 12%,transparent),inset 0 0 0 2px var(--surface)!important}
+.badge:before{content:none!important}
+.exp-score{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px;min-height:58px;padding:0 0 9px;border:2px solid currentColor;border-radius:50%!important;background:radial-gradient(circle at 30% 22%,color-mix(in srgb,currentColor 25%,var(--surface)),var(--surface) 74%);font:900 19px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.04em;box-shadow:0 0 0 4px color-mix(in srgb,currentColor 10%,transparent),inset 0 0 0 2px var(--surface)!important}
+.exp-score:before{content:'';position:absolute;inset:4px;border:1px dashed color-mix(in srgb,currentColor 52%,transparent);border-radius:50%;background:none}
+.exp-score:after{content:'MICI';position:absolute;bottom:7px;font:900 7px/1 var(--f-body);letter-spacing:.15em;opacity:.85}
+@media(max-width:380px){.recipe-controls{grid-template-columns:minmax(0,1fr) 108px!important;gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:12px;padding:7px 7px}}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
