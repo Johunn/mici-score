@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v46';/);
+  assert.match(swSource, /const CACHE='mici-score-v47';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v46/);
+  assert.match(swSource, /mici-score-v47/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1233,4 +1233,12 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
       assert.ok(found, 'unresolvable ingredient in ' + recipe.title + ': ' + ingredient.names[0]);
     }
   }
+});
+
+test('recipes have a dedicated main-navigation entry and open the recipe catalogue', () => {
+  assert.match(html, /<button data-tab="recipes"><span class="tab-icon" aria-hidden="true">▧<\/span><span>Recettes<\/span><\/button>/);
+  assert.match(html, /if\(target==='recipes'\)\{ui\.tab='compose';ui\.view='recipes';ui\.recipeId=null;render\(\);return\}/);
+  assert.match(html, /b\.dataset\.tab==='recipes'&&ui\.tab==='compose'&&ui\.view==='recipes'/);
+  assert.match(html, /function recipesHTML\(\)/);
+  assert.match(recipesSource, /"id":/);
 });
