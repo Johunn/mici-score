@@ -1247,6 +1247,7 @@ function recipesHTML(){
 }
 
 function calcHTML(){
+  if(ui.view==='recipes')return recipesHTML();
   if(ui.view==='add')return addHTML();
   if(ui.view==='detail'&&ui.sel)return detailHTML();
   if(ui.view==='plate')return plateHTML();
