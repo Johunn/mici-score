@@ -3065,7 +3065,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 pommes",
       "1 c. à café de cannelle",
@@ -3075,7 +3075,7 @@ window.MICI_RECIPES = [
       "4 c. à soupe de beurre ou d’huile de coco",
       "Une pincée de sel"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
