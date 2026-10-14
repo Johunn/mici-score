@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v53';/);
+  assert.match(swSource, /const CACHE='mici-score-v54';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v53/);
+  assert.match(swSource, /mici-score-v54/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1193,7 +1193,7 @@ test('recipe search and sort share one row, search focus has no halo, and score 
   assert.match(html, /\.badge\{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px/);
   assert.match(html, /\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px/);
   assert.match(html, /content:'MICI'/);
-  assert.match(swSource, /const CACHE='mici-score-v53';/);
+  assert.match(swSource, /const CACHE='mici-score-v54';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
@@ -1270,6 +1270,8 @@ test('recipe catalogue supports robust ingredient search, both MICI score sort d
   assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
   assert.match(html, /\.badge:before,\.exp-score:before\{content:none!important\}/);
   assert.match(html, /recipe-score-pill[^>]*>\$\{fmt\(score\)\}<\/span>/);
+  assert.match(html, /\.recipe-score-pill\{min-width:58px;min-height:48px;padding:7px 12px;font-size:23px!important;font-weight:900/);
+  assert.match(html, /\.badge,\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:56px;min-height:46px;padding:7px 12px/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
