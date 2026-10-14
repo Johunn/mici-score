@@ -1189,7 +1189,7 @@ test('catalog search and sort share a compact row and portions are continuously 
 test('recipe controls are compact and score badges have a distinct high-contrast treatment', () => {
   assert.match(html, /class="recipe-controls"/);
   assert.match(html, /class="field recipe-query"/);
-  assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{height:42px/);
+  assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{width:100%;height:42px/);
   assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
   assert.match(html, /\.exp-score:after\{content:'SCORE'/);
   assert.match(html, /border-radius:16px 16px 16px 5px/);
