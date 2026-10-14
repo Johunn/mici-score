@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v52';/);
+  assert.match(swSource, /const CACHE='mici-score-v53';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1258,15 +1258,18 @@ test('recipes have a dedicated main-navigation entry and open the recipe catalog
   assert.match(recipesSource, /"id":/);
 });
 
-test('recipe catalogue supports ingredient search, category filtering, sorting, and preserves focus while typing', () => {
+test('recipe catalogue supports robust ingredient search, both MICI score sort directions, and matching search focus', () => {
   assert.match(html, /id="recipe-search"/);
   assert.match(html, /id="recipe-category"/);
   assert.match(html, /id="recipe-sort"/);
   assert.match(html, /function recipeResultsHTML\(\)/);
-  assert.match(html, /norm\(\[r\.title,r\.summary,r\.category,\.\.\.r\.ingredients\.flatMap\(i=>i\.names\)\]\.join\(' '\)\)\.includes\(q\)/);
+  assert.match(html, /terms\.every\(term=>searchable\.includes\(term\)\)/);
+  assert.match(html, /value="score-asc"[^>]*>Score MICI ↑/);
+  assert.match(html, /ui\.recipeSort==='score-asc'/);
   assert.match(html, /t\.id==='recipe-search'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
-  assert.match(html, /t\.id==='recipe-category'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
-  assert.match(html, /t\.id==='recipe-sort'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
+  assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
+  assert.match(html, /\.badge:before,\.exp-score:before\{content:none!important\}/);
+  assert.match(html, /recipe-score-pill[^>]*>\$\{fmt\(score\)\}<\/span>/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
