@@ -77,7 +77,7 @@ window.MICI_RECIPES = [
   {
     "id": "veloute-carotte-pdt",
     "title": "Chicons rôtis au saumon fumé (adaptés)",
-    "category": "Soupe",
+    "category": "Repas complet",
     "servings": 1,
     "summary": "Adaptation simplifiée de la recette publiée. Consulter la source pour les ingrédients et instructions originaux.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-chicons-rotis-au-saumon-fume/",
