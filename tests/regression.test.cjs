@@ -1187,12 +1187,11 @@ test('catalog search and sort share a compact row and portions are continuously 
 });
 
 test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
-  assert.match(html, /\.recipe-controls\{grid-template-columns:minmax\(0,1fr\) 132px!important/);
-  assert.match(html, /\.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important\}/);
-  assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:1px solid var\(--line\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
-  assert.match(html, /\.badge\{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px/);
-  assert.match(html, /\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px/);
-  assert.match(html, /content:'MICI'/);
+  assert.match(html, /#app \.recipe-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 132px!important/);
+  assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
+  assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
+  assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
+  assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
   assert.match(swSource, /const CACHE='mici-score-v55';/);
 });
 
