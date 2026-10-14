@@ -1011,7 +1011,11 @@ window.MICI_RECIPES = [
       "Ajouter le saumon fumé en petits morceaux et réchauffer doucement."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Quantités d’origine non transcrites : la source doit être consultée."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "salade-pates-mediterr",
@@ -1047,7 +1051,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "chicons-celeri-rave-saumon",
@@ -1083,7 +1091,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "potage-chicons",
@@ -1119,7 +1131,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "tartinade-carottes",
@@ -1155,7 +1171,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "gateau-carottes",
@@ -1204,7 +1224,8 @@ window.MICI_RECIPES = [
       "1 c. à café de levure chimique",
       "Quelques gouttes d’extrait de vanille",
       "Une pincée de sel"
-    ]
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "potage-panais-dukkah",
@@ -1240,7 +1261,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; les quantités de la fiche individuelle restent à transcrire."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "nouilles-riz-legumes",
@@ -1280,16 +1305,17 @@ window.MICI_RECIPES = [
     "originalIngredients": [
       "1 courgette",
       "2 carottes",
-      "Jus d’un demi-citron vert",
+      "Le jus d’un demi-citron vert",
       "2 cm de gingembre",
       "200 g de nouilles de riz",
-      "200 ml de bouillon de poulet (frais ou préparé avec un demi-cube)",
+      "200 ml de bouillon de poulet",
       "200 g de lanières de poulet cuites",
       "2 c. à soupe de ketchup",
       "3 c. à soupe d’huile d’olive",
       "2 c. à soupe de sauce soja",
       "Poivre et sel"
-    ]
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "potage-potiron",
@@ -1325,12 +1351,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "750 g de potiron en dés",
-      "2 blancs de poireaux",
-      "1,5 l de bouillon de poulet (frais ou en cube)"
-    ]
+      "La liste d’origine indiquée sur la source doit être transcrite avec ses quantités exactes."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "vive-chou-fleur-oeuf",
@@ -1366,7 +1391,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "plat-four-digeste",
@@ -1402,7 +1431,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "salade-poulet-curry",
@@ -1438,7 +1471,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "saumon-carottes-four",
@@ -1474,18 +1511,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "400 à 600 g de filet de saumon",
-      "8 c. à soupe de fromage aux fines herbes light (option sans lactose et sans fines herbes possible)",
-      "12 à 16 c. à soupe de chapelure (option sans gluten possible)",
-      "Sel et poivre",
-      "600 g de carottes",
-      "1 oignon (facultatif)",
-      "2 c. à café de beurre liquide (ou beurre de soja)",
-      "1 cube de bouillon de légumes maigre",
-      "Accompagnement suggéré : pommes de terre nature ou purée"
-    ]
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "soupe-carottes-gingembre",
@@ -1521,15 +1551,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "500 g de carottes",
-      "2 cm de gingembre frais",
-      "2 litres de bouillon de poule (maison ou un cube)",
-      "1 c. à café de curry doux",
-      "½ c. à café de cumin (facultatif)",
-      "Sel et poivre"
-    ]
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "diplomate-framboises",
@@ -1565,7 +1591,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "mousse-cafe-lait",
@@ -1601,15 +1631,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "250 g de fromage blanc maigre",
-      "3 c. à soupe de lait écrémé",
-      "7 g de gélatine (ou feuilles de gélatine)",
-      "50 g de sucre",
-      "1 blanc d’œuf",
-      "10 cl de café"
-    ]
+      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "spaghettis-bolognaise",
@@ -1645,22 +1671,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "400 g de spaghettis",
-      "2 oignons",
-      "2 c. à soupe d’huile d’olive",
-      "500 g de filet américain (ou viande hachée mélangée)",
-      "3 gousses d’ail",
-      "1 grand verre de vin rouge",
-      "7,5 dl de coulis de tomates",
-      "2 carottes",
-      "2 branches de céleri",
-      "3 feuilles de laurier et 3 branches de thym frais",
-      "Sel et poivre",
-      "Quelques feuilles de basilic",
-      "Quelques tomates cerises"
-    ]
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "crumble-avoine",
@@ -1696,7 +1711,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "gateau-compote-pommes",
@@ -1732,13 +1751,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "1 œuf",
-      "60 g de sucre",
-      "60 g de farine fermentante (ou 60 g de farine classique + 2 g de levure chimique)",
-      "60 g de compote de pommes fine sans sucre"
-    ]
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "gateaux-pommes",
@@ -1774,7 +1791,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "hachis-shepherd-pie",
@@ -1810,7 +1831,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "biscuits-dattes-amandes",
@@ -1846,7 +1871,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "dinde-chili-patate-douce",
@@ -1882,7 +1911,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "soupe-potiron-coco",
@@ -1918,7 +1951,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "cake-banane-renverse",
@@ -1954,7 +1991,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "chips-legumes-four",
@@ -1984,7 +2025,15 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "2 panais pelés",
+      "2 courgettes",
+      "2 carottes pelées",
+      "Huile d’olive (spray)",
+      "Au moins 1 c. à café de sel"
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "wrap-festif-saumon",
@@ -2020,14 +2069,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
+    "sourceIngredientsVerified": false,
     "originalIngredients": [
-      "2 wraps de taille moyenne",
-      "Fromage frais light (quantité non précisée)",
-      "Saumon fumé (quantité non précisée)",
-      "Poivre et sel",
-      "Aneth frais ou séché"
-    ]
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "tortilla-espagnole",
@@ -2057,7 +2103,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "courgette-farcie",
@@ -2096,13 +2146,12 @@ window.MICI_RECIPES = [
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 courgette",
-      "300 g d’américain nature (bœuf haché maigre)",
+      "300 g d’américain nature",
       "Sel et poivre",
       "Herbes de Provence",
-      "Un peu de fromage râpé allégé",
-      "Optionnel : 1 oignon",
-      "Matière grasse pour la cuisson (1 c. à soupe indiquée dans la préparation)"
-    ]
+      "Un peu de fromage râpé allégé"
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "wrap-avocat-courgette",
@@ -2132,7 +2181,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "1 avocat",
+      "Le jus d’un demi-citron",
+      "100 g de lamelles de poulet ou de restes de poulet rôti/cuit",
+      "1 courgette",
+      "4 wraps",
+      "Poivre et sel"
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "crepes-avoine-fraises",
@@ -2168,7 +2226,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "apero-light",
@@ -2204,7 +2266,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La source regroupe plusieurs petites recettes ; chaque préparation doit être séparée si elle est reproduite dans le catalogue."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "tiramisu-leger",
@@ -2240,7 +2306,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "macaroni-potiron",
@@ -2276,7 +2346,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "croque-thon",
@@ -2312,7 +2386,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "bagel-courgettes",
@@ -2342,7 +2420,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "pates-saumon",
@@ -2378,7 +2460,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "mousse-chocolat-legere",
@@ -2414,7 +2500,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "roulades-poulet-epinards",
@@ -2450,7 +2540,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "poulet-chicons-butternut",
@@ -2486,7 +2580,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "pates-fromage-legere",
@@ -2522,7 +2620,18 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "300 g de thon au naturel",
+      "2 courgettes",
+      "1 c. à café d’origan séché",
+      "600 ml de lait demi-écrémé",
+      "6 c. à soupe de maïzena",
+      "150 g de fromage râpé maigre",
+      "Poivre, sel et noix de muscade",
+      "Macaronis : quantité à confirmer sur la liste complète de la source"
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "courgette-thon",
@@ -2558,7 +2667,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La fiche intitulée « Courgette farcie au thon » possède une source individuelle, mais sa liste détaillée doit encore être transcrite."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "mug-cake-avoine",
@@ -2594,7 +2707,17 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "1 banane mûre",
+      "1 œuf",
+      "½ c. à café de levure chimique",
+      "6 c. à soupe de flocons d’avoine",
+      "Une poignée de myrtilles fraîches ou surgelées",
+      "Une pincée de cannelle",
+      "Une pincée de sel"
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "pizza-chou-fleur",
@@ -2630,7 +2753,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "beignets-pommes",
@@ -2666,7 +2793,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "crumble-pommes",
@@ -2711,7 +2842,8 @@ window.MICI_RECIPES = [
       "4 c. à soupe de sirop d’érable",
       "4 c. à soupe de beurre ou d’huile de coco",
       "Une pincée de sel"
-    ]
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "wrap-salade-oeufs",
@@ -2741,7 +2873,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "biscuits-avoine",
@@ -2777,7 +2913,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "eau-fruitee",
@@ -2813,7 +2953,11 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "Dépend de la variante : concombre + menthe + 1 l d’eau ; ou 100 g de framboises + menthe + 1 l d’eau ; ou 1 orange/citron + 1 l d’eau."
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "smoothie-fruits-rouges-2",
@@ -2849,7 +2993,14 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": true,
+    "originalIngredients": [
+      "4 c. à soupe de fruits rouges",
+      "1 banane",
+      "3 c. à soupe de lait d’amande (ou lait ou yaourt)",
+      "Garnitures facultatives : fruits frais, granola ou canneberge séchée"
+    ],
+    "originalIngredientsVerified": true
   },
   {
     "id": "mug-cake-pommes",
@@ -2879,7 +3030,11 @@ window.MICI_RECIPES = [
       "Cuire jusqu’à ce que la préparation soit prise, en vérifiant la cuisson."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   },
   {
     "id": "crumble-pommes-myrtilles",
@@ -2915,6 +3070,10 @@ window.MICI_RECIPES = [
       "Cuire au four jusqu’à ce que le crumble soit cuit."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false
+    "sourceIngredientsVerified": false,
+    "originalIngredients": [
+      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+    ],
+    "originalIngredientsVerified": false
   }
 ];
