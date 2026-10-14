@@ -1660,7 +1660,7 @@ document.addEventListener('click',e=>{
     const r=scoreOf(items,ui),now=Date.now(),savedItems=items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0}));
     if(ui.mealEditId){const existing=store.entries.find(x=>String(x.id)===String(ui.mealEditId));if(!existing){ui.mealEditId=null;ui.msg='Ce repas n’existe plus dans le journal. Enregistre-le comme un nouveau repas si nécessaire.';render(true);return}existing.items=savedItems;existing.r=ui.ress;existing.jeun=ui.jeun;existing.note=ui.note.trim();existing.L=r.lv.L;existing.score=r.score;existing.edited=now;}
     else store.entries.push({id:now,ts:now,items:savedItems,r:ui.ress,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
-    save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.mealEditId=null;ui.tab='journal';ui.msg='';render();
+    const wasEditing=!!ui.mealEditId,returnTab=ui.mealEditReturn;save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.mealEditId=null;ui.tab=wasEditing?(returnTab==='journal'?'journal':'calc'):'journal';ui.msg='';render();
   }
   else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
   else if(a==='cancelEdit'){ui.editId=null;render(true)}
