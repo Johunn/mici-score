@@ -1191,7 +1191,10 @@ test('recipe controls are compact and score badges have a distinct high-contrast
   assert.match(html, /class="field recipe-query"/);
   assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{height:42px/);
   assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
-  assert.match(html, /\.exp-score:after\{content:'SCORE'/);\n  assert.match(html, /border-radius:16px 16px 16px 5px/);\n  assert.match(html, /grid-template-columns:minmax\(0,1\.2fr\) minmax\(0,\.9fr\) minmax\(0,\.8fr\)/);\n  assert.match(html, /\.recipe-controls \.recipe-query\{grid-column:auto\}/);
+  assert.match(html, /\.exp-score:after\{content:'SCORE'/);
+  assert.match(html, /border-radius:16px 16px 16px 5px/);
+  assert.match(html, /grid-template-columns:minmax\(0,1\.2fr\) minmax\(0,\.9fr\) minmax\(0,\.8fr\)/);
+  assert.match(html, /\.recipe-controls \.recipe-query\{grid-column:auto\}/);
   assert.match(html, /\.catalog-tools\{display:grid;grid-template-columns:minmax\(0,1fr\) 132px/);
   assert.match(html, /height:44px;padding:8px 42px 8px 12px/);
   assert.match(swSource, /const CACHE='mici-score-v51';/);
