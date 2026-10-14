@@ -543,6 +543,23 @@ nav.tabs button[aria-current=page] .tab-icon{font-weight:800}
 @media(min-width:760px){main{padding-top:22px}.appbar-in{padding-left:24px;padding-right:24px}}
 @media(max-width:360px){.today-stats{grid-template-columns:1fr}.today-intro h1{font-size:31px}nav.tabs button{font-size:9px}}
 
+
+/* Ajustements visuels finaux : les pastilles restent lisibles dans tous les thèmes. */
+.badge{border-color:currentColor;background:color-mix(in srgb,currentColor 13%,var(--surface));border-radius:999px;font-weight:800;font-variant-numeric:tabular-nums}
+.exp-score{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:38px;padding:6px 10px;border:1.5px solid currentColor;border-radius:13px;background:color-mix(in srgb,currentColor 15%,var(--surface));font:800 16px/1 var(--f-display);font-variant-numeric:tabular-nums;letter-spacing:-.02em;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.recipe-controls{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.recipe-controls .field{margin:0;min-width:0}
+.recipe-controls .field label{display:block;margin:0 0 4px;font-size:11px;line-height:1.2;color:var(--muted);font-weight:700;letter-spacing:.02em}
+.recipe-controls input[type=search],.recipe-controls select{height:42px;min-width:0;padding:8px 10px;border-radius:11px;font-size:14px}
+.recipe-controls .recipe-query{grid-column:1/-1}
+.recipe-count{margin:8px 0 0!important;font-size:12px!important;line-height:1.35}
+.portion-control{padding:2px 2px 0}
+.portion-control input[type=range]{display:block;width:100%;height:34px;margin:0;touch-action:pan-y}
+.portion-scale{display:flex;justify-content:space-between;gap:3px;margin-top:-2px;color:var(--muted);font-size:11px;line-height:1.2}
+.portion-current{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:2px}
+.portion-current strong{font:700 14px var(--f-display);color:var(--accent)}
+@media(max-width:360px){.recipe-controls{gap:6px}.recipe-controls input[type=search],.recipe-controls select{font-size:13px;padding:7px 8px}}
+
 </style>
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
