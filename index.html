@@ -570,8 +570,8 @@ const cleanJournalEntry=e=>{
 const cleanJournalEntries=entries=>Array.isArray(entries)?entries.map(cleanJournalEntry):[];
 const cleanJournalSnapshot=s=>s&&typeof s==='object'?Object.assign({},s,{entries:cleanJournalEntries(s.entries)}):s;
 function norm(p){
-  let th=(['system','dark','ocean','charbon','amoled','micinuit','mici','custom'].indexOf(p.theme)>=0)?p.theme:'amoled';
-  if(!p.ver&&th==='system')th='amoled'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
+  let th=(['system','dark','ocean','charbon','amoled','micinuit','mici','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
+  if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
   return{custom:p.custom||[],entries:cleanJournalEntries(p.entries),plate:Array.isArray(p.plate)?p.plate:null,over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
 }
 
