@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v51';/);
+  assert.match(swSource, /const CACHE='mici-score-v52';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v51/);
+  assert.match(swSource, /mici-score-v52/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1186,18 +1186,14 @@ test('catalog search and sort share a compact row and portions are continuously 
   assert.match(html, /portion-scale/);
 });
 
-test('recipe controls are compact and score badges have a distinct high-contrast treatment', () => {
-  assert.match(html, /class="recipe-controls"/);
-  assert.match(html, /class="field recipe-query"/);
-  assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{width:100%;height:42px/);
-  assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
-  assert.match(html, /\.exp-score:after\{content:'SCORE'/);
-  assert.match(html, /border-radius:16px 16px 16px 5px/);
-  assert.match(html, /grid-template-columns:minmax\(0,1\.2fr\) minmax\(0,\.9fr\) minmax\(0,\.8fr\)/);
-  assert.match(html, /\.recipe-controls \.recipe-query\{grid-column:auto\}/);
-  assert.match(html, /\.catalog-tools\{display:grid;grid-template-columns:minmax\(0,1fr\) 132px/);
-  assert.match(html, /height:44px;padding:8px 42px 8px 12px/);
-  assert.match(swSource, /const CACHE='mici-score-v51';/);
+test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
+  assert.match(html, /\.recipe-controls\{grid-template-columns:minmax\(0,1fr\) 132px!important/);
+  assert.match(html, /\.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important\}/);
+  assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:1px solid var\(--line\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
+  assert.match(html, /\.badge\{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px/);
+  assert.match(html, /\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px/);
+  assert.match(html, /content:'MICI'/);
+  assert.match(swSource, /const CACHE='mici-score-v52';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
