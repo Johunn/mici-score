@@ -573,7 +573,7 @@ RAW.forEach(([c,list])=>list.forEach(str=>{
   FOODS.push({id,n:p[0],c,L:v.slice(0,7),b:v[7],obs:p[2]==='o',ho:+ex[0]||0,u:+ex[1]||0,rf:ex[2]||'',ru:ex[3]||'',comp:ex[4]||''});
 }));
 
-const store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'micinuit',layout:'liste',sort:'cat',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,onb:false,flags:{},ep:0,mt:0,del:{},acct:null};
+const store={custom:[],entries:[],over:{},sens:{},prof:'poche',mods:{},theme:'amoled',layout:'liste',sort:'cat',cbg:'#EDF1EE',cac:'#1F5C63',ver:5,aurora:true,onb:false,flags:{},ep:0,mt:0,del:{},acct:null};
 let getStore=()=>store;
 const setStoreProvider=fn=>{
   if(typeof fn!=='function')throw new TypeError('Store provider must be a function');

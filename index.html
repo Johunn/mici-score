@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr" data-theme="micinuit">
+<html lang="fr" data-theme="amoled">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#170D20">
+<meta name="theme-color" content="#000000">
 <meta name="application-name" content="MICI Score">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 32'%3E%3Cpath d='M6 29.6L12 16C13.6 12.5 17.6 9.6 17.6 6.2C17.6 3.7 15 2.3 12 2.3C9 2.3 6.4 3.7 6.4 6.2C6.4 9.6 10.4 12.5 12 16L18 29.6' fill='none' stroke='%238A4FBF' stroke-width='3.4'/%3E%3C/svg%3E">
@@ -570,8 +570,8 @@ const cleanJournalEntry=e=>{
 const cleanJournalEntries=entries=>Array.isArray(entries)?entries.map(cleanJournalEntry):[];
 const cleanJournalSnapshot=s=>s&&typeof s==='object'?Object.assign({},s,{entries:cleanJournalEntries(s.entries)}):s;
 function norm(p){
-  let th=(['system','dark','ocean','charbon','amoled','micinuit','mici','custom'].indexOf(p.theme)>=0)?p.theme:'micinuit';
-  if(!p.ver&&th==='system')th='micinuit'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
+  let th=(['system','dark','ocean','charbon','amoled','micinuit','mici','custom'].indexOf(p.theme)>=0)?p.theme:'amoled';
+  if(!p.ver&&th==='system')th='amoled'; // anciennes sauvegardes : « Auto » était la valeur par défaut, pas un choix
   return{custom:p.custom||[],entries:cleanJournalEntries(p.entries),plate:Array.isArray(p.plate)?p.plate:null,over:p.over||{},sens:p.sens||{},prof:(p.prof==='general'?'general':'poche'),mods:p.mods||{},theme:th,layout:p.layout||'liste',sort:['cat','nom','scd','sca'].includes(p.sort)?p.sort:'cat',cbg:p.cbg||'#EDF1EE',cac:p.cac||'#1F5C63',ver:5,aurora:p.aurora!==false,onb:!!p.onb,flags:(p.flags&&typeof p.flags==='object')?p.flags:{},ep:+p.ep||0,mt:+p.mt||0,del:(p.del&&typeof p.del==='object')?p.del:{},acct:(p.acct&&typeof p.acct==='object')?p.acct:null};
 }
 
