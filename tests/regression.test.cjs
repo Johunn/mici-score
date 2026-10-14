@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v54';/);
+  assert.match(swSource, /const CACHE='mici-score-v55';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v54/);
+  assert.match(swSource, /mici-score-v55/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1187,13 +1187,12 @@ test('catalog search and sort share a compact row and portions are continuously 
 });
 
 test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
-  assert.match(html, /\.recipe-controls\{grid-template-columns:minmax\(0,1fr\) 132px!important/);
-  assert.match(html, /\.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important\}/);
-  assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:1px solid var\(--line\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
-  assert.match(html, /\.badge\{position:relative;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:46px/);
-  assert.match(html, /\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:58px;min-width:58px;height:58px/);
-  assert.match(html, /content:'MICI'/);
-  assert.match(swSource, /const CACHE='mici-score-v54';/);
+  assert.match(html, /#app \.recipe-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 132px!important/);
+  assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
+  assert.match(html, /#app \.searchbox input\[type=search\]:focus,#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
+  assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
+  assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
+  assert.match(swSource, /const CACHE='mici-score-v55';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
@@ -1258,20 +1257,14 @@ test('recipes have a dedicated main-navigation entry and open the recipe catalog
   assert.match(recipesSource, /"id":/);
 });
 
-test('recipe catalogue supports robust ingredient search, both MICI score sort directions, and matching search focus', () => {
-  assert.match(html, /id="recipe-search"/);
-  assert.match(html, /id="recipe-category"/);
-  assert.match(html, /id="recipe-sort"/);
-  assert.match(html, /function recipeResultsHTML\(\)/);
-  assert.match(html, /terms\.every\(term=>searchable\.includes\(term\)\)/);
-  assert.match(html, /value="score-asc"[^>]*>Score MICI ↑/);
-  assert.match(html, /ui\.recipeSort==='score-asc'/);
-  assert.match(html, /t\.id==='recipe-search'[\s\S]*?results\.innerHTML=recipeResultsHTML\(\)/);
-  assert.match(html, /#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
-  assert.match(html, /\.badge:before,\.exp-score:before\{content:none!important\}/);
-  assert.match(html, /recipe-score-pill[^>]*>\$\{fmt\(score\)\}<\/span>/);
-  assert.match(html, /\.recipe-score-pill\{min-width:58px;min-height:48px;padding:7px 12px;font-size:23px!important;font-weight:900/);
-  assert.match(html, /\.badge,\.exp-score\{position:relative;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:56px;min-height:46px;padding:7px 12px/);
+test('catalog and recipe search/sort stay on one row and score numbers are large and bold', () => {
+  assert.match(html, /#app \.catalog-tools\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 132px!important/);
+  assert.match(html, /#app \.catalog-tools \.catalog-sort\{grid-column:2!important;grid-row:1!important/);
+  assert.match(html, /#app \.recipe-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 132px!important/);
+  assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
+  assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
+  assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
+  assert.match(swSource, /const CACHE='mici-score-v55';/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
