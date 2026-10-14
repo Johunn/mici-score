@@ -1,4 +1,4 @@
-/* Idées de repas adaptées par MICI Score à partir de ressources spécialisées. Les sources sont des ressources d'inspiration, pas nécessairement la recette exacte. */
+/* Recettes adaptées par MICI Score à partir de ressources spécialisées. Les sources directes et adaptations sont précisées dans chaque fiche. */
 window.MICI_RECIPES = [
   {
     "id": "bol-riz-poulet",
@@ -76,64 +76,76 @@ window.MICI_RECIPES = [
   },
   {
     "id": "veloute-carotte-pdt",
-    "title": "Velouté de carottes et pommes de terre",
+    "title": "Chicons au saumon fumé (adaptés)",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Une soupe mixée dont la texture peut être ajustée.",
-    "source": "https://www.crohnscolitisfoundation.org/patientsandcaregivers/diet-and-nutrition/what-should-i-eat",
-    "sourceLabel": "Crohn’s & Colitis Foundation — conseils alimentaires",
+    "summary": "Version simplifiée d’une recette au four publiée par l’association belge ; le chou-fleur et les chicons peuvent ne pas convenir à tout le monde.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-chicons-rotis-au-saumon-fume/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
     "ingredients": [
       {
         "names": [
-          "Carotte cuite"
+          "Endive cuite"
         ],
         "grams": 150
       },
       {
         "names": [
-          "Pomme de terre vapeur sans peau"
+          "Saumon fumé"
         ],
-        "grams": 120
+        "grams": 100
       },
       {
         "names": [
-          "Bouillon cube"
+          "Chou-fleur cuit"
         ],
-        "grams": 5
+        "grams": 100
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 25
       }
     ],
     "steps": [
-      "Cuire les légumes dans l’eau avec un peu de bouillon.",
-      "Mixer jusqu’à obtenir une texture lisse.",
-      "Allonger avec de l’eau si nécessaire."
+      "Cuire le chou-fleur et le réduire en purée avec un peu de lait.",
+      "Placer les endives cuites dans un plat et recouvrir de saumon fumé et de purée de chou-fleur.",
+      "Faire gratiner au four jusqu’à ce que le plat soit chaud. Adapter les légumes selon ta tolérance."
     ]
   },
   {
     "id": "porridge-banane",
-    "title": "Porridge à la banane",
+    "title": "Flocons d’avoine à la banane (adaptés)",
     "category": "Petit-déjeuner",
     "servings": 1,
-    "summary": "Un petit-déjeuner chaud avec une banane mûre.",
-    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "summary": "Version simplifiée inspirée d’une recette d’overnight oats publiée par l’association belge.",
+    "source": "https://www.crohn-larectocoliteetnous.be/overnight-oats-au-curcuma/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
     "ingredients": [
       {
         "names": [
           "Flocons d'avoine cuits à l'eau"
         ],
-        "grams": 220
+        "grams": 180
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 100
       },
       {
         "names": [
           "Banane bien mûre"
         ],
-        "grams": 80
+        "grams": 60
       }
     ],
     "steps": [
-      "Cuire les flocons dans l’eau en remuant.",
-      "Ajouter la banane écrasée.",
-      "Ajuster la texture avec un peu d’eau."
+      "Mélanger les flocons avec le lait.",
+      "Laisser reposer au réfrigérateur plusieurs heures ou toute la nuit.",
+      "Ajouter la banane écrasée avant de servir. La version proposée ici omet le curcuma et les garnitures."
     ]
   },
   {
@@ -240,22 +252,16 @@ window.MICI_RECIPES = [
   },
   {
     "id": "pates-poulet-courgette",
-    "title": "Pâtes blanches au poulet et courgette",
+    "title": "Pâtes aux courgettes et au saumon fumé (adaptées)",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Une recette simple sans sauce épicée.",
-    "source": "https://www.crohn-larectocoliteetnous.be/theme/nutrition-recettes/",
-    "sourceLabel": "Crohn / La rectocolite et nous — inspiration (adaptation)",
+    "summary": "Adaptation simplifiée d’une recette publiée par l’association belge Crohn / La rectocolite et nous.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-rapide-de-pates-aux-courgettes-et-au-saumon-fume/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
     "ingredients": [
       {
         "names": [
           "Pâtes blanches nature"
-        ],
-        "grams": 180
-      },
-      {
-        "names": [
-          "Poulet grillé sans peau"
         ],
         "grams": 100
       },
@@ -267,15 +273,15 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
-          "Huile d'olive"
+          "Saumon fumé"
         ],
-        "grams": 5
+        "grams": 100
       }
     ],
     "steps": [
-      "Cuire les pâtes.",
-      "Cuire le poulet à cœur et la courgette jusqu’à ce qu’elle soit tendre.",
-      "Mélanger avec un peu d’eau de cuisson."
+      "Cuire les pâtes selon les indications.",
+      "Faire cuire la courgette en petits dés jusqu’à ce qu’elle soit tendre.",
+      "Ajouter le saumon fumé en lamelles et réchauffer brièvement. Cette version simplifiée n’inclut pas la crème ni le citron de la recette source."
     ]
   },
   {
@@ -370,30 +376,54 @@ window.MICI_RECIPES = [
   },
   {
     "id": "toast-oeufs",
-    "title": "Tartines et œufs brouillés",
+    "title": "Tartines à la salade d’œufs (adaptées)",
     "category": "Petit-déjeuner",
     "servings": 1,
-    "summary": "Un petit-déjeuner salé simple à préparer.",
-    "source": "https://www.crohnscolitisfoundation.org/patientandcaregivers/gutfriendlyrecipes",
-    "sourceLabel": "Crohn’s & Colitis Foundation — inspiration (adaptation)",
+    "summary": "Adaptation simplifiée d’une recette de bagel à la salade d’œufs publiée par l’association belge.",
+    "source": "https://www.crohn-larectocoliteetnous.be/bagels-de-paques-avec-fromage-cremeux-et-salade-doeufs/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
     "ingredients": [
       {
         "names": [
           "Pain de mie nature"
         ],
-        "grams": 70
+        "grams": 60
       },
       {
         "names": [
           "Œuf"
         ],
-        "grams": 100
+        "grams": 50
+      },
+      {
+        "names": [
+          "Mayonnaise allégée"
+        ],
+        "grams": 5
+      },
+      {
+        "names": [
+          "Yaourt sans lactose"
+        ],
+        "grams": 10
+      },
+      {
+        "names": [
+          "Avocat"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Lardons ou bacon"
+        ],
+        "grams": 15
       }
     ],
     "steps": [
-      "Faire griller légèrement le pain si cela te convient.",
-      "Cuire les œufs brouillés à feu doux.",
-      "Servir sans piment ni garniture supplémentaire."
+      "Cuire l’œuf dur puis l’écraser à la fourchette.",
+      "Mélanger l’œuf avec la mayonnaise allégée et le yaourt.",
+      "Étaler sur le pain et ajouter l’avocat et le bacon cuits. Cette version remplace le bagel et le fromage crémeux par des ingrédients du catalogue."
     ]
   },
   {
@@ -580,6 +610,59 @@ window.MICI_RECIPES = [
       "Cuire la semoule dans l’eau.",
       "Laisser tiédir puis incorporer le yaourt.",
       "Ajouter la banane écrasée."
+    ]
+  },
+  {
+    "id": "quiche-avoine-courgette",
+    "title": "Petite quiche courgette et avoine (adaptée)",
+    "category": "Repas complet",
+    "servings": 1,
+    "summary": "Adaptation d’une quiche à base de flocons d’avoine publiée par l’association belge ; les flocons d’avoine sont riches en fibres.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-quiche-flocons-davoine/",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (adaptée)",
+    "ingredients": [
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Œuf"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Lait demi-écrémé"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Tomate cuite sans peau"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 10
+      }
+    ],
+    "steps": [
+      "Mélanger les flocons d’avoine avec un peu d’huile et d’eau pour former une base adaptée.",
+      "Battre les œufs avec le lait.",
+      "Ajouter la courgette et la tomate cuites puis verser sur la base.",
+      "Cuire au four jusqu’à ce que la garniture soit prise. Cette adaptation simplifie la pâte de la recette source."
     ]
   }
 ];
