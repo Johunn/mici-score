@@ -1362,11 +1362,13 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine indiquée sur la source doit être transcrite avec ses quantités exactes."
+      "750 g de potiron coupé en dés",
+      "2 blancs de poireaux",
+      "1,5 l de bouillon de poulet (frais ou en cube)"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1444,7 +1446,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "600 g de pommes de terre",
       "480 g de courgettes",
@@ -1455,7 +1457,7 @@ window.MICI_RECIPES = [
       "Poivre et sel",
       "Chapelure"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1582,16 +1584,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "500 g de carottes",
       "2 cm de gingembre frais",
-      "2 l de bouillon de poule",
+      "2 l de bouillon de poule (maison ou un cube)",
       "1 c. à café de curry doux",
       "½ c. à café de cumin (facultatif si mal toléré)",
       "Sel et poivre"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1628,11 +1630,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+      "12 c. à soupe de yaourt (version végétale possible)",
+      "8 c. à soupe de flocons d’avoine (sans gluten si souhaité)",
+      "2 c. à soupe d’huile de coco",
+      "3 c. à soupe de sirop d’érable",
+      "1 c. à café de cannelle",
+      "150 g de framboises surgelées, de myrtilles ou de fraises"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1669,11 +1676,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La source est identifiée mais les ingrédients détaillés n’ont pas encore été transcrits."
+      "250 g de fromage blanc maigre",
+      "3 c. à soupe de lait écrémé",
+      "7 g de gélatine",
+      "50 g de sucre",
+      "1 blanc d’œuf",
+      "10 cl de café"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1710,11 +1722,23 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "400 g de spaghettis",
+      "2 oignons hachés finement",
+      "2 c. à soupe d’huile d’olive",
+      "500 g de filet américain",
+      "3 gousses d’ail hachées finement",
+      "1 grand verre de vin rouge",
+      "7,5 dl de coulis de tomates",
+      "2 carottes en petits cubes",
+      "2 branches de céleri coupées finement",
+      "3 feuilles de laurier et 3 branches de thym frais attachées ensemble",
+      "Sel et poivre",
+      "Quelques feuilles de basilic",
+      "Quelques tomates cerises"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1792,11 +1816,14 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La page source doit être consultée pour transcrire la liste d’origine sans inférer les quantités."
+      "1 œuf",
+      "60 g de sucre",
+      "60 g de farine fermentante (ou 60 g de farine classique et 2 g de levure chimique)",
+      "60 g de compote de pommes fine sans sucre"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1833,11 +1860,15 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "2 pommes",
+      "1 paquet de pâte filo ou pâte à brick",
+      "Une pincée de cannelle",
+      "Édulcorant selon le goût",
+      "Jaune d’œuf pour fermer les gâteaux (mentionné dans la préparation, quantité non précisée)"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1874,11 +1905,26 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "1 kg de pommes de terre épluchées et coupées en dés",
+      "2 c. à café de sel",
+      "2 c. à café de fromage double-crème light",
+      "120 ml de crème de soja",
+      "1 c. à soupe d’huile d’olive",
+      "800 g de haché d’agneau ou de poulet pour 4 portions",
+      "2 c. à café de poivre noir fraîchement moulu",
+      "1 carotte coupée",
+      "2 c. à soupe de beurre",
+      "2 c. à soupe de farine sans gluten",
+      "340 ml de bouillon de viande sans oignon ni ail",
+      "1 c. à soupe de sauce Worcester ou sauce soja sans gluten",
+      "150 g de haricots verts (ou une carotte supplémentaire)",
+      "1 c. à soupe de thym frais haché",
+      "1 c. à soupe d’huile d’ail",
+      "2 c. à soupe de persil frais pour la finition"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1915,11 +1961,16 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "200 g de dattes",
+      "200 g d’amandes",
+      "125 g de miel",
+      "Un trait de jus d’orange",
+      "2 blancs d’œufs battus",
+      "Une feuille azyme (papier comestible, à retirer avant de consommer)"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1956,11 +2007,26 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "2 c. à soupe d’huile d’ail",
+      "500 g de haché de dinde",
+      "1 poivron rouge en tranches (ou une carotte supplémentaire)",
+      "1 c. à café de sel",
+      "½ c. à café de cumin",
+      "¼ c. à café de piment en poudre facultatif",
+      "¼ c. à café de paprika facultatif",
+      "1 feuille de laurier",
+      "1 boîte de tomates en dés",
+      "Une seconde boîte de dés de tomate (doublon présent sur la source)",
+      "1 piment vert (ou une carotte supplémentaire)",
+      "1 boîte de maïs égoutté",
+      "250 ml de purée de tomates sans oignon ni ail",
+      "180 ml d’eau",
+      "1 patate douce pelée et coupée en dés",
+      "2 c. à soupe de coriandre fraîche hachée"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -1997,11 +2063,25 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "1 c. à soupe d’huile de coco ou d’huile d’olive",
+      "1 c. à soupe d’huile d’ail",
+      "1 c. à soupe de gingembre frais haché",
+      "8 pâtissons",
+      "2 courgettes",
+      "1 c. à café de curry en poudre sans gluten, oignon ni ail",
+      "1 c. à café de sel",
+      "¾ c. à café de coriandre moulue",
+      "½ c. à café de cumin moulu",
+      "¼ c. à café de clou de girofle moulu",
+      "¼ c. à café de cayenne facultatif",
+      "1 l de bouillon de légumes sans oignon ni ail",
+      "25 cl de lait de coco light",
+      "250 g de potiron frais pressé",
+      "2 c. à soupe de coriandre fraîche hachée pour la finition"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -2038,11 +2118,21 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "La liste d’origine doit être transcrite depuis la source avant toute validation."
+      "Beurre ou huile de coco pour le moule",
+      "2 c. à soupe de beurre non salé",
+      "2 c. à soupe de cassonade",
+      "2 bananes (une en tranches et une écrasée)",
+      "2 œufs légèrement battus",
+      "75 ml de sirop d’érable",
+      "60 ml de lait de coco non sucré",
+      "1 c. à café d’extrait de vanille",
+      "½ c. à café de levure chimique",
+      "1 c. à café de vinaigre",
+      "75 g de farine de noix de coco"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -2073,15 +2163,15 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 panais pelés",
       "2 courgettes",
       "2 carottes pelées",
-      "Huile d’olive (spray)",
+      "Huile d’olive en spray",
       "Au moins 1 c. à café de sel"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -2244,7 +2334,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 avocat",
       "Le jus d’un demi-citron",
@@ -2253,7 +2343,7 @@ window.MICI_RECIPES = [
       "4 wraps",
       "Poivre et sel"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -2644,7 +2734,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "400 g d’épinards surgelés sans crème",
       "150 g de filets de poulet",
@@ -2655,7 +2745,7 @@ window.MICI_RECIPES = [
       "70 g de fromage râpé light",
       "Poivre, sel et noix de muscade"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -2882,7 +2972,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 chou-fleur",
       "1 œuf",
@@ -2892,7 +2982,7 @@ window.MICI_RECIPES = [
       "1 c. à soupe d’huile d’olive",
       "Garniture : quelques c. à soupe de passata de tomates, fromage râpé, poivre, sel et herbes de Provence"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -2929,7 +3019,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "100 g de farine",
       "150 ml de lait écrémé ou demi-écrémé, avec ou sans lactose",
@@ -2938,7 +3028,7 @@ window.MICI_RECIPES = [
       "Huile neutre pour la cuisson",
       "1 pomme ferme"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
@@ -3057,7 +3147,7 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
       "10 g d’amandes",
       "1 banane",
@@ -3066,7 +3156,7 @@ window.MICI_RECIPES = [
       "15 g de raisins secs",
       "10 g de margarine liquide"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
