@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v49';/);
+  assert.match(swSource, /const CACHE='mici-score-v50';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v49/);
+  assert.match(swSource, /mici-score-v50/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1190,8 +1190,8 @@ test('recipe controls are compact and score badges have a distinct high-contrast
   assert.match(html, /class="field recipe-query"/);
   assert.match(html, /\.recipe-controls input\[type=search\],\.recipe-controls select\{height:42px/);
   assert.match(html, /\.exp-score\{display:inline-flex;align-items:center;justify-content:center/);
-  assert.match(html, /background:color-mix\(in srgb,currentColor 15%,var\(--surface\)\)/);
-  assert.match(swSource, /const CACHE='mici-score-v49';/);
+  assert.match(html, /background:color-mix\(in srgb,currentColor 27%,var\(--surface\)\)/);\n  assert.match(html, /\.catalog-tools\{display:grid;grid-template-columns:minmax\(0,1fr\) 132px/);\n  assert.match(html, /height:44px;padding:8px 42px 8px 12px/);\n  assert.match(html, /function portionFactorAt\(v\)/);\n  assert.match(html, /function portionGrams\(f,v\)/);
+  assert.match(swSource, /const CACHE='mici-score-v50';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
