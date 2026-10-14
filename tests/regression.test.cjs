@@ -10,6 +10,7 @@ const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const coreModuleSource = fs.readFileSync(path.join(root, 'score-core.js'), 'utf8');
 const swSource = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+const manifestSource = fs.readFileSync(path.join(root, 'manifest.webmanifest'), 'utf8');
 
 function copy(value) {
   return JSON.parse(JSON.stringify(value));
@@ -48,6 +49,9 @@ test('app shell loads the scoring module before its inline code', () => {
   assert.ok(html.includes('<html lang="fr" data-theme="amoled">'));
   assert.ok(html.includes(")?p.theme:'amoled';"));
   assert.ok(coreModuleSource.includes("theme:'amoled',layout:'liste'"), 'new installations must default to the AMOLED theme');
+  assert.ok(html.includes('<meta name="theme-color" content="#000000">'));
+  assert.match(manifestSource, /"background_color": "#000000"/);
+  assert.match(manifestSource, /"theme_color": "#000000"/);
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
