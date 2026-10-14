@@ -1132,7 +1132,7 @@ function savePlate(){
 }
 
 /* ---------- État de l'interface ---------- */
-const ui={tab:'calc',view:'home',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),jeun:false,ress:7,editId:null,eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
+const ui={tab:'calc',view:'home',qs:'',cat:-1,page:0,sort:store.sort||'cat',sel:null,plate:loadPlate(),jeun:false,ress:7,editId:null,mealEditId:null,mealEditReturn:'calc',eR:7,eNote:'',note:'',msg:'',exportText:'',ov:5,
   recipeId:null,newName:'',newCat:0,newL:[0,0,0,0,0,0,0],newB:0,resetArmed:false,delArmed:false,gmenu:false,journalDays:30};
 function backupText(){
   return JSON.stringify(Object.assign({},store,{acct:null,plate:undefined}));
@@ -1268,7 +1268,7 @@ function plateHTML(){
   if(!items.length)return '<section class="compose-empty"><span class="exp-eyebrow">COMPOSITION EN COURS</span><h1>Prépare ton prochain repas</h1><p class="today-lede">Commence par les aliments que tu vas manger. Tu pourras adapter les portions, puis noter ton ressenti après le repas.</p><ol class="steps"><li>Choisis les ingrédients du repas.</li><li>Ajuste les portions si nécessaire.</li><li>Après le repas, note comment tu te sens.</li></ol><button class="btn block" data-act="explore">Choisir des aliments</button><button class="btn ghost block" style="margin-top:8px" data-act="openRecipes">Parcourir les recettes</button><p class="small muted" style="margin-top:12px">Ton brouillon est conservé localement. Rien n’est ajouté au journal tant que tu ne l’enregistres pas.</p></section>';
   const r=scoreOf(items,ui);
   return `<button class="link" data-act="back">‹ Retour</button>
-  <h2 style="margin-top:6px">Mon assiette</h2>
+  <h2 style="margin-top:6px">${ui.mealEditId?'Modifier le repas enregistré':'Mon assiette'}</h2>${ui.mealEditId?'<p class="notice">Tu modifies un repas existant : l’enregistrement mettra à jour ce repas sans en créer un nouveau.</p>':''}
   <p><button class="btn ghost" data-act="openRecipes">Trouver une recette</button></p>
   <div class="card dialwrap ${cls(r.score)}" style="margin-top:0">
     ${dial(r.score)}
@@ -1286,14 +1286,14 @@ function plateHTML(){
     <label class="toggle"><input type="checkbox" data-act="jeun" ${ui.jeun?'checked':''}> À jeun</label>
     <p class="muted small" style="margin:0">À jeun amplifie l'effet du lactose (+30 %). Cet ajustement est arbitraire.</p>
   </div>
-  <div class="card"><h3>Noter mon ressenti</h3>
+  <div class="card"><h3>${ui.mealEditId?'Modifier mon ressenti':'Noter mon ressenti'}</h3>
     <div class="field"><label for="ress">Digestion : <span class="rangeval" id="ressv">${ui.ress}</span> / 10</label>
       <input type="range" id="ress" min="0" max="10" step="1" value="${ui.ress}">
       <div class="muted small" style="display:flex;justify-content:space-between"><span>Très mal</span><span>Aucun souci</span></div></div>
     <div class="field"><label for="note">Détails (selles, gaz, brûlures, délai, repas de la veille)</label>
       <textarea id="note" placeholder="Facultatif">${esc(ui.note)}</textarea></div>
-    <p style="margin:14px 0 0"><button class="btn block" data-act="saveEntry">Enregistrer dans le journal</button>
-    <button class="btn danger block" data-act="clearPlate">Vider l'assiette</button></p>
+    <p style="margin:14px 0 0"><button class="btn block" data-act="saveEntry">${ui.mealEditId?'Enregistrer les modifications':'Enregistrer dans le journal'}</button>
+    ${ui.mealEditId?'<button class="btn ghost block" style="margin-top:8px" data-act="cancelMealEdit">Annuler la modification</button>':'<button class="btn danger block" data-act="clearPlate">Vider l’assiette</button>'}</p>
   </div>`;
 }
 
@@ -1629,7 +1629,7 @@ document.addEventListener('click',e=>{
   else if(a==='journalRange'){ui.journalDays=+b.dataset.days;render(true)}
   else if(a==='repeatEntry'){
     const e=store.entries.find(x=>String(x.id)===String(id));
-    if(e){ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=7;ui.note='';ui.view='plate';ui.tab='compose';render()}
+    if(e){ui.mealEditId=e.id;ui.mealEditReturn=ui.tab==='journal'?'journal':'calc';ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=Number.isFinite(+e.r)?Math.max(0,Math.min(10,+e.r)):7;ui.note=e.note||'';ui.view='plate';ui.tab='compose';ui.msg='';render()}
   }
   else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
   else if(a==='back'){if(ui.view==='list'){ui.view='plate';ui.tab='compose'}else{ui.view='list';ui.tab='compose'}ui.msg='';render()}
@@ -1645,11 +1645,13 @@ document.addEventListener('click',e=>{
   else if(a==='pp'){const it=ui.plate[+b.dataset.i];it.p=+b.dataset.v;it.g=0;savePlate();render(true)}
   else if(a==='rm'){ui.plate.splice(+b.dataset.i,1);savePlate();if(!ui.plate.length)ui.view='list';render(true)}
   else if(a==='clearPlate'){ui.plate=[];savePlate();ui.view='list';ui.note='';ui.ress=7;render()}
+  else if(a==='cancelMealEdit'){ui.mealEditId=null;ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.tab=ui.mealEditReturn==='journal'?'journal':'calc';ui.msg='';render()}
   else if(a==='saveEntry'){
     const items=plateItems();if(!items.length)return;
-    const r=scoreOf(items,ui);
-    store.entries.push({id:Date.now(),ts:Date.now(),items:items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0})),r:ui.ress,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
-    save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.tab='journal';render();
+    const r=scoreOf(items,ui),now=Date.now(),savedItems=items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0}));
+    if(ui.mealEditId){const existing=store.entries.find(x=>String(x.id)===String(ui.mealEditId));if(!existing){ui.mealEditId=null;ui.msg='Ce repas n’existe plus dans le journal. Enregistre-le comme un nouveau repas si nécessaire.';render(true);return}existing.items=savedItems;existing.r=ui.ress;existing.jeun=ui.jeun;existing.note=ui.note.trim();existing.L=r.lv.L;existing.score=r.score;existing.edited=now;}
+    else store.entries.push({id:now,ts:now,items:savedItems,r:ui.ress,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
+    save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.mealEditId=null;ui.tab='journal';ui.msg='';render();
   }
   else if(a==='editEntry'){const e=store.entries.find(x=>String(x.id)===id);if(e){ui.editId=e.id;ui.eR=e.r;ui.eNote=e.note||''}render(true)}
   else if(a==='cancelEdit'){ui.editId=null;render(true)}
