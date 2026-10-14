@@ -44,7 +44,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v4.7';"));
+  assert.ok(html.includes("const APP_V='v4.8';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -68,7 +68,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v33 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v34';/);
+  assert.match(swSource, /const CACHE='mici-score-v35';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
