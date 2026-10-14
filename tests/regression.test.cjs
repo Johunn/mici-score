@@ -1178,3 +1178,27 @@ test('search focus has a single explicit focus-visible treatment and portion ste
   assert.match(html, /data-act="pp" data-i=/);
   assert.match(html, /aria-pressed="\$\{!it\.g&&it\.p===k\}"/);
 });
+
+
+test('reopening a journal meal restores its saved feeling and notes for editing', () => {
+  assert.match(html, /ui\.mealEditId=e\.id[\s\S]*?ui\.ress=Number\.isFinite\(\+e\.r\)[\s\S]*?ui\.note=e\.note\|\|''/);
+  assert.match(html, /data-act="repeatEntry"[\s\S]*?Reprendre et modifier/);
+  assert.match(html, /data-act="cancelMealEdit"/);
+});
+
+test('saving an edited meal updates the existing journal entry instead of duplicating it', () => {
+  assert.match(html, /if\(ui\.mealEditId\)\{const existing=store\.entries\.find\(x=>String\(x\.id\)===String\(ui\.mealEditId\)\)/);
+  assert.match(html, /existing\.items=savedItems;existing\.r=ui\.ress;existing\.jeun=ui\.jeun;existing\.note=ui\.note\.trim\(\)/);
+  assert.match(html, /else store\.entries\.push\(\{id:now,ts:now/);
+  assert.match(html, /existing\.edited=now/);
+});
+
+test('last meals are promoted on the home screen and journal with full meal-edit actions', () => {
+  const home = extractBetween(html, 'function homeHTML(){', 'function recipesHTML(){');
+  const journal = extractBetween(html, 'function journalHTML(){', 'function learning()');
+  assert.ok(home.indexOf('MÉMOIRE RÉCENTE') < home.indexOf('MON HISTORIQUE'));
+  assert.ok(journal.indexOf('HISTORIQUE') < journal.indexOf('ÉVOLUTION'));
+  assert.match(journal, /Reprendre et modifier/);
+  assert.match(journal, /Corriger la note/);
+  assert.match(html, /\.recent-meals\{border:1px solid var\(--line\);border-radius:16px/);
+});
