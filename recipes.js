@@ -1110,7 +1110,7 @@ window.MICI_RECIPES = [
     "servings": 1,
     "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-aux-chicons/",
-    "sourceLabel": "Crohn / La rectocolite et nous — index de recettes, adaptation simplifiée MICI Score",
+    "sourceLabel": "Crohn / La rectocolite et nous — recette originale",
     "ingredients": [
       {
         "names": [
@@ -1137,11 +1137,14 @@ window.MICI_RECIPES = [
       "Cuire à cœur les aliments qui le nécessitent et assembler. Cette fiche simplifiée ne remplace pas la recette originale."
     ],
     "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
+    "sourceIngredientsVerified": true,
     "originalIngredients": [
-      "Source utilisée : index de recettes ; la fiche individuelle et ses quantités restent à identifier."
+      "700 g de chicons (réserver un demi-chicon pour la finition)",
+      "1 blanc de poireau",
+      "2 l de bouillon de poulet, frais ou à base d’un cube de bouillon",
+      "100 g de bacon"
     ],
-    "originalIngredientsVerified": false,
+    "originalIngredientsVerified": true,
     "adaptationVerified": false
   },
   {
