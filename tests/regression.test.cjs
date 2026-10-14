@@ -47,6 +47,7 @@ test('app shell loads the scoring module before its inline code', () => {
   assert.ok(html.includes("const APP_V='v6.0';"));
   assert.ok(html.includes('<html lang="fr" data-theme="amoled">'));
   assert.ok(html.includes(")?p.theme:'amoled';"));
+  assert.ok(coreModuleSource.includes("theme:'amoled',layout:'liste'"), 'new installations must default to the AMOLED theme');
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
