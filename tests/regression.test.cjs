@@ -10,6 +10,7 @@ const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const coreModuleSource = fs.readFileSync(path.join(root, 'score-core.js'), 'utf8');
 const swSource = fs.readFileSync(path.join(root, 'sw.js'), 'utf8');
+const recipesSource = fs.readFileSync(path.join(root, 'recipes.js'), 'utf8');
 
 function copy(value) {
   return JSON.parse(JSON.stringify(value));
@@ -44,7 +45,7 @@ test('app shell loads the scoring module before its inline code', () => {
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
-  assert.ok(html.includes("const APP_V='v6.1';"));
+  assert.ok(html.includes("const APP_V='v6.2';"));
   assert.doesNotMatch(html, /\/\*CORE_START\*\//);
   assert.doesNotMatch(html, /\/\*CORE_END\*\//);
 });
@@ -68,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v42';/);
+  assert.match(swSource, /const CACHE='mici-score-v43';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -342,7 +343,7 @@ test('backup import discards unknown journal fields', () => {
 test('score formula and scale explanations stay consistent', () => {
   assert.match(coreModuleSource, /const K=9;/);
   assert.match(coreModuleSource, /function rawScore\(lv\)\{return 10\*Math\.exp\(-penalty\(lv\)\/K\)\}/);
-  assert.ok(html.includes("const APP_V='v6.1';"));
+  assert.ok(html.includes("const APP_V='v6.2';"));
   assert.match(html, /Math\.min\(100,f\.L\[i\]\/4\*100\)/);
   assert.match(html, /Niveaux estimés de 0 à 4/);
   assert.match(html, /!arrNums\(f\.L,7,0,3\)/);
@@ -1126,7 +1127,7 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
   assert.match(html, /data-act="repeatEntry"/);
   assert.match(html, /const ui=\{tab:'calc',view:'home'/);
   assert.match(html, /else if\(a==='repeatEntry'\)[\s\S]*?filter\(x=>byId\(x\.id\)\)/);
-  assert.ok(html.includes("const APP_V='v6.1';"));
+  assert.ok(html.includes("const APP_V='v6.2';"));
 });
 
 
@@ -1167,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v42/);
+  assert.match(swSource, /mici-score-v43/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1201,4 +1202,32 @@ test('last meals are promoted on the home screen and journal with full meal-edit
   assert.match(journal, /Reprendre et modifier/);
   assert.match(journal, /Corriger la note/);
   assert.match(html, /\.recent-meals\{border:1px solid var\(--line\);border-radius:16px/);
+});
+
+
+test('recipe catalogue contains at least 15 documented ideas with resolvable local ingredients', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  assert.ok(Array.isArray(recipes));
+  assert.ok(recipes.length >= 15, 'recipe catalogue should contain more than four entries');
+  assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
+  assert.ok(recipes.every(r => r.title && r.category && r.summary && r.source.startsWith('https://')));
+  assert.ok(html.includes('Recettes à tester selon ta tolérance'));
+  const coreSandbox = { window: {} };
+  vm.createContext(coreSandbox);
+  new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(coreSandbox);
+  const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
+  const norm = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const recipe of recipes) {
+    assert.ok(recipe.ingredients.length >= 2, 'recipe needs ingredients: ' + recipe.title);
+    assert.ok(recipe.steps.length >= 2, 'recipe needs preparation steps: ' + recipe.title);
+    for (const ingredient of recipe.ingredients) {
+      const found = foods.some(food => ingredient.names.some(name =>
+        norm(food.n) === norm(name) || norm(food.n).startsWith(norm(name) + ' ')
+      ));
+      assert.ok(found, 'unresolvable ingredient in ' + recipe.title + ': ' + ingredient.names[0]);
+    }
+  }
 });
