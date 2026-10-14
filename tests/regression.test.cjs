@@ -1130,6 +1130,13 @@ test('home dashboard prioritizes tasks and safely restores a previously logged m
 });
 
 
+test('v6 merges the personal dashboard with the fast task-oriented entry point', () => {
+  assert.match(html, /Moins de recherche\\\.<br>Plus de repères\\\./);
+  assert.match(html, /data-act=\"startCompose\">＋ Composer un repas/);
+  assert.match(html, /Comprendre mon historique/);
+  assert.match(html, /Ressenti moyen · 7 jours/);
+});
+
 test('v5 uses a dedicated meal composer and personal-observation journal', () => {
   assert.match(html, /data-tab="calc">Aujourd’hui/);
   assert.match(html, /data-tab="compose">Composer/);
