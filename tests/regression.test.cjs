@@ -54,7 +54,7 @@ test('settings and journal note fields have accessible labels and focus support'
   assert.ok(html.includes('<label for="cid">Identifiant client Google</label><input type="text" id="cid"'));
   assert.ok(/<label for="enote">Note personnelle<\/label><textarea id="enote"/.test(html));
   assert.ok(html.includes(':focus-visible{outline:3px solid var(--accent);outline-offset:2px}'));
-  assert.ok(html.includes('<nav class="tabs" aria-label="Navigation">'));
+  assert.ok(html.includes('<nav class="tabs" aria-label="Navigation principale">'));
   assert.ok(html.includes('@media (prefers-reduced-motion:no-preference)'));
 });
 
@@ -67,8 +67,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module and uses the v37 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v37';/);
+test('service worker pre-caches the extracted scoring module and uses the v39 cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v39';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
