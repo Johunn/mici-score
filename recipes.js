@@ -1561,6 +1561,12 @@ window.MICI_RECIPES = [
             ],
             "grams": 100
         },
+        {
+            "names": [
+                "Cannelle"
+            ],
+            "grams": 1
+        }
     ],
     "steps": [
         "Préchauffez le four à 160 °C. Préparez une plaque recouverte de papier cuisson. Épluchez les pommes, retirez le cœur et coupez la chair en petits dés.",
@@ -1586,11 +1592,6 @@ window.MICI_RECIPES = [
             "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
         },
         {
-            "name": "Cannelle",
-            "amount": "Une pincée",
-            "reason": "Utilisée pour parfumer la compote, mais non intégrée au calcul du score."
-        },
-        {
             "name": "Jaune d’œuf",
             "amount": "Une petite quantité pour coller les extrémités",
             "reason": "La source ne précise pas la quantité ; non intégré au score."
@@ -1603,7 +1604,7 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
-    "scoreNote": "Score très partiel : seuls 100 g de pomme cuite sont comptés. La pâte filo/brick, la cannelle, l’édulcorant et le jaune d’œuf ne sont pas intégrés au calcul ; le score ne représente donc pas le gâteau complet."
+    "scoreNote": "Score très partiel : 100 g de pomme cuite et 1 g de cannelle sont comptés. La pâte filo/brick, l’édulcorant et le jaune d’œuf ne sont pas intégrés au calcul ; le score ne représente donc pas le gâteau complet."
   },
   {
     "id": "hachis-shepherd-pie",
