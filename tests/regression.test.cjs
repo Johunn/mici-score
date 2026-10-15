@@ -68,8 +68,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
   assert.ok(swSource.includes(".catch(()=>caches.open(CACHE).then(c=>c.match(r)))"));
 });
 
-test('service worker pre-caches the extracted scoring module and uses the v41 cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v57';/);
+test('service worker pre-caches the extracted scoring module and uses the current cache', () => {
+  assert.match(swSource, /const CACHE='mici-score-v58';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v57/);
+  assert.match(swSource, /mici-score-v58/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1184,7 +1184,7 @@ test('food and recipe catalogs use matching one-row search, sort, category, and 
   assert.match(html, /id="recipe-category"/);
   assert.match(html, /#app \.unified-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 142px 160px!important/);
   assert.match(html, /#app \.unified-search:focus-within\{border:2px solid var\(--accent\)!important;outline:none!important;box-shadow:none!important\}/);
-  assert.match(swSource, /const CACHE='mici-score-v57';/);
+  assert.match(swSource, /const CACHE='mici-score-v58';/);
 });
 
 test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
@@ -1193,7 +1193,7 @@ test('recipe search and sort share one row, search focus has no halo, and score 
   assert.match(html, /#app \.searchbox input\[type=search\]:focus,#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v57';/);
+  assert.match(swSource, /const CACHE='mici-score-v58';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
@@ -1254,6 +1254,18 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
       assert.ok(found, 'unresolvable ingredient in ' + recipe.title + ': ' + ingredient.names[0]);
     }
   }
+  const partialRecipes = recipes.filter(recipe => recipe.scoreNote);
+  assert.ok(partialRecipes.filter(recipe => recipe.unscoredIngredients && recipe.unscoredIngredients.length).length >= 5, 'partial recipes must list excluded ingredients and amounts');
+  assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
+  assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
+  const appleCakes = recipes.find(recipe => recipe.id === 'gateaux-pommes');
+  assert.ok(appleCakes, 'apple cakes recipe must exist');
+  assert.ok(appleCakes.ingredients.some(ingredient => ingredient.names.some(name => norm(name) === 'cannelle')), 'cinnamon must be included in the apple-cake score when listed as a scored ingredient');
+  assert.ok(!appleCakes.unscoredIngredients.some(ingredient => norm(ingredient.name) === 'cannelle'), 'cinnamon must not also be listed among unscored apple-cake ingredients');
+  assert.match(appleCakes.scoreNote, /100 g de pomme cuite et 1 g de cannelle sont comptés/i, 'apple-cake partial-score note must accurately list the scored ingredients');
+  assert.ok(html.includes('r.scoreNote?`<p class="notice">'), 'partial-score note must be visible');
+  assert.ok(html.includes('${esc(r.scoreNote)}</p>'), 'partial-score note must render its text');
+  assert.ok(html.includes('Ajouter les ingrédients comptés à mon assiette'), 'partial recipes must clarify what gets added to the plate');
 });
 
 test('recipes have a dedicated main-navigation entry and open the recipe catalogue', () => {
@@ -1271,7 +1283,7 @@ test('catalog and recipe search/sort stay on one row and score numbers are large
   assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v57';/);
+  assert.match(swSource, /const CACHE='mici-score-v58';/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {

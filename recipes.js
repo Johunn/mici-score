@@ -982,12 +982,38 @@ window.MICI_RECIPES = [
     "id": "potage-chou-fleur-saumon-adapte",
     "title": "Potage de chou-fleur au saumon fumé (adapté)",
     "category": "Soupe",
+    "servings": 1,
     "source": "https://www.crohn-larectocoliteetnous.be/potage-de-chou-fleur-au-saumon-fume/",
     "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
-    "summary": "Potage simplifié à partir de la recette publiée ; le chou-fleur et le saumon fumé ne sont pas tolérés de la même façon par tout le monde.",
-    "ingredients": [],
-    "steps": [],
-    "scoreDisabled": true,
+    "summary": "Adaptation MICI Score pour une portion du potage publié pour 2 personnes. La quantité de saumon est définie ici pour pouvoir établir une estimation, contrairement à la source.",
+    "ingredients": [
+        {
+            "names": [
+                "Chou-fleur cuit"
+            ],
+            "grams": 250
+        },
+        {
+            "names": [
+                "Poireau cuit (blanc)"
+            ],
+            "grams": 80
+        },
+        {
+            "names": [
+                "Saumon fumé"
+            ],
+            "grams": 25
+        }
+    ],
+    "steps": [
+        "Retirez les feuilles et le cœur dur du chou-fleur, puis séparez-le en petites fleurettes. Nettoyez les blancs de poireaux et coupez-les en rondelles.",
+        "Versez le bouillon de légumes dans une casserole et ajoutez les fleurettes de chou-fleur et les rondelles de poireau. Portez à ébullition, puis baissez le feu et laissez cuire doucement environ 15 à 20 minutes, jusqu’à ce que les légumes soient tendres.",
+        "Retirez la casserole du feu et mixez les légumes avec le bouillon jusqu’à obtenir un potage onctueux. Si la texture est trop épaisse, ajoutez un peu d’eau chaude ou de bouillon ; si elle est trop fluide, faites-la réduire quelques minutes à feu doux.",
+        "Coupez le saumon fumé en fines lanières. Répartissez le potage dans un bol, puis ajoutez le saumon au dernier moment afin qu’il garde sa texture et ne cuise pas excessivement.",
+        "Goûtez avant de saler : le saumon fumé et le bouillon peuvent déjà apporter suffisamment de sel. Servez chaud."
+    ],
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 chou-fleur",
@@ -995,8 +1021,16 @@ window.MICI_RECIPES = [
       "1 l de bouillon de légumes",
       "Quelques lanières de saumon fumé"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Bouillon de légumes",
+            "amount": "Environ 500 ml pour une portion",
+            "reason": "Le bouillon apporte le liquide de cuisson, mais n’est pas intégré au calcul du score."
+        }
+    ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel : le chou-fleur, le poireau et 25 g de saumon fumé sont comptés. La quantité de saumon est une hypothèse d’adaptation ; le bouillon n’est pas inclus dans le calcul."
   },
   {
     "id": "salade-pates-mediterr",
@@ -1182,20 +1216,47 @@ window.MICI_RECIPES = [
     "title": "Potage au potiron digeste",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation MICI Score pour une portion. La source indique des quantités pour 2 personnes tout en affichant 4 portions : les quantités de cette fiche sont donc une proposition adaptée, pas une reproduction exacte.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-au-potiron-digeste/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
-    "steps": [],
-    "scoreDisabled": true,
+    "ingredients": [
+        {
+            "names": [
+                "Potiron ou butternut cuit"
+            ],
+            "grams": 250
+        },
+        {
+            "names": [
+                "Poireau cuit (blanc)"
+            ],
+            "grams": 50
+        }
+    ],
+    "steps": [
+        "Coupez le blanc de poireau en fines rondelles. Si vous utilisez du potiron frais, retirez la peau et les graines, puis coupez la chair en dés réguliers. Avec du potiron surgelé, vous pouvez l’ajouter directement.",
+        "Versez le bouillon dans une casserole et portez-le à ébullition. Ajoutez le poireau et le potiron, puis attendez la reprise de l’ébullition.",
+        "Baissez le feu et laissez mijoter doucement jusqu’à ce que les légumes soient très tendres. La source indique environ 15 minutes après la reprise de l’ébullition ; prolongez si les morceaux résistent à la pointe d’un couteau.",
+        "Retirez la casserole du feu et mixez soigneusement jusqu’à obtenir une texture veloutée. Si le potage vous semble trop épais, ajustez sa consistance avec un peu de bouillon chaud.",
+        "Goûtez et ajustez l’assaisonnement selon votre tolérance. Servez chaud, ou laissez refroidir avant de répartir en portions pour la conservation."
+    ],
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "750 g de potiron coupé en dés",
       "2 blancs de poireaux",
       "1,5 l de bouillon de poulet (frais ou en cube)"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Bouillon de poulet",
+            "amount": "Environ 400 ml pour une portion",
+            "reason": "Le bouillon est nécessaire à la recette mais n’est pas intégré au calcul du score."
+        }
+    ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel : seuls le potiron et le poireau sont comptés. Le bouillon n’entre pas dans le score. Les quantités affichées ici sont une adaptation d’une source dont le nombre de portions est contradictoire."
   },
   {
     "id": "vive-chou-fleur-oeuf",
@@ -1230,12 +1291,32 @@ window.MICI_RECIPES = [
     "title": "Plat au four facile à digérer",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation MICI Score pour une portion, basée sur la recette publiée pour 4 personnes. Le bouillon, le lait et la chapelure restent dans la préparation, mais ne sont pas inclus dans le calcul du score.",
     "source": "https://www.crohn-larectocoliteetnous.be/plat-au-four-facile-digerer/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
-    "steps": [],
-    "scoreDisabled": true,
+    "ingredients": [
+        {
+            "names": [
+                "Pomme de terre vapeur sans peau"
+            ],
+            "grams": 150
+        },
+        {
+            "names": [
+                "Courgette cuite sans peau"
+            ],
+            "grams": 120
+        }
+    ],
+    "steps": [
+        "Épluchez les pommes de terre, coupez-les en morceaux de taille comparable et faites-les cuire dans une casserole d’eau jusqu’à ce qu’elles soient tendres. Égouttez-les soigneusement.",
+        "Écrasez les pommes de terre encore chaudes. Incorporez le lait écrémé progressivement jusqu’à obtenir une purée souple, puis assaisonnez avec un peu de sel, de poivre et de noix de muscade. Ajoutez le persil selon votre goût.",
+        "Préchauffez le four à 200 °C. Coupez la courgette en rondelles régulières afin qu’elles cuisent uniformément.",
+        "Dans une petite casserole, faites chauffer un fond d’eau avec le cube de bouillon. Ajoutez les rondelles de courgette et laissez-les mijoter environ 5 minutes à feu moyen, jusqu’à ce qu’elles commencent à s’attendrir.",
+        "Égouttez les courgettes si nécessaire, puis répartissez-les au fond d’un petit plat allant au four. Recouvrez uniformément avec la purée de pommes de terre et lissez la surface.",
+        "Parsemez de chapelure pour obtenir une croûte dorée. Enfournez 15 à 20 minutes, jusqu’à ce que le dessus soit légèrement doré et que le plat soit chaud à cœur. Laissez reposer quelques minutes avant de servir."
+    ],
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "600 g de pommes de terre",
@@ -1247,8 +1328,31 @@ window.MICI_RECIPES = [
       "Poivre et sel",
       "Chapelure"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Lait écrémé",
+            "amount": "Environ 30 ml",
+            "reason": "Le lait est utilisé pour assouplir la purée, mais n’est pas intégré au score de cette adaptation."
+        },
+        {
+            "name": "Bouillon de légumes pauvre en matières grasses",
+            "amount": "Environ 1/4 de cube",
+            "reason": "Quantité répartie sur les quatre portions de la recette originale ; non intégrée au score."
+        },
+        {
+            "name": "Chapelure",
+            "amount": "Environ 1 cuillère à soupe",
+            "reason": "Quantité proposée pour cette adaptation, car la source ne la précise pas ; non intégrée au score."
+        },
+        {
+            "name": "Persil, noix de muscade, sel et poivre",
+            "amount": "Selon le goût",
+            "reason": "Assaisonnements non intégrés au calcul du score."
+        }
+    ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel : les pommes de terre et les courgettes sont comptées. Le lait, le cube de bouillon, la chapelure et les assaisonnements ne sont pas intégrés au calcul."
   },
   {
     "id": "salade-poulet-curry",
@@ -1447,12 +1551,32 @@ window.MICI_RECIPES = [
     "title": "Gâteaux aux pommes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation MICI Score d’une recette de 6 petits gâteaux. La pâte filo ou à brick est essentielle à la recette mais n’est pas comptée dans le score de cette fiche.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-gateaux-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
-    "steps": [],
-    "scoreDisabled": true,
+    "ingredients": [
+        {
+            "names": [
+                "Pomme cuite sans peau"
+            ],
+            "grams": 100
+        },
+        {
+            "names": [
+                "Cannelle"
+            ],
+            "grams": 1
+        }
+    ],
+    "steps": [
+        "Préchauffez le four à 160 °C. Préparez une plaque recouverte de papier cuisson. Épluchez les pommes, retirez le cœur et coupez la chair en petits dés.",
+        "Placez les morceaux de pomme dans une petite casserole avec un fond d’eau. Faites-les cuire à feu doux en remuant régulièrement jusqu’à ce qu’ils se défassent et forment une compote épaisse. Ajoutez un peu d’eau si elles attachent, mais évitez une compote trop liquide.",
+        "Ajoutez une pincée de cannelle et, si vous le souhaitez, un édulcorant compatible avec vos préférences. Augmentez brièvement le feu en remuant pour faire évaporer l’excès d’humidité, puis retirez du feu et laissez refroidir jusqu’à ce que la compote soit tiède.",
+        "Déroulez la pâte filo ou à brick et découpez des bandes adaptées à la taille des petits gâteaux. Déposez une petite cuillerée de compote sur une bande, sans trop la garnir : une quantité excessive risque de faire éclater le rouleau à la cuisson.",
+        "Roulez la bande autour de la compote et repliez les extrémités. La recette originale indique de les coller avec un peu de jaune d’œuf ; utilisez-en une petite quantité si vous choisissez cette finition.",
+        "Déposez les gâteaux sur la plaque en laissant un peu d’espace entre eux. Faites cuire environ 20 minutes à 160 °C, jusqu’à ce que la pâte soit sèche et légèrement dorée. Laissez tiédir avant de manipuler, car la compote reste chaude."
+    ],
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 pommes",
@@ -1461,8 +1585,26 @@ window.MICI_RECIPES = [
       "Édulcorant selon le goût",
       "Jaune d’œuf pour fermer les gâteaux (mentionné dans la préparation, quantité non précisée)"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Pâte filo ou pâte à brick",
+            "amount": "Environ 1/3 du paquet pour deux petits gâteaux",
+            "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
+        },
+        {
+            "name": "Jaune d’œuf",
+            "amount": "Une petite quantité pour coller les extrémités",
+            "reason": "La source ne précise pas la quantité ; non intégré au score."
+        },
+        {
+            "name": "Édulcorant",
+            "amount": "Facultatif, selon le goût",
+            "reason": "Quantité variable et non intégrée au score."
+        }
+    ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score très partiel : 100 g de pomme cuite et 1 g de cannelle sont comptés. La pâte filo/brick, l’édulcorant et le jaune d’œuf ne sont pas intégrés au calcul ; le score ne représente donc pas le gâteau complet."
   },
   {
     "id": "hachis-shepherd-pie",
@@ -1640,12 +1782,32 @@ window.MICI_RECIPES = [
     "title": "Wrap festif au fromage frais et au saumon fumé",
     "category": "Repas rapide",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation MICI Score d’un wrap apéritif. La recette originale ne précise pas les quantités de fromage frais et de saumon ; les quantités utilisées pour le calcul sont des estimations éditoriales.",
     "source": "https://www.crohn-larectocoliteetnous.be/wrap-festif-au-fromage-frais-et-au-saumon-fume/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
-    "steps": [],
-    "scoreDisabled": true,
+    "ingredients": [
+        {
+            "names": [
+                "Tortilla ou wrap de blé"
+            ],
+            "grams": 60
+        },
+        {
+            "names": [
+                "Saumon fumé"
+            ],
+            "grams": 30
+        }
+    ],
+    "steps": [
+        "Posez un wrap sur une assiette adaptée au micro-ondes et réchauffez-le quelques secondes, juste assez pour l’assouplir. Il doit rester facile à rouler sans devenir sec.",
+        "Laissez le wrap refroidir quelques instants. Étalez une fine couche régulière de fromage frais light sur toute la surface, en laissant une petite marge sur un bord pour faciliter la fermeture.",
+        "Déposez une tranche de saumon fumé sur le fromage. Si la tranche ne couvre pas toute la surface, répartissez-la pour que chaque bouchée contienne un peu de garniture.",
+        "Poivrez légèrement, salez uniquement si nécessaire et parsemez d’aneth frais ou séché.",
+        "Roulez le wrap fermement sans écraser la garniture. Placez la jointure en dessous et, si le wrap est préparé à l’avance, gardez-le au frais jusqu’au découpage.",
+        "Coupez le rouleau en rondelles régulières pour former les bouchées. Plantez un cure-dents dans chaque morceau et servez frais."
+    ],
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 wraps de taille moyenne",
@@ -1654,8 +1816,21 @@ window.MICI_RECIPES = [
       "Poivre et sel",
       "Aneth frais ou séché"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Fromage frais light",
+            "amount": "Environ 25 g pour un wrap",
+            "reason": "Quantité proposée pour l’adaptation ; cet ingrédient n’est pas intégré au score faute d’entrée adaptée dans le catalogue."
+        },
+        {
+            "name": "Aneth, sel et poivre",
+            "amount": "Une pincée, selon le goût",
+            "reason": "Assaisonnements non intégrés au calcul du score."
+        }
+    ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel : le wrap et 30 g de saumon fumé sont comptés. La quantité de saumon est une hypothèse d’adaptation ; le fromage frais, le sel, le poivre et l’aneth ne sont pas intégrés au score faute de quantité/catalogue correspondant."
   },
   {
     "id": "tortilla-espagnole",
