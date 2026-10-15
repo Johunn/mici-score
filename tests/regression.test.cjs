@@ -1262,8 +1262,7 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   const partialRecipes = recipes.filter(recipe => recipe.scoreNote);
   assert.ok(partialRecipes.filter(recipe => recipe.unscoredIngredients && recipe.unscoredIngredients.length).length >= 5, 'partial recipes must list excluded ingredients and amounts');
   const disabledRecipes = recipes.filter(recipe => recipe.scoreDisabled);
-  assert.equal(disabledRecipes.length, 3, 'only the three recipes that cannot produce a meaningful single score should be disabled');
-  assert.ok(disabledRecipes.every(recipe => /Score désactivé/i.test(recipe.scoreNote || '') && recipe.unscoredIngredients?.length), 'every disabled recipe must state the concrete blocker');
+  assert.equal(disabledRecipes.length, 0, 'blocked recipes must be removed from the catalogue');
   assert.ok(recipes.filter(recipe => !recipe.scoreDisabled).every(recipe => recipe.ingredients.length > 0), 'every enabled recipe must have ingredients for its score');
   assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
@@ -1340,9 +1339,9 @@ test('les recettes à adaptation non validée sont scorables ou bloquées avec u
   new vm.Script(recipesSource, { filename: 'recipes.js:partial-coverage-test' }).runInContext(recipeSandbox);
   const recipes = recipeSandbox.window.MICI_RECIPES;
   const pending = recipes.filter(recipe => recipe.adaptationVerified === false);
-  assert.ok(pending.length >= 52, 'all currently pending source-backed adaptations must be covered');
+  assert.equal(pending.length, 49, '49 pending source-backed adaptations remain after removing the blocked cards');
   const disabled = pending.filter(recipe => recipe.scoreDisabled);
-  assert.equal(disabled.length, 3, 'only the source-unverified salad and two multi-recipe cards should be blocked');
+  assert.equal(disabled.length, 0, 'blocked recipes must be removed from the catalogue');
   for (const recipe of pending) {
     assert.ok(Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0, recipe.id + ' must retain the known ingredients');
     assert.ok(recipe.scoreNote, recipe.id + ' must explain score coverage or the blocker');
@@ -1352,7 +1351,7 @@ test('les recettes à adaptation non validée sont scorables ou bloquées avec u
       assert.ok(recipe.unscoredIngredients.length > 0, recipe.id + ' must state the blocking reason');
     }
   }
-  assert.equal(pending.length - disabled.length, 49, '49 of the 52 pending adaptations should have usable partial scores');
+  assert.equal(pending.length - disabled.length, 49, 'all 49 remaining pending adaptations should have usable partial scores');
 });
 
 test('three source-backed recipes include their main scoreable ingredients and name exclusions precisely', () => {
