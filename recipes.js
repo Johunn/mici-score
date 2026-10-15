@@ -188,8 +188,8 @@ window.MICI_RECIPES = [
     "category": "Repas complet",
     "servings": 1,
     "summary": "Une combinaison tendre sans sauce lourde.",
-    "source": "https://www.ibdcentrebc.ca/recipes/",
-    "sourceLabel": "Inspiration générale — IBD Centre of BC (recette adaptée par MICI Score)",
+    "source": "https://www.ibdcentrebc.ca/2021/02/low-insoluble-fibre-diet/",
+    "sourceLabel": "Source nutritionnelle générale — poissons et pommes de terre bien cuits (recette composée par MICI Score)",
     "ingredients": [
       {
         "names": [
