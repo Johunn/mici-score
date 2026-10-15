@@ -1102,5 +1102,312 @@ window.MICI_RECIPES = [
     "prepTime": "10 min",
     "cookTime": null,
     "restTime": "2 à 4 h au réfrigérateur"
+  },
+  {
+    "id": "tortilla-espagnole-officielle",
+    "title": "Tortilla espagnole",
+    "category": "Repas complet",
+    "servings": 2,
+    "servingsLabel": "2 portions",
+    "prepTime": "5 min",
+    "cookTime": "15 min",
+    "restTime": null,
+    "summary": "Recette publiée par l’association belge Crohn / La rectocolite et nous. Les quantités utilisées pour le score sont estimées par portion à partir des unités de la source.",
+    "source": "https://www.crohn-larectocoliteetnous.be/tortilla-espagnole/",
+    "ingredients": [
+      {
+        "names": [
+          "Lardons ou bacon"
+        ],
+        "grams": 75
+      },
+      {
+        "names": [
+          "Œuf"
+        ],
+        "grams": 75
+      },
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 50
+      }
+    ],
+    "originalIngredients": [
+      "150 g d’allumettes de bacon",
+      "3 œufs",
+      "Un trait de lait demi-écrémé",
+      "1 grosse pomme de terre bouillie",
+      "½ courgette",
+      "1 carotte",
+      "Poivre et sel",
+      "Noix de muscade"
+    ],
+    "steps": [
+      "Découpez la pomme de terre bouillie en dés.",
+      "Lavez et découpez la courgette en dés.",
+      "Lavez et râpez la carotte.",
+      "Battez les œufs avec un peu de lait. Salez, poivrez et ajoutez la noix de muscade.",
+      "Faites frire les allumettes de bacon 5 minutes dans un peu d’huile. Mieux vaut utiliser une poêle antiadhésive.",
+      "Ajoutez l’œuf.",
+      "Ajoutez la pomme de terre, la courgette et la carotte.",
+      "Faites frire la tortilla jusqu’à ce que l’œuf soit bien cuit.",
+      "Vous pouvez couvrir la poêle, la tortilla cuira un peu plus vite."
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Lait demi-écrémé",
+        "amount": "Un trait, quantité non précisée",
+        "reason": "Quantité non précisée dans la source ; non compté."
+      },
+      {
+        "name": "Huile de cuisson",
+        "amount": "Quantité non précisée",
+        "reason": "La source indique un peu d’huile ; non comptée."
+      },
+      {
+        "name": "Poivre, sel et noix de muscade",
+        "amount": "Selon le goût",
+        "reason": "Assaisonnements non comptés."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : bacon, œuf, pomme de terre, courgette et carotte. Les poids de la pomme de terre et des légumes sont estimés à partir des unités de la source ; lait, huile et assaisonnements ne sont pas comptés.",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (source vérifiée)",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "soupe-carottes-gingembre-officielle",
+    "title": "Soupe de carottes au gingembre",
+    "category": "Soupe",
+    "servings": 4,
+    "servingsLabel": "4 portions",
+    "prepTime": "15 min",
+    "cookTime": "15 min",
+    "restTime": null,
+    "summary": "Recette publiée par l’association belge Crohn / La rectocolite et nous.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-soupe-de-carottes-gingembredelicieuse/",
+    "ingredients": [
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 125
+      },
+      {
+        "names": [
+          "Gingembre frais"
+        ],
+        "grams": 2
+      },
+      {
+        "names": [
+          "Bouillon clair"
+        ],
+        "grams": 500
+      },
+      {
+        "names": [
+          "Curry en poudre"
+        ],
+        "grams": 0.5
+      },
+      {
+        "names": [
+          "Cumin"
+        ],
+        "grams": 0.25
+      }
+    ],
+    "originalIngredients": [
+      "500 g de carottes",
+      "2 cm de gingembre frais",
+      "2 litres de bouillon de poule (maison ou un cube)",
+      "1 cuillère à café de curry doux",
+      "½ cuillère à café de cumin (facultatif si mal toléré)",
+      "Sel et poivre"
+    ],
+    "steps": [
+      "Épluchez et lavez les carottes. Coupez-les en morceaux.",
+      "Épluchez le gingembre et détaillez-le en tout petits morceaux.",
+      "Portez le bouillon à ébullition.",
+      "Ajoutez-y les carottes et le gingembre.",
+      "Assaisonnez avec le curry, le cumin, le sel et le poivre.",
+      "Cuisez le tout jusqu’à ce que les légumes soient tendres.",
+      "Mixez la soupe."
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Sel et poivre",
+        "amount": "Selon le goût",
+        "reason": "Assaisonnements non comptés."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : carotte, gingembre, bouillon, curry et cumin. Le gingembre est converti en grammes à titre estimatif ; sel et poivre ne sont pas comptés.",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (source vérifiée)",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "petit-gateau-compote-officiel",
+    "title": "Petit gâteau à la compote de pommes",
+    "category": "Dessert",
+    "servings": 10,
+    "servingsLabel": "10 petits gâteaux ou 1 grand gâteau",
+    "prepTime": "15 min",
+    "cookTime": "20 à 25 min (petits) ou 50 min (grand)",
+    "restTime": null,
+    "summary": "Recette publiée par l’association belge Crohn / La rectocolite et nous. Le score porte sur un petit gâteau ; la source propose aussi une version grand gâteau.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-petit-gateau-a-la-compote-de-pommes/",
+    "ingredients": [
+      {
+        "names": [
+          "Œuf"
+        ],
+        "grams": 5
+      },
+      {
+        "names": [
+          "Sucre (1 cuillère)"
+        ],
+        "grams": 6
+      },
+      {
+        "names": [
+          "Compote sans morceaux"
+        ],
+        "grams": 6
+      }
+    ],
+    "originalIngredients": [
+      "1 œuf",
+      "60 g de sucre",
+      "60 g de farine fermentante (ou 60 g de farine classique et 2 g de levure chimique)",
+      "60 g de compote de pommes fine sans sucre"
+    ],
+    "steps": [
+      "Préchauffez le four à 180 °C.",
+      "Battez l’œuf entier avec le sucre à l’aide d’un mixer jusqu’à ce qu’il devienne épais et jaune clair.",
+      "Ajoutez délicatement et petit à petit la compote de pommes et la farine au mélange d’œufs.",
+      "Répartissez le mélange dans de petits moules ou dans un grand moule à gâteau.",
+      "Remplissez les moules aux trois quarts pour que le gâteau puisse encore lever un peu.",
+      "Placez le gâteau au four. Pour les petits gâteaux, laissez cuire 20 à 25 minutes et 50 minutes pour un grand gâteau. Vérifiez la cuisson avec une pique en bois : elle doit ressortir sèche."
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Farine fermentante (ou farine et levure chimique)",
+        "amount": "60 g pour la recette, soit environ 6 g par petit gâteau",
+        "reason": "Pas d’entrée de farine fermentante suffisamment fidèle dans le catalogue ; non comptée."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par petit gâteau : œuf, sucre et compote. La farine (ingrédient important de la recette) n’est pas comptée ; le score ne représente donc pas l’ensemble du gâteau.",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (source vérifiée)",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "hachis-shepherd-pie-officiel",
+    "title": "Hachis parmentier ou Shepherd’s Pie",
+    "category": "Repas complet",
+    "servings": 4,
+    "servingsLabel": "4 portions",
+    "prepTime": "15 min",
+    "cookTime": "25 min",
+    "restTime": null,
+    "summary": "Recette publiée par l’association belge Crohn / La rectocolite et nous. Le score est partiel, car la viande et plusieurs ingrédients de la sauce ne sont pas représentés fidèlement dans le calcul.",
+    "source": "https://www.crohn-larectocoliteetnous.be/recette-shepherds-pie-minute/",
+    "ingredients": [
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 250
+      },
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Haricots verts cuits"
+        ],
+        "grams": 37.5
+      }
+    ],
+    "originalIngredients": [
+      "1 kg de pommes de terre épluchées et coupées en dés",
+      "2 cuillères à café de sel",
+      "2 cuillères à café de fromage double-crème light",
+      "120 ml de crème de soja",
+      "1 cuillère à soupe d’huile d’olive",
+      "800 g de haché d’agneau ou de poulet pour 4 portions",
+      "2 cuillères à café de poivre noir fraîchement moulu",
+      "1 carotte coupée",
+      "2 cuillères à soupe de beurre",
+      "2 cuillères à soupe de farine sans gluten",
+      "340 ml de bouillon de viande sans oignon ni ail",
+      "1 cuillère à soupe de sauce Worcester ou sauce soja sans gluten",
+      "150 g de haricots verts (ou une carotte supplémentaire)",
+      "1 cuillère à soupe de thym frais haché",
+      "1 cuillère à soupe d’huile d’ail",
+      "2 cuillères à soupe de persil frais pour la finition"
+    ],
+    "steps": [
+      "Placez les pommes de terre dans une grande casserole et couvrez d’eau. Ajoutez une cuillère à café de sel et faites cuire à feu vif.",
+      "Réduisez la température et laissez les pommes de terre mijoter pendant environ 12 minutes jusqu’à ce qu’elles soient cuites.",
+      "Faites chauffer l’huile dans une grande poêle, pendant que les pommes de terre cuisent. Ajoutez la viande (poulet ou agneau) et le reste du sel et du poivre. Faites brunir la viande pendant 4 à 6 minutes en remuant.",
+      "Faites s’écouler la graisse excédentaire de la poêle et ajoutez la carotte. Faites cuire encore 5 minutes en remuant régulièrement.",
+      "Égouttez les pommes de terre et mettez-les dans un grand bol. Ajoutez-y le fromage double-crème light et la crème de soja, puis écrasez jusqu’à obtention d’un mélange onctueux. Ajoutez du sel selon le goût.",
+      "Faites fondre le beurre dans une petite casserole. Ajoutez la farine et battez vigoureusement pendant deux minutes.",
+      "Continuez à battre tout en ajoutant le bouillon de viande et la sauce Worcester ou la sauce soja sans gluten. Laissez cuire encore une minute jusqu’à épaississement. Versez la sauce sur la viande et ajoutez les haricots (ou une carotte supplémentaire) et le thym.",
+      "Préchauffez le four à 200 °C.",
+      "Placez le mélange de viande dans un plat allant au four. Répartissez uniformément la purée de pommes de terre dessus et enfournez 3 à 4 minutes, jusqu’à ce que la couche supérieure soit dorée.",
+      "Retirez le plat du four, arrosez d’huile d’ail, ajoutez le persil et servez chaud."
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Haché d’agneau ou de poulet",
+        "amount": "800 g pour 4 portions",
+        "reason": "Aucun équivalent fidèle au haché de cette recette n’est utilisé ; non compté."
+      },
+      {
+        "name": "Fromage double-crème light et crème de soja",
+        "amount": "2 c. à café et 120 ml pour la recette",
+        "reason": "Aucun équivalent suffisamment fidèle au catalogue ; non comptés."
+      },
+      {
+        "name": "Huile d’olive, beurre, farine, bouillon, sauce Worcester/soja, huile d’ail",
+        "amount": "Quantités de la recette source",
+        "reason": "Non intégrés au score faute de correspondances fidèles ou de quantité représentée."
+      },
+      {
+        "name": "Sel, poivre, thym et persil",
+        "amount": "Selon la recette source",
+        "reason": "Assaisonnements non comptés."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : pommes de terre, carotte et haricots verts. La viande hachée, les matières grasses et la sauce ne sont pas comptées ; ce score ne représente donc pas le hachis complet.",
+    "sourceLabel": "Recette originale — Crohn / La rectocolite et nous (source vérifiée)",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
   }
 ];
