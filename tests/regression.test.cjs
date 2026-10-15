@@ -1256,7 +1256,7 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   }
   const partialRecipes = recipes.filter(recipe => recipe.scoreNote);
   assert.ok(partialRecipes.filter(recipe => recipe.unscoredIngredients && recipe.unscoredIngredients.length).length >= 5, 'partial recipes must list excluded ingredients and amounts');
-  assert.ok(recipes.filter(recipe => recipe.scoreNote && !recipe.scoreDisabled && recipe.ingredients.length).length >= 40, 'most formerly disabled recipes must now have an explicit partial score');
+  assert.equal(recipes.filter(recipe => recipe.scoreDisabled || !recipe.ingredients.length).length, 0, 'every catalogue recipe must have a score or an explicit partial score');
   assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
   const appleCakes = recipes.find(recipe => recipe.id === 'gateaux-pommes');
