@@ -1523,6 +1523,12 @@ window.MICI_RECIPES = [
                 "Pomme cuite sans peau"
             ],
             "grams": 100
+        },
+        {
+            "names": [
+                "Cannelle"
+            ],
+            "grams": 1
         }
     ],
     "steps": [
