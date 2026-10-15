@@ -4261,7 +4261,7 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel : banane, avoine, amandes, noix de coco, raisins secs et margarine sont comptés. L’avoine cuite à l’eau est une approximation des flocons secs utilisés dans la pâte ; les quantités par portion sont indicatives.",
+    "scoreNote": "Score estimatif construit à partir des six ingrédients listés dans la source. Les quantités sont ramenées à une portion ; les flocons d’avoine cuits à l’eau et la margarine en fine couche sont des approximations des formes utilisées dans la recette.",
     "unscoredIngredients": []
   },
   {
