@@ -1258,6 +1258,11 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   assert.ok(partialRecipes.filter(recipe => recipe.unscoredIngredients && recipe.unscoredIngredients.length).length >= 5, 'partial recipes must list excluded ingredients and amounts');
   assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
+  const appleCakes = recipes.find(recipe => recipe.id === 'gateaux-pommes');
+  assert.ok(appleCakes, 'apple cakes recipe must exist');
+  assert.ok(!appleCakes.ingredients.some(ingredient => ingredient.names.some(name => norm(name) === 'cannelle')), 'cinnamon must not be included in the apple-cake score');
+  assert.ok(appleCakes.unscoredIngredients.some(ingredient => norm(ingredient.name) === 'cannelle'), 'cinnamon must be listed among unscored apple-cake ingredients');
+  assert.match(appleCakes.scoreNote, /cannelle.*ne sont pas intégrés au calcul/i, 'apple-cake partial-score note must agree with the ingredients included in the score');
   assert.ok(html.includes('r.scoreNote?`<p class="notice">'), 'partial-score note must be visible');
   assert.ok(html.includes('${esc(r.scoreNote)}</p>'), 'partial-score note must render its text');
   assert.ok(html.includes('Ajouter les ingrédients comptés à mon assiette'), 'partial recipes must clarify what gets added to the plate');
