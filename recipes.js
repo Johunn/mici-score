@@ -1080,19 +1080,19 @@ window.MICI_RECIPES = [
       }
     ],
     "steps": [],
-    "scoreDisabled": false,
+    "scoreDisabled": true,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
       "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
     "adaptationVerified": false,
-    "scoreNote": "Score ultra-partiel : seules 150 g de pâtes blanches (portion estimée à partir du titre) sont comptées. La liste complète des ingrédients de la source n’est pas vérifiée ; ce score ne représente pas la salade complète.",
+    "scoreNote": "Score désactivé : la liste complète des ingrédients de la source n’a pas pu être vérifiée. Un score limité aux pâtes seules serait trompeur pour une salade composée ; ne pas interpréter cette fiche comme une recette scorée.",
     "unscoredIngredients": [
       {
-        "name": "Tous les autres ingrédients éventuels de la salade",
-        "amount": "Non vérifié",
-        "reason": "Liste complète de la source non vérifiée ; non comptés dans le score."
+        "name": "Ingrédients de la salade",
+        "amount": "Liste source complète non vérifiée",
+        "reason": "Aucun score n’est calculé tant que la liste complète n’est pas vérifiée."
       }
     ]
   },
@@ -1496,6 +1496,18 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
+          "Vermicelles ou nouilles de riz"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Bouillon clair"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
           "Poulet rôti du commerce"
         ],
         "grams": 100
@@ -1508,7 +1520,7 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
-          "Huile d'olive"
+          "Huile d'olive (1 cuillère)"
         ],
         "grams": 22
       },
@@ -1517,6 +1529,18 @@ window.MICI_RECIPES = [
           "Sauce soja"
         ],
         "grams": 15
+      },
+      {
+        "names": [
+          "Gingembre frais"
+        ],
+        "grams": 2
+      },
+      {
+        "names": [
+          "Citron (jus)"
+        ],
+        "grams": 5
       }
     ],
     "steps": [],
@@ -1537,32 +1561,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel calculé sur les ingrédients reconnus de la recette source (2 portions). Les poids d’une courgette et de deux carottes sont estimés par portion ; les nouilles de riz, le bouillon, le jus de citron vert, le gingembre et les assaisonnements ne sont pas comptés.",
+    "scoreNote": "Score partiel par portion estimée : courgette, carotte, nouilles de riz, bouillon clair, poulet, ketchup, huile, sauce soja, gingembre et jus de citron sont comptés. Le jus de citron est utilisé comme approximation du citron vert ; sel et poivre ne sont pas comptés.",
     "unscoredIngredients": [
-      {
-        "name": "Nouilles de riz",
-        "amount": "200 g pour 2 portions (100 g par portion)",
-        "reason": "Aucun aliment correspondant n’est disponible dans le catalogue ; non remplacé par des pâtes de blé."
-      },
-      {
-        "name": "Bouillon de poulet",
-        "amount": "200 ml pour 2 portions (100 ml par portion)",
-        "reason": "Le catalogue ne permet pas de distinguer de façon fidèle le bouillon préparé du cube concentré."
-      },
-      {
-        "name": "Jus de citron vert",
-        "amount": "½ citron vert pour 2 portions",
-        "reason": "Quantité exprimée en fruit et non pesée ; non intégré au calcul."
-      },
-      {
-        "name": "Gingembre frais",
-        "amount": "2 cm pour 2 portions",
-        "reason": "Aucun aliment correspondant n’est disponible dans le catalogue."
-      },
       {
         "name": "Poivre et sel",
         "amount": "Selon le goût",
-        "reason": "Quantités non précisées et non intégrées au calcul."
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -1803,13 +1807,13 @@ window.MICI_RECIPES = [
         "names": [
           "Curry en poudre"
         ],
-        "grams": 3
+        "grams": 2
       },
       {
         "names": [
           "Fromage blanc 0 %"
         ],
-        "grams": 30
+        "grams": 15
       }
     ],
     "steps": [],
@@ -1824,17 +1828,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel calculé sur les ingrédients reconnus de la recette source (2 portions). Les conversions du curry et du fromage blanc en grammes sont estimées ; le poivre, le sel et le curcuma facultatif ne sont pas comptés.",
+    "scoreNote": "Score partiel : poulet, curry et fromage blanc sont comptés. Le poulet rôti est un proxy des dés de poulet de la source ; la conversion du curry en grammes est estimée.",
     "unscoredIngredients": [
       {
         "name": "Poivre et sel",
         "amount": "Selon le goût",
-        "reason": "Quantités non précisées et non intégrées au calcul."
+        "reason": "Quantités non précisées ; non comptées."
       },
       {
         "name": "Curcuma",
         "amount": "Une pincée facultative",
-        "reason": "Quantité non précise et aliment non intégré au calcul."
+        "reason": "Quantité non précise ; non comptée."
       }
     ]
   },
@@ -1849,9 +1853,39 @@ window.MICI_RECIPES = [
     "ingredients": [
       {
         "names": [
-          "Carotte crue"
+          "Saumon cuit"
+        ],
+        "grams": 125
+      },
+      {
+        "names": [
+          "Fromage à tartiner (type Philadelphia)"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Carotte cuite"
         ],
         "grams": 150
+      },
+      {
+        "names": [
+          "Oignon cuit"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Beurre (fine couche)"
+        ],
+        "grams": 5
+      },
+      {
+        "names": [
+          "Bouillon cube"
+        ],
+        "grams": 0.25
       }
     ],
     "steps": [],
@@ -1870,32 +1904,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : saumon, fromage à tartiner, carotte, oignon, beurre et une fraction de cube de bouillon sont comptés. Le fromage aux fines herbes light est approximé par du fromage à tartiner ; la chapelure n’est pas intégrée.",
     "unscoredIngredients": [
       {
-        "name": "Carottes : 600 g de carottes",
-        "amount": "Quantité de la source",
-        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
+        "name": "Chapelure",
+        "amount": "12 à 16 c. à soupe pour la recette du poisson",
+        "reason": "Aucun équivalent fidèle dans le catalogue ; non comptée."
       },
       {
-        "name": "Carottes : 1 oignon (facultatif si mal toléré)",
-        "amount": "Quantité de la source",
-        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
-      },
-      {
-        "name": "Carottes : 2 c. à café de beurre liquide (ou beurre de soja)",
-        "amount": "Quantité de la source",
-        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
-      },
-      {
-        "name": "Carottes : 1 cube de bouillon de légumes maigre",
-        "amount": "Quantité de la source",
-        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
-      },
-      {
-        "name": "Carottes : sel et poivre",
-        "amount": "Quantité de la source",
-        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
+        "name": "Poivre et sel",
+        "amount": "Selon la recette",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -2205,6 +2224,18 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
+          "Sirop d'érable"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Beurre (fine couche)"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
           "Mûres"
         ],
         "grams": 100
@@ -2230,12 +2261,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : avoine, amandes, sirop d’érable, beurre, mûres et pomme sont comptés. La farine d’amande est approximée par des amandes ; l’avoine cuite à l’eau représente imparfaitement les flocons secs. Les quantités par portion restent indicatives.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Sel",
+        "amount": "Une pincée",
+        "reason": "Non compté."
       }
     ]
   },
@@ -2480,7 +2511,13 @@ window.MICI_RECIPES = [
         "names": [
           "Miel"
         ],
-        "grams": 30
+        "grams": 31
+      },
+      {
+        "names": [
+          "Jus d'orange"
+        ],
+        "grams": 5
       }
     ],
     "steps": [],
@@ -2496,12 +2533,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : dattes, amandes, miel et jus d’orange sont comptés. Les quantités sont ramenées à une portion estimée ; les blancs d’œufs et la feuille azyme ne sont pas intégrés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Blancs d’œufs",
+        "amount": "2 blancs pour la recette source",
+        "reason": "Aucun ingrédient œuf non préparé disponible ; non comptés."
+      },
+      {
+        "name": "Feuille azyme",
+        "amount": "1 feuille pour la recette",
+        "reason": "Aucun équivalent fidèle dans le catalogue ; non comptée."
       }
     ]
   },
@@ -3160,16 +3202,10 @@ window.MICI_RECIPES = [
           "Tortilla ou wrap de blé"
         ],
         "grams": 60
-      },
-      {
-        "names": [
-          "Framboises"
-        ],
-        "grams": 50
       }
     ],
     "steps": [],
-    "scoreDisabled": false,
+    "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Œufs farcis : 4 œufs, 2 c. à soupe de yaourt ou fromage frais, poivre et sel, 1 c. à café de persil haché.",
@@ -3179,12 +3215,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score désactivé : cette fiche rassemble plusieurs préparations apéritives différentes (œufs farcis, mini-pizzas, grissini et mousse de truite). Un score unique ne correspondrait à aucun plat précis ; chaque préparation doit être séparée pour obtenir un score exploitable.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Autres préparations apéritives",
+        "amount": "4 préparations distinctes",
+        "reason": "Un score unique serait trompeur ; fiche à scinder avant calcul."
       }
     ]
   },
@@ -4245,7 +4281,7 @@ window.MICI_RECIPES = [
       }
     ],
     "steps": [],
-    "scoreDisabled": false,
+    "scoreDisabled": true,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Variante concombre et menthe : ½ concombre, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
@@ -4254,12 +4290,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score désactivé : cette fiche regroupe trois variantes distinctes (concombre-menthe, framboise-menthe, orange/citron). Un score unique mélangerait des recettes différentes ; choisir une variante dédiée avant calcul.",
     "unscoredIngredients": [
       {
-        "name": "Variante framboise et menthe : 100 g de framboises fraîches ou surgelées, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
-        "amount": "Quantité de la source",
-        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
+        "name": "Variantes de recette",
+        "amount": "3 variantes alternatives",
+        "reason": "Un score unique n’est pas pertinent pour cette fiche multi-variantes."
       }
     ]
   },
