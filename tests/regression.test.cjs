@@ -1309,12 +1309,21 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
   new vm.Script(coreModuleSource, { filename: 'score-core.js:food-catalogue-test' }).runInContext(coreSandbox);
   const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
   for (const recipe of recipes) {
+    const scoreItems = [];
     for (const ingredient of recipe.ingredients) {
-      const found = foods.some(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
-        foods.some(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
-      assert.ok(found, recipe.title + ' ingredient must resolve: ' + ingredient.names[0]);
+      const food = foods.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
+        foods.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
+      assert.ok(food, recipe.title + ' ingredient must resolve: ' + ingredient.names[0]);
+      scoreItems.push({ f: food, p: 1, g: ingredient.grams });
+    }
+    if (!recipe.scoreDisabled) {
+      const score = coreSandbox.window.MICI_SCORE_CORE.scoreOf(scoreItems, {});
+      assert.ok(Number.isFinite(score.score) && score.score >= 0 && score.score <= 10,
+        recipe.title + ' must produce a finite MICI Score from its configured ingredients');
     }
   }
+  assert.equal(recipes.length, 79, 'recipe catalogue coverage must remain explicit');
+  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 76, '76 recipes must produce scores from configured ingredients');
 });
 
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
