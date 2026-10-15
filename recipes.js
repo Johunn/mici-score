@@ -710,7 +710,7 @@ window.MICI_RECIPES = [
       "Faire cuire les chicons jusqu’à ce qu’ils soient tendres.",
       "Ajouter le saumon fumé en lanières et réchauffer brièvement, puis mélanger aux pâtes. La sauce de la recette originale n’est pas reprise dans cette version simplifiée."
     ],
-    "scoreNote": "Score partiel calculé sur les quantités par portion dérivées de la recette source (2 portions). La crème de soja et les assaisonnements ne sont pas comptés.",
+    "scoreNote": "Score partiel calculé sur les ingrédients reconnus de la recette source (2 portions). Le poids des chicons est estimé ; la crème de soja et les assaisonnements ne sont pas comptés.",
     "unscoredIngredients": [
       {
         "name": "Crème de soja light",
@@ -1634,7 +1634,7 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel calculé sur les quantités par portion dérivées de la recette source (2 portions). Le poivre, le sel et le curcuma facultatif ne sont pas comptés.",
+    "scoreNote": "Score partiel calculé sur les ingrédients reconnus de la recette source (2 portions). Les conversions du curry et du fromage blanc en grammes sont estimées ; le poivre, le sel et le curcuma facultatif ne sont pas comptés.",
     "unscoredIngredients": [
       {
         "name": "Poivre et sel",
@@ -3076,7 +3076,7 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel calculé sur les quantités par portion dérivées de la recette source (4 portions). La maïzena, l’huile de cuisson et les assaisonnements ne sont pas comptés.",
+    "scoreNote": "Score partiel calculé sur les ingrédients reconnus de la recette source (4 portions). Le poids des courgettes est estimé par portion ; la maïzena, l’huile de cuisson et les assaisonnements ne sont pas comptés.",
     "unscoredIngredients": [
       {
         "name": "Maïzena",
