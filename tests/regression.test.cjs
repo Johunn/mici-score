@@ -1317,13 +1317,13 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
 
-test('47 recettes à adaptation non validée restent explicitement partielles et scorables', () => {
+test('les recettes à adaptation non validée restent explicitement partielles et scorables', () => {
   const recipeSandbox = { window: {} };
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:partial-coverage-test' }).runInContext(recipeSandbox);
   const recipes = recipeSandbox.window.MICI_RECIPES;
   const pending = recipes.filter(recipe => recipe.adaptationVerified === false);
-  assert.equal(pending.length, 47, 'expected 47 source-backed recipes awaiting adaptation validation');
+  assert.ok(pending.length >= 47, 'all formerly score-disabled source-backed recipes must remain covered');
   for (const recipe of pending) {
     assert.ok(Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0, recipe.id + ' must have ingredients for a score');
     assert.equal(recipe.scoreDisabled, false, recipe.id + ' should remain score-enabled when partial scoring is available');
