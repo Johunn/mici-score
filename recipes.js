@@ -982,6 +982,7 @@ window.MICI_RECIPES = [
     "id": "potage-chou-fleur-saumon-adapte",
     "title": "Potage de chou-fleur au saumon fumé (adapté)",
     "category": "Soupe",
+    "servings": 1,
     "source": "https://www.crohn-larectocoliteetnous.be/potage-de-chou-fleur-au-saumon-fume/",
     "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
     "summary": "Adaptation MICI Score pour une portion du potage publié pour 2 personnes. La quantité de saumon est définie ici pour pouvoir établir une estimation, contrairement à la source.",
@@ -1019,6 +1020,13 @@ window.MICI_RECIPES = [
       "2 blancs de poireaux",
       "1 l de bouillon de légumes",
       "Quelques lanières de saumon fumé"
+    ],
+    "unscoredIngredients": [
+        {
+            "name": "Bouillon de légumes",
+            "amount": "Environ 500 ml pour une portion",
+            "reason": "Le bouillon apporte le liquide de cuisson, mais n’est pas intégré au calcul du score."
+        }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1239,6 +1247,13 @@ window.MICI_RECIPES = [
       "2 blancs de poireaux",
       "1,5 l de bouillon de poulet (frais ou en cube)"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Bouillon de poulet",
+            "amount": "Environ 400 ml pour une portion",
+            "reason": "Le bouillon est nécessaire à la recette mais n’est pas intégré au calcul du score."
+        }
+    ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
     "scoreNote": "Score partiel : seuls le potiron et le poireau sont comptés. Le bouillon n’entre pas dans le score. Les quantités affichées ici sont une adaptation d’une source dont le nombre de portions est contradictoire."
@@ -1312,6 +1327,28 @@ window.MICI_RECIPES = [
       "Persil",
       "Poivre et sel",
       "Chapelure"
+    ],
+    "unscoredIngredients": [
+        {
+            "name": "Lait écrémé",
+            "amount": "Environ 30 ml",
+            "reason": "Le lait est utilisé pour assouplir la purée, mais n’est pas intégré au score de cette adaptation."
+        },
+        {
+            "name": "Bouillon de légumes pauvre en matières grasses",
+            "amount": "Environ 1/4 de cube",
+            "reason": "Quantité répartie sur les quatre portions de la recette originale ; non intégrée au score."
+        },
+        {
+            "name": "Chapelure",
+            "amount": "Environ 1 cuillère à soupe",
+            "reason": "Quantité proposée pour cette adaptation, car la source ne la précise pas ; non intégrée au score."
+        },
+        {
+            "name": "Persil, noix de muscade, sel et poivre",
+            "amount": "Selon le goût",
+            "reason": "Assaisonnements non intégrés au calcul du score."
+        }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1548,6 +1585,23 @@ window.MICI_RECIPES = [
       "Édulcorant selon le goût",
       "Jaune d’œuf pour fermer les gâteaux (mentionné dans la préparation, quantité non précisée)"
     ],
+    "unscoredIngredients": [
+        {
+            "name": "Pâte filo ou pâte à brick",
+            "amount": "Environ 1/3 du paquet pour deux petits gâteaux",
+            "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
+        },
+        {
+            "name": "Jaune d’œuf",
+            "amount": "Une petite quantité pour coller les extrémités",
+            "reason": "La source ne précise pas la quantité ; non intégré au score."
+        },
+        {
+            "name": "Édulcorant",
+            "amount": "Facultatif, selon le goût",
+            "reason": "Quantité variable et non intégrée au score."
+        }
+    ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
     "scoreNote": "Score très partiel : seuls 100 g de pomme cuite sont comptés. La pâte filo/brick, la cannelle, l’édulcorant et le jaune d’œuf ne sont pas intégrés au calcul ; le score ne représente donc pas le gâteau complet."
@@ -1761,6 +1815,18 @@ window.MICI_RECIPES = [
       "Saumon fumé (quantité non précisée par la source)",
       "Poivre et sel",
       "Aneth frais ou séché"
+    ],
+    "unscoredIngredients": [
+        {
+            "name": "Fromage frais light",
+            "amount": "Environ 25 g pour un wrap",
+            "reason": "Quantité proposée pour l’adaptation ; cet ingrédient n’est pas intégré au score faute d’entrée adaptée dans le catalogue."
+        },
+        {
+            "name": "Aneth, sel et poivre",
+            "amount": "Une pincée, selon le goût",
+            "reason": "Assaisonnements non intégrés au calcul du score."
+        }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
