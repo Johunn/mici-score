@@ -1231,8 +1231,8 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   assert.ok(recipes.every(r => r.title && r.category && r.summary && r.source.startsWith('https://')));
   assert.ok(html.includes('Recettes à tester selon ta tolérance'));
   assert.ok(html.includes('IDÉES DE REPAS · ${recipes.length} RECETTES'));
-  assert.ok(html.includes('Source : <a href="${esc(r.source)}"'));
-  assert.ok(html.includes('${esc(r.sourceLabel)} ↗</a>'));
+  assert.ok(!html.includes('Source : <a href="${esc(r.source)}"'), 'source should not be duplicated on the collapsed card');
+  assert.ok(html.includes('Voir la recette originale') && html.includes('Voir la source d’inspiration'), 'source links should use concise contextual labels');
   const coreSandbox = { window: {} };
   vm.createContext(coreSandbox);
   new vm.Script(coreModuleSource, { filename: 'score-core.js' }).runInContext(coreSandbox);
