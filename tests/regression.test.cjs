@@ -1350,5 +1350,9 @@ test('three source-backed recipes include their main scoreable ingredients and n
   assert.ok(get('pates-chicons-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja light'));
   assert.ok(names('salade-poulet-curry').includes('Fromage blanc 0 %'));
   assert.ok(!names('salade-poulet-curry').includes('Mayonnaise allégée'));
+  assert.ok(names('pates-saumon').includes('Saumon fumé'));
+  assert.ok(get('pates-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja légère'));
+  assert.ok(names('nouilles-riz-legumes').includes('Poulet rôti du commerce'));
+  assert.ok(get('nouilles-riz-legumes').unscoredIngredients.some(item => item.name === 'Nouilles de riz'));
 });
 
