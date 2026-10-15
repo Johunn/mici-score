@@ -1037,18 +1037,33 @@ window.MICI_RECIPES = [
     "title": "Salade de pâtes méditerranéenne",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Fiche conservée au catalogue, mais la liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner. Les ingrédients adaptés, le score et l’ajout à l’assiette restent indisponibles jusqu’à validation.",
+    "summary": "Score ultra-partiel calculé uniquement sur une portion estimée de pâtes blanches. La liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner sans consulter la source.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-de-pates-mediterraneenne/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 150
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": false,
     "originalIngredients": [
       "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
     ],
     "originalIngredientsVerified": false,
-    "adaptationVerified": false
+    "adaptationVerified": false,
+    "scoreNote": "Score ultra-partiel : seules 150 g de pâtes blanches (portion estimée à partir du titre) sont comptées. La liste complète des ingrédients de la source n’est pas vérifiée ; ce score ne représente pas la salade complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Tous les autres ingrédients éventuels de la salade",
+        "amount": "Non vérifié",
+        "reason": "Liste complète de la source non vérifiée ; non comptés dans le score."
+      }
+    ]
   },
   {
     "id": "chicons-celeri-rave-saumon",
