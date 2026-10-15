@@ -1322,8 +1322,8 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
         recipe.title + ' must produce a finite MICI Score from its configured ingredients');
     }
   }
-  assert.equal(recipes.length, 15, 'only the 15 verified official source recipes should remain');
-  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 15, 'all 15 official recipes must produce an estimate from configured ingredients');
+  assert.equal(recipes.length, 19, 'the catalogue should retain the 15 original verified recipes plus 4 reinstated official recipes');
+  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 19, 'all 19 official recipes must produce an estimate from configured ingredients');
 });
 
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
@@ -1351,6 +1351,27 @@ test('le catalogue ne contient que des recettes officielles vérifiées', () => 
     assert.ok(recipe.scoreNote, recipe.id + ' must explain the limits of the score estimate');
     assert.ok(Array.isArray(recipe.unscoredIngredients), recipe.id + ' must expose excluded ingredients explicitly');
   }
+});
+
+test('reinstated high-score recipes link to exact official pages and expose partial-score exclusions', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:reinstated-official-recipes' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  for (const id of ['tortilla-espagnole-officielle', 'soupe-carottes-gingembre-officielle', 'petit-gateau-compote-officiel', 'hachis-shepherd-pie-officiel']) {
+    const recipe = recipes.find(item => item.id === id);
+    assert.ok(recipe, id + ' must be present');
+    assert.equal(recipe.sourceIngredientsVerified, true);
+    assert.equal(recipe.adaptationVerified, true);
+    assert.ok(recipe.originalIngredients.length > 0);
+    assert.ok(recipe.steps.length >= 5);
+    assert.ok(recipe.scoreNote);
+    assert.ok(Array.isArray(recipe.unscoredIngredients));
+    assert.match(recipe.source, /^https:\/\/www\.crohn-larectocoliteetnous\.be\/.+/);
+  }
+  assert.ok(recipes.find(item => item.id === 'tortilla-espagnole-officielle').unscoredIngredients.some(item => /lait/i.test(item.name)));
+  assert.ok(recipes.find(item => item.id === 'petit-gateau-compote-officiel').unscoredIngredients.some(item => /farine/i.test(item.name)));
+  assert.ok(recipes.find(item => item.id === 'hachis-shepherd-pie-officiel').unscoredIngredients.some(item => /haché/i.test(item.name)));
 });
 
 test('verified source recipes preserve official ingredients, steps, and score exclusions', () => {
