@@ -1316,3 +1316,39 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /La pastille affiche le score MICI calculé/);
   assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
+
+test('47 recettes à adaptation non validée restent explicitement partielles et scorables', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:partial-coverage-test' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  const pending = recipes.filter(recipe => recipe.adaptationVerified === false);
+  assert.equal(pending.length, 47, 'expected 47 source-backed recipes awaiting adaptation validation');
+  for (const recipe of pending) {
+    assert.ok(Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0, recipe.id + ' must have ingredients for a score');
+    assert.equal(recipe.scoreDisabled, false, recipe.id + ' should remain score-enabled when partial scoring is available');
+    assert.ok(recipe.scoreNote, recipe.id + ' must clearly identify the score as partial');
+    assert.ok(Array.isArray(recipe.unscoredIngredients) && recipe.unscoredIngredients.length > 0, recipe.id + ' must list what is excluded from the score');
+  }
+});
+
+test('three source-backed recipes include their main scoreable ingredients and name exclusions precisely', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:source-ingredient-corrections' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  const get = id => recipes.find(recipe => recipe.id === id);
+  const names = id => get(id).ingredients.map(ingredient => ingredient.names[0]);
+  assert.deepEqual(names('pates-fromage-legere'), [
+    'Pâtes blanches nature', 'Thon en boîte au naturel', 'Courgette cuite sans peau',
+    'Lait demi-écrémé (verre 25 cl)', 'Fromage râpé'
+  ]);
+  assert.ok(get('pates-fromage-legere').unscoredIngredients.some(item => item.name === 'Maïzena'));
+  assert.deepEqual(names('pates-chicons-saumon'), [
+    'Pâtes blanches nature', 'Endive cuite', 'Saumon fumé', 'Beurre (fine couche)', 'Moutarde de Dijon'
+  ]);
+  assert.ok(get('pates-chicons-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja light'));
+  assert.ok(names('salade-poulet-curry').includes('Fromage blanc 0 %'));
+  assert.ok(!names('salade-poulet-curry').includes('Mayonnaise allégée'));
+});
+
