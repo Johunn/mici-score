@@ -1339,14 +1339,14 @@ test('three source-backed recipes include their main scoreable ingredients and n
   const recipes = recipeSandbox.window.MICI_RECIPES;
   const get = id => recipes.find(recipe => recipe.id === id);
   const names = id => get(id).ingredients.map(ingredient => ingredient.names[0]);
-  assert.deepEqual(names('pates-fromage-legere'), [
+  assert.equal(JSON.stringify(names('pates-fromage-legere')), JSON.stringify([
     'Pâtes blanches nature', 'Thon en boîte au naturel', 'Courgette cuite sans peau',
     'Lait demi-écrémé (verre 25 cl)', 'Fromage râpé'
-  ]);
+  ]));
   assert.ok(get('pates-fromage-legere').unscoredIngredients.some(item => item.name === 'Maïzena'));
-  assert.deepEqual(names('pates-chicons-saumon'), [
+  assert.equal(JSON.stringify(names('pates-chicons-saumon')), JSON.stringify([
     'Pâtes blanches nature', 'Endive cuite', 'Saumon fumé', 'Beurre (fine couche)', 'Moutarde de Dijon'
-  ]);
+  ]));
   assert.ok(get('pates-chicons-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja light'));
   assert.ok(names('salade-poulet-curry').includes('Fromage blanc 0 %'));
   assert.ok(!names('salade-poulet-curry').includes('Mayonnaise allégée'));
