@@ -987,31 +987,31 @@ window.MICI_RECIPES = [
     "sourceLabel": "Crohn / La rectocolite et nous — adaptation simplifiée",
     "summary": "Adaptation MICI Score pour une portion du potage publié pour 2 personnes. La quantité de saumon est définie ici pour pouvoir établir une estimation, contrairement à la source.",
     "ingredients": [
-        {
-            "names": [
-                "Chou-fleur cuit"
-            ],
-            "grams": 250
-        },
-        {
-            "names": [
-                "Poireau cuit (blanc)"
-            ],
-            "grams": 80
-        },
-        {
-            "names": [
-                "Saumon fumé"
-            ],
-            "grams": 25
-        }
+      {
+        "names": [
+          "Chou-fleur cuit"
+        ],
+        "grams": 250
+      },
+      {
+        "names": [
+          "Poireau cuit (blanc)"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Saumon fumé"
+        ],
+        "grams": 25
+      }
     ],
     "steps": [
-        "Retirez les feuilles et le cœur dur du chou-fleur, puis séparez-le en petites fleurettes. Nettoyez les blancs de poireaux et coupez-les en rondelles.",
-        "Versez le bouillon de légumes dans une casserole et ajoutez les fleurettes de chou-fleur et les rondelles de poireau. Portez à ébullition, puis baissez le feu et laissez cuire doucement environ 15 à 20 minutes, jusqu’à ce que les légumes soient tendres.",
-        "Retirez la casserole du feu et mixez les légumes avec le bouillon jusqu’à obtenir un potage onctueux. Si la texture est trop épaisse, ajoutez un peu d’eau chaude ou de bouillon ; si elle est trop fluide, faites-la réduire quelques minutes à feu doux.",
-        "Coupez le saumon fumé en fines lanières. Répartissez le potage dans un bol, puis ajoutez le saumon au dernier moment afin qu’il garde sa texture et ne cuise pas excessivement.",
-        "Goûtez avant de saler : le saumon fumé et le bouillon peuvent déjà apporter suffisamment de sel. Servez chaud."
+      "Retirez les feuilles et le cœur dur du chou-fleur, puis séparez-le en petites fleurettes. Nettoyez les blancs de poireaux et coupez-les en rondelles.",
+      "Versez le bouillon de légumes dans une casserole et ajoutez les fleurettes de chou-fleur et les rondelles de poireau. Portez à ébullition, puis baissez le feu et laissez cuire doucement environ 15 à 20 minutes, jusqu’à ce que les légumes soient tendres.",
+      "Retirez la casserole du feu et mixez les légumes avec le bouillon jusqu’à obtenir un potage onctueux. Si la texture est trop épaisse, ajoutez un peu d’eau chaude ou de bouillon ; si elle est trop fluide, faites-la réduire quelques minutes à feu doux.",
+      "Coupez le saumon fumé en fines lanières. Répartissez le potage dans un bol, puis ajoutez le saumon au dernier moment afin qu’il garde sa texture et ne cuise pas excessivement.",
+      "Goûtez avant de saler : le saumon fumé et le bouillon peuvent déjà apporter suffisamment de sel. Servez chaud."
     ],
     "scoreDisabled": false,
     "sourceIngredientsVerified": true,
@@ -1022,11 +1022,11 @@ window.MICI_RECIPES = [
       "Quelques lanières de saumon fumé"
     ],
     "unscoredIngredients": [
-        {
-            "name": "Bouillon de légumes",
-            "amount": "Environ 500 ml pour une portion",
-            "reason": "Le bouillon apporte le liquide de cuisson, mais n’est pas intégré au calcul du score."
-        }
+      {
+        "name": "Bouillon de légumes",
+        "amount": "Environ 500 ml pour une portion",
+        "reason": "Le bouillon apporte le liquide de cuisson, mais n’est pas intégré au calcul du score."
+      }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1055,12 +1055,31 @@ window.MICI_RECIPES = [
     "title": "Chicons braisés à la crème de céleri-rave, filet de dinde et purée de pommes de terre gratinée",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles.",
+    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/chicons-braises-a-la-creme-de-celeri-rave-filet-de-dinde-et-puree-de-pommes-de-terre-gratinee/",
     "sourceLabel": "Crohn / La rectocolite et nous — liste originale vérifiée via la version néerlandaise de la recette individuelle",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Endive cuite"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Céleri-rave cuit"
+        ],
+        "grams": 120
+      },
+      {
+        "names": [
+          "Pommes de terre au four avec peau"
+        ],
+        "grams": 150
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Crème de céleri-rave : 1/2 céleri-rave",
@@ -1077,19 +1096,40 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "potage-chicons",
     "title": "Potage aux chicons",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-aux-chicons/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Endive cuite"
+        ],
+        "grams": 200
+      },
+      {
+        "names": [
+          "Bouillon cube"
+        ],
+        "grams": 250
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "700 g de chicons (réserver un demi-chicon pour la finition)",
@@ -1098,19 +1138,46 @@ window.MICI_RECIPES = [
       "100 g de bacon"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "tartinade-carottes",
     "title": "Tartinade de carottes",
     "category": "Collation",
     "servings": 1,
-    "summary": "La liste originale des ingrédients a été vérifiée sur la source. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles.",
+    "summary": "La liste originale des ingrédients a été vérifiée sur la source. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-tartinade-de-carottes/",
     "sourceLabel": "Crohn / La rectocolite et nous — ingrédients originaux vérifiés sur la recette individuelle",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 120
+      },
+      {
+        "names": [
+          "Mayonnaise allégée"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Ketchup"
+        ],
+        "grams": 15
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "4 carottes",
@@ -1120,19 +1187,46 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "gateau-carottes",
     "title": "Gâteau aux carottes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-gateau-aux-carottes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Miel"
+        ],
+        "grams": 10
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "100 g de farine",
@@ -1148,19 +1242,46 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "potage-panais-dukkah",
     "title": "Potage de panais au dukkah",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles.",
+    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/potage-de-panais-au-dukkah/",
     "sourceLabel": "Crohn / La rectocolite et nous — liste originale vérifiée via la version néerlandaise de la recette individuelle",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Panais cuit"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Bouillon cube"
+        ],
+        "grams": 250
+      },
+      {
+        "names": [
+          "Noisettes"
+        ],
+        "grams": 10
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Soupe : 35 g de beurre ou margarine",
@@ -1181,19 +1302,46 @@ window.MICI_RECIPES = [
       "Alternative indiquée par la source : bacon croustillant à la place du dukkah"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "nouilles-riz-legumes",
     "title": "Nouilles de riz aux légumes",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-nouilles-de-riz-aux-legumes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Poulet rôti du commerce"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 courgette",
@@ -1209,7 +1357,15 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "potage-potiron",
@@ -1220,25 +1376,25 @@ window.MICI_RECIPES = [
     "source": "https://www.crohn-larectocoliteetnous.be/recette-potage-au-potiron-digeste/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
     "ingredients": [
-        {
-            "names": [
-                "Potiron ou butternut cuit"
-            ],
-            "grams": 250
-        },
-        {
-            "names": [
-                "Poireau cuit (blanc)"
-            ],
-            "grams": 50
-        }
+      {
+        "names": [
+          "Potiron ou butternut cuit"
+        ],
+        "grams": 250
+      },
+      {
+        "names": [
+          "Poireau cuit (blanc)"
+        ],
+        "grams": 50
+      }
     ],
     "steps": [
-        "Coupez le blanc de poireau en fines rondelles. Si vous utilisez du potiron frais, retirez la peau et les graines, puis coupez la chair en dés réguliers. Avec du potiron surgelé, vous pouvez l’ajouter directement.",
-        "Versez le bouillon dans une casserole et portez-le à ébullition. Ajoutez le poireau et le potiron, puis attendez la reprise de l’ébullition.",
-        "Baissez le feu et laissez mijoter doucement jusqu’à ce que les légumes soient très tendres. La source indique environ 15 minutes après la reprise de l’ébullition ; prolongez si les morceaux résistent à la pointe d’un couteau.",
-        "Retirez la casserole du feu et mixez soigneusement jusqu’à obtenir une texture veloutée. Si le potage vous semble trop épais, ajustez sa consistance avec un peu de bouillon chaud.",
-        "Goûtez et ajustez l’assaisonnement selon votre tolérance. Servez chaud, ou laissez refroidir avant de répartir en portions pour la conservation."
+      "Coupez le blanc de poireau en fines rondelles. Si vous utilisez du potiron frais, retirez la peau et les graines, puis coupez la chair en dés réguliers. Avec du potiron surgelé, vous pouvez l’ajouter directement.",
+      "Versez le bouillon dans une casserole et portez-le à ébullition. Ajoutez le poireau et le potiron, puis attendez la reprise de l’ébullition.",
+      "Baissez le feu et laissez mijoter doucement jusqu’à ce que les légumes soient très tendres. La source indique environ 15 minutes après la reprise de l’ébullition ; prolongez si les morceaux résistent à la pointe d’un couteau.",
+      "Retirez la casserole du feu et mixez soigneusement jusqu’à obtenir une texture veloutée. Si le potage vous semble trop épais, ajustez sa consistance avec un peu de bouillon chaud.",
+      "Goûtez et ajustez l’assaisonnement selon votre tolérance. Servez chaud, ou laissez refroidir avant de répartir en portions pour la conservation."
     ],
     "scoreDisabled": false,
     "sourceIngredientsVerified": true,
@@ -1248,11 +1404,11 @@ window.MICI_RECIPES = [
       "1,5 l de bouillon de poulet (frais ou en cube)"
     ],
     "unscoredIngredients": [
-        {
-            "name": "Bouillon de poulet",
-            "amount": "Environ 400 ml pour une portion",
-            "reason": "Le bouillon est nécessaire à la recette mais n’est pas intégré au calcul du score."
-        }
+      {
+        "name": "Bouillon de poulet",
+        "amount": "Environ 400 ml pour une portion",
+        "reason": "Le bouillon est nécessaire à la recette mais n’est pas intégré au calcul du score."
+      }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1263,12 +1419,25 @@ window.MICI_RECIPES = [
     "title": "Filet de vive, chou-fleur rôti et œuf mimosa",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles.",
+    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-vive-chou-fleur-roti-oeuf-mimosa/",
     "sourceLabel": "Crohn / La rectocolite et nous — liste originale vérifiée via la version néerlandaise de la recette individuelle",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Chou-fleur cuit"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Épinards cuits"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 grandes vives",
@@ -1284,7 +1453,15 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "plat-four-digeste",
@@ -1295,26 +1472,26 @@ window.MICI_RECIPES = [
     "source": "https://www.crohn-larectocoliteetnous.be/plat-au-four-facile-digerer/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
     "ingredients": [
-        {
-            "names": [
-                "Pomme de terre vapeur sans peau"
-            ],
-            "grams": 150
-        },
-        {
-            "names": [
-                "Courgette cuite sans peau"
-            ],
-            "grams": 120
-        }
+      {
+        "names": [
+          "Pomme de terre vapeur sans peau"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 120
+      }
     ],
     "steps": [
-        "Épluchez les pommes de terre, coupez-les en morceaux de taille comparable et faites-les cuire dans une casserole d’eau jusqu’à ce qu’elles soient tendres. Égouttez-les soigneusement.",
-        "Écrasez les pommes de terre encore chaudes. Incorporez le lait écrémé progressivement jusqu’à obtenir une purée souple, puis assaisonnez avec un peu de sel, de poivre et de noix de muscade. Ajoutez le persil selon votre goût.",
-        "Préchauffez le four à 200 °C. Coupez la courgette en rondelles régulières afin qu’elles cuisent uniformément.",
-        "Dans une petite casserole, faites chauffer un fond d’eau avec le cube de bouillon. Ajoutez les rondelles de courgette et laissez-les mijoter environ 5 minutes à feu moyen, jusqu’à ce qu’elles commencent à s’attendrir.",
-        "Égouttez les courgettes si nécessaire, puis répartissez-les au fond d’un petit plat allant au four. Recouvrez uniformément avec la purée de pommes de terre et lissez la surface.",
-        "Parsemez de chapelure pour obtenir une croûte dorée. Enfournez 15 à 20 minutes, jusqu’à ce que le dessus soit légèrement doré et que le plat soit chaud à cœur. Laissez reposer quelques minutes avant de servir."
+      "Épluchez les pommes de terre, coupez-les en morceaux de taille comparable et faites-les cuire dans une casserole d’eau jusqu’à ce qu’elles soient tendres. Égouttez-les soigneusement.",
+      "Écrasez les pommes de terre encore chaudes. Incorporez le lait écrémé progressivement jusqu’à obtenir une purée souple, puis assaisonnez avec un peu de sel, de poivre et de noix de muscade. Ajoutez le persil selon votre goût.",
+      "Préchauffez le four à 200 °C. Coupez la courgette en rondelles régulières afin qu’elles cuisent uniformément.",
+      "Dans une petite casserole, faites chauffer un fond d’eau avec le cube de bouillon. Ajoutez les rondelles de courgette et laissez-les mijoter environ 5 minutes à feu moyen, jusqu’à ce qu’elles commencent à s’attendrir.",
+      "Égouttez les courgettes si nécessaire, puis répartissez-les au fond d’un petit plat allant au four. Recouvrez uniformément avec la purée de pommes de terre et lissez la surface.",
+      "Parsemez de chapelure pour obtenir une croûte dorée. Enfournez 15 à 20 minutes, jusqu’à ce que le dessus soit légèrement doré et que le plat soit chaud à cœur. Laissez reposer quelques minutes avant de servir."
     ],
     "scoreDisabled": false,
     "sourceIngredientsVerified": true,
@@ -1329,26 +1506,26 @@ window.MICI_RECIPES = [
       "Chapelure"
     ],
     "unscoredIngredients": [
-        {
-            "name": "Lait écrémé",
-            "amount": "Environ 30 ml",
-            "reason": "Le lait est utilisé pour assouplir la purée, mais n’est pas intégré au score de cette adaptation."
-        },
-        {
-            "name": "Bouillon de légumes pauvre en matières grasses",
-            "amount": "Environ 1/4 de cube",
-            "reason": "Quantité répartie sur les quatre portions de la recette originale ; non intégrée au score."
-        },
-        {
-            "name": "Chapelure",
-            "amount": "Environ 1 cuillère à soupe",
-            "reason": "Quantité proposée pour cette adaptation, car la source ne la précise pas ; non intégrée au score."
-        },
-        {
-            "name": "Persil, noix de muscade, sel et poivre",
-            "amount": "Selon le goût",
-            "reason": "Assaisonnements non intégrés au calcul du score."
-        }
+      {
+        "name": "Lait écrémé",
+        "amount": "Environ 30 ml",
+        "reason": "Le lait est utilisé pour assouplir la purée, mais n’est pas intégré au score de cette adaptation."
+      },
+      {
+        "name": "Bouillon de légumes pauvre en matières grasses",
+        "amount": "Environ 1/4 de cube",
+        "reason": "Quantité répartie sur les quatre portions de la recette originale ; non intégrée au score."
+      },
+      {
+        "name": "Chapelure",
+        "amount": "Environ 1 cuillère à soupe",
+        "reason": "Quantité proposée pour cette adaptation, car la source ne la précise pas ; non intégrée au score."
+      },
+      {
+        "name": "Persil, noix de muscade, sel et poivre",
+        "amount": "Selon le goût",
+        "reason": "Assaisonnements non intégrés au calcul du score."
+      }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1359,12 +1536,31 @@ window.MICI_RECIPES = [
     "title": "Salade de poulet au curry",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-digeste-au-poulet-curry/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette originale de salade digeste au poulet curry ; adaptation MICI Score non validée",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Poulet rôti du commerce"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Mayonnaise allégée"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Curry en poudre"
+        ],
+        "grams": 2
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "50 g de dés de poulet ou de restes de poulet frit",
@@ -1374,19 +1570,34 @@ window.MICI_RECIPES = [
       "Une pincée de curcuma facultative"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "saumon-carottes-four",
     "title": "Filet de saumon au four et carottes",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-filet-de-saumon-au-four-et-carottes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 150
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Poisson : 8 c. à soupe de fromage aux fines herbes light",
@@ -1400,19 +1611,60 @@ window.MICI_RECIPES = [
       "Carottes : sel et poivre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Carottes : 600 g de carottes",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      },
+      {
+        "name": "Carottes : 1 oignon (facultatif si mal toléré)",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      },
+      {
+        "name": "Carottes : 2 c. à café de beurre liquide (ou beurre de soja)",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      },
+      {
+        "name": "Carottes : 1 cube de bouillon de légumes maigre",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      },
+      {
+        "name": "Carottes : sel et poivre",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      }
+    ]
   },
   {
     "id": "soupe-carottes-gingembre",
     "title": "Soupe de carottes au gingembre",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-soupe-de-carottes-gingembredelicieuse/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Bouillon cube"
+        ],
+        "grams": 250
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "500 g de carottes",
@@ -1423,19 +1675,46 @@ window.MICI_RECIPES = [
       "Sel et poivre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "diplomate-framboises",
     "title": "Diplomate aux framboises",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-diplomate-aux-framboises/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Framboises"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Sirop d'érable"
+        ],
+        "grams": 15
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "12 c. à soupe de yaourt (version végétale possible)",
@@ -1446,19 +1725,34 @@ window.MICI_RECIPES = [
       "150 g de framboises surgelées, de myrtilles ou de fraises"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "mousse-cafe-lait",
     "title": "Mousse de café au lait",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/mousse-de-cafe-au-lait/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Mousse au chocolat"
+        ],
+        "grams": 80
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "250 g de fromage blanc maigre",
@@ -1469,19 +1763,34 @@ window.MICI_RECIPES = [
       "10 cl de café"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "spaghettis-bolognaise",
     "title": "Spaghettis à la bolognaise classique",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/spaghettis-a-la-bolognaise-classique-sauce-a-cuisson-lente/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Spaghetti bolognaise"
+        ],
+        "grams": 300
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "400 g de spaghettis",
@@ -1499,19 +1808,52 @@ window.MICI_RECIPES = [
       "Quelques tomates cerises"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "400 g de spaghettis",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      }
+    ]
   },
   {
     "id": "crumble-avoine",
     "title": "Un fabuleux crumble à l’avoine",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles.",
+    "summary": "Liste originale vérifiée via la version néerlandaise de la recette individuelle. L’adaptation MICI Score n’est pas validée : son score et l’ajout à l’assiette restent indisponibles. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/un-fabuleux-crumble-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — liste originale vérifiée via la version néerlandaise de la recette individuelle",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 35
+      },
+      {
+        "names": [
+          "Amandes"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Mûres"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Pomme cuite sans peau"
+        ],
+        "grams": 70
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "70 g de flocons d’avoine",
@@ -1523,19 +1865,40 @@ window.MICI_RECIPES = [
       "140 g de pomme"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "gateau-compote-pommes",
     "title": "Petit gâteau à la compote de pommes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-petit-gateau-a-la-compote-de-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Compote de pomme sans sucre ajouté"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Baguette ou pain blanc"
+        ],
+        "grams": 30
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 œuf",
@@ -1544,7 +1907,15 @@ window.MICI_RECIPES = [
       "60 g de compote de pommes fine sans sucre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "gateaux-pommes",
@@ -1555,26 +1926,26 @@ window.MICI_RECIPES = [
     "source": "https://www.crohn-larectocoliteetnous.be/recette-gateaux-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
     "ingredients": [
-        {
-            "names": [
-                "Pomme cuite sans peau"
-            ],
-            "grams": 100
-        },
-        {
-            "names": [
-                "Cannelle"
-            ],
-            "grams": 1
-        }
+      {
+        "names": [
+          "Pomme cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Cannelle"
+        ],
+        "grams": 1
+      }
     ],
     "steps": [
-        "Préchauffez le four à 160 °C. Préparez une plaque recouverte de papier cuisson. Épluchez les pommes, retirez le cœur et coupez la chair en petits dés.",
-        "Placez les morceaux de pomme dans une petite casserole avec un fond d’eau. Faites-les cuire à feu doux en remuant régulièrement jusqu’à ce qu’ils se défassent et forment une compote épaisse. Ajoutez un peu d’eau si elles attachent, mais évitez une compote trop liquide.",
-        "Ajoutez une pincée de cannelle et, si vous le souhaitez, un édulcorant compatible avec vos préférences. Augmentez brièvement le feu en remuant pour faire évaporer l’excès d’humidité, puis retirez du feu et laissez refroidir jusqu’à ce que la compote soit tiède.",
-        "Déroulez la pâte filo ou à brick et découpez des bandes adaptées à la taille des petits gâteaux. Déposez une petite cuillerée de compote sur une bande, sans trop la garnir : une quantité excessive risque de faire éclater le rouleau à la cuisson.",
-        "Roulez la bande autour de la compote et repliez les extrémités. La recette originale indique de les coller avec un peu de jaune d’œuf ; utilisez-en une petite quantité si vous choisissez cette finition.",
-        "Déposez les gâteaux sur la plaque en laissant un peu d’espace entre eux. Faites cuire environ 20 minutes à 160 °C, jusqu’à ce que la pâte soit sèche et légèrement dorée. Laissez tiédir avant de manipuler, car la compote reste chaude."
+      "Préchauffez le four à 160 °C. Préparez une plaque recouverte de papier cuisson. Épluchez les pommes, retirez le cœur et coupez la chair en petits dés.",
+      "Placez les morceaux de pomme dans une petite casserole avec un fond d’eau. Faites-les cuire à feu doux en remuant régulièrement jusqu’à ce qu’ils se défassent et forment une compote épaisse. Ajoutez un peu d’eau si elles attachent, mais évitez une compote trop liquide.",
+      "Ajoutez une pincée de cannelle et, si vous le souhaitez, un édulcorant compatible avec vos préférences. Augmentez brièvement le feu en remuant pour faire évaporer l’excès d’humidité, puis retirez du feu et laissez refroidir jusqu’à ce que la compote soit tiède.",
+      "Déroulez la pâte filo ou à brick et découpez des bandes adaptées à la taille des petits gâteaux. Déposez une petite cuillerée de compote sur une bande, sans trop la garnir : une quantité excessive risque de faire éclater le rouleau à la cuisson.",
+      "Roulez la bande autour de la compote et repliez les extrémités. La recette originale indique de les coller avec un peu de jaune d’œuf ; utilisez-en une petite quantité si vous choisissez cette finition.",
+      "Déposez les gâteaux sur la plaque en laissant un peu d’espace entre eux. Faites cuire environ 20 minutes à 160 °C, jusqu’à ce que la pâte soit sèche et légèrement dorée. Laissez tiédir avant de manipuler, car la compote reste chaude."
     ],
     "scoreDisabled": false,
     "sourceIngredientsVerified": true,
@@ -1586,21 +1957,21 @@ window.MICI_RECIPES = [
       "Jaune d’œuf pour fermer les gâteaux (mentionné dans la préparation, quantité non précisée)"
     ],
     "unscoredIngredients": [
-        {
-            "name": "Pâte filo ou pâte à brick",
-            "amount": "Environ 1/3 du paquet pour deux petits gâteaux",
-            "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
-        },
-        {
-            "name": "Jaune d’œuf",
-            "amount": "Une petite quantité pour coller les extrémités",
-            "reason": "La source ne précise pas la quantité ; non intégré au score."
-        },
-        {
-            "name": "Édulcorant",
-            "amount": "Facultatif, selon le goût",
-            "reason": "Quantité variable et non intégrée au score."
-        }
+      {
+        "name": "Pâte filo ou pâte à brick",
+        "amount": "Environ 1/3 du paquet pour deux petits gâteaux",
+        "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
+      },
+      {
+        "name": "Jaune d’œuf",
+        "amount": "Une petite quantité pour coller les extrémités",
+        "reason": "La source ne précise pas la quantité ; non intégré au score."
+      },
+      {
+        "name": "Édulcorant",
+        "amount": "Facultatif, selon le goût",
+        "reason": "Quantité variable et non intégrée au score."
+      }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1611,12 +1982,25 @@ window.MICI_RECIPES = [
     "title": "Hachis parmentier ou Shepherd’s Pie",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-shepherds-pie-minute/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Hachis parmentier"
+        ],
+        "grams": 350
+      },
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 40
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 kg de pommes de terre épluchées et coupées en dés",
@@ -1637,19 +2021,46 @@ window.MICI_RECIPES = [
       "2 c. à soupe de persil frais pour la finition"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "biscuits-dattes-amandes",
     "title": "Biscuits aux dattes et amandes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-biscuits-aux-dattes-et-amandes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Dattes"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Amandes"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Miel"
+        ],
+        "grams": 30
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "200 g de dattes",
@@ -1660,19 +2071,46 @@ window.MICI_RECIPES = [
       "Une feuille azyme (papier comestible, à retirer avant de consommer)"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "dinde-chili-patate-douce",
     "title": "Dinde et chili à la patate douce",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-dinde-et-chili-a-la-patate-douce/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Patate douce cuite"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Maïs doux"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Sauce tomate du commerce (oignon, ail)"
+        ],
+        "grams": 80
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 c. à soupe d’huile d’ail",
@@ -1693,19 +2131,40 @@ window.MICI_RECIPES = [
       "2 c. à soupe de coriandre fraîche hachée"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "soupe-potiron-coco",
     "title": "Soupe au potiron, lait de coco et curry",
     "category": "Soupe",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-soupe-au-potiron-au-lait-de-coco-et-curry/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Potiron ou butternut cuit"
+        ],
+        "grams": 200
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 c. à soupe d’huile de coco ou d’huile d’olive",
@@ -1725,19 +2184,40 @@ window.MICI_RECIPES = [
       "2 c. à soupe de coriandre fraîche hachée pour la finition"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "cake-banane-renverse",
     "title": "Cake renversé à la banane caramélisée",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-cake-banane-upside-down-caramelise/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Chocolat au lait"
+        ],
+        "grams": 20
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Beurre ou huile de coco pour le moule",
@@ -1753,19 +2233,46 @@ window.MICI_RECIPES = [
       "75 g de farine de noix de coco"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "chips-legumes-four",
     "title": "Chips de légumes cuits au four",
     "category": "Collation",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-chips-legumes-cuits-four/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Carotte crue"
+        ],
+        "grams": 70
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 70
+      },
+      {
+        "names": [
+          "Potiron ou butternut cuit"
+        ],
+        "grams": 70
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 panais pelés",
@@ -1775,7 +2282,15 @@ window.MICI_RECIPES = [
       "Au moins 1 c. à café de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "wrap-festif-saumon",
@@ -1786,26 +2301,26 @@ window.MICI_RECIPES = [
     "source": "https://www.crohn-larectocoliteetnous.be/wrap-festif-au-fromage-frais-et-au-saumon-fume/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
     "ingredients": [
-        {
-            "names": [
-                "Tortilla ou wrap de blé"
-            ],
-            "grams": 60
-        },
-        {
-            "names": [
-                "Saumon fumé"
-            ],
-            "grams": 30
-        }
+      {
+        "names": [
+          "Tortilla ou wrap de blé"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Saumon fumé"
+        ],
+        "grams": 30
+      }
     ],
     "steps": [
-        "Posez un wrap sur une assiette adaptée au micro-ondes et réchauffez-le quelques secondes, juste assez pour l’assouplir. Il doit rester facile à rouler sans devenir sec.",
-        "Laissez le wrap refroidir quelques instants. Étalez une fine couche régulière de fromage frais light sur toute la surface, en laissant une petite marge sur un bord pour faciliter la fermeture.",
-        "Déposez une tranche de saumon fumé sur le fromage. Si la tranche ne couvre pas toute la surface, répartissez-la pour que chaque bouchée contienne un peu de garniture.",
-        "Poivrez légèrement, salez uniquement si nécessaire et parsemez d’aneth frais ou séché.",
-        "Roulez le wrap fermement sans écraser la garniture. Placez la jointure en dessous et, si le wrap est préparé à l’avance, gardez-le au frais jusqu’au découpage.",
-        "Coupez le rouleau en rondelles régulières pour former les bouchées. Plantez un cure-dents dans chaque morceau et servez frais."
+      "Posez un wrap sur une assiette adaptée au micro-ondes et réchauffez-le quelques secondes, juste assez pour l’assouplir. Il doit rester facile à rouler sans devenir sec.",
+      "Laissez le wrap refroidir quelques instants. Étalez une fine couche régulière de fromage frais light sur toute la surface, en laissant une petite marge sur un bord pour faciliter la fermeture.",
+      "Déposez une tranche de saumon fumé sur le fromage. Si la tranche ne couvre pas toute la surface, répartissez-la pour que chaque bouchée contienne un peu de garniture.",
+      "Poivrez légèrement, salez uniquement si nécessaire et parsemez d’aneth frais ou séché.",
+      "Roulez le wrap fermement sans écraser la garniture. Placez la jointure en dessous et, si le wrap est préparé à l’avance, gardez-le au frais jusqu’au découpage.",
+      "Coupez le rouleau en rondelles régulières pour former les bouchées. Plantez un cure-dents dans chaque morceau et servez frais."
     ],
     "scoreDisabled": false,
     "sourceIngredientsVerified": true,
@@ -1817,16 +2332,16 @@ window.MICI_RECIPES = [
       "Aneth frais ou séché"
     ],
     "unscoredIngredients": [
-        {
-            "name": "Fromage frais light",
-            "amount": "Environ 25 g pour un wrap",
-            "reason": "Quantité proposée pour l’adaptation ; cet ingrédient n’est pas intégré au score faute d’entrée adaptée dans le catalogue."
-        },
-        {
-            "name": "Aneth, sel et poivre",
-            "amount": "Une pincée, selon le goût",
-            "reason": "Assaisonnements non intégrés au calcul du score."
-        }
+      {
+        "name": "Fromage frais light",
+        "amount": "Environ 25 g pour un wrap",
+        "reason": "Quantité proposée pour l’adaptation ; cet ingrédient n’est pas intégré au score faute d’entrée adaptée dans le catalogue."
+      },
+      {
+        "name": "Aneth, sel et poivre",
+        "amount": "Une pincée, selon le goût",
+        "reason": "Assaisonnements non intégrés au calcul du score."
+      }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": true,
@@ -1837,12 +2352,25 @@ window.MICI_RECIPES = [
     "title": "Tortilla espagnole",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/tortilla-espagnole/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pommes de terre au four avec peau"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 80
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "150 g d’allumettes de bacon",
@@ -1855,19 +2383,40 @@ window.MICI_RECIPES = [
       "Noix de muscade"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "courgette-farcie",
     "title": "Courgette farcie",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-courgette-farcie/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Filet américain"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 courgette",
@@ -1877,19 +2426,52 @@ window.MICI_RECIPES = [
       "Un peu de fromage râpé allégé"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "wrap-avocat-courgette",
     "title": "Wraps à l’avocat et à la courgette",
     "category": "Repas rapide",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-wraps-a-lavocat-et-a-la-courgette-grillee/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Avocat"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Tortilla ou wrap de blé"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Poulet rôti du commerce"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 80
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 avocat",
@@ -1900,19 +2482,40 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "crepes-avoine-fraises",
     "title": "Crêpes aux flocons d’avoine et aux fraises",
     "category": "Petit-déjeuner",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-crepes-aux-flocons-davoine-et-aux-fraises/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Fraises"
+        ],
+        "grams": 60
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "60 g de fraises fraîches ou surgelées",
@@ -1922,19 +2525,46 @@ window.MICI_RECIPES = [
       "½ c. à café de levure chimique"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "apero-light",
     "title": "Recettes apéro light",
     "category": "Collation",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recettes-apero-light/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Jambon blanc"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Tortilla ou wrap de blé"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Framboises"
+        ],
+        "grams": 50
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Œufs farcis : 4 œufs, 2 c. à soupe de yaourt ou fromage frais, poivre et sel, 1 c. à café de persil haché.",
@@ -1943,19 +2573,34 @@ window.MICI_RECIPES = [
       "Mousse de truite fumée : 200 g de truite fumée, 5 c. à soupe de crème de soja légère, 1 c. à soupe de persil, poivre et sel."
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "tiramisu-leger",
     "title": "Tiramisu léger",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-tiramisu-leger/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Tiramisu"
+        ],
+        "grams": 150
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "100 g de boudoirs",
@@ -1967,19 +2612,46 @@ window.MICI_RECIPES = [
       "Cacao en poudre facultatif"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "macaroni-potiron",
     "title": "Macaroni au potiron",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-macaroni-au-potiron/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Potiron ou butternut cuit"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Poulet rôti du commerce"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "200 g de macaronis non cuits",
@@ -1990,19 +2662,34 @@ window.MICI_RECIPES = [
       "Fromage râpé light facultatif"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "croque-thon",
     "title": "Croque-monsieur à la salade de thon légère",
     "category": "Repas rapide",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-croque-thon-legere/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Sandwich thon-mayonnaise"
+        ],
+        "grams": 180
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 œuf dur",
@@ -2013,19 +2700,46 @@ window.MICI_RECIPES = [
       "Sel et poivre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "1 boîte de thon au naturel (environ 100 g)",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      }
+    ]
   },
   {
     "id": "bagel-courgettes",
     "title": "Bagel aux courgettes grillées",
     "category": "Repas rapide",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/bagel-courgettes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Baguette ou pain blanc"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Jambon blanc"
+        ],
+        "grams": 50
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 bagels",
@@ -2037,19 +2751,40 @@ window.MICI_RECIPES = [
       "Vinaigre balsamique"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "pates-saumon",
     "title": "Pâtes au saumon",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-pates-au-saumon/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Épinards cuits"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "300 g d’épinards surgelés",
@@ -2059,19 +2794,34 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "mousse-chocolat-legere",
     "title": "Mousse au chocolat légère",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-mousse-au-chocolat-legere/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Chocolat au lait"
+        ],
+        "grams": 40
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "80 g de chocolat au lait",
@@ -2079,19 +2829,40 @@ window.MICI_RECIPES = [
       "40 g de sucre blanc"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "80 g de chocolat au lait",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      }
+    ]
   },
   {
     "id": "roulades-poulet-epinards",
     "title": "Roulades de poulet aux épinards",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-roulades-de-poulet-aux-epinards/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Poulet rôti du commerce"
+        ],
+        "grams": 120
+      },
+      {
+        "names": [
+          "Épinards cuits"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "400 g d’épinards surgelés sans crème",
@@ -2104,19 +2875,46 @@ window.MICI_RECIPES = [
       "Poivre, sel et noix de muscade"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "poulet-chicons-butternut",
     "title": "Filet de poulet aux chicons et crème de butternut",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-filet-de-poulet-aux-chicons-et-a-la-creme-de-butternut/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Poulet rôti du commerce"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Endive cuite"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Potiron ou butternut cuit"
+        ],
+        "grams": 150
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "4 filets de poulet",
@@ -2131,19 +2929,40 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "pates-fromage-legere",
     "title": "Pâtes à la sauce légère au fromage",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/pates-sauce-legere-fromage/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pâtes blanches nature"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 100
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "400 g de macaronis",
@@ -2156,19 +2975,34 @@ window.MICI_RECIPES = [
       "Poivre, sel et noix de muscade"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "courgette-thon",
     "title": "Courgette farcie au thon",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/courgette-farcie-au-thon/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Courgette cuite sans peau"
+        ],
+        "grams": 180
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 courgette",
@@ -2178,19 +3012,46 @@ window.MICI_RECIPES = [
       "Fromage râpé"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "1 courgette",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      }
+    ]
   },
   {
     "id": "mug-cake-avoine",
     "title": "Mug cake sain à l’avoine",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/mug-cake-sain-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 40
+      },
+      {
+        "names": [
+          "Myrtilles"
+        ],
+        "grams": 30
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 banane mûre",
@@ -2202,19 +3063,40 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "pizza-chou-fleur",
     "title": "Pizza saine à base de chou-fleur",
     "category": "Repas complet",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/pizza-fond-en-chou-fleur/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Chou-fleur cuit"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Sauce tomate nature maison"
+        ],
+        "grams": 40
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 chou-fleur",
@@ -2226,19 +3108,40 @@ window.MICI_RECIPES = [
       "Garniture : quelques c. à soupe de passata de tomates, fromage râpé, poivre, sel et herbes de Provence"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "beignets-pommes",
     "title": "Beignets aux pommes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-beignets-aux-pommes-delicieusement-sains/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pomme cuite sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Baguette ou pain blanc"
+        ],
+        "grams": 50
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "100 g de farine",
@@ -2249,19 +3152,52 @@ window.MICI_RECIPES = [
       "1 pomme ferme"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "crumble-pommes",
     "title": "Délicieux crumble aux pommes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-delicieux-crumble-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pomme cuite sans peau"
+        ],
+        "grams": 200
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 35
+      },
+      {
+        "names": [
+          "Amandes"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Sirop d'érable"
+        ],
+        "grams": 15
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 pommes",
@@ -2273,19 +3209,46 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "wrap-salade-oeufs",
     "title": "Wrap avec une salade d’œufs saine",
     "category": "Repas rapide",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-wrap-avec-une-salade-doeufs-saine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Tortilla ou wrap de blé"
+        ],
+        "grams": 60
+      },
+      {
+        "names": [
+          "Mayonnaise allégée"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Roquette ou mâche"
+        ],
+        "grams": 20
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 œufs durs",
@@ -2297,19 +3260,52 @@ window.MICI_RECIPES = [
       "Roquette"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "biscuits-avoine",
     "title": "Biscuits à l’avoine",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-biscuits-a-lavoine/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Amandes"
+        ],
+        "grams": 10
+      },
+      {
+        "names": [
+          "Raisins secs"
+        ],
+        "grams": 15
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "10 g d’amandes",
@@ -2320,19 +3316,34 @@ window.MICI_RECIPES = [
       "10 g de margarine liquide"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "eau-fruitee",
     "title": "Eau fruitée",
     "category": "Boisson",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-eau-fruitee/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Framboises"
+        ],
+        "grams": 30
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "Variante concombre et menthe : ½ concombre, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
@@ -2340,19 +3351,40 @@ window.MICI_RECIPES = [
       "Variante orange ou citron : 1 orange ou 1 citron, de préférence non traité et bio, et 1 litre d’eau plate ou pétillante."
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Variante framboise et menthe : 100 g de framboises fraîches ou surgelées, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+      }
+    ]
   },
   {
     "id": "smoothie-fruits-rouges-2",
     "title": "Smoothie aux fruits rouges (deuxième fiche publiée)",
     "category": "Boisson",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés.",
+    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-smoothie-aux-fruits-rouges/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Smoothie aux fruits"
+        ],
+        "grams": 200
+      },
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 80
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "4 c. à soupe de fruits rouges surgelés",
@@ -2361,19 +3393,46 @@ window.MICI_RECIPES = [
       "Garniture facultative : fruits frais ou secs, granola, noix ou graines"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "mug-cake-pommes",
     "title": "Mug cake aux pommes",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score ; les ingrédients et quantités ne reproduisent pas nécessairement la recette publiée. Consulter la source.",
+    "summary": "Adaptation simplifiée MICI Score ; les ingrédients et quantités ne reproduisent pas nécessairement la recette publiée. Consulter la source. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/recette-mug-cake-aux-pommes/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Banane bien mûre"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Pomme cuite sans peau"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 40
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "1 banane mûre",
@@ -2385,19 +3444,52 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   },
   {
     "id": "crumble-pommes-myrtilles",
     "title": "Crumble croustillant aux pommes et aux myrtilles",
     "category": "Dessert",
     "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score ; la recette source peut contenir d’autres ingrédients et proportions. Consulter la source.",
+    "summary": "Adaptation simplifiée MICI Score ; la recette source peut contenir d’autres ingrédients et proportions. Consulter la source. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
     "source": "https://www.crohn-larectocoliteetnous.be/crumble-croustillant-aux-pommes-et-aux-myrtilles/",
     "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [],
+    "ingredients": [
+      {
+        "names": [
+          "Pomme cuite sans peau"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Myrtilles"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Flocons d'avoine cuits à l'eau"
+        ],
+        "grams": 35
+      },
+      {
+        "names": [
+          "Amandes"
+        ],
+        "grams": 30
+      }
+    ],
     "steps": [],
-    "scoreDisabled": true,
+    "scoreDisabled": false,
     "sourceIngredientsVerified": true,
     "originalIngredients": [
       "2 pommes",
@@ -2410,6 +3502,14 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": false
+    "adaptationVerified": true,
+    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "unscoredIngredients": [
+      {
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au score partiel."
+      }
+    ]
   }
 ];
