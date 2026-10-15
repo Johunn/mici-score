@@ -1720,15 +1720,33 @@ window.MICI_RECIPES = [
     "ingredients": [
       {
         "names": [
-          "Carotte crue"
+          "Carotte cuite"
         ],
-        "grams": 180
+        "grams": 125
       },
       {
         "names": [
-          "Bouillon cube"
+          "Bouillon clair"
         ],
-        "grams": 250
+        "grams": 500
+      },
+      {
+        "names": [
+          "Gingembre frais"
+        ],
+        "grams": 2
+      },
+      {
+        "names": [
+          "Curry en poudre"
+        ],
+        "grams": 0.5
+      },
+      {
+        "names": [
+          "Cumin"
+        ],
+        "grams": 0.25
       }
     ],
     "steps": [],
@@ -1744,12 +1762,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel calculé sur les quantités ramenées à une portion à partir de la recette source (4 portions). Le poids du gingembre et des épices est estimé ; le sel et le poivre ne sont pas comptés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Sel et poivre",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées et non intégrées au calcul."
       }
     ]
   },
