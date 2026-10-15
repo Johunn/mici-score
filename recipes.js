@@ -1369,15 +1369,33 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
-          "Carotte crue"
+          "Carotte cuite"
         ],
-        "grams": 80
+        "grams": 100
       },
       {
         "names": [
           "Poulet rôti du commerce"
         ],
         "grams": 100
+      },
+      {
+        "names": [
+          "Ketchup"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Huile d'olive"
+        ],
+        "grams": 22
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 15
       }
     ],
     "steps": [],
@@ -1398,12 +1416,32 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel calculé sur les ingrédients reconnus de la recette source (2 portions). Les poids d’une courgette et de deux carottes sont estimés par portion ; les nouilles de riz, le bouillon, le jus de citron vert, le gingembre et les assaisonnements ne sont pas comptés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Nouilles de riz",
+        "amount": "200 g pour 2 portions (100 g par portion)",
+        "reason": "Aucun aliment correspondant n’est disponible dans le catalogue ; non remplacé par des pâtes de blé."
+      },
+      {
+        "name": "Bouillon de poulet",
+        "amount": "200 ml pour 2 portions (100 ml par portion)",
+        "reason": "Le catalogue ne permet pas de distinguer de façon fidèle le bouillon préparé du cube concentré."
+      },
+      {
+        "name": "Jus de citron vert",
+        "amount": "½ citron vert pour 2 portions",
+        "reason": "Quantité exprimée en fruit et non pesée ; non intégré au calcul."
+      },
+      {
+        "name": "Gingembre frais",
+        "amount": "2 cm pour 2 portions",
+        "reason": "Aucun aliment correspondant n’est disponible dans le catalogue."
+      },
+      {
+        "name": "Poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées et non intégrées au calcul."
       }
     ]
   },
@@ -2789,11 +2827,17 @@ window.MICI_RECIPES = [
         "names": [
           "Pâtes blanches nature"
         ],
-        "grams": 150
+        "grams": 100
       },
       {
         "names": [
           "Épinards cuits"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Saumon fumé"
         ],
         "grams": 100
       }
@@ -2810,12 +2854,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel calculé sur les quantités de pâtes, d’épinards et de saumon par portion d’après la recette source (2 portions). La crème de soja et les assaisonnements ne sont pas comptés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Crème de soja légère",
+        "amount": "100 ml pour 2 portions (50 ml par portion)",
+        "reason": "Aucun aliment équivalent suffisamment fidèle n’est disponible dans le catalogue ; non remplacé par une crème laitière."
+      },
+      {
+        "name": "Poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées et non intégrées au calcul."
       }
     ]
   },
