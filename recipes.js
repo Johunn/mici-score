@@ -1064,39 +1064,6 @@ window.MICI_RECIPES = [
     "scoreNote": "Score partiel par portion adaptée : chou-fleur, poireau, bouillon clair et saumon fumé sont comptés. La quantité de saumon reste une adaptation estimée."
   },
   {
-    "id": "salade-pates-mediterr",
-    "title": "Salade de pâtes méditerranéenne",
-    "category": "Repas complet",
-    "servings": 1,
-    "summary": "Score ultra-partiel calculé uniquement sur une portion estimée de pâtes blanches. La liste complète des ingrédients originaux n’a pas pu être vérifiée. Ne pas utiliser cette fiche pour cuisiner sans consulter la source.",
-    "source": "https://www.crohn-larectocoliteetnous.be/recette-salade-de-pates-mediterraneenne/",
-    "sourceLabel": "Crohn / La rectocolite et nous — recette originale identifiée ; transcription complète des ingrédients en attente de vérification",
-    "ingredients": [
-      {
-        "names": [
-          "Pâtes blanches nature"
-        ],
-        "grams": 150
-      }
-    ],
-    "steps": [],
-    "scoreDisabled": true,
-    "sourceIngredientsVerified": false,
-    "originalIngredients": [
-      "Liste complète des ingrédients originaux non vérifiée. Les informations partielles disponibles ne sont pas présentées comme une liste complète."
-    ],
-    "originalIngredientsVerified": false,
-    "adaptationVerified": false,
-    "scoreNote": "Score désactivé : la liste complète des ingrédients de la source n’a pas pu être vérifiée. Un score limité aux pâtes seules serait trompeur pour une salade composée ; ne pas interpréter cette fiche comme une recette scorée.",
-    "unscoredIngredients": [
-      {
-        "name": "Ingrédients de la salade",
-        "amount": "Liste source complète non vérifiée",
-        "reason": "Aucun score n’est calculé tant que la liste complète n’est pas vérifiée."
-      }
-    ]
-  },
-  {
     "id": "chicons-celeri-rave-saumon",
     "title": "Chicons braisés à la crème de céleri-rave, filet de dinde et purée de pommes de terre gratinée",
     "category": "Repas complet",
@@ -3183,48 +3150,6 @@ window.MICI_RECIPES = [
     ]
   },
   {
-    "id": "apero-light",
-    "title": "Recettes apéro light",
-    "category": "Collation",
-    "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/recettes-apero-light/",
-    "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Jambon blanc"
-        ],
-        "grams": 50
-      },
-      {
-        "names": [
-          "Tortilla ou wrap de blé"
-        ],
-        "grams": 60
-      }
-    ],
-    "steps": [],
-    "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
-    "originalIngredients": [
-      "Œufs farcis : 4 œufs, 2 c. à soupe de yaourt ou fromage frais, poivre et sel, 1 c. à café de persil haché.",
-      "Mini-pizzas de wraps : 6 wraps, quelques cuillères à soupe de passata, ½ courgette, quelques cuillères à soupe de fromage râpé light, 100 g de julienne de jambon, herbes de Provence, poivre et sel.",
-      "Grissini au filet de Saxe : grissini et filet de Saxe (quantités non précisées).",
-      "Mousse de truite fumée : 200 g de truite fumée, 5 c. à soupe de crème de soja légère, 1 c. à soupe de persil, poivre et sel."
-    ],
-    "originalIngredientsVerified": true,
-    "adaptationVerified": false,
-    "scoreNote": "Score désactivé : cette fiche rassemble plusieurs préparations apéritives différentes (œufs farcis, mini-pizzas, grissini et mousse de truite). Un score unique ne correspondrait à aucun plat précis ; chaque préparation doit être séparée pour obtenir un score exploitable.",
-    "unscoredIngredients": [
-      {
-        "name": "Autres préparations apéritives",
-        "amount": "4 préparations distinctes",
-        "reason": "Un score unique serait trompeur ; fiche à scinder avant calcul."
-      }
-    ]
-  },
-  {
     "id": "tiramisu-leger",
     "title": "Tiramisu léger",
     "category": "Dessert",
@@ -4263,41 +4188,6 @@ window.MICI_RECIPES = [
     "adaptationVerified": false,
     "scoreNote": "Score estimatif construit à partir des six ingrédients listés dans la source. Les quantités sont ramenées à une portion ; les flocons d’avoine cuits à l’eau et la margarine en fine couche sont des approximations des formes utilisées dans la recette.",
     "unscoredIngredients": []
-  },
-  {
-    "id": "eau-fruitee",
-    "title": "Eau fruitée",
-    "category": "Boisson",
-    "servings": 1,
-    "summary": "Adaptation simplifiée MICI Score à partir de la source citée. Les ingrédients et quantités affichés sont une proposition adaptée au catalogue existant, pas une transcription de la recette originale. Consulter la source pour les ingrédients et instructions publiés. Score partiel disponible, à interpréter avec les ingrédients explicitement comptés.",
-    "source": "https://www.crohn-larectocoliteetnous.be/recette-eau-fruitee/",
-    "sourceLabel": "Crohn / La rectocolite et nous — recette publiée, adaptation simplifiée MICI Score",
-    "ingredients": [
-      {
-        "names": [
-          "Framboises"
-        ],
-        "grams": 30
-      }
-    ],
-    "steps": [],
-    "scoreDisabled": true,
-    "sourceIngredientsVerified": true,
-    "originalIngredients": [
-      "Variante concombre et menthe : ½ concombre, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
-      "Variante framboise et menthe : 100 g de framboises fraîches ou surgelées, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
-      "Variante orange ou citron : 1 orange ou 1 citron, de préférence non traité et bio, et 1 litre d’eau plate ou pétillante."
-    ],
-    "originalIngredientsVerified": true,
-    "adaptationVerified": false,
-    "scoreNote": "Score désactivé : cette fiche regroupe trois variantes distinctes (concombre-menthe, framboise-menthe, orange/citron). Un score unique mélangerait des recettes différentes ; choisir une variante dédiée avant calcul.",
-    "unscoredIngredients": [
-      {
-        "name": "Variantes de recette",
-        "amount": "3 variantes alternatives",
-        "reason": "Un score unique n’est pas pertinent pour cette fiche multi-variantes."
-      }
-    ]
   },
   {
     "id": "smoothie-fruits-rouges-2",
