@@ -1561,12 +1561,6 @@ window.MICI_RECIPES = [
             ],
             "grams": 100
         },
-        {
-            "names": [
-                "Cannelle"
-            ],
-            "grams": 1
-        }
     ],
     "steps": [
         "Préchauffez le four à 160 °C. Préparez une plaque recouverte de papier cuisson. Épluchez les pommes, retirez le cœur et coupez la chair en petits dés.",
@@ -1590,6 +1584,11 @@ window.MICI_RECIPES = [
             "name": "Pâte filo ou pâte à brick",
             "amount": "Environ 1/3 du paquet pour deux petits gâteaux",
             "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
+        },
+        {
+            "name": "Cannelle",
+            "amount": "Une pincée",
+            "reason": "Utilisée pour parfumer la compote, mais non intégrée au calcul du score."
         },
         {
             "name": "Jaune d’œuf",
