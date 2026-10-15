@@ -1026,6 +1026,12 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
+          "Bouillon clair"
+        ],
+        "grams": 250
+      },
+      {
+        "names": [
           "Saumon fumé"
         ],
         "grams": 25
@@ -1048,14 +1054,14 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Assaisonnements éventuels",
+        "amount": "Selon la recette",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel : le chou-fleur, le poireau et 25 g de saumon fumé sont comptés. La quantité de saumon est une hypothèse d’adaptation ; le bouillon n’est pas inclus dans le calcul."
+    "scoreNote": "Score partiel par portion adaptée : chou-fleur, poireau, bouillon clair et saumon fumé sont comptés. La quantité de saumon reste une adaptation estimée."
   },
   {
     "id": "salade-pates-mediterr",
@@ -1113,9 +1119,27 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
-          "Pommes de terre au four avec peau"
+          "Pomme de terre vapeur sans peau"
         ],
         "grams": 150
+      },
+      {
+        "names": [
+          "Escalope de dinde"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Lait demi-écrémé (verre 25 cl)"
+        ],
+        "grams": 20
+      },
+      {
+        "names": [
+          "Beurre (fine couche)"
+        ],
+        "grams": 5
       }
     ],
     "steps": [],
@@ -1137,12 +1161,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : chicons, céleri-rave, pommes de terre, dinde, lait et beurre sont comptés. Les quantités par portion sont des adaptations ; la chapelure et certains assaisonnements ne sont pas représentés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Chapelure ou panko",
+        "amount": "3 c. à soupe pour la recette",
+        "reason": "Aucun équivalent dédié dans le catalogue ; non compté."
+      },
+      {
+        "name": "Muscade, poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -1159,13 +1188,25 @@ window.MICI_RECIPES = [
         "names": [
           "Endive cuite"
         ],
-        "grams": 200
+        "grams": 175
       },
       {
         "names": [
-          "Bouillon cube"
+          "Poireau cuit (blanc)"
         ],
-        "grams": 250
+        "grams": 50
+      },
+      {
+        "names": [
+          "Bouillon clair"
+        ],
+        "grams": 500
+      },
+      {
+        "names": [
+          "Lardons ou bacon"
+        ],
+        "grams": 25
       }
     ],
     "steps": [],
@@ -1179,12 +1220,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel par portion estimée : chicons, poireau, bouillon clair et bacon sont comptés. La portion est estimée à partir des quantités de la recette source.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Assaisonnements éventuels",
+        "amount": "Selon la recette",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -1199,21 +1240,27 @@ window.MICI_RECIPES = [
     "ingredients": [
       {
         "names": [
-          "Carotte crue"
+          "Carotte cuite"
         ],
         "grams": 120
-      },
-      {
-        "names": [
-          "Mayonnaise allégée"
-        ],
-        "grams": 25
       },
       {
         "names": [
           "Ketchup"
         ],
         "grams": 15
+      },
+      {
+        "names": [
+          "Mayonnaise allégée"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Vinaigre balsamique"
+        ],
+        "grams": 10
       }
     ],
     "steps": [],
@@ -1228,12 +1275,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : carotte, ketchup, mayonnaise allégée et vinaigre balsamique sont comptés. Les quantités sont des estimations par portion ; les assaisonnements ne sont pas comptés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -1250,19 +1297,37 @@ window.MICI_RECIPES = [
         "names": [
           "Carotte crue"
         ],
-        "grams": 100
+        "grams": 25
       },
       {
         "names": [
           "Banane bien mûre"
         ],
-        "grams": 60
+        "grams": 30
       },
       {
         "names": [
-          "Miel"
+          "Dattes"
         ],
-        "grams": 10
+        "grams": 25
+      },
+      {
+        "names": [
+          "Lait demi-écrémé (verre 25 cl)"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Cannelle"
+        ],
+        "grams": 1
+      },
+      {
+        "names": [
+          "Vanille"
+        ],
+        "grams": 0.5
       }
     ],
     "steps": [],
@@ -1283,12 +1348,22 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : carotte, banane, dattes, lait et cannelle sont comptés. Les quantités par portion et les conversions d’épices sont estimées ; la farine, l’œuf, la levure et le mélange d’épices ne sont pas intégrés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Farine",
+        "amount": "100 g pour la recette source",
+        "reason": "Aucun aliment farine générique dans le catalogue ; non remplacée par du pain."
+      },
+      {
+        "name": "Œuf",
+        "amount": "1 œuf pour la recette source",
+        "reason": "Aucun ingrédient œuf non préparé disponible ; non compté."
+      },
+      {
+        "name": "Levure chimique et mélange d’épices",
+        "amount": "Selon la recette source",
+        "reason": "Non disponibles sous une forme fidèle ou quantités insuffisamment précises ; non comptés."
       }
     ]
   },
@@ -1309,7 +1384,7 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
-          "Bouillon cube"
+          "Bouillon clair"
         ],
         "grams": 250
       },
@@ -1318,6 +1393,42 @@ window.MICI_RECIPES = [
           "Noisettes"
         ],
         "grams": 10
+      },
+      {
+        "names": [
+          "Échalote"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Ail cuit"
+        ],
+        "grams": 2
+      },
+      {
+        "names": [
+          "Yaourt grec"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Beurre (fine couche)"
+        ],
+        "grams": 8
+      },
+      {
+        "names": [
+          "Graines de sésame"
+        ],
+        "grams": 1
+      },
+      {
+        "names": [
+          "Cumin"
+        ],
+        "grams": 0.5
       }
     ],
     "steps": [],
@@ -1343,12 +1454,22 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : panais, bouillon clair, noisettes, échalote, ail, yaourt grec, beurre, sésame et cumin sont comptés. Les quantités par portion sont estimées à partir de la recette source ; plusieurs éléments du dukkah ne sont pas représentés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Graines de fenouil et de coriandre",
+        "amount": "1 c. à café de chaque pour la recette",
+        "reason": "Aucun équivalent fidèle ou quantité par portion non établie ; non comptées."
+      },
+      {
+        "name": "Huile d’olive",
+        "amount": "Quantité non précisée",
+        "reason": "Non comptée faute de quantité fiable."
+      },
+      {
+        "name": "Sel et poivre",
+        "amount": "Selon le goût",
+        "reason": "Non comptés."
       }
     ]
   },
@@ -1465,6 +1586,12 @@ window.MICI_RECIPES = [
           "Poireau cuit (blanc)"
         ],
         "grams": 50
+      },
+      {
+        "names": [
+          "Bouillon clair"
+        ],
+        "grams": 375
       }
     ],
     "steps": [
@@ -1483,14 +1610,14 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Assaisonnements éventuels",
+        "amount": "Selon la recette",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel : seuls le potiron et le poireau sont comptés. Le bouillon n’entre pas dans le score. Les quantités affichées ici sont une adaptation d’une source dont le nombre de portions est contradictoire."
+    "scoreNote": "Score partiel : potiron, poireau et bouillon clair sont comptés. La portion reste indicative car le rendement de la recette n’est pas clairement établi."
   },
   {
     "id": "vive-chou-fleur-oeuf",
@@ -1509,9 +1636,33 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
+          "Brocoli cuit"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
           "Épinards cuits"
         ],
         "grams": 100
+      },
+      {
+        "names": [
+          "Œuf dur"
+        ],
+        "grams": 1
+      },
+      {
+        "names": [
+          "Huile d'olive (1 cuillère)"
+        ],
+        "grams": 5
+      },
+      {
+        "names": [
+          "Persil, coriandre, basilic frais"
+        ],
+        "grams": 2
       }
     ],
     "steps": [],
@@ -1532,12 +1683,22 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : chou-fleur, brocoli, épinards, œuf dur, huile d’olive et persil sont comptés. La vive et la salicorne ne sont pas représentées par des aliments équivalents ; le score ne couvre donc pas le plat complet.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Filets de vive",
+        "amount": "2 poissons pour la recette",
+        "reason": "Aucun aliment correspondant au poisson vive dans le catalogue ; non remplacé par un autre poisson."
+      },
+      {
+        "name": "Salicorne",
+        "amount": "100 g pour la recette",
+        "reason": "Aliment absent du catalogue ; non compté."
+      },
+      {
+        "name": "Ail, sel et poivre",
+        "amount": "Selon la recette",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -1561,6 +1722,30 @@ window.MICI_RECIPES = [
           "Courgette cuite sans peau"
         ],
         "grams": 120
+      },
+      {
+        "names": [
+          "Lait demi-écrémé (verre 25 cl)"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Bouillon cube"
+        ],
+        "grams": 0.25
+      },
+      {
+        "names": [
+          "Persil, coriandre, basilic frais"
+        ],
+        "grams": 2
+      },
+      {
+        "names": [
+          "Noix de muscade"
+        ],
+        "grams": 0.5
       }
     ],
     "steps": [
@@ -1585,14 +1770,19 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Chapelure",
+        "amount": "Quantité non précisée dans la liste source",
+        "reason": "Aucun équivalent fidèle dans le catalogue ; non comptée."
+      },
+      {
+        "name": "Poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Non comptés."
       }
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel : les pommes de terre et les courgettes sont comptées. Le lait, le cube de bouillon, la chapelure et les assaisonnements ne sont pas intégrés au calcul."
+    "scoreNote": "Score partiel : pommes de terre, courgettes, lait, une fraction de cube de bouillon, persil et muscade sont comptés. La chapelure et les quantités d’assaisonnement ne sont pas intégrées."
   },
   {
     "id": "salade-poulet-curry",
@@ -1782,9 +1972,9 @@ window.MICI_RECIPES = [
     "ingredients": [
       {
         "names": [
-          "Framboises"
+          "Yaourt nature"
         ],
-        "grams": 100
+        "grams": 80
       },
       {
         "names": [
@@ -1794,9 +1984,27 @@ window.MICI_RECIPES = [
       },
       {
         "names": [
+          "Huile de coco"
+        ],
+        "grams": 5
+      },
+      {
+        "names": [
           "Sirop d'érable"
         ],
         "grams": 15
+      },
+      {
+        "names": [
+          "Cannelle"
+        ],
+        "grams": 0.5
+      },
+      {
+        "names": [
+          "Framboises"
+        ],
+        "grams": 38
       }
     ],
     "steps": [],
@@ -1812,12 +2020,12 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : yaourt, avoine, huile de coco, sirop d’érable, cannelle et framboises sont comptés. Les mesures en cuillères ont été converties en grammes à titre indicatif ; les variantes de fruits de la source ne sont pas cumulées.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Assaisonnements éventuels",
+        "amount": "Selon la recette",
+        "reason": "Quantités non précisées ; non comptées."
       }
     ]
   },
@@ -1832,9 +2040,27 @@ window.MICI_RECIPES = [
     "ingredients": [
       {
         "names": [
-          "Mousse au chocolat"
+          "Fromage blanc 0 %"
         ],
-        "grams": 80
+        "grams": 125
+      },
+      {
+        "names": [
+          "Lait demi-écrémé (verre 25 cl)"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Sucre (1 cuillère)"
+        ],
+        "grams": 12
+      },
+      {
+        "names": [
+          "Café noir"
+        ],
+        "grams": 25
       }
     ],
     "steps": [],
@@ -1850,12 +2076,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel : fromage blanc maigre, lait, sucre et café sont comptés. La gélatine et le blanc d’œuf ne sont pas intégrés faute de correspondance fidèle dans le catalogue.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Gélatine",
+        "amount": "7 g pour la recette source",
+        "reason": "Ingrédient absent du catalogue ; non compté."
+      },
+      {
+        "name": "Blanc d’œuf",
+        "amount": "1 blanc pour la recette source",
+        "reason": "Aucun ingrédient œuf non préparé disponible ; non compté."
       }
     ]
   },
