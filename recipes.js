@@ -678,7 +678,7 @@ window.MICI_RECIPES = [
         "names": [
           "Pâtes blanches nature"
         ],
-        "grams": 150
+        "grams": 125
       },
       {
         "names": [
@@ -691,12 +691,37 @@ window.MICI_RECIPES = [
           "Saumon fumé"
         ],
         "grams": 100
+      },
+      {
+        "names": [
+          "Beurre (fine couche)"
+        ],
+        "grams": 2.5
+      },
+      {
+        "names": [
+          "Moutarde de Dijon"
+        ],
+        "grams": 2.5
       }
     ],
     "steps": [
       "Cuire les pâtes selon les indications.",
       "Faire cuire les chicons jusqu’à ce qu’ils soient tendres.",
       "Ajouter le saumon fumé en lanières et réchauffer brièvement, puis mélanger aux pâtes. La sauce de la recette originale n’est pas reprise dans cette version simplifiée."
+    ],
+    "scoreNote": "Score partiel calculé sur les quantités par portion dérivées de la recette source (2 portions). La crème de soja et les assaisonnements ne sont pas comptés.",
+    "unscoredIngredients": [
+      {
+        "name": "Crème de soja light",
+        "amount": "150 ml pour 2 portions (75 ml par portion)",
+        "reason": "Aucun aliment équivalent suffisamment fidèle n’est disponible dans le catalogue ; non remplacé par une crème laitière."
+      },
+      {
+        "name": "Poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées et non intégrées au calcul."
+      }
     ]
   },
   {
@@ -1544,19 +1569,19 @@ window.MICI_RECIPES = [
         "names": [
           "Poulet rôti du commerce"
         ],
-        "grams": 100
-      },
-      {
-        "names": [
-          "Mayonnaise allégée"
-        ],
-        "grams": 20
+        "grams": 25
       },
       {
         "names": [
           "Curry en poudre"
         ],
-        "grams": 2
+        "grams": 3
+      },
+      {
+        "names": [
+          "Fromage blanc 0 %"
+        ],
+        "grams": 30
       }
     ],
     "steps": [],
@@ -1571,12 +1596,17 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel calculé sur les quantités par portion dérivées de la recette source (2 portions). Le poivre, le sel et le curcuma facultatif ne sont pas comptés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Poivre et sel",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées et non intégrées au calcul."
+      },
+      {
+        "name": "Curcuma",
+        "amount": "Une pincée facultative",
+        "reason": "Quantité non précise et aliment non intégré au calcul."
       }
     ]
   },
@@ -2937,13 +2967,31 @@ window.MICI_RECIPES = [
         "names": [
           "Pâtes blanches nature"
         ],
-        "grams": 150
+        "grams": 100
+      },
+      {
+        "names": [
+          "Thon en boîte au naturel"
+        ],
+        "grams": 75
       },
       {
         "names": [
           "Courgette cuite sans peau"
         ],
         "grams": 100
+      },
+      {
+        "names": [
+          "Lait demi-écrémé (verre 25 cl)"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Fromage râpé"
+        ],
+        "grams": 38
       }
     ],
     "steps": [],
@@ -2961,12 +3009,22 @@ window.MICI_RECIPES = [
     ],
     "originalIngredientsVerified": true,
     "adaptationVerified": false,
-    "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
+    "scoreNote": "Score partiel calculé sur les quantités par portion dérivées de la recette source (4 portions). La maïzena, l’huile de cuisson et les assaisonnements ne sont pas comptés.",
     "unscoredIngredients": [
       {
-        "name": "Autres ingrédients et assaisonnements",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégrés au calcul du score partiel."
+        "name": "Maïzena",
+        "amount": "6 c. à soupe pour 4 portions",
+        "reason": "Aliment non disponible sous une forme correspondante dans le catalogue ; exclu du calcul."
+      },
+      {
+        "name": "Huile de cuisson",
+        "amount": "Quantité non précisée",
+        "reason": "La préparation mentionne un peu d’huile, sans quantité mesurable dans la liste des ingrédients."
+      },
+      {
+        "name": "Poivre, sel et noix de muscade",
+        "amount": "Selon le goût",
+        "reason": "Quantités non précisées et non intégrées au calcul."
       }
     ]
   },
