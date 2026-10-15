@@ -1239,14 +1239,14 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   const foods = coreSandbox.window.MICI_SCORE_CORE.FOODS;
   const norm = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   for (const recipe of recipes) {
-    if (recipe.adaptationVerified === false) {
-      assert.equal(recipe.scoreDisabled, true, 'unverified adaptation score must stay disabled: ' + recipe.title);
-      assert.equal(recipe.ingredients.length, 0, 'unverified adaptation must not retain placeholder ingredients: ' + recipe.title);
-      assert.equal(recipe.steps.length, 0, 'unverified adaptation must not retain placeholder steps: ' + recipe.title);
+    if (recipe.adaptationVerified === false && !recipe.scoreNote) {
+      assert.equal(recipe.scoreDisabled, true, 'unverified adaptation without a partial-score note must stay disabled: ' + recipe.title);
+      assert.equal(recipe.ingredients.length, 0, 'unverified adaptation without a partial-score note must not retain placeholder ingredients: ' + recipe.title);
+      assert.equal(recipe.steps.length, 0, 'unverified adaptation without a partial-score note must not retain placeholder steps: ' + recipe.title);
       continue;
     }
-    assert.ok(recipe.ingredients.length >= 2, 'verified recipe needs ingredients: ' + recipe.title);
-    assert.ok(recipe.steps.length >= 2, 'verified recipe needs preparation steps: ' + recipe.title);
+    assert.ok(recipe.ingredients.length >= 1, 'scored recipe needs at least one ingredient: ' + recipe.title);
+    if (!recipe.scoreNote) assert.ok(recipe.steps.length >= 2, 'verified recipe needs preparation steps: ' + recipe.title);
     for (const ingredient of recipe.ingredients) {
       const found = foods.some(food => ingredient.names.some(name =>
         norm(food.n) === norm(name) || norm(food.n).startsWith(norm(name) + ' ')
@@ -1256,6 +1256,7 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   }
   const partialRecipes = recipes.filter(recipe => recipe.scoreNote);
   assert.ok(partialRecipes.filter(recipe => recipe.unscoredIngredients && recipe.unscoredIngredients.length).length >= 5, 'partial recipes must list excluded ingredients and amounts');
+  assert.ok(recipes.filter(recipe => recipe.scoreNote && !recipe.scoreDisabled && recipe.ingredients.length).length >= 40, 'most formerly disabled recipes must now have an explicit partial score');
   assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
   const appleCakes = recipes.find(recipe => recipe.id === 'gateaux-pommes');
