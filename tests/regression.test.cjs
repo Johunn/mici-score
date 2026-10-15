@@ -1245,6 +1245,11 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
       assert.equal(recipe.steps.length, 0, 'unverified adaptation without a partial-score note must not retain placeholder steps: ' + recipe.title);
       continue;
     }
+    if (recipe.scoreDisabled) {
+      assert.match(recipe.scoreNote || '', /Score désactivé/i, 'disabled recipe must explain why it has no score: ' + recipe.title);
+      assert.ok(Array.isArray(recipe.unscoredIngredients) && recipe.unscoredIngredients.length > 0, 'disabled recipe must state what blocks scoring: ' + recipe.title);
+      continue;
+    }
     assert.ok(recipe.ingredients.length >= 1, 'scored recipe needs at least one ingredient: ' + recipe.title);
     if (!recipe.scoreNote) assert.ok(recipe.steps.length >= 2, 'verified recipe needs preparation steps: ' + recipe.title);
     for (const ingredient of recipe.ingredients) {
@@ -1256,14 +1261,17 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   }
   const partialRecipes = recipes.filter(recipe => recipe.scoreNote);
   assert.ok(partialRecipes.filter(recipe => recipe.unscoredIngredients && recipe.unscoredIngredients.length).length >= 5, 'partial recipes must list excluded ingredients and amounts');
-  assert.equal(recipes.filter(recipe => recipe.scoreDisabled || !recipe.ingredients.length).length, 0, 'every catalogue recipe must have a score or an explicit partial score');
+  const disabledRecipes = recipes.filter(recipe => recipe.scoreDisabled);
+  assert.equal(disabledRecipes.length, 3, 'only the three recipes that cannot produce a meaningful single score should be disabled');
+  assert.ok(disabledRecipes.every(recipe => /Score désactivé/i.test(recipe.scoreNote || '') && recipe.unscoredIngredients?.length), 'every disabled recipe must state the concrete blocker');
+  assert.ok(recipes.filter(recipe => !recipe.scoreDisabled).every(recipe => recipe.ingredients.length > 0), 'every enabled recipe must have ingredients for its score');
   assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
   const appleCakes = recipes.find(recipe => recipe.id === 'gateaux-pommes');
   assert.ok(appleCakes, 'apple cakes recipe must exist');
   assert.ok(appleCakes.ingredients.some(ingredient => ingredient.names.some(name => norm(name) === 'cannelle')), 'cinnamon must be included in the apple-cake score when listed as a scored ingredient');
   assert.ok(!appleCakes.unscoredIngredients.some(ingredient => norm(ingredient.name) === 'cannelle'), 'cinnamon must not also be listed among unscored apple-cake ingredients');
-  assert.match(appleCakes.scoreNote, /100 g de pomme cuite et 1 g de cannelle sont comptés/i, 'apple-cake partial-score note must accurately list the scored ingredients');
+  assert.match(appleCakes.scoreNote, /pomme et cannelle sont comptées/i, 'apple-cake partial-score note must accurately identify its scored ingredients');
   assert.ok(html.includes('r.scoreNote?`<p class="notice">'), 'partial-score note must be visible');
   assert.ok(html.includes('${esc(r.scoreNote)}</p>'), 'partial-score note must render its text');
   assert.ok(html.includes('Ajouter les ingrédients comptés à mon assiette'), 'partial recipes must clarify what gets added to the plate');
@@ -1317,19 +1325,25 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
 
-test('les recettes à adaptation non validée restent explicitement partielles et scorables', () => {
+test('les recettes à adaptation non validée sont scorables ou bloquées avec une raison explicite', () => {
   const recipeSandbox = { window: {} };
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:partial-coverage-test' }).runInContext(recipeSandbox);
   const recipes = recipeSandbox.window.MICI_RECIPES;
   const pending = recipes.filter(recipe => recipe.adaptationVerified === false);
-  assert.ok(pending.length >= 47, 'all formerly score-disabled source-backed recipes must remain covered');
+  assert.ok(pending.length >= 52, 'all currently pending source-backed adaptations must be covered');
+  const disabled = pending.filter(recipe => recipe.scoreDisabled);
+  assert.equal(disabled.length, 3, 'only the source-unverified salad and two multi-recipe cards should be blocked');
   for (const recipe of pending) {
-    assert.ok(Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0, recipe.id + ' must have ingredients for a score');
-    assert.equal(recipe.scoreDisabled, false, recipe.id + ' should remain score-enabled when partial scoring is available');
-    assert.ok(recipe.scoreNote, recipe.id + ' must clearly identify the score as partial');
-    assert.ok(Array.isArray(recipe.unscoredIngredients) && recipe.unscoredIngredients.length > 0, recipe.id + ' must list what is excluded from the score');
+    assert.ok(Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0, recipe.id + ' must retain the known ingredients');
+    assert.ok(recipe.scoreNote, recipe.id + ' must explain score coverage or the blocker');
+    assert.ok(Array.isArray(recipe.unscoredIngredients), recipe.id + ' must expose an explicit exclusion list');
+    if (recipe.scoreDisabled) {
+      assert.match(recipe.scoreNote, /Score désactivé/i, recipe.id + ' must explain why scoring is disabled');
+      assert.ok(recipe.unscoredIngredients.length > 0, recipe.id + ' must state the blocking reason');
+    }
   }
+  assert.equal(pending.length - disabled.length, 49, '49 of the 52 pending adaptations should have usable partial scores');
 });
 
 test('three source-backed recipes include their main scoreable ingredients and name exclusions precisely', () => {
