@@ -1256,7 +1256,8 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   }
   const partialRecipes = recipes.filter(recipe => recipe.scoreNote);
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
-  assert.ok(html.includes('${r.scoreNote?`<p class="notice">${esc(r.scoreNote)}</p>`:\'\'}'), 'partial-score note must be visible');
+  assert.ok(html.includes('r.scoreNote?`<p class="notice">'), 'partial-score note must be visible');
+  assert.ok(html.includes('${esc(r.scoreNote)}</p>'), 'partial-score note must render its text');
   assert.ok(html.includes('Ajouter les ingrédients comptés à mon assiette'), 'partial recipes must clarify what gets added to the plate');
 });
 
