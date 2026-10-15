@@ -1023,13 +1023,13 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Bouillon de légumes",
-        "amount": "Environ 500 ml pour une portion",
-        "reason": "Le bouillon apporte le liquide de cuisson, mais n’est pas intégré au calcul du score."
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel : le chou-fleur, le poireau et 25 g de saumon fumé sont comptés. La quantité de saumon est une hypothèse d’adaptation ; le bouillon n’est pas inclus dans le calcul."
   },
   {
@@ -1096,13 +1096,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1138,13 +1138,13 @@ window.MICI_RECIPES = [
       "100 g de bacon"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1187,13 +1187,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1242,13 +1242,13 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1302,13 +1302,13 @@ window.MICI_RECIPES = [
       "Alternative indiquée par la source : bacon croustillant à la place du dukkah"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1357,13 +1357,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1405,13 +1405,13 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Bouillon de poulet",
-        "amount": "Environ 400 ml pour une portion",
-        "reason": "Le bouillon est nécessaire à la recette mais n’est pas intégré au calcul du score."
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel : seuls le potiron et le poireau sont comptés. Le bouillon n’entre pas dans le score. Les quantités affichées ici sont une adaptation d’une source dont le nombre de portions est contradictoire."
   },
   {
@@ -1453,13 +1453,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1507,28 +1507,13 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Lait écrémé",
-        "amount": "Environ 30 ml",
-        "reason": "Le lait est utilisé pour assouplir la purée, mais n’est pas intégré au score de cette adaptation."
-      },
-      {
-        "name": "Bouillon de légumes pauvre en matières grasses",
-        "amount": "Environ 1/4 de cube",
-        "reason": "Quantité répartie sur les quatre portions de la recette originale ; non intégrée au score."
-      },
-      {
-        "name": "Chapelure",
-        "amount": "Environ 1 cuillère à soupe",
-        "reason": "Quantité proposée pour cette adaptation, car la source ne la précise pas ; non intégrée au score."
-      },
-      {
-        "name": "Persil, noix de muscade, sel et poivre",
-        "amount": "Selon le goût",
-        "reason": "Assaisonnements non intégrés au calcul du score."
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel : les pommes de terre et les courgettes sont comptées. Le lait, le cube de bouillon, la chapelure et les assaisonnements ne sont pas intégrés au calcul."
   },
   {
@@ -1570,13 +1555,13 @@ window.MICI_RECIPES = [
       "Une pincée de curcuma facultative"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1611,33 +1596,33 @@ window.MICI_RECIPES = [
       "Carottes : sel et poivre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Carottes : 600 g de carottes",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       },
       {
         "name": "Carottes : 1 oignon (facultatif si mal toléré)",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       },
       {
         "name": "Carottes : 2 c. à café de beurre liquide (ou beurre de soja)",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       },
       {
         "name": "Carottes : 1 cube de bouillon de légumes maigre",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       },
       {
         "name": "Carottes : sel et poivre",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       }
     ]
   },
@@ -1675,13 +1660,13 @@ window.MICI_RECIPES = [
       "Sel et poivre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1725,13 +1710,13 @@ window.MICI_RECIPES = [
       "150 g de framboises surgelées, de myrtilles ou de fraises"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1763,13 +1748,13 @@ window.MICI_RECIPES = [
       "10 cl de café"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1808,13 +1793,13 @@ window.MICI_RECIPES = [
       "Quelques tomates cerises"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
-        "name": "400 g de spaghettis",
+        "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1865,13 +1850,13 @@ window.MICI_RECIPES = [
       "140 g de pomme"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1907,13 +1892,13 @@ window.MICI_RECIPES = [
       "60 g de compote de pommes fine sans sucre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -1958,23 +1943,13 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Pâte filo ou pâte à brick",
-        "amount": "Environ 1/3 du paquet pour deux petits gâteaux",
-        "reason": "La pâte est essentielle à la recette, mais elle n’est pas intégrée au score de cette fiche."
-      },
-      {
-        "name": "Jaune d’œuf",
-        "amount": "Une petite quantité pour coller les extrémités",
-        "reason": "La source ne précise pas la quantité ; non intégré au score."
-      },
-      {
-        "name": "Édulcorant",
-        "amount": "Facultatif, selon le goût",
-        "reason": "Quantité variable et non intégrée au score."
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score très partiel : 100 g de pomme cuite et 1 g de cannelle sont comptés. La pâte filo/brick, l’édulcorant et le jaune d’œuf ne sont pas intégrés au calcul ; le score ne représente donc pas le gâteau complet."
   },
   {
@@ -2021,13 +1996,13 @@ window.MICI_RECIPES = [
       "2 c. à soupe de persil frais pour la finition"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2071,13 +2046,13 @@ window.MICI_RECIPES = [
       "Une feuille azyme (papier comestible, à retirer avant de consommer)"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2131,13 +2106,13 @@ window.MICI_RECIPES = [
       "2 c. à soupe de coriandre fraîche hachée"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2184,13 +2159,13 @@ window.MICI_RECIPES = [
       "2 c. à soupe de coriandre fraîche hachée pour la finition"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2233,13 +2208,13 @@ window.MICI_RECIPES = [
       "75 g de farine de noix de coco"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2282,13 +2257,13 @@ window.MICI_RECIPES = [
       "Au moins 1 c. à café de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2333,18 +2308,13 @@ window.MICI_RECIPES = [
     ],
     "unscoredIngredients": [
       {
-        "name": "Fromage frais light",
-        "amount": "Environ 25 g pour un wrap",
-        "reason": "Quantité proposée pour l’adaptation ; cet ingrédient n’est pas intégré au score faute d’entrée adaptée dans le catalogue."
-      },
-      {
-        "name": "Aneth, sel et poivre",
-        "amount": "Une pincée, selon le goût",
-        "reason": "Assaisonnements non intégrés au calcul du score."
+        "name": "Autres ingrédients et assaisonnements",
+        "amount": "Selon la recette originale",
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel : le wrap et 30 g de saumon fumé sont comptés. La quantité de saumon est une hypothèse d’adaptation ; le fromage frais, le sel, le poivre et l’aneth ne sont pas intégrés au score faute de quantité/catalogue correspondant."
   },
   {
@@ -2383,13 +2353,13 @@ window.MICI_RECIPES = [
       "Noix de muscade"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2426,13 +2396,13 @@ window.MICI_RECIPES = [
       "Un peu de fromage râpé allégé"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2482,13 +2452,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2525,13 +2495,13 @@ window.MICI_RECIPES = [
       "½ c. à café de levure chimique"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2573,13 +2543,13 @@ window.MICI_RECIPES = [
       "Mousse de truite fumée : 200 g de truite fumée, 5 c. à soupe de crème de soja légère, 1 c. à soupe de persil, poivre et sel."
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2612,13 +2582,13 @@ window.MICI_RECIPES = [
       "Cacao en poudre facultatif"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2662,13 +2632,13 @@ window.MICI_RECIPES = [
       "Fromage râpé light facultatif"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2700,13 +2670,13 @@ window.MICI_RECIPES = [
       "Sel et poivre"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "1 boîte de thon au naturel (environ 100 g)",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       }
     ]
   },
@@ -2751,13 +2721,13 @@ window.MICI_RECIPES = [
       "Vinaigre balsamique"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2794,13 +2764,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2829,13 +2799,13 @@ window.MICI_RECIPES = [
       "40 g de sucre blanc"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "80 g de chocolat au lait",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       }
     ]
   },
@@ -2875,13 +2845,13 @@ window.MICI_RECIPES = [
       "Poivre, sel et noix de muscade"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2929,13 +2899,13 @@ window.MICI_RECIPES = [
       "Poivre et sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -2975,13 +2945,13 @@ window.MICI_RECIPES = [
       "Poivre, sel et noix de muscade"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3012,13 +2982,13 @@ window.MICI_RECIPES = [
       "Fromage râpé"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "1 courgette",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       }
     ]
   },
@@ -3063,13 +3033,13 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3108,13 +3078,13 @@ window.MICI_RECIPES = [
       "Garniture : quelques c. à soupe de passata de tomates, fromage râpé, poivre, sel et herbes de Provence"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3152,13 +3122,13 @@ window.MICI_RECIPES = [
       "1 pomme ferme"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3209,13 +3179,13 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3260,13 +3230,13 @@ window.MICI_RECIPES = [
       "Roquette"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3316,13 +3286,13 @@ window.MICI_RECIPES = [
       "10 g de margarine liquide"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3351,13 +3321,13 @@ window.MICI_RECIPES = [
       "Variante orange ou citron : 1 orange ou 1 citron, de préférence non traité et bio, et 1 litre d’eau plate ou pétillante."
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Variante framboise et menthe : 100 g de framboises fraîches ou surgelées, une poignée de feuilles de menthe fraîche, 1 litre d’eau plate ou pétillante.",
-        "amount": "Selon la recette originale",
-        "reason": "Non intégré au score partiel ; sa contribution n’est pas calculée."
+        "amount": "Quantité de la source",
+        "reason": "Non intégré au calcul : le score ne tient pas compte de cet ingrédient."
       }
     ]
   },
@@ -3393,13 +3363,13 @@ window.MICI_RECIPES = [
       "Garniture facultative : fruits frais ou secs, granola, noix ou graines"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3444,13 +3414,13 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   },
@@ -3502,13 +3472,13 @@ window.MICI_RECIPES = [
       "Une pincée de sel"
     ],
     "originalIngredientsVerified": true,
-    "adaptationVerified": true,
+    "adaptationVerified": false,
     "scoreNote": "Score partiel indicatif calculé uniquement sur les ingrédients listés dans « Ingrédients intégrés au score ». Les autres ingrédients de la recette originale ne sont pas inclus ; ce score ne représente donc pas la recette complète.",
     "unscoredIngredients": [
       {
         "name": "Autres ingrédients et assaisonnements",
         "amount": "Selon la recette originale",
-        "reason": "Non intégrés au score partiel."
+        "reason": "Non intégrés au calcul du score partiel."
       }
     ]
   }
