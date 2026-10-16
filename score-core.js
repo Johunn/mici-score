@@ -219,6 +219,7 @@ const RAW=[
 "Omelette au fromage|2.5,1,0,0,0,0,0,0",
 "Œufs brouillés (beurre, lait)|2,1,0,0,0,0,0,0",
 "Œuf poché ou à la coque|0.5,0,0,0,0,0,0,0",
+"Œuf entier|1,0,0,0,0,0,0,0",
 "Lait entier (verre 25 cl)|1,3,0,0,0,0,0,0",
 "Lait demi-écrémé (verre 25 cl)|0.5,3,0,0,0,0,0,0|o",
 "Lait sans lactose (verre 25 cl)|0.5,0,0,0,0,0,1,0",
