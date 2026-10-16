@@ -1003,7 +1003,7 @@ test('generic egg ingredients resolve and all association recipes have complete 
   new vm.Script(recipesSource, { filename: 'recipes.js' }).runInContext(recipesSandbox);
   const recipes = recipesSandbox.window.MICI_RECIPES;
   const norm = value => String(value || '').normalize('NFD')
-    .replace(/[\\u0300-\\u036f]/g, '').toLocaleLowerCase('fr')
+    .replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr')
     .replace(/[^a-z0-9]+/g, ' ').trim();
   const resolve = ingredient =>
     core.FOODS.find(food => ingredient.names.some(name => norm(food.n) === norm(name))) ||
