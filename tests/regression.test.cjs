@@ -41,7 +41,7 @@ test('extracted scoring module is syntactically valid', () => {
 });
 
 test('app shell loads the scoring module before its inline code', () => {
-  const moduleTag = html.indexOf('<script src="score-core.js"></script>');
+  const moduleTag = html.indexOf('<script src="score-core.js?v=69"></script>');
   const appScript = html.indexOf('<script>\n(function(){');
   assert.ok(moduleTag >= 0, 'index.html must load score-core.js');
   assert.ok(appScript > moduleTag, 'score module must load before app initialization');
@@ -60,7 +60,7 @@ test('settings and journal note fields have accessible labels and focus support'
 });
 
 test('offline shell caches the app engine and local fonts without intercepting external origins', () => {
-  assert.ok(swSource.includes("'index.html','score-core.js'"));
+  assert.ok(swSource.includes("'index.html','score-core.js?v=69','recipes.js?v=69'"));
   assert.ok(swSource.includes("'fonts/bricolage-grotesque-latin-opsz-normal.woff2'"));
   assert.ok(swSource.includes("'fonts/figtree-latin-wght-normal.woff2'"));
   assert.ok(swSource.includes("'fonts/montserrat-latin-wght-normal.woff2'"));
@@ -69,8 +69,8 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the current cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v68';/);
-  assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
+  assert.match(swSource, /const CACHE='mici-score-v69';/);
+  assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js\?v=69'[^\]]*'recipes\.js\?v=69'/);
 });
 
 
