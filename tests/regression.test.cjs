@@ -996,6 +996,26 @@ test('score core loads and parses a large, valid food catalogue', () => {
   }
 });
 
+test('generic egg ingredients resolve and all association recipes have complete ingredient coverage', () => {
+  const core = makeCoreHarness();
+  const recipesSandbox = { window: {} };
+  vm.createContext(recipesSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js' }).runInContext(recipesSandbox);
+  const recipes = recipesSandbox.window.MICI_RECIPES;
+  const norm = value => String(value || '').normalize('NFD')
+    .replace(/[\\u0300-\\u036f]/g, '').toLocaleLowerCase('fr')
+    .replace(/[^a-z0-9]+/g, ' ').trim();
+  const resolve = ingredient =>
+    core.FOODS.find(food => ingredient.names.some(name => norm(food.n) === norm(name))) ||
+    core.FOODS.find(food => ingredient.names.some(name => norm(food.n).startsWith(norm(name) + ' ')));
+
+  assert.equal(core.refG(core.FOODS.find(food => food.n === 'Œuf entier')), 50);
+  const missing = recipes.flatMap(recipe => recipe.ingredients
+    .filter(ingredient => !resolve(ingredient))
+    .map(ingredient => recipe.title + ': ' + ingredient.names.join(' / ')));
+  assert.deepEqual(missing, [], 'all recipe ingredients must contribute to their scores');
+});
+
 test('reference portions apply to the food itself, not any composite containing its name', () => {
   const core = makeCoreHarness();
   const find = pattern => {
