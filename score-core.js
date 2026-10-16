@@ -624,6 +624,7 @@ const REFG_NOM=[
  [/^poire/i,160,[1]]
 ];
 const refG=f=>{for(const [rx,g,cats] of REFG_NOM)if((!cats||cats.includes(f.c))&&rx.test(f.n))return g;return REFG_CAT[f.c]||100};
+const pfOf=it=>it.g>0?Math.min(3,Math.max(0.1,it.g/refG(it.f))):PF[it.p];
 const grOf=(f,k)=>{const g=refG(f)*PF[k];return g<10?Math.round(g):Math.round(g/5)*5};   // poids estimé affiché sous chaque portion
 function levels(items,ctx){
   const L=Array(7).fill(0);let b=0,ho=0,u=0;
