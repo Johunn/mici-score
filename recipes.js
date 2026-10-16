@@ -1917,5 +1917,192 @@ window.MICI_RECIPES = [
     "sourceIngredientsVerified": true,
     "adaptationVerified": true,
     "scoreDisabled": false
+  },
+  {
+    "id": "cabillaud-cinq-parfums-750g",
+    "title": "Filet de cabillaud aux cinq parfums",
+    "category": "Repas complet",
+    "servings": 2,
+    "summary": "Cabillaud mariné aux cinq épices et à la sauce soja, sauté au wok.",
+    "source": "https://www.750g.com/filet-de-cabillaud-aux-cinq-parfums-r80618.htm",
+    "sourceLabel": "Recette publiée par 750g — Margot Zhang",
+    "ingredients": [
+      {
+        "names": [
+          "Cabillaud ou colin vapeur"
+        ],
+        "grams": 125
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Gingembre frais"
+        ],
+        "grams": 2.5
+      },
+      {
+        "names": [
+          "Huile de tournesol ou colza"
+        ],
+        "grams": 15
+      }
+    ],
+    "steps": [
+      "Couper le cabillaud en morceaux d’environ 5 cm. Mélanger la sauce soja, le vin de riz et les cinq épices, puis laisser mariner le poisson pendant au moins 30 minutes.",
+      "Hacher le gingembre et l’oignon nouveau. Égoutter le poisson en conservant la marinade, puis mélanger celle-ci avec la fécule et l’eau. Ajouter le gingembre et l’oignon.",
+      "Chauffer l’huile dans une poêle et faire dorer les morceaux de cabillaud.",
+      "Verser la marinade épaissie dans la poêle et mélanger délicatement. Arrêter la cuisson dès que la sauce commence à prendre, ajouter quelques gouttes d’huile de sésame et décorer avec le vert de l’oignon nouveau."
+    ],
+    "servingsLabel": "2 personnes",
+    "prepTime": "5 min",
+    "cookTime": "10 min",
+    "restTime": "30 min",
+    "originalIngredients": [
+      "250 g de filets de cabillaud",
+      "1/2 c. à café de fécule de pomme de terre",
+      "40 ml d’eau",
+      "Huile de sésame (quelques gouttes à la finition)",
+      "2 c. à soupe d’huile de tournesol",
+      "1 c. à soupe de vin de riz Shaoxing",
+      "1 oignon nouveau ou cébette",
+      "5 g de gingembre",
+      "1/2 c. à café de cinq épices",
+      "2 c. à soupe de sauce soja",
+      "Sel"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Fécule de pomme de terre et eau",
+        "amount": "1/2 c. à café et 40 ml",
+        "reason": "Non intégrées au calcul partiel."
+      },
+      {
+        "name": "Huile de sésame",
+        "amount": "Quelques gouttes",
+        "reason": "Huile distincte non représentée fidèlement dans le catalogue."
+      },
+      {
+        "name": "Vin de riz Shaoxing",
+        "amount": "1 c. à soupe",
+        "reason": "Vin de cuisson non compté."
+      },
+      {
+        "name": "Oignon nouveau",
+        "amount": "1",
+        "reason": "Cébette non représentée fidèlement dans le catalogue."
+      },
+      {
+        "name": "Cinq épices et sel",
+        "amount": "1/2 c. à café et selon goût",
+        "reason": "Mélange d’épices et assaisonnement non comptés."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : poisson blanc, sauce soja, gingembre et huile de tournesol. Le poids du poisson est donné par la source ; l’oignon nouveau, le vin de riz, la fécule, l’huile de sésame et le mélange cinq épices ne sont pas comptés. Le score ne représente donc pas toute la recette.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "yakiudon-750g",
+    "title": "Yakiudon",
+    "category": "Repas complet",
+    "servings": 4,
+    "summary": "Nouilles udon sautées au wok avec poulet, poivron et sauce japonaise.",
+    "source": "https://www.750g.com/yakiudon-r68641.htm",
+    "sourceLabel": "Recette publiée par 750g — Mathieu V.",
+    "ingredients": [
+      {
+        "names": [
+          "Nouilles de blé"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Poulet grillé sans peau"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Poivron cuit"
+        ],
+        "grams": 40
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 7.5
+      },
+      {
+        "names": [
+          "Sucre (1 cuillère)"
+        ],
+        "grams": 1
+      },
+      {
+        "names": [
+          "Huile de tournesol ou colza"
+        ],
+        "grams": 4
+      },
+      {
+        "names": [
+          "Piment (frais ou en poudre)"
+        ],
+        "grams": 1
+      }
+    ],
+    "steps": [
+      "Séparer les nouilles udon en les passant dans de l’eau tiède.",
+      "Couper le poulet en petits dés. Mélanger la sauce soja, la sauce tonkatsu, le sucre et le piment haché, puis enrober le poulet et laisser mariner 10 minutes.",
+      "Égoutter le poulet en conservant la marinade. Hacher grossièrement le poivron, les champignons shiitaké et le bok choy.",
+      "Faire chauffer l’huile dans un wok très chaud et saisir le poulet environ 10 minutes.",
+      "Ajouter le poivron et les champignons, puis faire revenir environ 3 minutes.",
+      "Incorporer les nouilles, la marinade restante et le bok choy. Cuire encore environ 2 minutes en mélangeant, puis servir très chaud."
+    ],
+    "servingsLabel": "4 personnes",
+    "prepTime": "15 min",
+    "cookTime": "15 min",
+    "restTime": "10 min",
+    "originalIngredients": [
+      "2 c. à soupe de sauce soja",
+      "2 c. à soupe de sauce tonkatsu",
+      "1 c. à café de sucre",
+      "1 c. à soupe d’huile végétale",
+      "1 petit piment rouge",
+      "1 bok choy (chou chinois)",
+      "400 g de nouilles udon fraîches",
+      "1 poivron",
+      "100 g de champignons shiitaké",
+      "400 g de filets de poulet"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Sauce tonkatsu",
+        "amount": "2 c. à soupe",
+        "reason": "Sauce composée non représentée fidèlement dans le catalogue alimentaire."
+      },
+      {
+        "name": "Bok choy",
+        "amount": "1",
+        "reason": "Chou chinois non représenté fidèlement dans le catalogue."
+      },
+      {
+        "name": "Champignons shiitaké",
+        "amount": "100 g",
+        "reason": "Le catalogue ne contient pas de correspondance exacte ; ils ne sont pas assimilés aux champignons de Paris."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : nouilles de blé utilisées comme approximation des udon, poulet, poivron, sauce soja, sucre, huile et piment. La sauce tonkatsu, le bok choy et les champignons shiitaké ne sont pas comptés ; les poids du poivron et du piment sont estimés à partir des unités de la source.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
   }
 ];
