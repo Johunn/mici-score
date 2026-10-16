@@ -1,4 +1,4 @@
-/* Catalogue de recettes publiées par des sources spécialisées. Les ingrédients originaux et les étapes sont retranscrits depuis les pages sources ; le score MICI reste une estimation partielle lorsqu’il ne couvre pas tous les ingrédients. */
+/* Catalogue de recettes publiées par des sources culinaires vérifiées. Les ingrédients originaux et les étapes sont retranscrits depuis les pages sources ; le score MICI reste une estimation partielle lorsqu’il ne couvre pas tous les ingrédients. */
 window.MICI_RECIPES = [
   {
     "id": "carotte-rotie-coucou",
@@ -1409,9 +1409,7 @@ window.MICI_RECIPES = [
     "sourceIngredientsVerified": true,
     "adaptationVerified": true,
     "scoreDisabled": false
-  }
-,
-[
+  },
   {
     "id": "yakitori-classique-750g",
     "title": "Yakitori classique",
@@ -1920,5 +1918,4 @@ window.MICI_RECIPES = [
     "adaptationVerified": true,
     "scoreDisabled": false
   }
-]
 ];
