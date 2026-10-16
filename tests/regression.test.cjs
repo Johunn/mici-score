@@ -1214,7 +1214,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
   assert.match(swSource, /mici-score-v69/);
-  assert.match(swSource, /'recipes\.js'/);
+  assert.match(swSource, /'recipes\.js\?v=69'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
 
