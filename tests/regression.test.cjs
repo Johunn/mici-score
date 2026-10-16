@@ -1030,6 +1030,9 @@ test('reference portions apply to the food itself, not any composite containing 
 
   assert.equal(core.refG(find(/^Jambon cru$/i)), 25);
   assert.equal(core.refG(find(/^Fromage blanc 0 %$/i)), 125);
+  assert.equal(core.refG(find(/^Lait demi-écrémé \(verre 25 cl\)$/i)), 250);
+  assert.equal(core.refG(find(/^Lait entier \(verre 25 cl\)$/i)), 250);
+  assert.equal(core.refG(find(/^Café glacé au lait \(25 cl\)$/i)), 250);
   assert.equal(core.refG(find(/^Burger maison/i)), 300);
   assert.equal(core.refG(find(/^Sandwich jambon blanc-fromage$/i)), 200);
   assert.equal(core.refG(find(/^Omelette au fromage$/i)), 100);
