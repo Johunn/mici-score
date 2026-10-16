@@ -1397,7 +1397,7 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /fmt\(e\.score!=null\?e\.score:e\.r\)/);
   assert.match(html, /ressenti personnel '\+fmt\(e\.r\)\+'\/10/);
   assert.match(html, /La pastille affiche le score MICI calculé/);
-  assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
+  assert.match(html, /const r=scorePlateOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
 
 test('le catalogue ne contient que des recettes vérifiées à partir de pages individuelles', () => {
