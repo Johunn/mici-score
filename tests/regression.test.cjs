@@ -1322,8 +1322,48 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
         recipe.title + ' must produce a finite MICI Score from its configured ingredients');
     }
   }
-  assert.equal(recipes.length, 19, 'the catalogue should retain the 15 original verified recipes plus 4 reinstated official recipes');
-  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 19, 'all 19 official recipes must produce an estimate from configured ingredients');
+  assert.equal(recipes.length, 25, 'the catalogue should retain 19 existing verified recipes plus 6 newly verified recipes');
+  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 25, 'all 25 verified recipes must produce an estimate from configured ingredients');
+});
+
+
+test('six nouvelles recettes asiatiques ont une source directe et un score de base strictement supérieur à 6/10', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:verified-asian-recipes' }).runInContext(recipeSandbox);
+  const coreSandbox = { window: {} };
+  vm.createContext(coreSandbox);
+  new vm.Script(coreModuleSource, { filename: 'score-core.js:verified-asian-recipes' }).runInContext(coreSandbox);
+  const core = coreSandbox.window.MICI_SCORE_CORE;
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  const ids = [
+    'yakitori-classique-750g',
+    'yakitori-gingembre-750g',
+    'saumon-facon-yakitori-750g',
+    'poisson-vapeur-cantonais-moulinex',
+    'riz-saute-poulet-cookeo-750g',
+    'udon-nabe-750g'
+  ];
+  const normalize = value => String(value).normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const id of ids) {
+    const recipe = recipes.find(item => item.id === id);
+    assert.ok(recipe, id + ' must be present');
+    assert.equal(recipe.sourceIngredientsVerified, true);
+    assert.equal(recipe.adaptationVerified, true);
+    assert.ok(/^https:\\/\\/www\\.(?:750g\\.com|moulinex\\.be)\\/.+/.test(recipe.source), id + ' must link to its exact source page');
+    assert.ok(recipe.originalIngredients.length > 0);
+    assert.ok(recipe.steps.length >= 3);
+    assert.ok(recipe.scoreNote && /partiel indicatif/i.test(recipe.scoreNote));
+    assert.ok(recipe.unscoredIngredients.length > 0);
+    const items = recipe.ingredients.map(ingredient => {
+      const food = core.FOODS.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
+        core.FOODS.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
+      assert.ok(food, id + ' score ingredient must resolve: ' + ingredient.names[0]);
+      return { f: food, p: 1, g: ingredient.grams };
+    });
+    const score = core.scoreOf(items, {}).score;
+    assert.ok(score > 6 && score <= 10, id + ' baseline partial score must be strictly above 6/10; got ' + score);
+  }
 });
 
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
@@ -1334,7 +1374,7 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
 
-test('le catalogue ne contient que des recettes officielles vérifiées', () => {
+test('le catalogue ne contient que des recettes vérifiées à partir de pages individuelles', () => {
   const recipeSandbox = { window: {} };
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:partial-coverage-test' }).runInContext(recipeSandbox);
@@ -1345,7 +1385,7 @@ test('le catalogue ne contient que des recettes officielles vérifiées', () => 
     assert.equal(recipe.sourceIngredientsVerified, true, recipe.id + ' must have a verified source ingredient list');
     assert.equal(recipe.adaptationVerified, true, recipe.id + ' must be an official source recipe, not a MICI Score adaptation');
     assert.equal(recipe.scoreDisabled, false, recipe.id + ' must have a usable score estimate');
-    assert.ok(/^https:\/\/www\.crohn-larectocoliteetnous\.be\/.+/.test(recipe.source), recipe.id + ' must link directly to an individual official recipe page');
+    assert.ok(/^https:\/\/www\.(?:crohn-larectocoliteetnous\.be|750g\.com|moulinex\.be)\/.+/.test(recipe.source), recipe.id + ' must link directly to a verified individual recipe page from an approved source');
     assert.ok(Array.isArray(recipe.originalIngredients) && recipe.originalIngredients.length > 0, recipe.id + ' must include the original ingredient list');
     assert.ok(Array.isArray(recipe.steps) && recipe.steps.length >= 3, recipe.id + ' must include detailed preparation steps');
     assert.ok(recipe.scoreNote, recipe.id + ' must explain the limits of the score estimate');
