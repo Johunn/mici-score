@@ -1381,6 +1381,17 @@ test('overnight oats keep the prepared quantity for the plate but use a normal p
   assert.match(html, /quantité utilisée pour le score/);
 });
 
+test('recipe scoring equivalence survives plate edits, journal replay, and backup restore', () => {
+  assert.match(html, /const scorePlateOf=\(items,opts\)=>scoreOf\(items\.map\(x=>x\.sg!=null\?\{f:x\.f,p:x\.p,g:x\.sg\}:x\),opts\)/);
+  assert.match(html, /scorePlateOf\(plateItems\(\),ui\)/);
+  assert.match(html, /x\.ing\.scoreGrams\/x\.ing\.grams/);
+  assert.match(html, /x\.sr!=null\?\{sr:x\.sr\}:\{\}/);
+  assert.match(html, /it\.sr!==undefined\)\{if\(!num\(it\.sr,0\.000001,1\)\)fail\(\);item\.sr=it\.sr\}/);
+  assert.match(html, /p\.sr!==undefined&&\(!Number\.isFinite\(p\.sr\)\|\|p\.sr<=0\|\|p\.sr>1\)/);
+  assert.match(html, /portionGrams\(byId\(ui\.plate\[i\]\.id\),v,ui\.plate\[i\]\.sr\)/);
+  assert.match(html, /scorePlateOf\(items,ui\),now=Date\.now\(\),savedItems/);
+});
+
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
   assert.match(html, /cls\(e\.score!=null\?e\.score:e\.r\)/);
   assert.match(html, /fmt\(e\.score!=null\?e\.score:e\.r\)/);
