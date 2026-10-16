@@ -1013,7 +1013,7 @@ test('generic egg ingredients resolve and all association recipes have complete 
   const missing = recipes.flatMap(recipe => recipe.ingredients
     .filter(ingredient => !resolve(ingredient))
     .map(ingredient => recipe.title + ': ' + ingredient.names.join(' / ')));
-  assert.deepEqual(missing, [], 'all recipe ingredients must contribute to their scores');
+  assert.equal(missing.length, 0, 'unmatched recipe ingredients: ' + missing.join('; '));
 });
 
 test('reference portions apply to the food itself, not any composite containing its name', () => {
