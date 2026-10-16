@@ -1015,6 +1015,7 @@ test('reference portions apply to the food itself, not any composite containing 
   assert.equal(core.refG(find(/^Omelette au fromage$/i)), 100);
   assert.equal(core.refG(find(/^Sushis saumon-avocat$/i)), 300);
   assert.equal(core.refG(find(/^Gratin de pâtes au jambon$/i)), 300);
+  assert.equal(core.refG(find(/^Croquettes de fromage ou de crevettes$/i)), 300);
 });
 
 test('neutral food scores 10 and a single feature follows the documented formula', () => {
