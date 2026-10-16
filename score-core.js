@@ -611,7 +611,7 @@ const REFG_NOM=[
  [/^frites/i,250,[2]],
  [/^lasagne/i,400,[10]],
  [/^spaghetti/i,300,[2]],
- [/^croque/i,135,[10,12]],
+ [/^croque(?:-| |$)/i,135,[10,12]],
  [/^croissant/i,50,[2,9]],
  [/^purée|^puree/i,160,[0,2]],
  [/^riz/i,150,[2,9,13]],
