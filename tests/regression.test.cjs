@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the current cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v63';/);
+  assert.match(swSource, /const CACHE='mici-score-v66';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v63/);
+  assert.match(swSource, /mici-score-v66/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1184,7 +1184,7 @@ test('food and recipe catalogs use matching one-row search, sort, category, and 
   assert.match(html, /id="recipe-category"/);
   assert.match(html, /#app \.unified-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 142px 160px!important/);
   assert.match(html, /#app \.unified-search:focus-within\{border:2px solid var\(--accent\)!important;outline:none!important;box-shadow:none!important\}/);
-  assert.match(swSource, /const CACHE='mici-score-v63';/);
+  assert.match(swSource, /const CACHE='mici-score-v66';/);
 });
 
 test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
@@ -1193,7 +1193,7 @@ test('recipe search and sort share one row, search focus has no halo, and score 
   assert.match(html, /#app \.searchbox input\[type=search\]:focus,#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v63';/);
+  assert.match(swSource, /const CACHE='mici-score-v66';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
@@ -1266,11 +1266,12 @@ test('recipe catalogue contains at least 15 documented ideas with resolvable loc
   assert.ok(recipes.filter(recipe => !recipe.scoreDisabled).every(recipe => recipe.ingredients.length > 0), 'every enabled recipe must have ingredients for its score');
   assert.ok(html.includes('Ingrédients non comptés dans le score'), 'excluded ingredients must be visible in recipe details');
   assert.ok(partialRecipes.length >= 5, 'partial-score recipes should explain excluded ingredients');
-  const appleCakes = recipes.find(recipe => recipe.id === 'gateaux-pommes');
-  assert.ok(appleCakes, 'apple cakes recipe must exist');
-  assert.ok(appleCakes.ingredients.some(ingredient => ingredient.names.some(name => norm(name) === 'cannelle')), 'cinnamon must be included in the apple-cake score when listed as a scored ingredient');
-  assert.ok(!appleCakes.unscoredIngredients.some(ingredient => norm(ingredient.name) === 'cannelle'), 'cinnamon must not also be listed among unscored apple-cake ingredients');
-  assert.match(appleCakes.scoreNote, /pomme et cannelle sont comptées/i, 'apple-cake partial-score note must accurately identify its scored ingredients');
+  const oatBiscuits = recipes.find(recipe => recipe.id === 'biscuits-avoine');
+  assert.ok(oatBiscuits, 'verified oat biscuits recipe must exist');
+  assert.equal(oatBiscuits.sourceIngredientsVerified, true, 'official ingredient list must be verified');
+  assert.ok(oatBiscuits.originalIngredients.some(ingredient => /flocons d’avoine/i.test(ingredient)), 'original source ingredients must be visible');
+  assert.ok(oatBiscuits.steps.length >= 6, 'the detailed source preparation must be present');
+  assert.match(oatBiscuits.scoreNote, /avoine cuite/i, 'score limitations for dry oats must be explicit');
   assert.ok(html.includes('r.scoreNote?`<p class="notice">'), 'partial-score note must be visible');
   assert.ok(html.includes('${esc(r.scoreNote)}</p>'), 'partial-score note must render its text');
   assert.ok(html.includes('Ajouter les ingrédients comptés à mon assiette'), 'partial recipes must clarify what gets added to the plate');
@@ -1291,7 +1292,7 @@ test('catalog and recipe search/sort stay on one row and score numbers are large
   assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v63';/);
+  assert.match(swSource, /const CACHE='mici-score-v66';/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
@@ -1299,7 +1300,7 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:deduplication-test' }).runInContext(recipeSandbox);
   const recipes = recipeSandbox.window.MICI_RECIPES;
-  assert.ok(recipes.length >= 25, 'expected an expanded recipe catalogue');
+  assert.ok(recipes.length >= 15, 'expected the verified official recipe catalogue');
   assert.equal(new Set(recipes.map(r => r.id)).size, recipes.length, 'recipe IDs must be unique');
   const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   assert.equal(new Set(recipes.map(r => normalize(r.title))).size, recipes.length, 'recipe titles must be unique');
@@ -1321,8 +1322,50 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
         recipe.title + ' must produce a finite MICI Score from its configured ingredients');
     }
   }
-  assert.equal(recipes.length, 76, 'recipe catalogue coverage must remain explicit after removing blocked recipes');
-  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 76, '76 recipes must produce scores from configured ingredients');
+  assert.equal(recipes.length, 27, 'the catalogue should retain 19 existing verified recipes plus 8 newly verified recipes');
+  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 27, 'all 27 verified recipes must produce an estimate from configured ingredients');
+});
+
+
+test('huit nouvelles recettes asiatiques ont une source directe et un score de base strictement supérieur à 6/10', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:verified-asian-recipes' }).runInContext(recipeSandbox);
+  const coreSandbox = { window: {} };
+  vm.createContext(coreSandbox);
+  new vm.Script(coreModuleSource, { filename: 'score-core.js:verified-asian-recipes' }).runInContext(coreSandbox);
+  const core = coreSandbox.window.MICI_SCORE_CORE;
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  const ids = [
+    'yakitori-classique-750g',
+    'yakitori-gingembre-750g',
+    'saumon-facon-yakitori-750g',
+    'poisson-vapeur-cantonais-moulinex',
+    'riz-saute-poulet-cookeo-750g',
+    'udon-nabe-750g',
+    'cabillaud-cinq-parfums-750g',
+    'yakiudon-750g'
+  ];
+  const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  for (const id of ids) {
+    const recipe = recipes.find(item => item.id === id);
+    assert.ok(recipe, id + ' must be present');
+    assert.equal(recipe.sourceIngredientsVerified, true);
+    assert.equal(recipe.adaptationVerified, true);
+    assert.ok(/^https:\/\/www\.(?:750g\.com|moulinex\.be)\/.+/.test(recipe.source), id + ' must link to its exact source page');
+    assert.ok(recipe.originalIngredients.length > 0);
+    assert.ok(recipe.steps.length >= 3);
+    assert.ok(recipe.scoreNote && /partiel indicatif/i.test(recipe.scoreNote));
+    assert.ok(recipe.unscoredIngredients.length > 0);
+    const items = recipe.ingredients.map(ingredient => {
+      const food = core.FOODS.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
+        core.FOODS.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
+      assert.ok(food, id + ' score ingredient must resolve: ' + ingredient.names[0]);
+      return { f: food, p: 1, g: ingredient.grams };
+    });
+    const score = core.scoreOf(items, {}).score;
+    assert.ok(score > 6 && score <= 10, id + ' baseline partial score must be strictly above 6/10; got ' + score);
+  }
 });
 
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
@@ -1333,49 +1376,67 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
 
-test('les recettes à adaptation non validée sont scorables ou bloquées avec une raison explicite', () => {
+test('le catalogue ne contient que des recettes vérifiées à partir de pages individuelles', () => {
   const recipeSandbox = { window: {} };
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:partial-coverage-test' }).runInContext(recipeSandbox);
   const recipes = recipeSandbox.window.MICI_RECIPES;
   const pending = recipes.filter(recipe => recipe.adaptationVerified === false);
-  assert.equal(pending.length, 49, '49 pending source-backed adaptations remain after removing the blocked cards');
-  const disabled = pending.filter(recipe => recipe.scoreDisabled);
-  assert.equal(disabled.length, 0, 'blocked recipes must be removed from the catalogue');
-  for (const recipe of pending) {
-    assert.ok(Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0, recipe.id + ' must retain the known ingredients');
-    assert.ok(recipe.scoreNote, recipe.id + ' must explain score coverage or the blocker');
-    assert.ok(Array.isArray(recipe.unscoredIngredients), recipe.id + ' must expose an explicit exclusion list');
-    if (recipe.scoreDisabled) {
-      assert.match(recipe.scoreNote, /Score désactivé/i, recipe.id + ' must explain why scoring is disabled');
-      assert.ok(recipe.unscoredIngredients.length > 0, recipe.id + ' must state the blocking reason');
-    }
+  assert.equal(pending.length, 0, 'no unverified MICI Score adaptations may remain');
+  for (const recipe of recipes) {
+    assert.equal(recipe.sourceIngredientsVerified, true, recipe.id + ' must have a verified source ingredient list');
+    assert.equal(recipe.adaptationVerified, true, recipe.id + ' must be an official source recipe, not a MICI Score adaptation');
+    assert.equal(recipe.scoreDisabled, false, recipe.id + ' must have a usable score estimate');
+    assert.ok(/^https:\/\/www\.(?:crohn-larectocoliteetnous\.be|750g\.com|moulinex\.be)\/.+/.test(recipe.source), recipe.id + ' must link directly to a verified individual recipe page from an approved source');
+    assert.ok(Array.isArray(recipe.originalIngredients) && recipe.originalIngredients.length > 0, recipe.id + ' must include the original ingredient list');
+    assert.ok(Array.isArray(recipe.steps) && recipe.steps.length >= 3, recipe.id + ' must include detailed preparation steps');
+    assert.ok(recipe.scoreNote, recipe.id + ' must explain the limits of the score estimate');
+    assert.ok(Array.isArray(recipe.unscoredIngredients), recipe.id + ' must expose excluded ingredients explicitly');
   }
-  assert.equal(pending.length - disabled.length, 49, 'all 49 remaining pending adaptations should have usable partial scores');
 });
 
-test('three source-backed recipes include their main scoreable ingredients and name exclusions precisely', () => {
+test('reinstated high-score recipes link to exact official pages and expose partial-score exclusions', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:reinstated-official-recipes' }).runInContext(recipeSandbox);
+  const recipes = recipeSandbox.window.MICI_RECIPES;
+  for (const id of ['tortilla-espagnole-officielle', 'soupe-carottes-gingembre-officielle', 'petit-gateau-compote-officiel', 'hachis-shepherd-pie-officiel']) {
+    const recipe = recipes.find(item => item.id === id);
+    assert.ok(recipe, id + ' must be present');
+    assert.equal(recipe.sourceIngredientsVerified, true);
+    assert.equal(recipe.adaptationVerified, true);
+    assert.ok(recipe.originalIngredients.length > 0);
+    assert.ok(recipe.steps.length >= 5);
+    assert.ok(recipe.scoreNote);
+    assert.ok(Array.isArray(recipe.unscoredIngredients));
+    assert.match(recipe.source, /^https:\/\/www\.crohn-larectocoliteetnous\.be\/.+/);
+  }
+  assert.ok(recipes.find(item => item.id === 'tortilla-espagnole-officielle').unscoredIngredients.some(item => /lait/i.test(item.name)));
+  assert.ok(recipes.find(item => item.id === 'petit-gateau-compote-officiel').unscoredIngredients.some(item => /farine/i.test(item.name)));
+  assert.ok(recipes.find(item => item.id === 'hachis-shepherd-pie-officiel').unscoredIngredients.some(item => /haché/i.test(item.name)));
+});
+
+test('verified source recipes preserve official ingredients, steps, and score exclusions', () => {
   const recipeSandbox = { window: {} };
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:source-ingredient-corrections' }).runInContext(recipeSandbox);
   const recipes = recipeSandbox.window.MICI_RECIPES;
   const get = id => recipes.find(recipe => recipe.id === id);
   const names = id => get(id).ingredients.map(ingredient => ingredient.names[0]);
-  assert.equal(JSON.stringify(names('pates-fromage-legere')), JSON.stringify([
+  assert.equal(JSON.stringify(names('pates-thon-courgette-fromage')), JSON.stringify([
     'Pâtes blanches nature', 'Thon en boîte au naturel', 'Courgette cuite sans peau',
     'Lait demi-écrémé (verre 25 cl)', 'Fromage râpé'
   ]));
-  assert.ok(get('pates-fromage-legere').unscoredIngredients.some(item => item.name === 'Maïzena'));
+  assert.ok(get('pates-thon-courgette-fromage').unscoredIngredients.some(item => item.name === 'Maïzena'));
   assert.equal(JSON.stringify(names('pates-chicons-saumon')), JSON.stringify([
     'Pâtes blanches nature', 'Endive cuite', 'Saumon fumé', 'Beurre (fine couche)', 'Moutarde de Dijon'
   ]));
   assert.ok(get('pates-chicons-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja light'));
   assert.ok(names('salade-poulet-curry').includes('Fromage blanc 0 %'));
   assert.ok(!names('salade-poulet-curry').includes('Mayonnaise allégée'));
-  assert.ok(names('pates-saumon').includes('Saumon fumé'));
-  assert.ok(get('pates-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja légère'));
-  assert.ok(names('nouilles-riz-legumes').includes('Poulet rôti du commerce'));
-  assert.ok(names('nouilles-riz-legumes').includes('Vermicelles ou nouilles de riz'));
-  assert.ok(!get('nouilles-riz-legumes').unscoredIngredients.some(item => item.name === 'Nouilles de riz'));
+  assert.ok(names('pates-courgette-saumon').includes('Saumon fumé'));
+  assert.ok(get('pates-courgette-saumon').unscoredIngredients.some(item => item.name === 'Crème de soja light'));
+  assert.ok(names('chips-legumes-four').includes('Panais cuit'));
+  assert.ok(get('chips-legumes-four').unscoredIngredients.some(item => item.name === 'Huile d’olive en spray'));
 });
 
