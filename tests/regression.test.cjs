@@ -1322,12 +1322,12 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
         recipe.title + ' must produce a finite MICI Score from its configured ingredients');
     }
   }
-  assert.equal(recipes.length, 25, 'the catalogue should retain 19 existing verified recipes plus 6 newly verified recipes');
-  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 25, 'all 25 verified recipes must produce an estimate from configured ingredients');
+  assert.equal(recipes.length, 27, 'the catalogue should retain 19 existing verified recipes plus 8 newly verified recipes');
+  assert.equal(recipes.filter(recipe => !recipe.scoreDisabled).length, 27, 'all 27 verified recipes must produce an estimate from configured ingredients');
 });
 
 
-test('six nouvelles recettes asiatiques ont une source directe et un score de base strictement supérieur à 6/10', () => {
+test('huit nouvelles recettes asiatiques ont une source directe et un score de base strictement supérieur à 6/10', () => {
   const recipeSandbox = { window: {} };
   vm.createContext(recipeSandbox);
   new vm.Script(recipesSource, { filename: 'recipes.js:verified-asian-recipes' }).runInContext(recipeSandbox);
@@ -1342,7 +1342,9 @@ test('six nouvelles recettes asiatiques ont une source directe et un score de ba
     'saumon-facon-yakitori-750g',
     'poisson-vapeur-cantonais-moulinex',
     'riz-saute-poulet-cookeo-750g',
-    'udon-nabe-750g'
+    'udon-nabe-750g',
+    'cabillaud-cinq-parfums-750g',
+    'yakiudon-750g'
   ];
   const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   for (const id of ids) {
