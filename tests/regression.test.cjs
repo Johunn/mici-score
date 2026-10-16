@@ -1209,7 +1209,7 @@ test('v6 provides four task-oriented navigation items and direct settings access
 
 
 test('recipe catalogue loads locally and uses the existing scoring and plate flow', () => {
-  assert.ok(html.includes('<script src="recipes.js"></script>'));
+  assert.ok(html.includes('<script src="recipes.js?v=69"></script>'));
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
