@@ -92,7 +92,8 @@ window.MICI_RECIPES = [
         "names": [
           "Flocons d'avoine cuits à l'eau"
         ],
-        "grams": 180
+        "grams": 180,
+        "scoreGrams": 40
       },
       {
         "names": [
@@ -143,7 +144,7 @@ window.MICI_RECIPES = [
         "reason": "Facultative et variable ; non comptée."
       }
     ],
-    "scoreNote": "Score partiel indicatif : avoine, lait et banane sont comptés. Les flocons secs sont représentés par l’équivalent catalogué d’avoine cuite ; curcuma, sucrant facultatif et garnitures ne sont pas comptés.",
+    "scoreNote": "Score partiel indicatif : avoine, lait et banane sont comptés. Les 180 g d’avoine préparée restent affichés et ajoutés à l’assiette ; 40 g sont utilisés uniquement pour le calcul du score afin d’éviter de comparer le poids hydraté à une portion de référence. Curcuma, sucrant facultatif et garnitures ne sont pas comptés.",
     "sourceIngredientsVerified": true,
     "adaptationVerified": true,
     "scoreDisabled": false

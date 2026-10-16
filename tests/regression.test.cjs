@@ -69,7 +69,7 @@ test('offline shell caches the app engine and local fonts without intercepting e
 });
 
 test('service worker pre-caches the extracted scoring module and uses the current cache', () => {
-  assert.match(swSource, /const CACHE='mici-score-v66';/);
+  assert.match(swSource, /const CACHE='mici-score-v67';/);
   assert.match(swSource, /const CORE=\[[^\]]*'score-core\.js'/);
 });
 
@@ -1168,7 +1168,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v66/);
+  assert.match(swSource, /mici-score-v67/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1184,7 +1184,7 @@ test('food and recipe catalogs use matching one-row search, sort, category, and 
   assert.match(html, /id="recipe-category"/);
   assert.match(html, /#app \.unified-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 142px 160px!important/);
   assert.match(html, /#app \.unified-search:focus-within\{border:2px solid var\(--accent\)!important;outline:none!important;box-shadow:none!important\}/);
-  assert.match(swSource, /const CACHE='mici-score-v66';/);
+  assert.match(swSource, /const CACHE='mici-score-v67';/);
 });
 
 test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
@@ -1193,7 +1193,7 @@ test('recipe search and sort share one row, search focus has no halo, and score 
   assert.match(html, /#app \.searchbox input\[type=search\]:focus,#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v66';/);
+  assert.match(swSource, /const CACHE='mici-score-v67';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
@@ -1292,7 +1292,7 @@ test('catalog and recipe search/sort stay on one row and score numbers are large
   assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v66';/);
+  assert.match(swSource, /const CACHE='mici-score-v67';/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
@@ -1314,7 +1314,7 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
       const food = foods.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
         foods.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
       assert.ok(food, recipe.title + ' ingredient must resolve: ' + ingredient.names[0]);
-      scoreItems.push({ f: food, p: 1, g: ingredient.grams });
+      scoreItems.push({ f: food, p: 1, g: ingredient.scoreGrams ?? ingredient.grams });
     }
     if (!recipe.scoreDisabled) {
       const score = coreSandbox.window.MICI_SCORE_CORE.scoreOf(scoreItems, {});
@@ -1361,11 +1361,35 @@ test('huit nouvelles recettes asiatiques ont une source directe et un score de b
       const food = core.FOODS.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
         core.FOODS.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
       assert.ok(food, id + ' score ingredient must resolve: ' + ingredient.names[0]);
-      return { f: food, p: 1, g: ingredient.grams };
+      return { f: food, p: 1, g: ingredient.scoreGrams ?? ingredient.grams };
     });
     const score = core.scoreOf(items, {}).score;
     assert.ok(score > 6 && score <= 10, id + ' baseline partial score must be strictly above 6/10; got ' + score);
   }
+});
+
+test('overnight oats keep the prepared quantity for the plate but use a normal portion for scoring', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:overnight-oats-portion' }).runInContext(recipeSandbox);
+  const recipe = recipeSandbox.window.MICI_RECIPES.find(item => item.id === 'overnight-oats-curcuma');
+  assert.ok(recipe, 'overnight oats recipe must exist');
+  assert.equal(recipe.ingredients[0].grams, 180, 'prepared oats quantity must remain 180 g for display and plate addition');
+  assert.equal(recipe.ingredients[0].scoreGrams, 40, 'scoring quantity must use the 40 g reference portion');
+  assert.match(recipe.scoreNote, /180 g d’avoine préparée restent affichés et ajoutés à l’assiette/);
+  assert.match(html, /ingredient\.scoreGrams\?\?x\.ingredient\.grams/);
+  assert.match(html, /quantité utilisée pour le score/);
+});
+
+test('recipe scoring equivalence survives plate edits, journal replay, and backup restore', () => {
+  assert.match(html, /const scorePlateOf=\(items,opts\)=>scoreOf\(items\.map\(x=>x\.sg!=null\?\{f:x\.f,p:x\.p,g:x\.sg\}:x\),opts\)/);
+  assert.match(html, /scorePlateOf\(plateItems\(\),ui\)/);
+  assert.match(html, /x\.ing\.scoreGrams\/x\.ing\.grams/);
+  assert.match(html, /x\.sr!=null\?\{sr:x\.sr\}:\{\}/);
+  assert.match(html, /it\.sr!==undefined\)\{if\(!num\(it\.sr,0\.000001,1\)\)fail\(\);item\.sr=it\.sr\}/);
+  assert.match(html, /p\.sr!==undefined&&\(!Number\.isFinite\(p\.sr\)\|\|p\.sr<=0\|\|p\.sr>1\)/);
+  assert.match(html, /portionGrams\(byId\(ui\.plate\[i\]\.id\),v,ui\.plate\[i\]\.sr\)/);
+  assert.match(html, /scorePlateOf\(items,ui\),now=Date\.now\(\),savedItems/);
 });
 
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
@@ -1373,7 +1397,7 @@ test('journal recipe entries show the calculated MICI Score as the primary badge
   assert.match(html, /fmt\(e\.score!=null\?e\.score:e\.r\)/);
   assert.match(html, /ressenti personnel '\+fmt\(e\.r\)\+'\/10/);
   assert.match(html, /La pastille affiche le score MICI calculé/);
-  assert.match(html, /const r=scoreOf\(items,ui\)[\s\S]*?score:r\.score/);
+  assert.match(html, /const r=scorePlateOf\(items,ui\)[\s\S]*?score:r\.score/);
 });
 
 test('le catalogue ne contient que des recettes vérifiées à partir de pages individuelles', () => {

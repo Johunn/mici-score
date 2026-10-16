@@ -717,7 +717,9 @@ function validateBackup(p){
       if(!record(it)||!id(it.id)||!text(it.n,200,true))fail();
       const portion=it.p===undefined?1:it.p,grams=it.g===undefined?0:it.g;
       if(!Number.isInteger(portion)||portion<0||portion>3||!num(grams,0,1500))fail();
-      return{id:it.id,n:it.n,p:portion,g:grams};
+      const item={id:it.id,n:it.n,p:portion,g:grams};
+      if(it.sr!==undefined){if(!num(it.sr,0.000001,1))fail();item.sr=it.sr}
+      return item;
     });
     const o={id:eid,ts,items,r:e.r,jeun:e.jeun===true||e.j===true,note:e.note===undefined?'':e.note};
     if(!text(o.note,10000))fail();
@@ -1204,9 +1206,10 @@ function normalizePlate(items){
     if(!p||typeof p!=='object'||Array.isArray(p)||typeof p.id!=='string'||!byId(p.id)||seen.has(p.id))return false;
     if(!Number.isInteger(p.p)||![0,1,2,3].includes(p.p))return false;
     if(p.g!==undefined&&(!Number.isInteger(p.g)||p.g<0||p.g>1500))return false;
+    if(p.sr!==undefined&&(!Number.isFinite(p.sr)||p.sr<=0||p.sr>1))return false;
     seen.add(p.id);
     return true;
-  }).map(p=>({id:p.id,p:p.p,g:p.g||0}));
+  }).map(p=>({id:p.id,p:p.p,g:p.g||0,...(p.sr!==undefined?{sr:p.sr}:{})}));
 }
 function loadPlate(){
   try{
@@ -1236,11 +1239,12 @@ function showBackupCopyFallback(txt){
 const app=document.getElementById('app'),bar=document.getElementById('bar');
 const portionFactors=[0.3,0.6,1,1.5],portionStops=[0,33,67,100],portionNames=['Trace','Petite','Normale','Grosse'];
 function portionFactorAt(v){const x=Math.max(0,Math.min(100,+v||0));for(let i=0;i<3;i++){if(x<=portionStops[i+1]){const t=(x-portionStops[i])/(portionStops[i+1]-portionStops[i]);return portionFactors[i]+t*(portionFactors[i+1]-portionFactors[i])}}return portionFactors[3]}
-function portionSliderValue(f,p,g){if(g>0){const factor=Math.max(.3,Math.min(1.5,g/refG(f)));for(let i=0;i<3;i++){if(factor<=portionFactors[i+1])return Math.round(portionStops[i]+(factor-portionFactors[i])/(portionFactors[i+1]-portionFactors[i])*(portionStops[i+1]-portionStops[i]))}return 100}return portionStops[[3,0,1,2].indexOf(p)]??67}
-function portionGrams(f,v){return Math.max(1,Math.min(1500,Math.round(refG(f)*portionFactorAt(v))))}
+function portionSliderValue(f,p,g,sr){if(g>0){const factor=Math.max(.3,Math.min(1.5,(g*(sr||1))/refG(f)));for(let i=0;i<3;i++){if(factor<=portionFactors[i+1])return Math.round(portionStops[i]+(factor-portionFactors[i])/(portionFactors[i+1]-portionFactors[i])*(portionStops[i+1]-portionStops[i]))}return 100}return portionStops[[3,0,1,2].indexOf(p)]??67}
+function portionGrams(f,v,sr){return Math.max(1,Math.min(1500,Math.round(refG(f)*portionFactorAt(v)/(sr||1))))}
 function portionNameAt(v){const x=Math.max(0,Math.min(100,+v||0));return portionNames[x<16.5?0:x<50?1:x<83.5?2:3]}
-function portionDisplay(f,p,g){const v=portionSliderValue(f,p,g);return portionNameAt(v)+' · ≈ '+(g>0?g:grOf(f,p))+' g'}
-const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0})).filter(x=>x.f);
+function portionDisplay(f,p,g,sr){const v=portionSliderValue(f,p,g,sr);return portionNameAt(v)+' · ≈ '+(g>0?g:Math.round(grOf(f,p)/(sr||1)))+' g'}
+const plateItems=()=>ui.plate.map(p=>({f:byId(p.id),p:p.p,g:p.g||0,sr:p.sr,sg:p.sr!=null?(p.g||0)*p.sr:undefined})).filter(x=>x.f);
+const scorePlateOf=(items,opts)=>scoreOf(items.map(x=>x.sg!=null?{f:x.f,p:x.p,g:x.sg}:x),opts);
 
 /* ---------- Vues ---------- */
 function dial(v){
@@ -1344,16 +1348,16 @@ function recipeResultsHTML(){
   const card=r=>{
     const matches=r.ingredients.map(i=>({ingredient:i,food:resolve(i)}));
     const missing=matches.filter(x=>!x.food);
-    const scoreItems=matches.filter(x=>x.food).map(x=>({f:x.food,p:1,g:x.ingredient.grams}));
+    const scoreItems=matches.filter(x=>x.food).map(x=>({f:x.food,p:1,g:x.ingredient.scoreGrams??x.ingredient.grams}));
     const score=r.scoreDisabled?null:(scoreItems.length?scoreOf(scoreItems,ui).score:null);
     const selected=ui.recipeId===r.id;
-    return `<article class="card" style="margin-top:12px"><div class="exp-eyebrow">${esc(r.category)}</div><h2 style="margin:5px 0 8px;font-size:20px">${esc(r.title)}</h2><p>${esc(r.summary)}</p>${r.prepTime||r.cookTime||r.restTime?`<p class="small muted">${r.prepTime?`Préparation : ${esc(r.prepTime)}`:'' }${r.cookTime?`${r.prepTime?' · ':''}Cuisson : ${esc(r.cookTime)}`:'' }${r.restTime?`${r.prepTime||r.cookTime?' · ':''}Repos : ${esc(r.restTime)}`:'' }</p>`:'' }${r.scoreNote?`<p class="notice">${esc(r.scoreNote)}</p>`:'' }<p class="small muted">${r.adaptationVerified===false&&!r.scoreNote?'Adaptation non validée · score suspendu':`${esc(r.servingsLabel||r.servings)} · ${matches.length-missing.length}/${matches.length} ingrédients reconnus${r.scoreDisabled?' · score suspendu (recette à vérifier)':r.scoreNote?' · score partiel':missing.length?' · score incomplet':''}`}</p>${score===null?'':`<div class="exp-row"><span class="exp-score recipe-score-pill ${cls(score)}" aria-label="Score MICI ${fmt(score)} sur 10">${fmt(score)}</span><span class="small muted">${r.scoreNote?'Estimation partielle — voir les ingrédients non comptés':missing.length?'Estimation partielle — ingrédients manquants':'Estimation selon les quantités indiquées'}</span></div>`}${selected?`${r.adaptationVerified===false&&!r.scoreNote?'<p class="notice">L’adaptation MICI Score n’est pas validée : ses ingrédients et sa préparation sont masqués. Consulte la recette originale via le lien source.</p>':`<h3>Ingrédients utilisés pour l’estimation du score</h3><ul>${matches.map(x=>`<li>${esc(x.ingredient.names[0])} — ${x.ingredient.grams} g ${x.food?'':'<b>(non reconnu dans le catalogue)</b>'}</li>`).join('')}</ul>${r.unscoredIngredients&&r.unscoredIngredients.length?`<h3>Ingrédients non comptés dans le score</h3><ul>${r.unscoredIngredients.map(i=>`<li><b>${esc(i.name)}</b> — ${esc(i.amount)}<br><span class="small muted">${esc(i.reason)}</span></li>`).join('')}</ul>`:'' }`}${r.sourceIngredientsVerified===true&&r.originalIngredients?`<h3>Ingrédients de la recette originale (source vérifiée)</h3><ul>${r.originalIngredients.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:`<p class="notice">La liste exacte des ingrédients de la source n’a pas encore été vérifiée pour cette fiche. Consulte la source avant de la reproduire.</p>`}${r.adaptationVerified===false&&!r.scoreNote?'':`<h3>Préparation</h3><ol>${r.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`}<p class="recipe-source-link"><a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${/recette originale|recette publiée|recette individuelle/i.test(r.sourceLabel||"")?"Voir la recette originale":"Voir la source d’inspiration"} ↗</a></p>${r.scoreDisabled?`<p class="notice">Le score et l’ajout direct à l’assiette sont suspendus pour cette recette, car les ingrédients et quantités de l’adaptation doivent encore être validés par rapport à la source.</p>`:missing.length?`<p class="notice">Le score est incomplet. Ajoute d’abord les aliments manquants au catalogue, puis reviens à cette recette. Aucun score complet n’est affiché.</p>`:`<button class="btn block" data-act="addRecipe" data-id="${esc(r.id)}">${r.scoreNote?'Ajouter les ingrédients comptés à mon assiette':'Ajouter les ingrédients à mon assiette'}</button>`}<button class="btn ghost block" data-act="closeRecipe">Fermer le détail</button>`:`<button class="btn ghost block" data-act="showRecipe" data-id="${esc(r.id)}">Voir la recette et son estimation</button>`}</article>`;
+    return `<article class="card" style="margin-top:12px"><div class="exp-eyebrow">${esc(r.category)}</div><h2 style="margin:5px 0 8px;font-size:20px">${esc(r.title)}</h2><p>${esc(r.summary)}</p>${r.prepTime||r.cookTime||r.restTime?`<p class="small muted">${r.prepTime?`Préparation : ${esc(r.prepTime)}`:'' }${r.cookTime?`${r.prepTime?' · ':''}Cuisson : ${esc(r.cookTime)}`:'' }${r.restTime?`${r.prepTime||r.cookTime?' · ':''}Repos : ${esc(r.restTime)}`:'' }</p>`:'' }${r.scoreNote?`<p class="notice">${esc(r.scoreNote)}</p>`:'' }<p class="small muted">${r.adaptationVerified===false&&!r.scoreNote?'Adaptation non validée · score suspendu':`${esc(r.servingsLabel||r.servings)} · ${matches.length-missing.length}/${matches.length} ingrédients reconnus${r.scoreDisabled?' · score suspendu (recette à vérifier)':r.scoreNote?' · score partiel':missing.length?' · score incomplet':''}`}</p>${score===null?'':`<div class="exp-row"><span class="exp-score recipe-score-pill ${cls(score)}" aria-label="Score MICI ${fmt(score)} sur 10">${fmt(score)}</span><span class="small muted">${r.scoreNote?'Estimation partielle — voir les ingrédients non comptés':missing.length?'Estimation partielle — ingrédients manquants':'Estimation selon les quantités indiquées'}</span></div>`}${selected?`${r.adaptationVerified===false&&!r.scoreNote?'<p class="notice">L’adaptation MICI Score n’est pas validée : ses ingrédients et sa préparation sont masqués. Consulte la recette originale via le lien source.</p>':`<h3>Ingrédients utilisés pour l’estimation du score</h3><ul>${matches.map(x=>`<li>${esc(x.ingredient.names[0])} — ${x.ingredient.grams} g${x.ingredient.scoreGrams!=null?` (quantité utilisée pour le score : ${x.ingredient.scoreGrams} g)`:''} ${x.food?'':'<b>(non reconnu dans le catalogue)</b>'}</li>`).join('')}</ul>${r.unscoredIngredients&&r.unscoredIngredients.length?`<h3>Ingrédients non comptés dans le score</h3><ul>${r.unscoredIngredients.map(i=>`<li><b>${esc(i.name)}</b> — ${esc(i.amount)}<br><span class="small muted">${esc(i.reason)}</span></li>`).join('')}</ul>`:'' }`}${r.sourceIngredientsVerified===true&&r.originalIngredients?`<h3>Ingrédients de la recette originale (source vérifiée)</h3><ul>${r.originalIngredients.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:`<p class="notice">La liste exacte des ingrédients de la source n’a pas encore été vérifiée pour cette fiche. Consulte la source avant de la reproduire.</p>`}${r.adaptationVerified===false&&!r.scoreNote?'':`<h3>Préparation</h3><ol>${r.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`}<p class="recipe-source-link"><a href="${esc(r.source)}" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">${/recette originale|recette publiée|recette individuelle/i.test(r.sourceLabel||"")?"Voir la recette originale":"Voir la source d’inspiration"} ↗</a></p>${r.scoreDisabled?`<p class="notice">Le score et l’ajout direct à l’assiette sont suspendus pour cette recette, car les ingrédients et quantités de l’adaptation doivent encore être validés par rapport à la source.</p>`:missing.length?`<p class="notice">Le score est incomplet. Ajoute d’abord les aliments manquants au catalogue, puis reviens à cette recette. Aucun score complet n’est affiché.</p>`:`<button class="btn block" data-act="addRecipe" data-id="${esc(r.id)}">${r.scoreNote?'Ajouter les ingrédients comptés à mon assiette':'Ajouter les ingrédients à mon assiette'}</button>`}<button class="btn ghost block" data-act="closeRecipe">Fermer le détail</button>`:`<button class="btn ghost block" data-act="showRecipe" data-id="${esc(r.id)}">Voir la recette et son estimation</button>`}</article>`;
   };
   return recipes.length?recipes.map(card).join(''):'<div class="exp-empty">Aucune recette ne correspond à ta recherche. Essaie un autre ingrédient ou une autre catégorie.</div>';
 }
 function recipeScore(r,resolve){
   if(r.scoreDisabled||(r.adaptationVerified===false&&!r.scoreNote)) return -1;
-  const items=r.ingredients.map(i=>({ingredient:i,food:resolve(i)})).filter(x=>x.food).map(x=>({f:x.food,p:1,g:x.ingredient.grams}));
+  const items=r.ingredients.map(i=>({ingredient:i,food:resolve(i)})).filter(x=>x.food).map(x=>({f:x.food,p:1,g:x.ingredient.scoreGrams??x.ingredient.grams}));
   return items.length===r.ingredients.length?scoreOf(items,ui).score:-1;
 }
 function recipesHTML(){
@@ -1378,7 +1382,7 @@ function plateHTML(){
   const items=plateItems();
   if(ui.view==='recipes')return recipesHTML();
   if(!items.length)return '<section class="compose-empty"><span class="exp-eyebrow">COMPOSITION EN COURS</span><h1>Prépare ton prochain repas</h1><p class="today-lede">Commence par les aliments que tu vas manger. Tu pourras adapter les portions, puis noter ton ressenti après le repas.</p><ol class="steps"><li>Choisis les ingrédients du repas.</li><li>Ajuste les portions si nécessaire.</li><li>Après le repas, note comment tu te sens.</li></ol><button class="btn block" data-act="explore">Choisir des aliments</button><button class="btn ghost block" style="margin-top:8px" data-act="openRecipes">Parcourir les recettes</button><p class="small muted" style="margin-top:12px">Ton brouillon est conservé localement. Rien n’est ajouté au journal tant que tu ne l’enregistres pas.</p></section>';
-  const r=scoreOf(items,ui);
+  const r=scorePlateOf(items,ui);
   return `<button class="link" data-act="back">‹ Retour</button>
   <h2 style="margin-top:6px">${ui.mealEditId?'Modifier le repas enregistré':'Mon assiette'}</h2>${ui.mealEditId?'<p class="notice">Tu modifies un repas existant : l’enregistrement mettra à jour ce repas sans en créer un nouveau.</p>':''}
   <p><button class="btn ghost" data-act="openRecipes">Trouver une recette</button></p>
@@ -1390,8 +1394,8 @@ function plateHTML(){
   ${attentionHTML(r.lv)}
   <div class="card"><h3>Aliments</h3>
     ${items.map((it,i)=>`<div class="item"><div class="head"><span>${esc(it.f.n)}</span><button class="x" data-act="rm" data-i="${i}">Retirer</button></div>
-      <div class="portion-control"><div class="portion-current"><span class="small muted">Portion estimée</span><strong id="portion-label-${i}">${portionDisplay(it.f,it.p,it.g)}</strong></div><input type="range" min="0" max="100" step="1" value="${portionSliderValue(it.f,it.p,it.g)}" data-pr="${i}" aria-label="Portion progressive pour ${esc(it.f.n)}" aria-valuetext="${portionDisplay(it.f,it.p,it.g)}"><div class="portion-scale" aria-hidden="true"><span>Trace</span><span>Petite</span><span>Normale</span><span>Grosse</span></div></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><label class="small muted" for="grams-${i}">Ajuster précisément</label><input id="grams-${i}" type="number" inputmode="decimal" min="1" max="1500" step="1" data-gi="${i}" value="${it.g||''}" placeholder="${Math.round(refG(it.f))}" aria-label="Poids en grammes de ${esc(it.f.n)}" style="width:88px"><span class="small muted">g</span></div></div>`).join('')}
+      <div class="portion-control"><div class="portion-current"><span class="small muted">Portion estimée</span><strong id="portion-label-${i}">${portionDisplay(it.f,it.p,it.g,it.sr)}</strong></div><input type="range" min="0" max="100" step="1" value="${portionSliderValue(it.f,it.p,it.g,it.sr)}" data-pr="${i}" aria-label="Portion progressive pour ${esc(it.f.n)}" aria-valuetext="${portionDisplay(it.f,it.p,it.g,it.sr)}"><div class="portion-scale" aria-hidden="true"><span>Trace</span><span>Petite</span><span>Normale</span><span>Grosse</span></div></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><label class="small muted" for="grams-${i}">Ajuster précisément</label><input id="grams-${i}" type="number" inputmode="decimal" min="1" max="1500" step="1" data-gi="${i}" value="${it.g||''}" placeholder="${Math.round(refG(it.f))}" aria-label="Poids en grammes de ${esc(it.f.n)}" style="width:88px"><span class="small muted">g</span></div>${it.sr!=null?`<p class="small muted">Pour le score : environ ${Math.round((it.g||0)*it.sr)} g équivalents, proportionnellement à la quantité préparée.</p>`:''} </div>`).join('')}
     <p style="margin:14px 0 0"><button class="btn ghost block" data-act="back">Ajouter un aliment</button></p>
   </div>
   <div class="card"><h3>Contexte</h3>
@@ -1584,7 +1588,7 @@ function profilHTML(){
 function updateBar(){
   const n=ui.plate.length;
   if(ui.tab!=='compose'||!n||ui.view==='plate'||ui.view==='add'||ui.view==='detail'){bar.innerHTML='';return}
-  const r=scoreOf(plateItems(),ui);
+  const r=scorePlateOf(plateItems(),ui);
   bar.innerHTML=`<div class="wrap"><button class="main" data-act="openPlate"><span class="badge ${cls(r.score)}">${fmt(r.score)}</span><span class="grow">Repas en cours · ${n} aliment${n>1?'s':''}</span><span>Voir ›</span></button><button class="clr" data-act="clearBar" aria-label="Vider l\u2019assiette">Vider</button></div>`;
 }
 
@@ -1679,12 +1683,12 @@ document.querySelector('nav.tabs').addEventListener('click',e=>{
   render();
 });
 
-document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){const g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));ui.plate[i].g=g; if(g>0)ui.plate[i].p=1;savePlate();render(true)}}else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;if(ui.plate[i]){const v=Math.max(0,Math.min(100,+t.value||0)),snap=portionStops.indexOf(v),levels=[3,0,1,2];if(snap>=0){ui.plate[i].p=levels[snap];ui.plate[i].g=0}else{ui.plate[i].p=1;ui.plate[i].g=portionGrams(byId(ui.plate[i].id),v)}savePlate();render(true)}}});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset&&t.dataset.gi!=null){const i=+t.dataset.gi;if(ui.plate[i]){const g=Math.max(0,Math.min(1500,Math.round(+t.value||0)));ui.plate[i].g=g; if(g>0)ui.plate[i].p=1;savePlate();render(true)}}else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;if(ui.plate[i]){const v=Math.max(0,Math.min(100,+t.value||0)),snap=portionStops.indexOf(v),levels=[3,0,1,2];if(snap>=0){if(ui.plate[i].sr!=null){ui.plate[i].p=1;ui.plate[i].g=portionGrams(byId(ui.plate[i].id),v,ui.plate[i].sr)}else{ui.plate[i].p=levels[snap];ui.plate[i].g=0}}else{ui.plate[i].p=1;ui.plate[i].g=portionGrams(byId(ui.plate[i].id),v,ui.plate[i].sr)}savePlate();render(true)}}});
 document.addEventListener('input',e=>{
   const t=e.target;
   if(t.id==='qs'){ui.qs=t.value;ui.page=0;document.getElementById('list').innerHTML=listHTML();const cb=document.querySelector('.searchbox .clear');if(cb)cb.hidden=!t.value}
   else if(t.id==='recipe-search'){ui.recipeSearch=t.value;const clear=document.querySelector('.recipe-unified-search .clear');if(clear)clear.hidden=!t.value;const results=document.getElementById('recipe-results');if(results)results.innerHTML=recipeResultsHTML()}
-  else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;const item=ui.plate[i];const label=document.getElementById('portion-label-'+i);if(item&&label){const g=portionGrams(item.f,+t.value);label.textContent=portionDisplay(item.f,1,g);t.setAttribute('aria-valuetext',label.textContent)}}
+  else if(t.dataset&&t.dataset.pr!=null){const i=+t.dataset.pr;const item=ui.plate[i];const label=document.getElementById('portion-label-'+i);if(item&&label){const g=portionGrams(item.f,+t.value,item.sr);label.textContent=portionDisplay(item.f,1,g,item.sr);t.setAttribute('aria-valuetext',label.textContent)}}
   else if(t.id==='ress'){ui.ress=+t.value;document.getElementById('ressv').textContent=t.value}
   else if(t.id==='note'){ui.note=t.value}
   else if(t.id==='eress'){ui.eR=+t.value;const v=document.getElementById('eressv');if(v)v.textContent=t.value}
@@ -1740,7 +1744,7 @@ document.addEventListener('click',e=>{
   else if(a==='closeRecipe'){ui.recipeId=null;ui.view='recipes';render(true)}
   else if(a==='addRecipe'){
     const recipe=(window.MICI_RECIPES||[]).find(r=>r.id===id);
-    if(recipe){const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();const next=recipe.ingredients.map(ing=>({ing,food:allFoods().find(f=>ing.names.some(n=>norm(f.n)===norm(n)))||allFoods().find(f=>ing.names.some(n=>norm(f.n).startsWith(norm(n)+' ')))}));if(next.every(x=>x.food)){ui.plate=next.map(x=>({id:x.food.id,p:1,g:x.ing.grams})).slice(0,100);savePlate();ui.view='plate';ui.tab='compose';ui.msg='Ingrédients ajoutés. Vérifie les quantités avant d’enregistrer le repas.';ui.recipeId=null;render()}else{ui.msg='Certains ingrédients ne sont pas reconnus : score complet indisponible.';render(true)}}
+    if(recipe){const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();const next=recipe.ingredients.map(ing=>({ing,food:allFoods().find(f=>ing.names.some(n=>norm(f.n)===norm(n)))||allFoods().find(f=>ing.names.some(n=>norm(f.n).startsWith(norm(n)+' ')))}));if(next.every(x=>x.food)){ui.plate=next.map(x=>({id:x.food.id,p:1,g:x.ing.grams,...(x.ing.scoreGrams!=null&&x.ing.grams>0?{sr:x.ing.scoreGrams/x.ing.grams}:{})})).slice(0,100);savePlate();ui.view='plate';ui.tab='compose';ui.msg='Ingrédients ajoutés. Vérifie les quantités avant d’enregistrer le repas.';ui.recipeId=null;render()}else{ui.msg='Certains ingrédients ne sont pas reconnus : score complet indisponible.';render(true)}}
   }
   else if(a==='explore'){ui.tab='compose';ui.view='list';ui.qs='';ui.cat=-1;ui.page=0;render();const q=document.getElementById('qs');if(q)q.focus()}
   else if(a==='openJournal'){ui.tab='journal';ui.msg='';render()}
@@ -1749,7 +1753,7 @@ document.addEventListener('click',e=>{
   else if(a==='journalRange'){ui.journalDays=+b.dataset.days;render(true)}
   else if(a==='repeatEntry'){
     const e=store.entries.find(x=>String(x.id)===String(id));
-    if(e){ui.mealEditId=e.id;ui.mealEditReturn=ui.tab==='journal'?'journal':'calc';ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=Number.isFinite(+e.r)?Math.max(0,Math.min(10,+e.r)):7;ui.note=e.note||'';ui.view='plate';ui.tab='compose';ui.msg='';render()}
+    if(e){ui.mealEditId=e.id;ui.mealEditReturn=ui.tab==='journal'?'journal':'calc';ui.plate=(e.items||[]).map(x=>({id:x.id,p:Number.isFinite(+x.p)?Math.max(0,Math.min(3,+x.p)):1,g:Number.isFinite(+x.g)?Math.max(0,Math.min(1500,+x.g)):0,...(Number.isFinite(+x.sr)&&+x.sr>0&&+x.sr<=1?{sr:+x.sr}:{})})).filter(x=>byId(x.id)).slice(0,100);savePlate();ui.jeun=!!e.jeun;ui.ress=Number.isFinite(+e.r)?Math.max(0,Math.min(10,+e.r)):7;ui.note=e.note||'';ui.view='plate';ui.tab='compose';ui.msg='';render()}
   }
   else if(a==='clearBar'){ui.plate=[];savePlate();document.querySelectorAll('.row.sel').forEach(r=>{r.classList.remove('sel');const n=r.querySelector('.name');if(n)n.setAttribute('aria-pressed','false')});updateBar()}
   else if(a==='back'){if(ui.view==='list'){ui.view='plate';ui.tab='compose'}else{ui.view='list';ui.tab='compose'}ui.msg='';render()}
@@ -1768,7 +1772,7 @@ document.addEventListener('click',e=>{
   else if(a==='cancelMealEdit'){ui.mealEditId=null;ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.tab=ui.mealEditReturn==='journal'?'journal':'calc';ui.msg='';render()}
   else if(a==='saveEntry'){
     const items=plateItems();if(!items.length)return;
-    const r=scoreOf(items,ui),now=Date.now(),savedItems=items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0}));
+    const r=scorePlateOf(items,ui),now=Date.now(),savedItems=items.map(x=>({id:x.f.id,n:x.f.n,p:x.p,g:x.g||0,...(x.sr!=null?{sr:x.sr}:{})}));
     if(ui.mealEditId){const existing=store.entries.find(x=>String(x.id)===String(ui.mealEditId));if(!existing){ui.mealEditId=null;ui.msg='Ce repas n’existe plus dans le journal. Enregistre-le comme un nouveau repas si nécessaire.';render(true);return}existing.items=savedItems;existing.r=ui.ress;existing.jeun=ui.jeun;existing.note=ui.note.trim();existing.L=r.lv.L;existing.score=r.score;existing.edited=now;}
     else store.entries.push({id:now,ts:now,items:savedItems,r:ui.ress,jeun:ui.jeun,note:ui.note.trim(),L:r.lv.L,score:r.score});
     const wasEditing=!!ui.mealEditId,returnTab=ui.mealEditReturn;save();ui.plate=[];savePlate();ui.view='home';ui.note='';ui.ress=7;ui.mealEditId=null;ui.tab=wasEditing?(returnTab==='journal'?'journal':'calc'):'journal';ui.msg='';render();
