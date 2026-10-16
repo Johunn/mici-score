@@ -1013,7 +1013,8 @@ test('reference portions apply to the food itself, not any composite containing 
   assert.equal(core.refG(find(/^Burger maison/i)), 300);
   assert.equal(core.refG(find(/^Sandwich jambon blanc-fromage$/i)), 200);
   assert.equal(core.refG(find(/^Omelette au fromage$/i)), 100);
-  assert.equal(core.refG(find(/^Riz sauté au poulet au Cookeo$/i)), 300);
+  assert.equal(core.refG(find(/^Sushis saumon-avocat$/i)), 300);
+  assert.equal(core.refG(find(/^Gratin de pâtes au jambon$/i)), 300);
 });
 
 test('neutral food scores 10 and a single feature follows the documented formula', () => {
@@ -1188,7 +1189,7 @@ test('recipe catalogue loads locally and uses the existing scoring and plate flo
   assert.match(html, /function recipesHTML\(\)/);
   assert.match(html, /scoreOf\(scoreItems,ui\)/);
   assert.match(html, /data-act="addRecipe"/);
-  assert.match(swSource, /mici-score-v67/);
+  assert.match(swSource, /mici-score-v68/);
   assert.match(swSource, /'recipes\.js'/);
   assert.match(html, /Ingrédients ajoutés\. Vérifie les quantités/);
 });
@@ -1204,7 +1205,7 @@ test('food and recipe catalogs use matching one-row search, sort, category, and 
   assert.match(html, /id="recipe-category"/);
   assert.match(html, /#app \.unified-controls\{display:grid!important;grid-template-columns:minmax\(0,1fr\) 142px 160px!important/);
   assert.match(html, /#app \.unified-search:focus-within\{border:2px solid var\(--accent\)!important;outline:none!important;box-shadow:none!important\}/);
-  assert.match(swSource, /const CACHE='mici-score-v67';/);
+  assert.match(swSource, /const CACHE='mici-score-v68';/);
 });
 
 test('recipe search and sort share one row, search focus has no halo, and score badges are redesigned', () => {
@@ -1213,7 +1214,7 @@ test('recipe search and sort share one row, search focus has no halo, and score 
   assert.match(html, /#app \.searchbox input\[type=search\]:focus,#app \.searchbox input\[type=search\]:focus-visible\{border:2px solid var\(--accent\)!important;outline:none!important;outline-offset:0!important;box-shadow:none!important\}/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v67';/);
+  assert.match(swSource, /const CACHE='mici-score-v68';/);
 });
 
 test('reopening a journal meal restores its saved feeling and notes for editing', () => {
@@ -1312,7 +1313,7 @@ test('catalog and recipe search/sort stay on one row and score numbers are large
   assert.match(html, /#app \.recipe-controls \.field:nth-child\(3\)\{grid-column:2!important;grid-row:1!important/);
   assert.match(html, /#app \.badge,#app \.exp-score\{font-family:var\(--f-display\)!important;font-size:24px!important;font-weight:900!important/);
   assert.match(html, /#app \.recipe-score-pill\{min-width:60px!important;min-height:48px!important;padding:7px 12px!important;font-size:25px!important;font-weight:900!important/);
-  assert.match(swSource, /const CACHE='mici-score-v67';/);
+  assert.match(swSource, /const CACHE='mici-score-v68';/);
 });
 
 test('recipe catalogue has unique IDs and titles and all ingredients resolve to local food entries', () => {
