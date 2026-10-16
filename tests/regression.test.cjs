@@ -996,16 +996,24 @@ test('score core loads and parses a large, valid food catalogue', () => {
   }
 });
 
-test('reference portion regex does not confuse smoked salmon with smoked ham', () => {
+test('reference portions apply to the food itself, not any composite containing its name', () => {
   const core = makeCoreHarness();
-  const salmon = core.FOODS.find(food => /saumon fumé/i.test(food.n));
-  assert.ok(salmon, 'smoked salmon must exist in the catalogue');
+  const find = pattern => {
+    const food = core.FOODS.find(item => pattern.test(item.n));
+    assert.ok(food, 'expected catalogue item matching ' + pattern);
+    return food;
+  };
+
+  const salmon = find(/^Saumon fumé$/i);
   assert.equal(core.refG(salmon), 180);
   assert.ok(Math.abs(core.pfOf({ f: salmon, p: 1, g: 100 }) - (100 / 180)) < 1e-12);
 
-  const ham = core.FOODS.find(food => /jambon cru/i.test(food.n));
-  assert.ok(ham, 'cured ham must exist in the catalogue');
-  assert.equal(core.refG(ham), 25);
+  assert.equal(core.refG(find(/^Jambon cru$/i)), 25);
+  assert.equal(core.refG(find(/^Fromage blanc 0 %$/i)), 125);
+  assert.equal(core.refG(find(/^Burger maison/i)), 300);
+  assert.equal(core.refG(find(/^Sandwich jambon blanc-fromage$/i)), 200);
+  assert.equal(core.refG(find(/^Omelette au fromage$/i)), 100);
+  assert.equal(core.refG(find(/^Riz sauté au poulet au Cookeo$/i)), 300);
 });
 
 test('neutral food scores 10 and a single feature follows the documented formula', () => {
