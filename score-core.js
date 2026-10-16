@@ -593,9 +593,37 @@ const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 /* Poids de référence d'une portion normale (grammes) : valeurs NUBEL (Conseil supérieur de la Santé, Belgique) pour les aliments cités par nom ; le reste = estimations par catégorie, à corriger. */
 const REFG_CAT=[150,140,150,120,100,60,25,5,200,40,300,40,200,60];
 const ORD=[0,1,2,3,4,5,6,7,8,9,13,12,10,11];   // ordre d'affichage des catégories (les index restent stables pour tes aliments perso)
-const REFG_NOM=[[/jambon cru|jambon fumé|jambon fume/i,25],[/jambon/i,45],[/fromage fondu/i,20],[/fromage|emmental|gruy|edam|gouda|mozzarella/i,25],[/œuf|oeuf|omelette/i,50],[/baguette/i,130],[/pistolet/i,45],[/pain/i,80],[/wrap|tortilla/i,60],[/yaourt/i,125],[/poulet/i,160],[/saumon/i,180],[/cabillaud|colin/i,175],[/frites/i,250],[/lasagne/i,400],[/spaghetti/i,300],[/croque/i,135],[/croissant/i,50],[/purée|puree/i,160],[/riz/i,150],[/mayonnaise|ketchup/i,25],[/huile/i,10],[/beurre/i,10],[/pomme(?! de terre)/i,140],[/banane/i,130],[/orange/i,140],[/poire/i,160]];
-const refG=f=>{for(const [rx,g] of REFG_NOM)if(rx.test(f.n))return g;return REFG_CAT[f.c]||100};
-const pfOf=it=>it.g>0?Math.min(3,Math.max(0.1,it.g/refG(it.f))):PF[it.p];
+const REFG_NOM=[
+ [/^jambon cru|^jambon fumé|^jambon fume/i,25,[3]],
+ [/^jambon/i,45,[3]],
+ [/^fromage fondu/i,20,[4]],
+ [/^fromage blanc/i,125,[4]],
+ [/^(?:fromage|emmental|gruy|edam|gouda|mozzarella|cubes de fromage)/i,25,[4,11]],
+ [/^(?:œuf|oeuf)/i,50,[4]],
+ [/^baguette/i,130,[2]],
+ [/^pistolet/i,45,[2]],
+ [/^pain/i,80,[2]],
+ [/^(?:wrap|tortilla)/i,60,[2,9]],
+ [/^yaourt/i,125,[4]],
+ [/^poulet/i,160,[3]],
+ [/^saumon/i,180,[3]],
+ [/^(?:cabillaud|colin)/i,175,[3]],
+ [/^frites/i,250,[2]],
+ [/^lasagne/i,400,[10]],
+ [/^spaghetti/i,300,[2]],
+ [/^croque/i,135,[10,12]],
+ [/^croissant/i,50,[2,9]],
+ [/^purée|^puree/i,160,[0,2]],
+ [/^riz/i,150,[2,9,13]],
+ [/^(?:mayonnaise|ketchup)/i,25,[6]],
+ [/^huile/i,10,[7]],
+ [/^beurre/i,10,[4,7]],
+ [/^pomme(?! de terre)/i,140,[1]],
+ [/^banane/i,130,[1]],
+ [/^orange/i,140,[1]],
+ [/^poire/i,160,[1]]
+];
+const refG=f=>{for(const [rx,g,cats] of REFG_NOM)if((!cats||cats.includes(f.c))&&rx.test(f.n))return g;return REFG_CAT[f.c]||100};
 const grOf=(f,k)=>{const g=refG(f)*PF[k];return g<10?Math.round(g):Math.round(g/5)*5};   // poids estimé affiché sous chaque portion
 function levels(items,ctx){
   const L=Array(7).fill(0);let b=0,ho=0,u=0;
