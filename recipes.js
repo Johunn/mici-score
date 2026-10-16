@@ -1410,4 +1410,515 @@ window.MICI_RECIPES = [
     "adaptationVerified": true,
     "scoreDisabled": false
   }
+,
+[
+  {
+    "id": "yakitori-classique-750g",
+    "title": "Yakitori classique",
+    "category": "Repas complet",
+    "servings": 4,
+    "summary": "Brochettes de poulet avec sauce soja, saké, mirin et sucre.",
+    "source": "https://www.750g.com/yakitori-r83476.htm",
+    "sourceLabel": "Recette publiée par 750g — Chef Damien",
+    "ingredients": [
+      {
+        "names": [
+          "Poulet grillé sans peau"
+        ],
+        "grams": 125
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 31.25
+      },
+      {
+        "names": [
+          "Sucre (1 cuillère)"
+        ],
+        "grams": 8
+      }
+    ],
+    "steps": [
+      "Mélanger le saké, la sauce soja, le mirin et le sucre dans une casserole, porter à ébullition puis laisser réduire d’environ un tiers. Laisser refroidir la sauce.",
+      "Découper le poulet et l’enfiler sur des brochettes en bambou.",
+      "Cuire à la plancha en retournant régulièrement et en badigeonnant avec la sauce jusqu’à ce que le poulet soit cuit et doré."
+    ],
+    "servingsLabel": "4 personnes",
+    "prepTime": "20 min",
+    "cookTime": "10 min",
+    "restTime": null,
+    "originalIngredients": [
+      "500 g de blancs de poulet",
+      "12,5 cl de saké",
+      "12,5 cl de sauce soja",
+      "6 cl de mirin",
+      "2 c. à soupe de sucre"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Saké",
+        "amount": "12,5 cl",
+        "reason": "Boisson de cuisson non représentée par une correspondance alimentaire fidèle dans le score."
+      },
+      {
+        "name": "Mirin",
+        "amount": "6 cl",
+        "reason": "Condiment sucré non représenté fidèlement dans le catalogue alimentaire."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : poulet, sauce soja et sucre. Le saké et le mirin, présents en quantité importante dans la sauce, ne sont pas comptés ; le score ne représente donc pas tous les ingrédients du plat.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "yakitori-gingembre-750g",
+    "title": "Yakitori de poulet au gingembre",
+    "category": "Repas complet",
+    "servings": 4,
+    "summary": "Boulettes de poulet au gingembre, nappées d’une sauce japonaise réduite.",
+    "source": "https://www.750g.com/yakitori-de-poulet-au-gingembre-r70578.htm",
+    "sourceLabel": "Recette publiée par 750g — Epices & Moi",
+    "ingredients": [
+      {
+        "names": [
+          "Poulet grillé sans peau"
+        ],
+        "grams": 150
+      },
+      {
+        "names": [
+          "Gingembre frais"
+        ],
+        "grams": 5
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 12.5
+      },
+      {
+        "names": [
+          "Sucre (1 cuillère)"
+        ],
+        "grams": 3.75
+      },
+      {
+        "names": [
+          "Huile d'olive (1 cuillère)"
+        ],
+        "grams": 4
+      }
+    ],
+    "steps": [
+      "Préchauffer le four à 200 °C. Hacher le poulet avec les oignons nouveaux, le gingembre et le sel. Incorporer le blanc d’œuf puis former des boulettes et les rouler légèrement dans la farine.",
+      "Cuire les boulettes sur une plaque recouverte de papier cuisson pendant environ 15 minutes, en les badigeonnant de l’huile de riz ou d’olive.",
+      "Mélanger les ingrédients de la sauce et la faire réduire jusqu’à obtenir une texture sirupeuse. Napper les boulettes, puis les passer sous le gril par courtes périodes en renouvelant le glaçage.",
+      "Enrober les boulettes de graines de sésame, les enfiler sur des pics et servir chaud."
+    ],
+    "servingsLabel": "4 personnes",
+    "prepTime": "20 min",
+    "cookTime": "35 min",
+    "restTime": null,
+    "originalIngredients": [
+      "4 suprêmes de poulet",
+      "2 oignons nouveaux",
+      "1 morceau de gingembre frais",
+      "1 pincée de sel",
+      "30 g de farine de blé",
+      "1 blanc d’œuf",
+      "1 c. à café d’huile de sésame",
+      "2 c. à café de saké",
+      "5 cl de sauce soja",
+      "7,5 cl de mirin",
+      "1 c. à soupe de sucre",
+      "1 c. à café d’huile de riz ou d’olive",
+      "1 c. à café de fécule de maïs",
+      "Graines de sésame"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Oignons nouveaux",
+        "amount": "2",
+        "reason": "Le catalogue ne dispose pas d’une entrée fidèle pour la cébette."
+      },
+      {
+        "name": "Farine de blé et blanc d’œuf",
+        "amount": "30 g et 1 blanc",
+        "reason": "Non intégrés au calcul partiel."
+      },
+      {
+        "name": "Huile de sésame",
+        "amount": "1 c. à café",
+        "reason": "Huile différente de l’huile d’olive retenue pour la quantité d’huile de riz ou d’olive de la source."
+      },
+      {
+        "name": "Saké, mirin et fécule de maïs",
+        "amount": "Quantités de la recette source",
+        "reason": "Non représentés par des correspondances fiables dans le score."
+      },
+      {
+        "name": "Graines de sésame",
+        "amount": "Selon la source",
+        "reason": "Garniture non comptée."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : poulet, gingembre, sauce soja, sucre et huile de riz/olive. Le poids d’un suprême et celui du morceau de gingembre ne sont pas précisés dans la source : le calcul suppose 150 g de poulet et 5 g de gingembre par personne. Les autres ingrédients exclus sont listés séparément.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "saumon-facon-yakitori-750g",
+    "title": "Saumon façon yakitori",
+    "category": "Repas complet",
+    "servings": 4,
+    "summary": "Saumon mariné au soja, citron vert, ail et sucre puis rapidement poêlé.",
+    "source": "https://www.750g.com/saumon-facon-yakitori-r45071.htm",
+    "sourceLabel": "Recette publiée par 750g — La cuisine de Solenne",
+    "ingredients": [
+      {
+        "names": [
+          "Saumon cuit"
+        ],
+        "grams": 125
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 15
+      },
+      {
+        "names": [
+          "Huile de tournesol ou colza"
+        ],
+        "grams": 7
+      },
+      {
+        "names": [
+          "Sucre (1 cuillère)"
+        ],
+        "grams": 3.75
+      },
+      {
+        "names": [
+          "Ail cuit"
+        ],
+        "grams": 2
+      }
+    ],
+    "steps": [
+      "Préparer une marinade en mélangeant la sauce soja, l’huile, le jus des citrons verts, l’ail émincé et le sucre. Ajouter une pincée de sel.",
+      "Retirer la peau du saumon et le couper en gros cubes.",
+      "Mélanger le saumon avec la marinade et réserver au frais pendant 30 minutes.",
+      "Poêler les morceaux à feu vif pendant environ 5 minutes et servir immédiatement."
+    ],
+    "servingsLabel": "4 personnes",
+    "prepTime": "10 min",
+    "cookTime": "5 min",
+    "restTime": "30 min",
+    "originalIngredients": [
+      "4 filets de saumon",
+      "2 citrons verts",
+      "4 c. à soupe de sauce soja",
+      "2 c. à soupe d’huile",
+      "1 c. à soupe de sucre",
+      "2 gousses d’ail"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Citrons verts",
+        "amount": "2",
+        "reason": "Le jus n’est pas compté dans le score partiel."
+      },
+      {
+        "name": "Sel et sésame d’accompagnement",
+        "amount": "Selon la source et le conseil de présentation",
+        "reason": "Assaisonnement et accompagnement non comptés."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : saumon, sauce soja, huile, sucre et ail. La source ne précise pas le poids des filets ni celui des gousses d’ail ; le calcul suppose 125 g de saumon et 2 g d’ail par portion. Le jus de citron vert n’est pas compté.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "poisson-vapeur-cantonais-moulinex",
+    "title": "Poisson vapeur à la cantonaise",
+    "category": "Repas complet",
+    "servings": 2,
+    "summary": "Lieu noir vapeur avec gingembre, soja et garniture parfumée à l’huile.",
+    "source": "https://www.moulinex.be/fr/recette/detail/PRO/poisson-vapeur-a-la-cantonaise/2676861",
+    "sourceLabel": "Recette publiée par Moulinex",
+    "ingredients": [
+      {
+        "names": [
+          "Cabillaud ou colin vapeur"
+        ],
+        "grams": 125
+      },
+      {
+        "names": [
+          "Gingembre frais"
+        ],
+        "grams": 4
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 7.5
+      },
+      {
+        "names": [
+          "Huile de tournesol ou colza"
+        ],
+        "grams": 7
+      }
+    ],
+    "steps": [
+      "Hacher le gingembre et déposer le poisson dans un panier vapeur tapissé de papier cuisson.",
+      "Ajouter de l’eau dans la cuve. Mélanger la moitié du gingembre avec la sauce soja et l’huile de sésame, puis verser sur le poisson.",
+      "Cuire à la vapeur douce pendant environ 18 minutes.",
+      "Faire revenir le reste du gingembre avec l’huile de tournesol pendant une minute. Ajouter l’oignon nouveau, la coriandre et le poivre, puis verser cette garniture sur le poisson."
+    ],
+    "servingsLabel": "2 personnes",
+    "prepTime": "10 min",
+    "cookTime": "19 min",
+    "restTime": null,
+    "originalIngredients": [
+      "250 g de filet de lieu noir",
+      "2 c. à café de gingembre haché",
+      "1 c. à soupe de sauce soja",
+      "1/2 c. à café d’huile de sésame grillé",
+      "1 c. à soupe d’huile de tournesol",
+      "1 oignon nouveau",
+      "10 brins de coriandre",
+      "Poivre",
+      "25 cl d’eau pour la cuisson vapeur"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Huile de sésame grillé",
+        "amount": "1/2 c. à café",
+        "reason": "Le catalogue ne permet pas de représenter cette huile distincte avec une correspondance fidèle."
+      },
+      {
+        "name": "Oignon nouveau et coriandre",
+        "amount": "1 oignon nouveau et 10 brins",
+        "reason": "Herbes et cébette non comptées faute de correspondances fidèles."
+      },
+      {
+        "name": "Poivre et eau",
+        "amount": "Selon la source",
+        "reason": "Non comptés dans le score."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : poisson blanc, gingembre, sauce soja et huile de tournesol. L’huile de sésame, l’oignon nouveau et la coriandre ne sont pas comptés ; le score ne représente donc pas l’ensemble de la recette.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "riz-saute-poulet-cookeo-750g",
+    "title": "Riz sauté au poulet au Cookeo",
+    "category": "Repas complet",
+    "servings": 4,
+    "summary": "Riz basmati cuit sous pression puis sauté avec poulet, carottes et sauce soja.",
+    "source": "https://www.750g.com/riz-saute-au-poulet-au-cookeo-r208954.htm",
+    "sourceLabel": "Recette publiée par 750g — Nadia Paprikas",
+    "ingredients": [
+      {
+        "names": [
+          "Riz blanc"
+        ],
+        "grams": 180
+      },
+      {
+        "names": [
+          "Poulet grillé sans peau"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Oignon cuit"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Ail cuit"
+        ],
+        "grams": 2
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 7.5
+      },
+      {
+        "names": [
+          "Huile d'olive (1 cuillère)"
+        ],
+        "grams": 7.5
+      }
+    ],
+    "steps": [
+      "Rincer le riz plusieurs fois, le placer dans la cuve avec l’eau et le sel, puis cuire sous pression pendant 6 minutes. Laisser reposer 2 minutes avant d’ouvrir.",
+      "Émincer l’oignon et l’ail. Couper les carottes et le poulet en dés.",
+      "Vider puis nettoyer la cuve. Faire revenir l’oignon et l’ail dans l’huile d’olive en mode Dorer pendant 3 minutes.",
+      "Ajouter les carottes et le poulet, puis faire dorer environ 12 minutes.",
+      "Ajouter le riz cuit et la sauce soja, mélanger et faire dorer encore 3 minutes. Poivrer et rectifier l’assaisonnement."
+    ],
+    "servingsLabel": "4 personnes",
+    "prepTime": "15 min",
+    "cookTime": "25 min",
+    "restTime": null,
+    "originalIngredients": [
+      "250 g de riz basmati",
+      "2 filets de poulet",
+      "2 carottes",
+      "1 oignon",
+      "1 gousse d’ail",
+      "2 c. à soupe de sauce soja",
+      "50 cl d’eau",
+      "2 c. à soupe d’huile d’olive",
+      "Sel",
+      "Poivre",
+      "Coriandre ou ciboule en finition, selon le conseil de la source"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Eau, sel et poivre",
+        "amount": "Selon la recette source",
+        "reason": "Non comptés dans le score."
+      },
+      {
+        "name": "Coriandre ou ciboule",
+        "amount": "Garniture facultative",
+        "reason": "Conseil de finition de la source ; non compté."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : riz blanc cuit, poulet, carotte, oignon, ail, sauce soja et huile d’olive. Les quantités de poulet, carottes, oignon et ail sont estimées à partir des unités de la source ; le riz sec est converti en portion de riz cuit. Eau et assaisonnements ne sont pas comptés.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  },
+  {
+    "id": "udon-nabe-750g",
+    "title": "Nouilles udon façon nabe",
+    "category": "Repas complet",
+    "servings": 4,
+    "summary": "Nouilles udon en bouillon soja-vinaigre avec poulet, légumes et un œuf par bol.",
+    "source": "https://www.750g.com/nouilles-udon-facon-nabe-r37627.htm",
+    "sourceLabel": "Recette publiée par 750g — Tanoshi",
+    "ingredients": [
+      {
+        "names": [
+          "Nouilles de blé"
+        ],
+        "grams": 100
+      },
+      {
+        "names": [
+          "Poulet grillé sans peau"
+        ],
+        "grams": 80
+      },
+      {
+        "names": [
+          "Champignons de Paris cuits"
+        ],
+        "grams": 25
+      },
+      {
+        "names": [
+          "Carotte cuite"
+        ],
+        "grams": 30
+      },
+      {
+        "names": [
+          "Œuf dur"
+        ],
+        "grams": 50
+      },
+      {
+        "names": [
+          "Sauce soja"
+        ],
+        "grams": 14
+      },
+      {
+        "names": [
+          "Épinards cuits"
+        ],
+        "grams": 20
+      }
+    ],
+    "steps": [
+      "Couper le poulet en fines tranches, le mélanger avec 2 cuillères à café de sauce soja et le saké, puis laisser mariner 10 minutes.",
+      "Laver et émincer les épinards, les champignons et l’oignon nouveau. Couper la carotte en fine julienne.",
+      "Préchauffer le four à 180 °C. Porter à ébullition le vinaigre de riz, le reste de la sauce soja et l’eau ; cuire les udon environ 6 minutes en les gardant très fermes, puis réserver le bouillon.",
+      "Faire cuire le poulet, les carottes et les champignons dans une partie du bouillon pendant environ 10 minutes.",
+      "Répartir les nouilles dans quatre bols, ajouter le poulet et les légumes, couvrir de bouillon chaud et déposer un œuf dans chaque bol. Enfourner 3 à 4 minutes jusqu’à ce que le blanc soit pris."
+    ],
+    "servingsLabel": "4 personnes",
+    "prepTime": "30 min",
+    "cookTime": "20 min",
+    "restTime": null,
+    "originalIngredients": [
+      "2 filets de poulet",
+      "80 g de pousses d’épinards",
+      "100 g de champignons de Paris",
+      "1 carotte",
+      "1 oignon nouveau ou cébette",
+      "4 œufs",
+      "2 c. à café de sauce soja pour la marinade",
+      "2 c. à café de saké",
+      "400 g de nouilles udon",
+      "2 c. à soupe de vinaigre de riz",
+      "3 c. à soupe de sauce soja pour le bouillon",
+      "60 cl d’eau"
+    ],
+    "unscoredIngredients": [
+      {
+        "name": "Oignon nouveau",
+        "amount": "1",
+        "reason": "Cébette non représentée fidèlement dans le catalogue."
+      },
+      {
+        "name": "Saké",
+        "amount": "2 c. à café",
+        "reason": "Non compté dans le score."
+      },
+      {
+        "name": "Vinaigre de riz",
+        "amount": "2 c. à soupe",
+        "reason": "Vinaigre distinct non représenté fidèlement ; non compté."
+      },
+      {
+        "name": "Eau",
+        "amount": "60 cl",
+        "reason": "Liquide de cuisson non compté."
+      }
+    ],
+    "scoreNote": "Score partiel indicatif par portion : nouilles de blé utilisées comme approximation des udon, poulet, champignons de Paris, carotte, œuf, sauce soja et épinards cuits. Les udon sont représentées par l’entrée de nouilles de blé du catalogue ; saké, vinaigre de riz, cébette et eau ne sont pas comptés.",
+    "sourceIngredientsVerified": true,
+    "adaptationVerified": true,
+    "scoreDisabled": false
+  }
+]
 ];
