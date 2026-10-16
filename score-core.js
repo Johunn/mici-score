@@ -595,6 +595,8 @@ const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
 const REFG_CAT=[150,140,150,120,100,60,25,5,200,40,300,40,200,60];
 const ORD=[0,1,2,3,4,5,6,7,8,9,13,12,10,11];   // ordre d'affichage des catégories (les index restent stables pour tes aliments perso)
 const REFG_NOM=[
+ [/^lait.*25 cl/i,250,[4]],
+ [/^café glacé.*25 cl/i,250,[8]],
  [/^jambon cru|^jambon fumé|^jambon fume/i,25,[3]],
  [/^jambon/i,45,[3]],
  [/^fromage fondu/i,20,[4]],
