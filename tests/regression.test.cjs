@@ -1314,7 +1314,7 @@ test('recipe catalogue has unique IDs and titles and all ingredients resolve to 
       const food = foods.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
         foods.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
       assert.ok(food, recipe.title + ' ingredient must resolve: ' + ingredient.names[0]);
-      scoreItems.push({ f: food, p: 1, g: ingredient.grams });
+      scoreItems.push({ f: food, p: 1, g: ingredient.scoreGrams ?? ingredient.grams });
     }
     if (!recipe.scoreDisabled) {
       const score = coreSandbox.window.MICI_SCORE_CORE.scoreOf(scoreItems, {});
@@ -1361,11 +1361,24 @@ test('huit nouvelles recettes asiatiques ont une source directe et un score de b
       const food = core.FOODS.find(food => ingredient.names.some(name => normalize(food.n) === normalize(name))) ||
         core.FOODS.find(food => ingredient.names.some(name => normalize(food.n).startsWith(normalize(name) + ' ')));
       assert.ok(food, id + ' score ingredient must resolve: ' + ingredient.names[0]);
-      return { f: food, p: 1, g: ingredient.grams };
+      return { f: food, p: 1, g: ingredient.scoreGrams ?? ingredient.grams };
     });
     const score = core.scoreOf(items, {}).score;
     assert.ok(score > 6 && score <= 10, id + ' baseline partial score must be strictly above 6/10; got ' + score);
   }
+});
+
+test('overnight oats keep the prepared quantity for the plate but use a normal portion for scoring', () => {
+  const recipeSandbox = { window: {} };
+  vm.createContext(recipeSandbox);
+  new vm.Script(recipesSource, { filename: 'recipes.js:overnight-oats-portion' }).runInContext(recipeSandbox);
+  const recipe = recipeSandbox.window.MICI_RECIPES.find(item => item.id === 'overnight-oats-curcuma');
+  assert.ok(recipe, 'overnight oats recipe must exist');
+  assert.equal(recipe.ingredients[0].grams, 180, 'prepared oats quantity must remain 180 g for display and plate addition');
+  assert.equal(recipe.ingredients[0].scoreGrams, 40, 'scoring quantity must use the 40 g reference portion');
+  assert.match(recipe.scoreNote, /180 g d’avoine préparée restent affichés et ajoutés à l’assiette/);
+  assert.match(html, /ingredient\.scoreGrams\?\?x\.ingredient\.grams/);
+  assert.match(html, /quantité utilisée pour le score/);
 });
 
 test('journal recipe entries show the calculated MICI Score as the primary badge and personal feeling separately', () => {
