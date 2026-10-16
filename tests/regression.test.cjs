@@ -996,6 +996,18 @@ test('score core loads and parses a large, valid food catalogue', () => {
   }
 });
 
+test('reference portion regex does not confuse smoked salmon with smoked ham', () => {
+  const core = makeCoreHarness();
+  const salmon = core.FOODS.find(food => /saumon fumé/i.test(food.n));
+  assert.ok(salmon, 'smoked salmon must exist in the catalogue');
+  assert.equal(core.refG(salmon), 180);
+  assert.ok(Math.abs(core.pfOf({ f: salmon, p: 1, g: 100 }) - (100 / 180)) < 1e-12);
+
+  const ham = core.FOODS.find(food => /jambon cru/i.test(food.n));
+  assert.ok(ham, 'cured ham must exist in the catalogue');
+  assert.equal(core.refG(ham), 25);
+});
+
 test('neutral food scores 10 and a single feature follows the documented formula', () => {
   const core = makeCoreHarness();
   core.store.prof = 'general';
