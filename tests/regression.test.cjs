@@ -1344,13 +1344,13 @@ test('six nouvelles recettes asiatiques ont une source directe et un score de ba
     'riz-saute-poulet-cookeo-750g',
     'udon-nabe-750g'
   ];
-  const normalize = value => String(value).normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   for (const id of ids) {
     const recipe = recipes.find(item => item.id === id);
     assert.ok(recipe, id + ' must be present');
     assert.equal(recipe.sourceIngredientsVerified, true);
     assert.equal(recipe.adaptationVerified, true);
-    assert.ok(/^https:\\/\\/www\\.(?:750g\\.com|moulinex\\.be)\\/.+/.test(recipe.source), id + ' must link to its exact source page');
+    assert.ok(/^https:\/\/www\.(?:750g\.com|moulinex\.be)\/.+/.test(recipe.source), id + ' must link to its exact source page');
     assert.ok(recipe.originalIngredients.length > 0);
     assert.ok(recipe.steps.length >= 3);
     assert.ok(recipe.scoreNote && /partiel indicatif/i.test(recipe.scoreNote));
